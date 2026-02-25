@@ -1,0 +1,29 @@
+---
+description: CSS architecture and design token conventions
+globs: src/styles/**/*.css, src/tokens/**/*.json
+alwaysApply: false
+---
+
+# CSS & Token Conventions
+
+## Three-Layer CSS
+1. **`base.css`** — CSS custom properties (design tokens), reset, font imports. Edit here to change global values.
+2. **`layout.css`** — Sidebar, page shell, `.page-title`/`.page-sub`, responsive breakpoints. Shared structure.
+3. **`components.css`** — Reusable UI pieces: `.scale`, `.step`, `.badge-row`, `.theme-panel`, `.section`, `.placeholder`. Add new component styles here.
+
+## Design Tokens
+- Canonical values live in `src/tokens/` as JSON (e.g. `colours.json`)
+- CSS variables in `base.css` reference these values
+- When adding a new foundation (typography, spacing), create a matching JSON token file
+
+## Key Variables
+```css
+--page-bg, --ink, --ink-2, --ink-3    /* surface & text hierarchy */
+--rule, --card-bg, --radius           /* borders, cards, rounding */
+--mono, --serif                       /* font stacks */
+--sidebar-w, --sidebar-bg             /* sidebar layout */
+```
+
+## Fonts
+- **DM Mono** (monospace) — UI text, labels, code
+- **Fraunces** (serif) — headings, page titles, section titles

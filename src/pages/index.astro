@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Default.astro';
+---
+
+<Layout title="Overview" section="overview">
+  <h1 class="page-title">Nexus Design System</h1>
+  <p class="page-sub">Foundations · Components · Guidelines</p>
+
+  <div class="overview-grid">
+    <a href="/colours" class="overview-card">
+      <div class="overview-card-icon">◆</div>
+      <h3>Colours</h3>
+      <p>7 OKLCH-based scales, 77 tokens, WCAG verified for dark and light themes.</p>
+    </a>
+    <a href="/typography" class="overview-card">
+      <div class="overview-card-icon">Aa</div>
+      <h3>Typography</h3>
+      <p>Type scales, font stacks, line heights, and text styles.</p>
+    </a>
+    <a href="/spacing" class="overview-card">
+      <div class="overview-card-icon">⊞</div>
+      <h3>Spacing</h3>
+      <p>Spatial system for margins, padding, and component gaps.</p>
+    </a>
+    <a href="/grid" class="overview-card">
+      <div class="overview-card-icon">▦</div>
+      <h3>Grid</h3>
+      <p>Responsive layout grid, columns, and breakpoints.</p>
+    </a>
+    <a href="/atoms" class="overview-card">
+      <div class="overview-card-icon">○</div>
+      <h3>Atoms</h3>
+      <p>Buttons, inputs, icons, badges, and other foundational elements.</p>
+    </a>
+    <a href="/molecules" class="overview-card">
+      <div class="overview-card-icon">◎</div>
+      <h3>Molecules</h3>
+      <p>Form fields, cards, search bars, and composed patterns.</p>
+    </a>
+    <a href="/organisms" class="overview-card">
+      <div class="overview-card-icon">◉</div>
+      <h3>Organisms</h3>
+      <p>Headers, navigation, sidebars, and complex UI regions.</p>
+    </a>
+  </div>
+
+  <div class="footer">
+    Nexus Design System · v0.1.0
+  </div>
+</Layout>
+
+<style>
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .overview-card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    cursor: pointer;
+    display: block;
+  }
+
+  .overview-card:hover {
+    border-color: #C8C3BC;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  .overview-card-icon {
+    font-size: 22px;
+    margin-bottom: 14px;
+    opacity: 0.35;
+  }
+
+  .overview-card h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 6px;
+    letter-spacing: -0.2px;
+  }
+
+  .overview-card p {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+</style>

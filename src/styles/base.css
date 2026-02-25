@@ -1,0 +1,28 @@
+/* ─── RESET & BASE ─────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --page-bg:  #F5F4F1;
+  --ink:      #1A1816;
+  --ink-2:    #5C5954;
+  --ink-3:    #9A9590;
+  --rule:     #DDD9D3;
+  --card-bg:  #FFFFFF;
+  --radius:   10px;
+  --mono:     'DM Mono', monospace;
+  --serif:    'Fraunces', Georgia, serif;
+
+  /* sidebar */
+  --sidebar-w:   260px;
+  --sidebar-bg:  #FFFFFF;
+  --sidebar-rule: #EDE9E3;
+}
+
+body {
+  font-family: var(--mono);
+  background: var(--page-bg);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }

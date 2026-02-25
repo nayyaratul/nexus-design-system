@@ -1,0 +1,501 @@
+---
+import Layout from '../layouts/Default.astro';
+---
+
+<Layout title="Colours" section="colours">
+
+  <h1 class="page-title">Colours</h1>
+  <p class="page-sub">7 scales · 11 steps each · OKLCH-based · WCAG verified · Dark / Light symmetric</p>
+
+  <!-- ─── LEGEND ─────────────────────────────────── -->
+  <div class="legend">
+    <span class="legend-item"><span class="legend-dot" style="background:#D6F0E0;border:1px solid #afd8be"></span>AAA ≥ 7:1 — all text</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#D6EAFF;border:1px solid #a8cff0"></span>AA ≥ 4.5:1 — normal text ≥14px</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#FFF0D6;border:1px solid #f0d49a"></span>AA Lg ≥ 3:1 — large / bold text only</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#EDE9E3;border:1px solid #ccc7bf"></span>Fail — decorative only</span>
+    <span class="legend-item" style="margin-left:auto; font-style:italic; color: var(--ink-3)">Hover a step to expand</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NEUTRAL GREY
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Neutral Grey</span>
+      <span class="section-desc">Pure neutral · Hue 0, Chroma 0 · Base UI surfaces & text</span>
+    </div>
+    <div class="scale">
+      <div class="step on-light" style="background:#FAFAFA"><span class="n">0</span><span class="h">#FAFAFA</span></div>
+      <div class="step on-light" style="background:#DEDEDE"><span class="n">10</span><span class="h">#DEDEDE</span></div>
+      <div class="step on-light" style="background:#C3C3C3"><span class="n">20</span><span class="h">#C3C3C3</span></div>
+      <div class="step on-light" style="background:#A8A8A8"><span class="n">30</span><span class="h">#A8A8A8</span></div>
+      <div class="step on-dark"  style="background:#8E8E8E"><span class="n">40</span><span class="h">#8E8E8E</span></div>
+      <div class="step on-dark"  style="background:#757575"><span class="n">50</span><span class="h">#757575</span></div>
+      <div class="step on-dark"  style="background:#5E5F5F"><span class="n">60</span><span class="h">#5E5F5F</span></div>
+      <div class="step on-dark"  style="background:#4B4B4A"><span class="n">70</span><span class="h">#4B4B4A</span></div>
+      <div class="step on-dark"  style="background:#373737"><span class="n">80</span><span class="h">#373737</span></div>
+      <div class="step on-dark"  style="background:#242424"><span class="n">90</span><span class="h">#242424</span></div>
+      <div class="step on-dark"  style="background:#080808"><span class="n">100</span><span class="h">#080808</span></div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+      <div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aa">AA</div><div class="badge-cell b-aa">AA</div>
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+      <div class="badge-cell b-aa">AA</div><div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aalg">AA Lg</div>
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       COOL GREY
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Cool Grey</span>
+      <span class="section-desc">Blue undertone · Hue 260, Chroma peak 0.030 · Panels & sidebars</span>
+    </div>
+    <div class="scale">
+      <div class="step on-light" style="background:#F8FAFD"><span class="n">0</span><span class="h">#F8FAFD</span></div>
+      <div class="step on-light" style="background:#DCDEE1"><span class="n">10</span><span class="h">#DCDEE1</span></div>
+      <div class="step on-light" style="background:#BFC3CA"><span class="n">20</span><span class="h">#BFC3CA</span></div>
+      <div class="step on-light" style="background:#A2A9B4"><span class="n">30</span><span class="h">#A2A9B4</span></div>
+      <div class="step on-dark"  style="background:#868F9F"><span class="n">40</span><span class="h">#868F9F</span></div>
+      <div class="step on-dark"  style="background:#6C7688"><span class="n">50</span><span class="h">#6C7688</span></div>
+      <div class="step on-dark"  style="background:#565F6F"><span class="n">60</span><span class="h">#565F6F</span></div>
+      <div class="step on-dark"  style="background:#444B57"><span class="n">70</span><span class="h">#444B57</span></div>
+      <div class="step on-dark"  style="background:#32373E"><span class="n">80</span><span class="h">#32373E</span></div>
+      <div class="step on-dark"  style="background:#212427"><span class="n">90</span><span class="h">#212427</span></div>
+      <div class="step on-dark"  style="background:#070809"><span class="n">100</span><span class="h">#070809</span></div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+      <div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aa">AA</div><div class="badge-cell b-aa">AA</div>
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+      <div class="badge-cell b-aa">AA</div><div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aalg">AA Lg</div>
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       WARM GREY
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Warm Grey</span>
+      <span class="section-desc">Stone undertone · Hue 55, Chroma peak 0.010 · Cards & content areas</span>
+    </div>
+    <div class="scale">
+      <div class="step on-light" style="background:#FBFAF9"><span class="n">0</span><span class="h">#FBFAF9</span></div>
+      <div class="step on-light" style="background:#DFDEDD"><span class="n">10</span><span class="h">#DFDEDD</span></div>
+      <div class="step on-light" style="background:#C5C2C1"><span class="n">20</span><span class="h">#C5C2C1</span></div>
+      <div class="step on-light" style="background:#ACA8A5"><span class="n">30</span><span class="h">#ACA8A5</span></div>
+      <div class="step on-dark"  style="background:#938D8A"><span class="n">40</span><span class="h">#938D8A</span></div>
+      <div class="step on-dark"  style="background:#7B7470"><span class="n">50</span><span class="h">#7B7470</span></div>
+      <div class="step on-dark"  style="background:#635D5A"><span class="n">60</span><span class="h">#635D5A</span></div>
+      <div class="step on-dark"  style="background:#4E4A47"><span class="n">70</span><span class="h">#4E4A47</span></div>
+      <div class="step on-dark"  style="background:#393634"><span class="n">80</span><span class="h">#393634</span></div>
+      <div class="step on-dark"  style="background:#252322"><span class="n">90</span><span class="h">#252322</span></div>
+      <div class="step on-dark"  style="background:#080807"><span class="n">100</span><span class="h">#080807</span></div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+      <div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aa">AA</div><div class="badge-cell b-aa">AA</div>
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+      <div class="badge-cell b-aa">AA</div><div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aalg">AA Lg</div>
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       RED
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Red</span>
+      <span class="section-desc">Hue 25 · Error · Destructive actions · Alerts</span>
+    </div>
+    <div class="scale">
+      <div class="step on-light" style="background:#FBFBFB"><span class="n">0</span><span class="h">#FBFBFB</span></div>
+      <div class="step on-light" style="background:#FBD6D3"><span class="n">10</span><span class="h">#FBD6D3</span></div>
+      <div class="step on-light" style="background:#F8B1AB"><span class="n">20</span><span class="h">#F8B1AB</span></div>
+      <div class="step on-light" style="background:#F68D85"><span class="n">30</span><span class="h">#F68D85</span></div>
+      <div class="step on-dark"  style="background:#FC5C59"><span class="n">40</span><span class="h">#FC5C59</span></div>
+      <div class="step on-dark"  style="background:#E32631"><span class="n">50</span><span class="h">#E32631</span></div>
+      <div class="step on-dark"  style="background:#BC1624"><span class="n">60</span><span class="h">#BC1624</span></div>
+      <div class="step on-dark"  style="background:#971A1F"><span class="n">70</span><span class="h">#971A1F</span></div>
+      <div class="step on-dark"  style="background:#700F14"><span class="n">80</span><span class="h">#700F14</span></div>
+      <div class="step on-dark"  style="background:#490D0E"><span class="n">90</span><span class="h">#490D0E</span></div>
+      <div class="step on-dark"  style="background:#140706"><span class="n">100</span><span class="h">#140706</span></div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+      <div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aa">AA</div><div class="badge-cell b-aa">AA</div>
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+      <div class="badge-cell b-aa">AA</div><div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aalg">AA Lg</div>
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       GREEN
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Green</span>
+      <span class="section-desc">Hue 152 · Success · Confirmations · Positive actions</span>
+    </div>
+    <div class="scale">
+      <div class="step on-light" style="background:#F4FEF6"><span class="n">0</span><span class="h">#F4FEF6</span></div>
+      <div class="step on-light" style="background:#C8E6CE"><span class="n">10</span><span class="h">#C8E6CE</span></div>
+      <div class="step on-light" style="background:#97D0A5"><span class="n">20</span><span class="h">#97D0A5</span></div>
+      <div class="step on-light" style="background:#4EBF75"><span class="n">30</span><span class="h">#4EBF75</span></div>
+      <div class="step on-dark"  style="background:#24A95B"><span class="n">40</span><span class="h">#24A95B</span></div>
+      <div class="step on-dark"  style="background:#198647"><span class="n">50</span><span class="h">#198647</span></div>
+      <div class="step on-dark"  style="background:#136D39"><span class="n">60</span><span class="h">#136D39</span></div>
+      <div class="step on-dark"  style="background:#0B582C"><span class="n">70</span><span class="h">#0B582C</span></div>
+      <div class="step on-dark"  style="background:#02401E"><span class="n">80</span><span class="h">#02401E</span></div>
+      <div class="step on-dark"  style="background:#002A10"><span class="n">90</span><span class="h">#002A10</span></div>
+      <div class="step on-dark"  style="background:#030D05"><span class="n">100</span><span class="h">#030D05</span></div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+      <div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aa">AA</div><div class="badge-cell b-aa">AA</div>
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+      <div class="badge-cell b-aa">AA</div><div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aalg">AA Lg</div>
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       YELLOW
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Yellow</span>
+      <span class="section-desc">Hue 85 · Warning · Caution · Attention</span>
+    </div>
+    <div class="scale">
+      <div class="step on-light" style="background:#FFFCF4"><span class="n">0</span><span class="h">#FFFCF4</span></div>
+      <div class="step on-light" style="background:#F5DCAA"><span class="n">10</span><span class="h">#F5DCAA</span></div>
+      <div class="step on-light" style="background:#EEBD4B"><span class="n">20</span><span class="h">#EEBD4B</span></div>
+      <div class="step on-light" style="background:#D3A330"><span class="n">30</span><span class="h">#D3A330</span></div>
+      <div class="step on-dark"  style="background:#B78D27"><span class="n">40</span><span class="h">#B78D27</span></div>
+      <div class="step on-dark"  style="background:#93711D"><span class="n">50</span><span class="h">#93711D</span></div>
+      <div class="step on-dark"  style="background:#775A14"><span class="n">60</span><span class="h">#775A14</span></div>
+      <div class="step on-dark"  style="background:#62490D"><span class="n">70</span><span class="h">#62490D</span></div>
+      <div class="step on-dark"  style="background:#483403"><span class="n">80</span><span class="h">#483403</span></div>
+      <div class="step on-dark"  style="background:#312200"><span class="n">90</span><span class="h">#312200</span></div>
+      <div class="step on-dark"  style="background:#0F0901"><span class="n">100</span><span class="h">#0F0901</span></div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+      <div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aa">AA</div><div class="badge-cell b-aa">AA</div>
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+      <div class="badge-cell b-aa">AA</div><div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aalg">AA Lg</div>
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BLUE
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Blue</span>
+      <span class="section-desc">Hue 260 · Info · Links · Interactive elements</span>
+    </div>
+    <div class="scale">
+      <div class="step on-light" style="background:#FAFCFF"><span class="n">0</span><span class="h">#FAFCFF</span></div>
+      <div class="step on-light" style="background:#D1E0F6"><span class="n">10</span><span class="h">#D1E0F6</span></div>
+      <div class="step on-light" style="background:#ABC4EE"><span class="n">20</span><span class="h">#ABC4EE</span></div>
+      <div class="step on-light" style="background:#82ABF0"><span class="n">30</span><span class="h">#82ABF0</span></div>
+      <div class="step on-dark"  style="background:#5692F6"><span class="n">40</span><span class="h">#5692F6</span></div>
+      <div class="step on-dark"  style="background:#1C6EF1"><span class="n">50</span><span class="h">#1C6EF1</span></div>
+      <div class="step on-dark"  style="background:#1459C7"><span class="n">60</span><span class="h">#1459C7</span></div>
+      <div class="step on-dark"  style="background:#0C47A4"><span class="n">70</span><span class="h">#0C47A4</span></div>
+      <div class="step on-dark"  style="background:#03337D"><span class="n">80</span><span class="h">#03337D</span></div>
+      <div class="step on-dark"  style="background:#001F5C"><span class="n">90</span><span class="h">#001F5C</span></div>
+      <div class="step on-dark"  style="background:#050B15"><span class="n">100</span><span class="h">#050B15</span></div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+      <div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aa">AA</div><div class="badge-cell b-aa">AA</div>
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+    </div>
+    <div class="badge-row">
+      <div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div><div class="badge-cell b-aaa">AAA</div>
+      <div class="badge-cell b-aa">AA</div><div class="badge-cell b-aalg">AA Lg</div><div class="badge-cell b-aalg">AA Lg</div>
+      <div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div><div class="badge-cell b-fail">Fail</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TEXT USABILITY — 14px button text
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Button Text at 14px</span>
+      <span class="section-desc">Which steps pass AA (≥ 4.5:1) for normal-weight 14px text on each theme background</span>
+    </div>
+
+    <div class="usability-grid">
+      <!-- LIGHT THEME -->
+      <div class="theme-panel light">
+        <div class="theme-panel-head lh">Light theme — on #FFFFFF</div>
+
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#4B4B4A"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Neutral Grey 70</div>
+            <div class="ts-text" style="color:#4B4B4A">Button label text</div>
+            <div class="ts-info">#4B4B4A · 8.73:1</div>
+          </div>
+          <span class="ts-badge aaa">AAA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#5E5F5F"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Neutral Grey 60</div>
+            <div class="ts-text" style="color:#5E5F5F">Button label text</div>
+            <div class="ts-info">#5E5F5F · 6.41:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#757575"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Neutral Grey 50</div>
+            <div class="ts-text" style="color:#757575">Button label text</div>
+            <div class="ts-info">#757575 · 4.58:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#BC1624"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Red 60</div>
+            <div class="ts-text" style="color:#BC1624">Button label text</div>
+            <div class="ts-info">#BC1624 · 6.41:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#E32631"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Red 50</div>
+            <div class="ts-text" style="color:#E32631">Button label text</div>
+            <div class="ts-info">#E32631 · 4.58:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#136D39"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Green 60</div>
+            <div class="ts-text" style="color:#136D39">Button label text</div>
+            <div class="ts-info">#136D39 · 6.41:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#198647"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Green 50</div>
+            <div class="ts-text" style="color:#198647">Button label text</div>
+            <div class="ts-info">#198647 · 4.62:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#62490D"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Yellow 70</div>
+            <div class="ts-text" style="color:#62490D">Button label text</div>
+            <div class="ts-info">#62490D · 8.47:1</div>
+          </div>
+          <span class="ts-badge aaa">AAA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#775A14"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Yellow 60</div>
+            <div class="ts-text" style="color:#775A14">Button label text</div>
+            <div class="ts-info">#775A14 · 6.45:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#93711D"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Yellow 50</div>
+            <div class="ts-text" style="color:#93711D">Button label text</div>
+            <div class="ts-info">#93711D · 4.55:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#1459C7"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Blue 60</div>
+            <div class="ts-text" style="color:#1459C7">Button label text</div>
+            <div class="ts-info">#1459C7 · 6.40:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#1C6EF1"></div>
+          <div class="ts-meta">
+            <div class="ts-label">Blue 50 — links</div>
+            <div class="ts-text" style="color:#1C6EF1">Button label text</div>
+            <div class="ts-info">#1C6EF1 · 4.62:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+      </div>
+
+      <!-- DARK THEME -->
+      <div class="theme-panel dark">
+        <div class="theme-panel-head dh">Dark theme — on #080808</div>
+
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#A8A8A8;border-color:rgba(255,255,255,0.08)"></div>
+          <div class="ts-meta">
+            <div class="ts-label" style="color:#555">Neutral Grey 30</div>
+            <div class="ts-text" style="color:#A8A8A8">Button label text</div>
+            <div class="ts-info" style="color:#444">#A8A8A8 · 8.83:1</div>
+          </div>
+          <span class="ts-badge aaa">AAA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#8E8E8E;border-color:rgba(255,255,255,0.08)"></div>
+          <div class="ts-meta">
+            <div class="ts-label" style="color:#555">Neutral Grey 40</div>
+            <div class="ts-text" style="color:#8E8E8E">Button label text</div>
+            <div class="ts-info" style="color:#444">#8E8E8E · 6.82:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#757575;border-color:rgba(255,255,255,0.08)"></div>
+          <div class="ts-meta">
+            <div class="ts-label" style="color:#555">Neutral Grey 50</div>
+            <div class="ts-text" style="color:#757575">Button label text</div>
+            <div class="ts-info" style="color:#444">#757575 · 4.58:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#FC5C59;border-color:rgba(255,255,255,0.08)"></div>
+          <div class="ts-meta">
+            <div class="ts-label" style="color:#555">Red 40</div>
+            <div class="ts-text" style="color:#FC5C59">Button label text</div>
+            <div class="ts-info" style="color:#444">#FC5C59 · 6.50:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#E32631;border-color:rgba(255,255,255,0.08)"></div>
+          <div class="ts-meta">
+            <div class="ts-label" style="color:#555">Red 50</div>
+            <div class="ts-text" style="color:#E32631">Button label text</div>
+            <div class="ts-info" style="color:#444">#E32631 · 4.38:1 ⚠</div>
+          </div>
+          <span class="ts-badge aalg">AA Lg</span>
+        </div>
+
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#24A95B;border-color:rgba(255,255,255,0.08)"></div>
+          <div class="ts-meta">
+            <div class="ts-label" style="color:#555">Green 40</div>
+            <div class="ts-text" style="color:#24A95B">Button label text</div>
+            <div class="ts-info" style="color:#444">#24A95B · 6.58:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#198647;border-color:rgba(255,255,255,0.08)"></div>
+          <div class="ts-meta">
+            <div class="ts-label" style="color:#555">Green 50</div>
+            <div class="ts-text" style="color:#198647">Button label text</div>
+            <div class="ts-info" style="color:#444">#198647 · 4.33:1 ⚠</div>
+          </div>
+          <span class="ts-badge aalg">AA Lg</span>
+        </div>
+
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#B78D27;border-color:rgba(255,255,255,0.08)"></div>
+          <div class="ts-meta">
+            <div class="ts-label" style="color:#555">Yellow 40</div>
+            <div class="ts-text" style="color:#B78D27">Button label text</div>
+            <div class="ts-info" style="color:#444">#B78D27 · 6.54:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#D3A330;border-color:rgba(255,255,255,0.08)"></div>
+          <div class="ts-meta">
+            <div class="ts-label" style="color:#555">Yellow 30</div>
+            <div class="ts-text" style="color:#D3A330">Button label text</div>
+            <div class="ts-info" style="color:#444">#D3A330 · 8.63:1</div>
+          </div>
+          <span class="ts-badge aaa">AAA</span>
+        </div>
+
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#5692F6;border-color:rgba(255,255,255,0.08)"></div>
+          <div class="ts-meta">
+            <div class="ts-label" style="color:#555">Blue 40</div>
+            <div class="ts-text" style="color:#5692F6">Button label text</div>
+            <div class="ts-info" style="color:#444">#5692F6 · 6.52:1</div>
+          </div>
+          <span class="ts-badge aa">AA</span>
+        </div>
+        <div class="text-sample-row">
+          <div class="swatch-dot" style="background:#1C6EF1;border-color:rgba(255,255,255,0.08)"></div>
+          <div class="ts-meta">
+            <div class="ts-label" style="color:#555">Blue 50 — links</div>
+            <div class="ts-text" style="color:#1C6EF1">Button label text</div>
+            <div class="ts-info" style="color:#444">#1C6EF1 · 4.34:1 ⚠</div>
+          </div>
+          <span class="ts-badge aalg">AA Lg</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>Rule for 14px button text (normal weight):</strong>
+      AA requires ≥ 4.5:1. For each scale, the minimum step that passes on white is <strong>Step 50</strong> (Grey/Red/Green/Blue) or <strong>Step 50</strong> (Yellow). On dark (#080808), it's <strong>Step 40</strong> for chromatic scales and <strong>Step 40–50</strong> for greys.
+      Steps marked ⚠ clear 4.5:1 only marginally — prefer one step darker (higher step number on white; lower on dark) for robust compliance across display variability.
+      <br><br>
+      <strong>Yellow exception:</strong> Yellow 20–30 appear bright but sit at low contrast on white. Always use Yellow 50+ for text on white. Yellow is best used as a background tint with dark (Step 70+) text on top.
+    </div>
+  </div>
+
+  <div class="footer">
+    Nexus Design System · Colours
+  </div>
+
+</Layout>

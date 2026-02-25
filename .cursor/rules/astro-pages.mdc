@@ -1,0 +1,32 @@
+---
+description: How to create and structure Astro pages in this project
+globs: src/pages/**/*.astro
+alwaysApply: false
+---
+
+# Astro Page Conventions
+
+Every page wraps content in the shared layout and follows this pattern:
+
+```astro
+---
+import Layout from '../layouts/Default.astro';
+---
+
+<Layout title="Page Name" section="section-id">
+  <h1 class="page-title">Page Name</h1>
+  <p class="page-sub">Short description · separated · by middots</p>
+
+  <!-- page content -->
+
+  <div class="footer">Nexus Design System · Page Name</div>
+</Layout>
+```
+
+## Rules
+- `title` — shown in `<title>` tag, appended with " — Nexus Design System"
+- `section` — must match the `id` in the nav items array in `Default.astro` for active state highlighting
+- Title is always `<h1 class="page-title">`, subtitle is always `<p class="page-sub">`
+- When adding a new page, also add a nav entry in `src/layouts/Default.astro`
+- Subdirectories (atoms/, molecules/, organisms/) use `index.astro` for the landing page
+- Use British English for the filename (e.g. `colours.astro`, not `colors.astro`)

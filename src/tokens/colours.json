@@ -1,0 +1,131 @@
+{
+  "neutralGrey": {
+    "label": "Neutral Grey",
+    "hue": 0,
+    "chroma": 0,
+    "usage": "Base UI surfaces & text",
+    "steps": [
+      { "step": 0,   "hex": "#FAFAFA" },
+      { "step": 10,  "hex": "#DEDEDE" },
+      { "step": 20,  "hex": "#C3C3C3" },
+      { "step": 30,  "hex": "#A8A8A8" },
+      { "step": 40,  "hex": "#8E8E8E" },
+      { "step": 50,  "hex": "#757575" },
+      { "step": 60,  "hex": "#5E5F5F" },
+      { "step": 70,  "hex": "#4B4B4A" },
+      { "step": 80,  "hex": "#373737" },
+      { "step": 90,  "hex": "#242424" },
+      { "step": 100, "hex": "#080808" }
+    ]
+  },
+  "coolGrey": {
+    "label": "Cool Grey",
+    "hue": 260,
+    "chromaPeak": 0.030,
+    "usage": "Panels & sidebars",
+    "steps": [
+      { "step": 0,   "hex": "#F8FAFD" },
+      { "step": 10,  "hex": "#DCDEE1" },
+      { "step": 20,  "hex": "#BFC3CA" },
+      { "step": 30,  "hex": "#A2A9B4" },
+      { "step": 40,  "hex": "#868F9F" },
+      { "step": 50,  "hex": "#6C7688" },
+      { "step": 60,  "hex": "#565F6F" },
+      { "step": 70,  "hex": "#444B57" },
+      { "step": 80,  "hex": "#32373E" },
+      { "step": 90,  "hex": "#212427" },
+      { "step": 100, "hex": "#070809" }
+    ]
+  },
+  "warmGrey": {
+    "label": "Warm Grey",
+    "hue": 55,
+    "chromaPeak": 0.010,
+    "usage": "Cards & content areas",
+    "steps": [
+      { "step": 0,   "hex": "#FBFAF9" },
+      { "step": 10,  "hex": "#DFDEDD" },
+      { "step": 20,  "hex": "#C5C2C1" },
+      { "step": 30,  "hex": "#ACA8A5" },
+      { "step": 40,  "hex": "#938D8A" },
+      { "step": 50,  "hex": "#7B7470" },
+      { "step": 60,  "hex": "#635D5A" },
+      { "step": 70,  "hex": "#4E4A47" },
+      { "step": 80,  "hex": "#393634" },
+      { "step": 90,  "hex": "#252322" },
+      { "step": 100, "hex": "#080807" }
+    ]
+  },
+  "red": {
+    "label": "Red",
+    "hue": 25,
+    "usage": "Error · Destructive actions · Alerts",
+    "steps": [
+      { "step": 0,   "hex": "#FBFBFB" },
+      { "step": 10,  "hex": "#FBD6D3" },
+      { "step": 20,  "hex": "#F8B1AB" },
+      { "step": 30,  "hex": "#F68D85" },
+      { "step": 40,  "hex": "#FC5C59" },
+      { "step": 50,  "hex": "#E32631" },
+      { "step": 60,  "hex": "#BC1624" },
+      { "step": 70,  "hex": "#971A1F" },
+      { "step": 80,  "hex": "#700F14" },
+      { "step": 90,  "hex": "#490D0E" },
+      { "step": 100, "hex": "#140706" }
+    ]
+  },
+  "green": {
+    "label": "Green",
+    "hue": 152,
+    "usage": "Success · Confirmations · Positive actions",
+    "steps": [
+      { "step": 0,   "hex": "#F4FEF6" },
+      { "step": 10,  "hex": "#C8E6CE" },
+      { "step": 20,  "hex": "#97D0A5" },
+      { "step": 30,  "hex": "#4EBF75" },
+      { "step": 40,  "hex": "#24A95B" },
+      { "step": 50,  "hex": "#198647" },
+      { "step": 60,  "hex": "#136D39" },
+      { "step": 70,  "hex": "#0B582C" },
+      { "step": 80,  "hex": "#02401E" },
+      { "step": 90,  "hex": "#002A10" },
+      { "step": 100, "hex": "#030D05" }
+    ]
+  },
+  "yellow": {
+    "label": "Yellow",
+    "hue": 85,
+    "usage": "Warning · Caution · Attention",
+    "steps": [
+      { "step": 0,   "hex": "#FFFCF4" },
+      { "step": 10,  "hex": "#F5DCAA" },
+      { "step": 20,  "hex": "#EEBD4B" },
+      { "step": 30,  "hex": "#D3A330" },
+      { "step": 40,  "hex": "#B78D27" },
+      { "step": 50,  "hex": "#93711D" },
+      { "step": 60,  "hex": "#775A14" },
+      { "step": 70,  "hex": "#62490D" },
+      { "step": 80,  "hex": "#483403" },
+      { "step": 90,  "hex": "#312200" },
+      { "step": 100, "hex": "#0F0901" }
+    ]
+  },
+  "blue": {
+    "label": "Blue",
+    "hue": 260,
+    "usage": "Info · Links · Interactive elements",
+    "steps": [
+      { "step": 0,   "hex": "#FAFCFF" },
+      { "step": 10,  "hex": "#D1E0F6" },
+      { "step": 20,  "hex": "#ABC4EE" },
+      { "step": 30,  "hex": "#82ABF0" },
+      { "step": 40,  "hex": "#5692F6" },
+      { "step": 50,  "hex": "#1C6EF1" },
+      { "step": 60,  "hex": "#1459C7" },
+      { "step": 70,  "hex": "#0C47A4" },
+      { "step": 80,  "hex": "#03337D" },
+      { "step": 90,  "hex": "#001F5C" },
+      { "step": 100, "hex": "#050B15" }
+    ]
+  }
+}

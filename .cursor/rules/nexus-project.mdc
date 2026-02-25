@@ -1,0 +1,29 @@
+---
+description: Nexus Design System — project overview, structure, and where to find things
+alwaysApply: true
+---
+
+# Nexus Design System
+
+Documentation site for the Nexus Design System, built with **Astro**.
+
+## Structure
+```
+src/
+  styles/        → base.css (variables, reset), layout.css (sidebar, shell), components.css (UI pieces)
+  layouts/       → Default.astro (shared sidebar + page shell, wraps every page)
+  pages/         → one .astro file per section (file-based routing)
+  tokens/        → JSON source-of-truth for design token values
+  components/    → reusable Astro components
+.local/          → updates.md (decision log), experiments, internal docs
+```
+
+## Sections
+- **Foundations:** Colours, Typography, Spacing, Grid
+- **Components:** Atoms, Molecules, Organisms
+
+## Key Convention
+- **British English everywhere** — display text AND URLs and filenames (e.g. `colours.astro` → `/colours`, not `colors`)
+
+## Session Continuity
+Always check `.local/updates.md` for the full decision log before starting new work.

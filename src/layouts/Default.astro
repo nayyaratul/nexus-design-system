@@ -1,0 +1,84 @@
+---
+interface Props {
+  title: string;
+  section: string;
+}
+
+const { title, section } = Astro.props;
+
+const navGroups = [
+  {
+    label: 'Foundations',
+    items: [
+      { name: 'Colours',    href: '/colours',    id: 'colours',    icon: '◆' },
+      { name: 'Typography', href: '/typography',  id: 'typography', icon: 'Aa' },
+      { name: 'Spacing',    href: '/spacing',     id: 'spacing',    icon: '⊞' },
+      { name: 'Grid',       href: '/grid',        id: 'grid',       icon: '▦' },
+    ],
+  },
+  {
+    label: 'Components',
+    items: [
+      { name: 'Atoms',      href: '/atoms',       id: 'atoms',      icon: '○' },
+      { name: 'Molecules',  href: '/molecules',   id: 'molecules',  icon: '◎' },
+      { name: 'Organisms',  href: '/organisms',   id: 'organisms',  icon: '◉' },
+    ],
+  },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} — Nexus Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ─── SIDEBAR ─────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <a href="/">
+          <h1>Nexus</h1>
+          <span>Design System</span>
+        </a>
+      </div>
+
+      <nav>
+        {navGroups.map((group) => (
+          <div class="nav-group">
+            <div class="nav-group-title">{group.label}</div>
+            {group.items.map((item) => (
+              <a
+                href={item.href}
+                class:list={['nav-link', { active: section === item.id }]}
+              >
+                <span class="nav-icon">{item.icon}</span>
+                {item.name}
+              </a>
+            ))}
+          </div>
+        ))}
+      </nav>
+    </aside>
+
+    <!-- ─── MAIN CONTENT ────────────────────────────── -->
+    <main class="main">
+      <div class="page">
+        <slot />
+      </div>
+    </main>
+
+  </div>
+</body>
+</html>
+
+<style is:global>
+  @import '../styles/base.css';
+  @import '../styles/layout.css';
+  @import '../styles/components.css';
+</style>
