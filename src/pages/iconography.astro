@@ -1,0 +1,363 @@
+---
+import Layout from '../layouts/Default.astro';
+import iconNodes from 'lucide-static/icon-nodes.json';
+import tags from 'lucide-static/tags.json';
+import colours from '../tokens/colours.json';
+
+// Build SVG inner HTML from icon-nodes tuples
+function buildSvgChildren(nodes: [string, Record<string, string>][]): string {
+  return nodes
+    .map(([tag, attrs]) => {
+      const a = Object.entries(attrs)
+        .map(([k, v]) => `${k}="${v}"`)
+        .join(' ');
+      return `<${tag} ${a}/>`;
+    })
+    .join('');
+}
+
+// Build category → icon-names map from tags
+const categoryMap: Record<string, string[]> = {};
+for (const [name, tagList] of Object.entries(tags as Record<string, string[]>)) {
+  for (const t of tagList) {
+    if (!categoryMap[t]) categoryMap[t] = [];
+    categoryMap[t].push(name);
+  }
+}
+// Keep categories with ≥8 icons, sorted alphabetically
+const categoryNames = Object.keys(categoryMap)
+  .filter((c) => categoryMap[c].length >= 8)
+  .sort();
+
+// Build icon → categories lookup
+const iconCategories: Record<string, string[]> = {};
+for (const [cat, icons] of Object.entries(categoryMap)) {
+  if (!categoryNames.includes(cat)) continue;
+  for (const icon of icons) {
+    if (!iconCategories[icon]) iconCategories[icon] = [];
+    iconCategories[icon].push(cat);
+  }
+}
+
+// Prepare all icon entries sorted alphabetically
+const iconEntries = Object.entries(iconNodes as Record<string, [string, Record<string, string>][]>).sort(
+  ([a], [b]) => a.localeCompare(b)
+);
+
+// Colour scales for picker
+const colourScales = Object.entries(colours as Record<string, { label: string; steps: { step: number; hex: string }[] }>);
+---
+
+<Layout title="Iconography" section="iconography">
+  <h1 class="page-title">Iconography</h1>
+  <p class="page-sub">{iconEntries.length} icons from Lucide — search, colour, adjust stroke, and download SVGs</p>
+
+  <!-- ─── CONTROLS BAR ──────────────────────────────────── -->
+  <div class="icon-controls">
+    <div class="icon-search-wrap">
+      <svg class="icon-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input type="text" id="icon-search" class="icon-search" placeholder="Search icons…" autocomplete="off" />
+    </div>
+
+    <div class="icon-control-group">
+      <button type="button" id="colour-trigger" class="icon-colour-trigger">
+        <span class="icon-colour-swatch" id="colour-swatch" style="background:#3A3530"></span>
+        <span class="icon-colour-label" id="colour-label">Neutral Grey 80</span>
+      </button>
+    </div>
+
+    <div class="icon-control-group icon-stroke-group">
+      <span class="icon-stroke-label">Stroke</span>
+      <div class="icon-stroke-toggle">
+        <button type="button" class="icon-stroke-btn" data-width="1">Thin</button>
+        <button type="button" class="icon-stroke-btn active" data-width="1.5">Regular</button>
+        <button type="button" class="icon-stroke-btn" data-width="2">Bold</button>
+      </div>
+    </div>
+
+    <div class="icon-control-group">
+      <select id="icon-category" class="icon-category-select">
+        <option value="">All categories</option>
+        {categoryNames.map((cat) => (
+          <option value={cat}>{cat} ({categoryMap[cat].length})</option>
+        ))}
+      </select>
+    </div>
+
+    <div class="icon-count" id="icon-count">
+      <span id="icon-count-num">{iconEntries.length}</span> icons
+    </div>
+  </div>
+
+  <!-- ─── COLOUR PICKER PANEL ───────────────────────────── -->
+  <div class="icon-colour-panel hidden" id="colour-panel">
+    <div class="icon-colour-panel-inner">
+      {colourScales.map(([key, scale]) => (
+        <div class="icon-colour-row">
+          <div class="icon-colour-row-label">{scale.label}</div>
+          <div class="icon-colour-chips">
+            {scale.steps.map((s) => (
+              <button
+                type="button"
+                class="icon-colour-chip"
+                data-hex={s.hex}
+                data-name={`${scale.label} ${s.step}`}
+                style={`background:${s.hex}`}
+                title={`${scale.label} ${s.step} — ${s.hex}`}
+              />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- ─── ICON GRID ─────────────────────────────────────── -->
+  <div class="icon-grid" id="icon-grid">
+    {iconEntries.map(([name, nodes]) => (
+      <button
+        type="button"
+        class="icon-card"
+        data-name={name}
+        data-categories={(iconCategories[name] || []).join(',')}
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          set:html={buildSvgChildren(nodes)}
+        />
+        <span class="icon-card-name">{name}</span>
+      </button>
+    ))}
+  </div>
+
+  <!-- ─── DETAIL PANEL ──────────────────────────────────── -->
+  <div class="icon-detail-overlay hidden" id="detail-overlay"></div>
+  <div class="icon-detail-panel hidden" id="detail-panel">
+    <div class="icon-detail-header">
+      <h3 id="detail-name">icon-name</h3>
+      <button type="button" class="icon-detail-close" id="detail-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="icon-detail-preview" id="detail-preview"></div>
+    <div class="icon-detail-actions">
+      <button type="button" class="icon-detail-btn" id="btn-copy-name">Copy name</button>
+      <button type="button" class="icon-detail-btn" id="btn-copy-svg">Copy SVG</button>
+    </div>
+    <div class="icon-detail-section">
+      <div class="icon-detail-section-title">Download SVG</div>
+      <div class="icon-detail-sizes">
+        <button type="button" class="icon-size-btn" data-size="16">16&times;16</button>
+        <button type="button" class="icon-size-btn" data-size="20">20&times;20</button>
+        <button type="button" class="icon-size-btn" data-size="24">24&times;24</button>
+        <button type="button" class="icon-size-btn" data-size="32">32&times;32</button>
+      </div>
+    </div>
+    <div class="icon-detail-section">
+      <div class="icon-detail-section-title">Categories</div>
+      <div class="icon-detail-categories" id="detail-categories"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Nexus Design System · v0.1.0
+  </div>
+</Layout>
+
+<script>
+  // ─── STATE ───────────────────────────────────────────────
+  let currentColour = '#3A3530';
+  let currentStrokeWidth = 1.5;
+  let currentIconName = '';
+
+  const grid = document.getElementById('icon-grid')!;
+  const searchInput = document.getElementById('icon-search') as HTMLInputElement;
+  const categorySelect = document.getElementById('icon-category') as HTMLSelectElement;
+  const countNum = document.getElementById('icon-count-num')!;
+  const colourTrigger = document.getElementById('colour-trigger')!;
+  const colourPanel = document.getElementById('colour-panel')!;
+  const colourSwatch = document.getElementById('colour-swatch')!;
+  const colourLabel = document.getElementById('colour-label')!;
+  const detailOverlay = document.getElementById('detail-overlay')!;
+  const detailPanel = document.getElementById('detail-panel')!;
+  const detailName = document.getElementById('detail-name')!;
+  const detailPreview = document.getElementById('detail-preview')!;
+  const detailCategories = document.getElementById('detail-categories')!;
+  const detailClose = document.getElementById('detail-close')!;
+  const btnCopyName = document.getElementById('btn-copy-name')!;
+  const btnCopySvg = document.getElementById('btn-copy-svg')!;
+
+  const allCards = Array.from(grid.querySelectorAll('.icon-card')) as HTMLButtonElement[];
+
+  // ─── SEARCH & FILTER ────────────────────────────────────
+  let debounceTimer: ReturnType<typeof setTimeout>;
+
+  function filterIcons() {
+    const query = searchInput.value.toLowerCase().trim();
+    const category = categorySelect.value;
+    let visible = 0;
+
+    for (const card of allCards) {
+      const name = card.dataset.name || '';
+      const cats = card.dataset.categories || '';
+      const matchesSearch = !query || name.includes(query);
+      const matchesCat = !category || cats.split(',').includes(category);
+      const show = matchesSearch && matchesCat;
+      card.classList.toggle('hidden', !show);
+      if (show) visible++;
+    }
+
+    countNum.textContent = String(visible);
+  }
+
+  searchInput.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(filterIcons, 120);
+  });
+
+  categorySelect.addEventListener('change', filterIcons);
+
+  // ─── COLOUR PICKER ──────────────────────────────────────
+  colourTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    colourPanel.classList.toggle('hidden');
+  });
+
+  colourPanel.addEventListener('click', (e) => {
+    const chip = (e.target as HTMLElement).closest('.icon-colour-chip') as HTMLButtonElement | null;
+    if (!chip) return;
+    const hex = chip.dataset.hex!;
+    const name = chip.dataset.name!;
+    currentColour = hex;
+    colourSwatch.style.background = hex;
+    colourLabel.textContent = name;
+    grid.style.color = hex;
+    colourPanel.classList.add('hidden');
+
+    // Update detail preview if open
+    if (!detailPanel.classList.contains('hidden')) {
+      const svg = detailPreview.querySelector('svg');
+      if (svg) svg.setAttribute('stroke', hex);
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!colourPanel.contains(e.target as Node) && !colourTrigger.contains(e.target as Node)) {
+      colourPanel.classList.add('hidden');
+    }
+  });
+
+  // ─── STROKE WIDTH ───────────────────────────────────────
+  const strokeBtns = document.querySelectorAll('.icon-stroke-btn');
+  strokeBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      strokeBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const w = parseFloat((btn as HTMLButtonElement).dataset.width || '1.5');
+      currentStrokeWidth = w;
+      grid.querySelectorAll('svg').forEach((svg) => {
+        svg.setAttribute('stroke-width', String(w));
+      });
+
+      // Update detail preview if open
+      if (!detailPanel.classList.contains('hidden')) {
+        const svg = detailPreview.querySelector('svg');
+        if (svg) svg.setAttribute('stroke-width', String(w));
+      }
+    });
+  });
+
+  // ─── DETAIL PANEL ───────────────────────────────────────
+  function openDetail(card: HTMLButtonElement) {
+    const name = card.dataset.name || '';
+    const cats = (card.dataset.categories || '').split(',').filter(Boolean);
+    currentIconName = name;
+
+    detailName.textContent = name;
+
+    // Clone the SVG at 48×48
+    const srcSvg = card.querySelector('svg')!;
+    const bigSvg = srcSvg.cloneNode(true) as SVGElement;
+    bigSvg.setAttribute('width', '48');
+    bigSvg.setAttribute('height', '48');
+    bigSvg.setAttribute('stroke', currentColour);
+    bigSvg.setAttribute('stroke-width', String(currentStrokeWidth));
+    detailPreview.innerHTML = '';
+    detailPreview.appendChild(bigSvg);
+
+    // Categories
+    detailCategories.innerHTML = cats
+      .map((c) => `<span class="icon-detail-cat-chip">${c}</span>`)
+      .join('');
+
+    detailPanel.classList.remove('hidden');
+    detailOverlay.classList.remove('hidden');
+  }
+
+  function closeDetail() {
+    detailPanel.classList.add('hidden');
+    detailOverlay.classList.add('hidden');
+    currentIconName = '';
+  }
+
+  grid.addEventListener('click', (e) => {
+    const card = (e.target as HTMLElement).closest('.icon-card') as HTMLButtonElement | null;
+    if (card) openDetail(card);
+  });
+
+  detailClose.addEventListener('click', closeDetail);
+  detailOverlay.addEventListener('click', closeDetail);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeDetail();
+      colourPanel.classList.add('hidden');
+    }
+  });
+
+  // ─── COPY ───────────────────────────────────────────────
+  function flashBtn(btn: HTMLElement, text: string) {
+    const orig = btn.textContent;
+    btn.textContent = text;
+    setTimeout(() => (btn.textContent = orig), 1200);
+  }
+
+  btnCopyName.addEventListener('click', () => {
+    navigator.clipboard.writeText(currentIconName);
+    flashBtn(btnCopyName, 'Copied!');
+  });
+
+  btnCopySvg.addEventListener('click', () => {
+    const svg = detailPreview.querySelector('svg');
+    if (svg) {
+      navigator.clipboard.writeText(svg.outerHTML);
+      flashBtn(btnCopySvg, 'Copied!');
+    }
+  });
+
+  // ─── DOWNLOAD ───────────────────────────────────────────
+  document.querySelectorAll('.icon-size-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const size = (btn as HTMLButtonElement).dataset.size || '24';
+      const liveSvg = detailPreview.querySelector('svg');
+      if (!liveSvg) return;
+
+      const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${currentColour}" stroke-width="${currentStrokeWidth}" stroke-linecap="round" stroke-linejoin="round">${liveSvg.innerHTML}</svg>`;
+      const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${currentIconName}-${size}x${size}.svg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  });
+</script>
