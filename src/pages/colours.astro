@@ -224,4 +224,33 @@ function getButtonTextRow(scaleName: string, step: number, theme: 'light' | 'dar
     Nexus Design System · Colours
   </div>
 
+  <div class="colour-toast" id="colour-toast">Copied!</div>
 </Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const steps = document.querySelectorAll('.step');
+    const toast = document.getElementById('colour-toast');
+    let hideTimer: ReturnType<typeof setTimeout>;
+
+    steps.forEach(step => {
+      step.addEventListener('click', () => {
+        const hexEl = step.querySelector('.h');
+        if (!hexEl) return;
+        const hex = hexEl.textContent?.trim();
+        if (!hex) return;
+
+        navigator.clipboard.writeText(hex).then(() => {
+          if (toast) {
+            toast.textContent = `Copied ${hex}`;
+            toast.classList.add('colour-toast--visible');
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+              toast.classList.remove('colour-toast--visible');
+            }, 1800);
+          }
+        });
+      });
+    });
+  });
+</script>

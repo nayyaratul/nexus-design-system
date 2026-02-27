@@ -423,7 +423,8 @@ import AccordionSection from '../components/AccordionSection.astro';
               <span class="rt-col">4/12 (sticky)</span>
             </div>
           </div>
-          <pre><code>&lt;Container fluid className="p-0 m-0"&gt;
+          <div class="code-block-wrapper">
+            <pre><code>&lt;Container fluid className="p-0 m-0"&gt;
   &lt;Row className="gx-1 gx-md-5"&gt;
     &lt;Col xs=&#123;12&#125; md=&#123;7&#125;&gt;
       &#123;/* Main content */&#125;
@@ -433,6 +434,8 @@ import AccordionSection from '../components/AccordionSection.astro';
     &lt;/Col&gt;
   &lt;/Row&gt;
 &lt;/Container&gt;</code></pre>
+            <button class="code-copy-btn" aria-label="Copy code"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          </div>
         </li>
         <li>
           <strong>Full-width content strip (card stack)</strong>
@@ -447,13 +450,16 @@ import AccordionSection from '../components/AccordionSection.astro';
             <li><strong>Use when:</strong> you want a stack of full-width cards with consistent horizontal margins.</li>
             <li><strong>Behaviour:</strong> always one 12-column wrapper; cards inside handle their own layout.</li>
           </ul>
-          <pre><code>&lt;Container fluid&gt;
+          <div class="code-block-wrapper">
+            <pre><code>&lt;Container fluid&gt;
   &lt;Row className="mx-4 mx-md-5 g-1 g-md-5"&gt;
     &lt;Col xs=&#123;12&#125;&gt;
       &#123;/* Card stack */&#125;
     &lt;/Col&gt;
   &lt;/Row&gt;
 &lt;/Container&gt;</code></pre>
+            <button class="code-copy-btn" aria-label="Copy code"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          </div>
         </li>
         <li>
           <strong>Centred narrow form / content sheet</strong>
@@ -479,7 +485,8 @@ import AccordionSection from '../components/AccordionSection.astro';
               <span class="rt-col">Centred, constrained</span>
             </div>
           </div>
-          <pre><code>&lt;Container className="customContainer"&gt;
+          <div class="code-block-wrapper">
+            <pre><code>&lt;Container className="customContainer"&gt;
   &lt;Row&gt;
     &lt;Col xs=&#123;12&#125;&gt;
       &#123;/* Form / reading content */&#125;
@@ -492,6 +499,8 @@ import AccordionSection from '../components/AccordionSection.astro';
   max-width: 690px;
   @include mobileOnly &#123; max-width: 100%; &#125;
 &#125;</code></pre>
+            <button class="code-copy-btn" aria-label="Copy code"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          </div>
         </li>
         <li>
           <strong>Centred assessment / exam card</strong>
@@ -527,7 +536,8 @@ import AccordionSection from '../components/AccordionSection.astro';
               <span class="rt-col">offset-4</span>
             </div>
           </div>
-          <pre><code>&lt;Container fluid&gt;
+          <div class="code-block-wrapper">
+            <pre><code>&lt;Container fluid&gt;
   &lt;Row className="gx-0"&gt;
     &lt;Col xs=&#123;12&#125; md=&#123;&#123; span: 8, offset: 2 &#125;&#125;
          lg=&#123;&#123; span: 6, offset: 3 &#125;&#125;
@@ -536,6 +546,8 @@ import AccordionSection from '../components/AccordionSection.astro';
     &lt;/Col&gt;
   &lt;/Row&gt;
 &lt;/Container&gt;</code></pre>
+            <button class="code-copy-btn" aria-label="Copy code"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          </div>
         </li>
         <li>
           <strong>Profile / detail card with inner grid</strong>
@@ -550,13 +562,16 @@ import AccordionSection from '../components/AccordionSection.astro';
             <li><strong>Use when:</strong> you need a structured information card (avatar + details + actions).</li>
             <li><strong>Inner split:</strong> 3/7/2 arranges avatar, text, and actions within the card.</li>
           </ul>
-          <pre><code>&lt;Col xl=&#123;8&#125;&gt;
+          <div class="code-block-wrapper">
+            <pre><code>&lt;Col xl=&#123;8&#125;&gt;
   &lt;Row&gt;
     &lt;Col xs=&#123;3&#125;&gt;&#123;/* Avatar */&#125;&lt;/Col&gt;
     &lt;Col xs=&#123;7&#125;&gt;&#123;/* Details */&#125;&lt;/Col&gt;
     &lt;Col xs=&#123;2&#125;&gt;&#123;/* Actions */&#125;&lt;/Col&gt;
   &lt;/Row&gt;
 &lt;/Col&gt;</code></pre>
+            <button class="code-copy-btn" aria-label="Copy code"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          </div>
         </li>
       </ul>
     </AccordionSection>
@@ -731,4 +746,20 @@ import AccordionSection from '../components/AccordionSection.astro';
   </div>
 
   <div class="footer">Nexus Design System · Grid</div>
+
+  <div class="grid-toast" id="grid-toast">Copied!</div>
+
+  <script>
+    document.querySelectorAll('.code-copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.closest('.code-block-wrapper').querySelector('code');
+        if (!code) return;
+        navigator.clipboard.writeText(code.textContent).then(() => {
+          const toast = document.getElementById('grid-toast');
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 1500);
+        });
+      });
+    });
+  </script>
 </Layout>
