@@ -9,7 +9,7 @@ const primitiveScale = [
   { token: '100',  px: 8,  rem: '0.5',    use: 'Small — base unit', pragmatic: false },
   { token: '125',  px: 10, rem: '0.625',  use: 'Pragmatic — legacy product patterns', pragmatic: true },
   { token: '150',  px: 12, rem: '0.75',   use: 'Medium — card padding, list spacing', pragmatic: false },
-  { token: '200',  px: 16, rem: '1',     use: 'Base — default padding', pragmatic: false },
+  { token: '200',  px: 16, rem: '1',      use: 'Base — default padding', pragmatic: false },
   { token: '250',  px: 20, rem: '1.25',   use: 'Medium-large', pragmatic: false },
   { token: '300',  px: 24, rem: '1.5',    use: 'Large — section spacing', pragmatic: false },
   { token: '400',  px: 32, rem: '2',      use: 'X-large', pragmatic: false },
@@ -20,9 +20,36 @@ const primitiveScale = [
 ];
 
 const usageCategories = [
-  { name: 'Small', range: '2–12px', tokens: 'space-025–150', use: 'Icon gaps, compact padding, badge padding, inline spacing', samplePx: [4, 8, 12] },
-  { name: 'Medium', range: '16–24px', tokens: 'space-200–300', use: 'Card padding, list spacing, section spacing', samplePx: [16, 20, 24] },
-  { name: 'Large', range: '32–80px', tokens: 'space-400–1000', use: 'Major sections, page padding, hero areas', samplePx: [32, 48, 64] },
+  {
+    name: 'Small',
+    range: '2–12px',
+    subtitle: 'Micro interactions & tight spaces',
+    accent: '#E8E4DE',
+    mockupType: 'small',
+    tokens: ['space-025', 'space-050', 'space-075', 'space-100', 'space-125', 'space-150'],
+    use: 'Icon gaps, compact padding, badge padding, inline spacing',
+    samplePx: [4, 8, 12],
+  },
+  {
+    name: 'Medium',
+    range: '16–24px',
+    subtitle: 'Component-level breathing room',
+    accent: '#C8D8F0',
+    mockupType: 'medium',
+    tokens: ['space-200', 'space-250', 'space-300'],
+    use: 'Card padding, list spacing, form fields, section spacing',
+    samplePx: [16, 20, 24],
+  },
+  {
+    name: 'Large',
+    range: '32–80px',
+    subtitle: 'Page-level structure & rhythm',
+    accent: '#D6F0E0',
+    mockupType: 'large',
+    tokens: ['space-400', 'space-500', 'space-600', 'space-800', 'space-1000'],
+    use: 'Major sections, page padding, hero areas, vertical rhythm',
+    samplePx: [32, 48, 64],
+  },
 ];
 
 const bootstrapMapping = [
@@ -32,6 +59,15 @@ const bootstrapMapping = [
   { bootstrap: '3', value: '1rem', px: '16px', token: 'space-200' },
   { bootstrap: '4', value: '1.25rem', px: '20px', token: 'space-250' },
   { bootstrap: '5', value: '1.5rem', px: '24px', token: 'space-300' },
+];
+
+const layoutPatterns = [
+  { context: 'Card padding', values: '12px, 16px, 20px, 24px', tokens: 'space-150, space-200, space-250, space-300', mockup: 'card', use: 'Inset spacing for card-like containers, panels, and dialogs', tokenList: ['space-150', 'space-200', 'space-250', 'space-300'] },
+  { context: 'Flex gap', values: '4px, 8px, 12px, 16px, 24px', tokens: 'space-050, space-100, space-150, space-200, space-300', mockup: 'flex', use: 'Horizontal and vertical gaps between sibling elements', tokenList: ['space-050', 'space-100', 'space-150', 'space-200', 'space-300'] },
+  { context: 'Button padding', values: '4px 8px, 8px 12px, 10px 16px', tokens: 'space-050/100, space-100/150, space-125/200', mockup: 'button', use: 'Vertical / horizontal inset for interactive controls', tokenList: ['space-050', 'space-100', 'space-125', 'space-150', 'space-200'] },
+  { context: 'Modal padding', values: '20px, 24px', tokens: 'space-250, space-300', mockup: 'modal', use: 'Content inset for overlays, sheets, and modals', tokenList: ['space-250', 'space-300'] },
+  { context: 'Section spacing', values: '12px, 16px, 24px', tokens: 'space-150, space-200, space-300', mockup: 'section', use: 'Vertical rhythm between stacked content blocks', tokenList: ['space-150', 'space-200', 'space-300'] },
+  { context: 'Container padding', values: '16px (mobile), 24px (desktop)', tokens: 'space-200, space-300', mockup: 'container', use: 'Outer padding on page-level wrappers', tokenList: ['space-200', 'space-300'] },
 ];
 
 const cssExample = `margin: var(--space-200);
@@ -45,30 +81,6 @@ const scssExample = `@use 'base' as *;
   padding: var(--space-200);
   & + .card { margin-top: var(--space-150); }
 }`;
-
-const layoutPatterns = [
-  { context: 'Card padding', values: '12px, 16px, 20px, 24px', tokens: 'space-150, space-200, space-250, space-300', mockup: 'card' },
-  { context: 'Flex gap', values: '4px, 8px, 12px, 16px, 24px', tokens: 'space-050, space-100, space-150, space-200, space-300', mockup: 'flex' },
-  { context: 'Button padding', values: '4px 8px, 8px 12px, 10px 16px', tokens: 'space-050/100, space-100/150, space-125/200', mockup: 'button' },
-  { context: 'Modal padding', values: '20px, 24px', tokens: 'space-250, space-300', mockup: 'modal' },
-  { context: 'Section spacing', values: '12px, 16px, 24px', tokens: 'space-150, space-200, space-300', mockup: 'section' },
-  { context: 'Container padding', values: '16px (mobile), 24px (desktop)', tokens: 'space-200, space-300', mockup: 'container' },
-];
-
-const scalePreviewItems = [
-  { token: '025', px: 2, pragmatic: false },
-  { token: '050', px: 4, pragmatic: false },
-  { token: '075', px: 6, pragmatic: true },
-  { token: '100', px: 8, pragmatic: false },
-  { token: '125', px: 10, pragmatic: true },
-  { token: '150', px: 12, pragmatic: false },
-  { token: '200', px: 16, pragmatic: false },
-  { token: '300', px: 24, pragmatic: false },
-  { token: '400', px: 32, pragmatic: false },
-  { token: '600', px: 48, pragmatic: false },
-  { token: '800', px: 64, pragmatic: false },
-  { token: '1000', px: 80, pragmatic: false },
-];
 ---
 
 <Layout title="Spacing" section="spacing">
@@ -76,7 +88,7 @@ const scalePreviewItems = [
   <p class="page-sub">4px base grid · 2–80px scale · Margins · Padding · Gaps · REM units</p>
 
   <!-- ═══════════════════════════════════════════════════════
-       OVERVIEW
+       1. HERO OVERVIEW
   ════════════════════════════════════════════════════════ -->
   <div class="section">
     <div class="section-header">
@@ -92,212 +104,200 @@ const scalePreviewItems = [
       <strong>Scope:</strong> Spacing covers margins, padding, and gaps between elements. Borders and dividers are documented separately.
     </div>
 
-    <div class="space-grid-4px">
-      {[...Array(64)].map((_, i) => (
-        <div class="space-grid-cell"></div>
-      ))}
-    </div>
-    <span class="grid-diagram-caption">4px base unit · all spacing aligns to this grid (except pragmatic tokens)</span>
-
-    <div class="space-mpg-diagram">
-      <div class="space-mpg-outer">
-        <span class="space-mpg-label space-mpg-label--margin">margin</span>
-        <div class="space-mpg-border">
-          <span class="space-mpg-label space-mpg-label--border">border</span>
-          <div class="space-mpg-inner">
-            <span class="space-mpg-label space-mpg-label--padding">padding</span>
-            <div class="space-mpg-content">
-              <span class="space-mpg-label space-mpg-label--gap">gap</span>
-              <div class="space-mpg-flex">
-                <div></div><div></div><div></div>
-              </div>
+    <!-- Proportional ruler -->
+    <div class="space-ruler-card">
+      <div class="space-ruler-bars">
+        {primitiveScale.map((s) => (
+          <div class={`space-ruler-row ${s.pragmatic ? 'space-ruler-row--pragmatic' : ''}`} title={s.use}>
+            <span class="space-ruler-label">--space-{s.token}</span>
+            <div class="space-ruler-track">
+              <div class={`space-ruler-bar ${s.pragmatic ? 'space-ruler-bar--pragmatic' : ''}`} style={`width: ${(s.px / 80) * 100}%`}></div>
             </div>
+            <span class="space-ruler-px">{s.px}px</span>
           </div>
-        </div>
+        ))}
+      </div>
+      <div class="space-ruler-axis">
+        <span>0</span>
+        <span>20px</span>
+        <span>40px</span>
+        <span>60px</span>
+        <span>80px</span>
       </div>
     </div>
-    <span class="grid-diagram-caption">Margin (outside) · Padding (inside) · Gap (between flex children)</span>
+
   </div>
 
   <!-- ═══════════════════════════════════════════════════════
-       PRIMITIVE SCALE
+       2. THE SCALE
   ════════════════════════════════════════════════════════ -->
   <div class="section">
     <div class="section-header">
-      <span class="section-title">Primitive Scale</span>
-      <span class="section-desc">Raw space tokens · 2–80px · Use for margins, padding, gap</span>
+      <span class="section-title">The Scale</span>
+      <span class="section-desc">14 tokens · 2–80px · Click any row to copy the CSS variable</span>
     </div>
 
     <div class="info-box space-info-box">
-      Primitives are the raw value palette — they carry no usage opinion. Use them wherever you need consistent spacing.
-      Tokens marked <span class="pragmatic-tag">pragmatic</span> (6px, 10px) are not on the 4px grid but are included for existing product patterns. Prefer grid-aligned tokens for new work.
+      Primitives are the raw value palette — they carry no usage opinion. Tokens marked <span class="pragmatic-tag">pragmatic</span> (6px, 10px) are not on the 4px grid but are included for existing product patterns. Prefer grid-aligned tokens for new work.
     </div>
 
-    <div class="type-table space-primitive-table">
-      <div class="type-table-head">
-        <span class="tt-col tt-token">Token</span>
-        <span class="tt-col tt-px">px</span>
-        <span class="tt-col tt-rem">rem</span>
-        <span class="tt-col tt-use">Use</span>
-        <span class="tt-col tt-preview">Preview</span>
+    <div class="space-explorer">
+      <div class="space-explorer-head">
+        <span class="space-explorer-col space-explorer-col--token">Token</span>
+        <span class="space-explorer-col space-explorer-col--px">px</span>
+        <span class="space-explorer-col space-explorer-col--rem">rem</span>
+        <span class="space-explorer-col space-explorer-col--bar">Scale</span>
+        <span class="space-explorer-col space-explorer-col--use">Use</span>
       </div>
       {primitiveScale.map((s) => (
-        <div class="type-table-row">
-          <span class="tt-col tt-token"><code>--space-{s.token}</code></span>
-          <span class="tt-col tt-px">{s.px}</span>
-          <span class="tt-col tt-rem">{s.rem}</span>
-          <span class="tt-col tt-use">{s.use}{s.pragmatic && ' (pragmatic)'}</span>
-          <span class="tt-col tt-preview">
-            <div class={`space-table-preview ${s.pragmatic ? 'space-table-preview--pragmatic' : ''}`} style={`gap: ${s.px}px`}>
-              <div></div><div></div><div></div>
+        <div class={`space-explorer-row ${s.pragmatic ? 'space-explorer-row--pragmatic' : ''}`} data-token={`var(--space-${s.token})`}>
+          <span class="space-explorer-col space-explorer-col--token"><code>--space-{s.token}</code>{s.pragmatic && <span class="pragmatic-tag">pragmatic</span>}</span>
+          <span class="space-explorer-col space-explorer-col--px">{s.px}</span>
+          <span class="space-explorer-col space-explorer-col--rem">{s.rem}</span>
+          <span class="space-explorer-col space-explorer-col--bar">
+            <div class="space-explorer-bar-track">
+              <div class={`space-explorer-bar ${s.pragmatic ? 'space-explorer-bar--pragmatic' : ''}`} style={`width: ${(s.px / 80) * 100}%`}></div>
             </div>
           </span>
+          <span class="space-explorer-col space-explorer-col--use">{s.use}</span>
         </div>
       ))}
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════
-       VISUAL SCALE
+       3. APPLYING SPACE
   ════════════════════════════════════════════════════════ -->
   <div class="section">
     <div class="section-header">
-      <span class="section-title">Scale Preview</span>
-      <span class="section-desc">Visual comparison of spacing values</span>
+      <span class="section-title">Applying Space</span>
+      <span class="section-desc">Usage categories and layout patterns</span>
     </div>
 
-    <div class="space-scale-demo">
-      {scalePreviewItems.map((item) => (
-        <div class="space-scale-item" data-tooltip={`--space-${item.token} · ${item.px}px${item.pragmatic ? ' (pragmatic)' : ''}`}>
-          <div class={`space-scale-blocks ${item.pragmatic ? 'space-scale-blocks--pragmatic' : ''}`} style={`gap: ${item.px}px`}>
-            <div></div><div></div><div></div>
-          </div>
-          <span class="space-scale-label">--space-{item.token}</span>
-          <span class="space-scale-label space-scale-label--px">{item.px}px</span>
-        </div>
-      ))}
-    </div>
-    <span class="grid-diagram-caption">Gap between blocks increases by token value · Hover for details</span>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       USAGE CATEGORIES
-  ════════════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-title">Usage Categories</span>
-      <span class="section-desc">When to use each range</span>
-    </div>
-
-    <div class="space-categories">
+    <!-- Usage triptych -->
+    <div class="space-triptych">
       {usageCategories.map((cat) => (
-        <div class="space-category-card">
-          <div class="space-category-preview">
-            {cat.samplePx.map((px) => (
-              <div class="space-category-sample" style={`gap: ${px}px`}>
-                <div></div><div></div><div></div>
-              </div>
-            ))}
+        <div class="space-triptych-card">
+          <div class="space-triptych-header" style={`background: ${cat.accent};`}>
+            <div class="space-triptych-preview">
+              {cat.mockupType === 'small' && (
+                <div class="space-triptych-mockup-small">
+                  <div class="stm-button">
+                    Action
+                    <span class="stm-badge">3</span>
+                  </div>
+                </div>
+              )}
+              {cat.mockupType === 'medium' && (
+                <div class="space-triptych-mockup-medium">
+                  <div class="stm-card">
+                    <div class="stm-card-title"></div>
+                    <div class="stm-card-line"></div>
+                    <div class="stm-card-line stm-card-line--short"></div>
+                  </div>
+                </div>
+              )}
+              {cat.mockupType === 'large' && (
+                <div class="space-triptych-mockup-large">
+                  <div class="stm-section"></div>
+                  <div class="stm-gap-indicator">
+                    <span>gap</span>
+                  </div>
+                  <div class="stm-section"></div>
+                </div>
+              )}
+            </div>
           </div>
-          <div class="space-category-name">{cat.name}</div>
-          <div class="space-category-range">{cat.range}</div>
-          <div class="space-category-tokens"><code>{cat.tokens}</code></div>
-          <div class="space-category-use">{cat.use}</div>
+          <div class="space-triptych-body">
+            <div class="space-triptych-name">{cat.name}</div>
+            <div class="space-triptych-subtitle">{cat.subtitle}</div>
+            <div class="space-triptych-range">{cat.range}</div>
+            <div class="space-triptych-pills">
+              {cat.tokens.map((t) => (
+                <span class="space-triptych-pill">{t}</span>
+              ))}
+            </div>
+            <div class="space-triptych-use">{cat.use}</div>
+          </div>
         </div>
       ))}
     </div>
-  </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       BOOTSTRAP ALIGNMENT
-  ════════════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-title">Bootstrap Alignment</span>
-      <span class="section-desc">How Bootstrap utilities map to our tokens</span>
-    </div>
-
-    <div class="info-box space-info-box">
-      Our product uses Bootstrap 5 for layout. Bootstrap's <code>$spacer</code> is 1rem (16px). Utilities like <code>m-*</code>, <code>p-*</code>, <code>gap-*</code> use Bootstrap's scale. Use our tokens in component CSS; use Bootstrap utilities for grid and layout.
-    </div>
-
-    <div class="type-table">
-      <div class="type-table-head">
-        <span class="tt-col tt-token">Bootstrap</span>
-        <span class="tt-col tt-px">Value</span>
-        <span class="tt-col tt-rem">px</span>
-        <span class="tt-col tt-use">Our token</span>
-      </div>
-      {bootstrapMapping.map((row) => (
-        <div class="type-table-row">
-          <span class="tt-col tt-token"><code>m-{row.bootstrap}</code> <code>p-{row.bootstrap}</code> <code>gap-{row.bootstrap}</code></span>
-          <span class="tt-col tt-px">{row.value}</span>
-          <span class="tt-col tt-rem">{row.px}</span>
-          <span class="tt-col tt-use">
-            {row.token && <code>{row.token}</code>}
-            {!row.token && '—'}
-          </span>
-        </div>
-      ))}
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       LAYOUT PATTERNS
-  ════════════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-title">Layout Patterns</span>
-      <span class="section-desc">Common spacing by context</span>
-    </div>
-
-    <div class="space-patterns-list">
+    <!-- Enhanced layout patterns -->
+    <h3 class="space-patterns-heading">Layout Patterns</h3>
+    <div class="space-patterns-enhanced">
       {layoutPatterns.map((p) => (
-        <div class="space-pattern-row">
-          <div class="space-pattern-mockup">
+        <div class="space-pattern-enhanced-row">
+          <div class="space-pattern-enhanced-mockup">
             {p.mockup === 'card' && (
-              <div class="space-mockup-card">
-                <div class="space-mockup-inner" style="padding: 16px;">
-                  <span class="layout-thumb-label">space-200</span>
+              <div class="spm-card">
+                <div class="spm-card-inner">
+                  <div class="spm-bracket spm-bracket--top">
+                    <span>padding</span>
+                  </div>
+                  <div class="spm-bracket spm-bracket--left">
+                    <span>padding</span>
+                  </div>
+                  <div class="spm-card-content">
+                    <div></div>
+                    <div></div>
+                  </div>
                 </div>
               </div>
             )}
             {p.mockup === 'flex' && (
-              <div class="space-mockup-flex" style="gap: 8px;">
-                <div></div><div></div><div></div>
+              <div class="spm-flex">
+                <div class="spm-flex-child"></div>
+                <div class="spm-gap-indicator"><span>gap</span></div>
+                <div class="spm-flex-child"></div>
+                <div class="spm-gap-indicator"><span>gap</span></div>
+                <div class="spm-flex-child"></div>
               </div>
             )}
             {p.mockup === 'button' && (
-              <div class="space-mockup-button" style="padding: 8px 12px;">
-                <span class="layout-thumb-label">space-100/150</span>
+              <div class="spm-button">
+                <div class="spm-bracket spm-bracket--top"><span>v-pad</span></div>
+                <div class="spm-bracket spm-bracket--left"><span>h-pad</span></div>
+                <span class="spm-button-label">Button</span>
               </div>
             )}
             {p.mockup === 'modal' && (
-              <div class="space-mockup-modal">
-                <div class="space-mockup-inner" style="padding: 24px;">
-                  <span class="layout-thumb-label">space-300</span>
+              <div class="spm-modal">
+                <div class="spm-modal-header"></div>
+                <div class="spm-modal-body">
+                  <div class="spm-bracket spm-bracket--left"><span>inset</span></div>
+                  <div class="spm-modal-content">
+                    <div></div><div></div>
+                  </div>
                 </div>
               </div>
             )}
             {p.mockup === 'section' && (
-              <div class="space-mockup-section">
-                <div></div>
-                <div class="space-mockup-gap" style="height: 24px;"></div>
-                <div></div>
+              <div class="spm-sections">
+                <div class="spm-section-block"></div>
+                <div class="spm-gap-indicator"><span>margin</span></div>
+                <div class="spm-section-block"></div>
+                <div class="spm-gap-indicator"><span>margin</span></div>
+                <div class="spm-section-block"></div>
               </div>
             )}
             {p.mockup === 'container' && (
-              <div class="space-mockup-container">
-                <div class="space-mockup-inner" style="padding: 24px;">
-                  <span class="layout-thumb-label">space-300</span>
-                </div>
+              <div class="spm-container">
+                <div class="spm-bracket spm-bracket--left"><span>pad</span></div>
+                <div class="spm-container-content"></div>
+                <div class="spm-bracket spm-bracket--right"><span>pad</span></div>
               </div>
             )}
           </div>
-          <div class="space-pattern-info">
-            <div class="space-pattern-context">{p.context}</div>
-            <div class="space-pattern-values">{p.values}</div>
-            <code class="space-pattern-tokens">{p.tokens}</code>
+          <div class="space-pattern-enhanced-info">
+            <div class="space-pattern-enhanced-context">{p.context}</div>
+            <div class="space-pattern-enhanced-use">{p.use}</div>
+            <div class="space-pattern-enhanced-values">{p.values}</div>
+            <div class="space-pattern-enhanced-tokens">
+              {p.tokenList.map((t) => (
+                <code>{t}</code>
+              ))}
+            </div>
           </div>
         </div>
       ))}
@@ -305,25 +305,64 @@ const scalePreviewItems = [
   </div>
 
   <!-- ═══════════════════════════════════════════════════════
-       DO / DON'T
+       4. BOOTSTRAP BRIDGE
   ════════════════════════════════════════════════════════ -->
   <div class="section">
     <div class="section-header">
-      <span class="section-title">Do & Don't</span>
-      <span class="section-desc">Spacing best practices</span>
+      <span class="section-title">Bootstrap Bridge</span>
+      <span class="section-desc">How Bootstrap utilities map to our tokens</span>
+    </div>
+
+    <div class="info-box space-info-box">
+      Our product uses Bootstrap 5 for layout. Bootstrap's <code>$spacer</code> is 1rem (16px). Use our tokens in component CSS; use Bootstrap utilities for grid and layout.
+    </div>
+
+    <div class="space-bootstrap-flow">
+      {bootstrapMapping.map((row) => (
+        <div class="space-bootstrap-item">
+          <div class="space-bootstrap-from">
+            <code>m-{row.bootstrap}</code> / <code>p-{row.bootstrap}</code>
+          </div>
+          <span class="space-bootstrap-arrow">→</span>
+          <div class="space-bootstrap-to">
+            {row.token ? <code>{row.token}</code> : <span class="space-bootstrap-none">—</span>}
+            <span class="space-bootstrap-px">{row.px}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       5. BEST PRACTICES
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Best Practices</span>
+      <span class="section-desc">Do & Don't — with code examples</span>
     </div>
 
     <div class="do-dont-grid">
       <div class="do-dont-card do-dont-card--dont">
         <div class="do-dont-header">Don't</div>
         <div class="do-dont-body">
-          Mix hardcoded values like <code>padding: 12px</code> and <code>margin: 0.75rem</code> — inconsistent across components.
+          Mix hardcoded values — inconsistent and unthemeable.
+          <pre class="do-dont-code do-dont-code--dont"><code>.card &#123;
+  padding: 12px;
+  margin: 0.75rem;
+  gap: 7px;
+&#125;</code></pre>
         </div>
       </div>
       <div class="do-dont-card do-dont-card--do">
         <div class="do-dont-header">Do</div>
         <div class="do-dont-body">
-          Use tokens: <code>padding: var(--space-150)</code>, <code>margin: var(--space-200)</code> — consistent and themeable.
+          Use tokens — consistent and themeable.
+          <pre class="do-dont-code do-dont-code--do"><code>.card &#123;
+  padding: var(--space-150);
+  margin: var(--space-200);
+  gap: var(--space-100);
+&#125;</code></pre>
         </div>
       </div>
     </div>
@@ -332,13 +371,21 @@ const scalePreviewItems = [
       <div class="do-dont-card do-dont-card--dont">
         <div class="do-dont-header">Don't</div>
         <div class="do-dont-body">
-          Use arbitrary values off the 4px grid (e.g. 7px, 13px, 19px) — breaks alignment.
+          Use arbitrary values off the 4px grid — breaks visual alignment.
+          <pre class="do-dont-code do-dont-code--dont"><code>.widget &#123;
+  padding: 13px 19px;
+  margin-bottom: 7px;
+&#125;</code></pre>
         </div>
       </div>
       <div class="do-dont-card do-dont-card--do">
         <div class="do-dont-header">Do</div>
         <div class="do-dont-body">
-          Use grid-aligned tokens (4, 8, 12, 16, 24, 32…) for new work. Pragmatic tokens only when matching existing patterns.
+          Use grid-aligned tokens. Pragmatic tokens only when matching existing patterns.
+          <pre class="do-dont-code do-dont-code--do"><code>.widget &#123;
+  padding: var(--space-150) var(--space-250);
+  margin-bottom: var(--space-100);
+&#125;</code></pre>
         </div>
       </div>
     </div>
@@ -347,20 +394,28 @@ const scalePreviewItems = [
       <div class="do-dont-card do-dont-card--dont">
         <div class="do-dont-header">Don't</div>
         <div class="do-dont-body">
-          Use <code>gap: 0</code> when you mean "tight" — zero can feel cramped; consider <code>space-050</code> or <code>space-100</code>.
+          Use <code>gap: 0</code> when you mean "tight" — zero can feel cramped.
+          <pre class="do-dont-code do-dont-code--dont"><code>.toolbar &#123;
+  display: flex;
+  gap: 0;
+&#125;</code></pre>
         </div>
       </div>
       <div class="do-dont-card do-dont-card--do">
         <div class="do-dont-header">Do</div>
         <div class="do-dont-body">
-          Use semantic spacing even for compact layouts — <code>gap: var(--space-100)</code> gives predictable rhythm.
+          Use semantic spacing even for compact layouts.
+          <pre class="do-dont-code do-dont-code--do"><code>.toolbar &#123;
+  display: flex;
+  gap: var(--space-050);
+&#125;</code></pre>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════
-       IMPLEMENTATION
+       6. IMPLEMENTATION
   ════════════════════════════════════════════════════════ -->
   <div class="section">
     <div class="section-header">
@@ -389,21 +444,34 @@ const scalePreviewItems = [
     </AccordionSection>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       PRAGMATIC TOKENS NOTE
-  ════════════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-title">Pragmatic Tokens</span>
-      <span class="section-desc">6px and 10px — when and why</span>
-    </div>
-
-    <div class="info-box">
-      <strong>space-075 (6px)</strong> and <strong>space-125 (10px)</strong> are not on the 4px grid. They are included because the product already uses these values (e.g. widget borders, bottom bar padding, compact layouts).
-      <br /><br />
-      <strong>Guidance:</strong> For new work, prefer grid-aligned tokens (4, 8, 12, 16, 24, 32…). Use 6px and 10px only when matching existing patterns or when a design explicitly requires a value between 4–8 or 8–12.
-    </div>
-  </div>
-
   <div class="footer">Nexus Design System · Spacing</div>
+
+  <!-- Toast for copy feedback -->
+  <div class="space-toast" id="space-toast">Copied!</div>
 </Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const rows = document.querySelectorAll('.space-explorer-row');
+    const toast = document.getElementById('space-toast');
+    let hideTimer: ReturnType<typeof setTimeout>;
+
+    rows.forEach(row => {
+      row.addEventListener('click', () => {
+        const token = row.getAttribute('data-token');
+        if (!token) return;
+
+        navigator.clipboard.writeText(token).then(() => {
+          if (toast) {
+            toast.textContent = `Copied ${token}`;
+            toast.classList.add('space-toast--visible');
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+              toast.classList.remove('space-toast--visible');
+            }, 1800);
+          }
+        });
+      });
+    });
+  });
+</script>
