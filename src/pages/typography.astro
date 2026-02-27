@@ -68,7 +68,12 @@ const semanticStyles = [
           <span style="font-weight:500">Medium 500</span>
           <span style="font-weight:600">Semi-bold 600</span>
         </div>
-        <code class="type-font-stack">Inter, system-ui, -apple-system, sans-serif</code>
+        <div class="type-font-stack-wrapper">
+          <code class="type-font-stack">Inter, system-ui, -apple-system, sans-serif</code>
+          <button class="type-font-stack-copy" aria-label="Copy font stack">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+        </div>
         <div class="type-font-var">var(--sans)</div>
       </div>
     </div>
@@ -100,7 +105,7 @@ const semanticStyles = [
         <span class="tt-col tt-preview">Preview</span>
       </div>
       {primitiveScale.map((s) => (
-        <div class="type-table-row">
+        <div class="type-table-row" data-token={`--font-size-${s.token}`}>
           <span class="tt-col tt-token"><code>--font-size-{s.token}</code></span>
           <span class="tt-col tt-px">{s.px}</span>
           <span class="tt-col tt-rem">{s.rem}</span>
@@ -128,17 +133,17 @@ const semanticStyles = [
       <div>
         <div class="type-mini-table-title">Font Weight</div>
         <div class="type-mini-table">
-          <div class="type-mini-row">
+          <div class="type-mini-row" data-token="--font-weight-regular">
             <code>--font-weight-regular</code>
             <span>400</span>
             <span style="font-weight:400; font-family:var(--sans);">The quick brown fox</span>
           </div>
-          <div class="type-mini-row">
+          <div class="type-mini-row" data-token="--font-weight-medium">
             <code>--font-weight-medium</code>
             <span>500</span>
             <span style="font-weight:500; font-family:var(--sans);">The quick brown fox</span>
           </div>
-          <div class="type-mini-row">
+          <div class="type-mini-row" data-token="--font-weight-semibold">
             <code>--font-weight-semibold</code>
             <span>600</span>
             <span style="font-weight:600; font-family:var(--sans);">The quick brown fox</span>
@@ -149,22 +154,22 @@ const semanticStyles = [
       <div>
         <div class="type-mini-table-title">Letter Spacing</div>
         <div class="type-mini-table">
-          <div class="type-mini-row">
+          <div class="type-mini-row" data-token="--letter-spacing-wide">
             <code>--letter-spacing-wide</code>
             <span>+0.02em</span>
             <span style="letter-spacing:0.02em; font-family:var(--sans);">OVERLINE TEXT</span>
           </div>
-          <div class="type-mini-row">
+          <div class="type-mini-row" data-token="--letter-spacing-normal">
             <code>--letter-spacing-normal</code>
             <span>0</span>
             <span style="letter-spacing:0; font-family:var(--sans);">Body text default</span>
           </div>
-          <div class="type-mini-row">
+          <div class="type-mini-row" data-token="--letter-spacing-tight">
             <code>--letter-spacing-tight</code>
             <span>-0.01em</span>
             <span style="letter-spacing:-0.01em; font-family:var(--sans);">Title tightened</span>
           </div>
-          <div class="type-mini-row">
+          <div class="type-mini-row" data-token="--letter-spacing-tighter">
             <code>--letter-spacing-tighter</code>
             <span>-0.02em</span>
             <span style="letter-spacing:-0.02em; font-family:var(--sans);">Display tighter</span>
@@ -207,11 +212,11 @@ const semanticStyles = [
     </div>
 
     {semanticStyles.map((group) => (
-      <div class="type-semantic-group">
+      <div class="type-semantic-group" data-group={group.group.toLowerCase()}>
         <div class="type-group-label">{group.group}</div>
 
         {group.styles.map((s) => (
-          <div class="type-specimen-row">
+          <div class="type-specimen-row" data-token={s.name}>
             <div class="type-specimen-meta">
               <code class="type-specimen-token">{s.name}</code>
               <span class="type-specimen-spec">
@@ -241,51 +246,51 @@ const semanticStyles = [
     </div>
 
     <div class="type-ramp">
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-display-lg">
         <span class="type-ramp-label">typography-display-lg</span>
         <span class="type-ramp-text" style="font-size:48px; line-height:56px; font-weight:500; letter-spacing:-0.02em;">Design Systems</span>
       </div>
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-display-sm">
         <span class="type-ramp-label">typography-display-sm</span>
         <span class="type-ramp-text" style="font-size:40px; line-height:48px; font-weight:500; letter-spacing:-0.02em;">Design Systems</span>
       </div>
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-title-xl">
         <span class="type-ramp-label">typography-title-xl</span>
         <span class="type-ramp-text" style="font-size:32px; line-height:40px; font-weight:600; letter-spacing:-0.02em;">Design Systems</span>
       </div>
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-title-lg">
         <span class="type-ramp-label">typography-title-lg</span>
         <span class="type-ramp-text" style="font-size:28px; line-height:36px; font-weight:600; letter-spacing:-0.02em;">Design Systems</span>
       </div>
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-title-md">
         <span class="type-ramp-label">typography-title-md</span>
         <span class="type-ramp-text" style="font-size:24px; line-height:32px; font-weight:600; letter-spacing:-0.01em;">Design Systems</span>
       </div>
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-title-sm">
         <span class="type-ramp-label">typography-title-sm</span>
         <span class="type-ramp-text" style="font-size:20px; line-height:28px; font-weight:500; letter-spacing:-0.01em;">Design Systems</span>
       </div>
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-body-lg">
         <span class="type-ramp-label">typography-body-lg</span>
         <span class="type-ramp-text" style="font-size:16px; line-height:24px; font-weight:400; letter-spacing:0;">Design Systems</span>
       </div>
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-title-xs">
         <span class="type-ramp-label">typography-title-xs</span>
         <span class="type-ramp-text" style="font-size:16px; line-height:20px; font-weight:500; letter-spacing:-0.01em;">Design Systems</span>
       </div>
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-body">
         <span class="type-ramp-label">typography-body</span>
         <span class="type-ramp-text" style="font-size:14px; line-height:20px; font-weight:400; letter-spacing:0;">Design Systems</span>
       </div>
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-title-2xs">
         <span class="type-ramp-label">typography-title-2xs</span>
         <span class="type-ramp-text" style="font-size:14px; line-height:16px; font-weight:500; letter-spacing:-0.01em;">Design Systems</span>
       </div>
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-caption">
         <span class="type-ramp-label">typography-caption</span>
         <span class="type-ramp-text" style="font-size:12px; line-height:16px; font-weight:400; letter-spacing:0.02em;">Design Systems</span>
       </div>
-      <div class="type-ramp-row">
+      <div class="type-ramp-row" data-token="typography-micro">
         <span class="type-ramp-label">typography-micro</span>
         <span class="type-ramp-text" style="font-size:10px; line-height:12px; font-weight:500; letter-spacing:0.02em;">DESIGN SYSTEMS</span>
       </div>
@@ -320,4 +325,38 @@ const semanticStyles = [
   </div>
 
   <div class="footer">Nexus Design System · Typography</div>
+
+  <div class="type-toast" id="type-toast">Copied!</div>
+
+  <script>
+    const toast = document.getElementById('type-toast');
+    let toastTimer;
+
+    function showToast(text) {
+      toast.textContent = `Copied: ${text}`;
+      toast.classList.add('type-toast--visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('type-toast--visible'), 1800);
+    }
+
+    function flashRow(el) {
+      el.classList.add('copied');
+      setTimeout(() => el.classList.remove('copied'), 300);
+    }
+
+    document.querySelectorAll('[data-token]').forEach(row => {
+      row.addEventListener('click', () => {
+        const token = row.dataset.token;
+        navigator.clipboard.writeText(token);
+        flashRow(row);
+        showToast(token);
+      });
+    });
+
+    document.querySelector('.type-font-stack-copy')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navigator.clipboard.writeText('var(--sans)');
+      showToast('var(--sans)');
+    });
+  </script>
 </Layout>
