@@ -1,0 +1,142 @@
+---
+description: Design token naming standard — three-tier hierarchy, naming patterns, and validation rules
+globs: src/tokens/**/*.json, src/styles/base.css
+alwaysApply: false
+---
+
+# Design Token Naming Standard
+
+**Enforcement:** Strict
+
+## Token Architecture
+
+All tokens follow a strict three-tier abstraction hierarchy:
+
+```
+Raw Value → Primitive → Semantic → Component → Themed Output
+```
+
+- Components must never reference raw values.
+- Semantic tokens must reference primitives.
+- Component tokens must reference semantic tokens.
+- Reference chains must end at a primitive.
+
+## Primitive Tokens
+
+Describe **what the value is**, not how it is used.
+
+### Naming Patterns
+
+```
+[color]-[shade]          neutral-grey-50, red-40, green-10
+space-[scale]
+font-size-[scale]
+radius-[scale]
+shadow-[scale]
+```
+
+### Colour Scale Convention
+
+| Step | Role |
+|---|---|
+| 0 | Lightest (near-white tint) |
+| 50 | Midpoint (equal contrast both directions) |
+| 100 | Darkest (near-black shade) |
+
+Full scales: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 (11 steps per colour).
+
+### Primitive Rules
+
+- No usage meaning (`primary`, `error`, `success`)
+- No component names (`button`, `input`, `card`)
+- No state names (`hover`, `focus`, `disabled`)
+- No semantic intent (`danger`, `warning`, `action`)
+- Must represent raw scales only
+
+## Semantic Tokens
+
+Describe **purpose**, not appearance. Reference primitive tokens. Enable theming.
+
+### Naming Pattern
+
+```
+[category]-[property]-[variant]     color-text-primary, color-border-error
+```
+
+### Categories
+
+| Category | Description |
+|---|---|
+| `color-background-*` | Surface and container fills |
+| `color-text-*` | Text and icon foregrounds |
+| `color-border-*` | Borders, dividers, outlines |
+| `color-action-*` | Interactive element colours |
+| `color-surface-*` | Elevated surfaces, overlays |
+| `spacing-*` | Gaps, padding, margins |
+| `typography-*` | Font sizes, weights, line heights |
+
+### Semantic Rules
+
+- Must reference primitives
+- Must not reference components
+- Must enable theming (same name, different value per theme)
+- Must describe purpose, not colour
+
+## Component Tokens
+
+Only when a component needs specific styling variations. Reference semantic tokens only.
+
+### Naming Pattern
+
+```
+[component]-[variant]-[property]-[state]     button-primary-background-hover
+```
+
+### Component Rules
+
+- Only create when necessary (prefer semantic tokens)
+- Must reference semantic tokens
+- Must not reference primitives directly
+
+## References & Aliasing
+
+Tokens reference other tokens using `{token-name}`.
+
+### Ideal Chain
+
+```
+component → semantic → primitive
+```
+
+- Maximum chain depth: 4 levels
+- Always end at a primitive
+- No circular references
+
+## Theming
+
+Semantic tokens are the theming layer. Only semantic-to-primitive mappings change per theme. Token names never include theme identifiers (`dark-`, `light-`).
+
+### Symmetry Rule
+
+Step N in light theme maps to Step (100−N) in dark theme, producing identical WCAG contrast ratios against their respective backgrounds.
+
+## Validation Checklist
+
+Before approving any token:
+
+- [ ] Name describes what it's for, not how it looks
+- [ ] Follows the correct naming pattern for its tier
+- [ ] Correct abstraction level (primitive / semantic / component)
+- [ ] References the correct layer
+- [ ] Reference chain under 4 levels
+- [ ] Theme-safe (no theme identifiers in name)
+
+## Rejected Patterns
+
+| Invalid | Violation |
+|---|---|
+| `red-text` | Encodes appearance |
+| `bg-white` | Encodes appearance, not theme-safe |
+| `btn-blue-hover` | Encodes appearance |
+| `grey-medium` | Not a proper scale value |
+| `focus-ring-color` | Wrong naming pattern |

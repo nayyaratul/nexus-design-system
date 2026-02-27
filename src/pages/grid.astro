@@ -1,17 +1,733 @@
 ---
 import Layout from '../layouts/Default.astro';
+import AccordionSection from '../components/AccordionSection.astro';
 ---
 
 <Layout title="Grid" section="grid">
   <h1 class="page-title">Grid</h1>
-  <p class="page-sub">Layout grid · Columns · Breakpoints · Responsive behavior</p>
+  <p class="page-sub">Bootstrap 5 · 12-column · Containers · Breakpoints · Responsive behaviour</p>
 
-  <div class="placeholder">
-    <div class="placeholder-icon">▦</div>
-    <span class="placeholder-badge">Coming Soon</span>
-    <p class="placeholder-text">
-      Responsive column grid, breakpoint definitions, and layout containers for consistent page structure.
-    </p>
+  <!-- ═══════════════════════════════════════════════════════
+       OVERVIEW
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Overview</span>
+      <span class="section-desc">Bootstrap 5 12-column flexbox grid · Used for all page-level layout</span>
+    </div>
+
+    <div class="info-box">
+      <strong>What we use:</strong> our product UIs use the standard <strong>Bootstrap 5 12-column flexbox grid</strong>
+      for page and layout structure. Every screen is built from <strong>containers → rows → columns</strong>, with
+      all page grids expressed using Bootstrap classes (or React-Bootstrap components) plus a small set of SCSS
+      mixins for responsive styling.
+      <br /><br />
+      The grid is responsible for <strong>macro layout</strong> (page sections, sidebars, main vs supporting columns).
+      <strong>Micro layout</strong> inside those sections (card internals, button alignment, fine-grain spacing) is
+      handled by component CSS and design tokens.
+    </div>
+
+    <div class="grid-diagram grid-diagram--twelve">
+      <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+      <div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div>
+    </div>
+    <span class="grid-diagram-caption">12-column Bootstrap grid · each block represents 1/12 of the row</span>
+
+    <div class="bp-ref-table" style="margin-top:20px;">
+      <div class="bp-ref-row bp-ref-row--head">
+        <span class="bp-ref-col bp-ref-col--bp">Breakpoint</span>
+        <span class="bp-ref-col bp-ref-col--infix">Class infix</span>
+        <span class="bp-ref-col bp-ref-col--min">Min-width</span>
+        <span class="bp-ref-col bp-ref-col--max">Container max</span>
+        <span class="bp-ref-col bp-ref-col--device">Typical device</span>
+      </div>
+      <div class="bp-ref-row">
+        <span class="bp-ref-col bp-ref-col--bp">xs</span>
+        <span class="bp-ref-col bp-ref-col--infix"><em>none</em></span>
+        <span class="bp-ref-col bp-ref-col--min">&lt; 576px</span>
+        <span class="bp-ref-col bp-ref-col--max">100%</span>
+        <span class="bp-ref-col bp-ref-col--device">Phones (portrait)</span>
+      </div>
+      <div class="bp-ref-row">
+        <span class="bp-ref-col bp-ref-col--bp">sm</span>
+        <span class="bp-ref-col bp-ref-col--infix">-sm-</span>
+        <span class="bp-ref-col bp-ref-col--min">≥ 576px</span>
+        <span class="bp-ref-col bp-ref-col--max">540px</span>
+        <span class="bp-ref-col bp-ref-col--device">Phones (landscape)</span>
+      </div>
+      <div class="bp-ref-row">
+        <span class="bp-ref-col bp-ref-col--bp">md</span>
+        <span class="bp-ref-col bp-ref-col--infix">-md-</span>
+        <span class="bp-ref-col bp-ref-col--min">≥ 768px</span>
+        <span class="bp-ref-col bp-ref-col--max">720px</span>
+        <span class="bp-ref-col bp-ref-col--device">Tablets</span>
+      </div>
+      <div class="bp-ref-row">
+        <span class="bp-ref-col bp-ref-col--bp">lg</span>
+        <span class="bp-ref-col bp-ref-col--infix">-lg-</span>
+        <span class="bp-ref-col bp-ref-col--min">≥ 992px</span>
+        <span class="bp-ref-col bp-ref-col--max">960px</span>
+        <span class="bp-ref-col bp-ref-col--device">Laptops</span>
+      </div>
+      <div class="bp-ref-row">
+        <span class="bp-ref-col bp-ref-col--bp">xl</span>
+        <span class="bp-ref-col bp-ref-col--infix">-xl-</span>
+        <span class="bp-ref-col bp-ref-col--min">≥ 1200px</span>
+        <span class="bp-ref-col bp-ref-col--max">1140px</span>
+        <span class="bp-ref-col bp-ref-col--device">Desktops</span>
+      </div>
+      <div class="bp-ref-row">
+        <span class="bp-ref-col bp-ref-col--bp">xxl</span>
+        <span class="bp-ref-col bp-ref-col--infix">-xxl-</span>
+        <span class="bp-ref-col bp-ref-col--min">≥ 1400px</span>
+        <span class="bp-ref-col bp-ref-col--max">1320px</span>
+        <span class="bp-ref-col bp-ref-col--device">Large desktops</span>
+      </div>
+    </div>
+    <span class="grid-diagram-caption">Bootstrap 5 breakpoint reference · all layouts are mobile-first (min-width)</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       GUIDES BY TOPIC (ACCORDIONS)
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Guides</span>
+      <span class="section-desc">Open the sections you need</span>
+    </div>
+
+    <AccordionSection title="House rules for the grid" open>
+      <p>
+        The grid is our default for <strong>page layout</strong>. Use it whenever you are arranging major regions:
+        page shells, dashboard bands, sidebars, content columns. Inside those regions, prefer simple flexbox or
+        component-level layout.
+      </p>
+      <ul>
+        <li>
+          <strong>Structure API:</strong> use React-Bootstrap <code>&lt;Container&gt;</code>, <code>&lt;Row&gt;</code>,
+          and <code>&lt;Col&gt;</code> (or their class equivalents) for new work. Raw <code>.row</code> / <code>.col-*</code>
+          classes appear only in legacy code.
+        </li>
+        <li>
+          <strong>One structural grid per section:</strong> each major page band (hero, dashboard, flow shell) should
+          normally have a single top-level grid. Deeper layout should be handled by CSS modules unless you truly need
+          another responsive column split.
+        </li>
+        <li>
+          <strong>Bootstrap for structure, SCSS for behaviour:</strong> use grid breakpoints to change column counts,
+          and SCSS mixins to refine padding, background, flex direction, and card widths inside those columns.
+        </li>
+        <li>
+          <strong>British English & naming:</strong> all documentation, comments, and URLs use British English
+          (for example, <code>/colours</code>, “behaviour”).
+        </li>
+        <li>
+          <strong>When <em>not</em> to use the grid:</strong> for card internals, button groups, icon + text pairs,
+          and other micro layout — use flexbox or component CSS directly. The grid is for macro page structure
+          (page shells, dashboard bands, sidebars, content columns), not for fine-grain alignment inside components.
+        </li>
+      </ul>
+    </AccordionSection>
+
+    <AccordionSection title="Column system & nesting">
+      <p>
+        Bootstrap’s grid is always <strong>12 columns per row</strong>. At any breakpoint, your layout is some
+        combination that adds up to 12 (for example 12, 6+6, 4+4+4, 3+3+3+3, 3+6+3).
+      </p>
+
+      <div class="grid-splits">
+        <div class="grid-diagram grid-diagram--split grid-diagram--12-12">
+          <div></div>
+        </div>
+        <span class="grid-splits-label">12 / 12 — single full-width column</span>
+
+        <div class="grid-diagram grid-diagram--split grid-diagram--6-6">
+          <div></div><div></div>
+        </div>
+        <span class="grid-splits-label">6 / 6 — two equal columns</span>
+
+        <div class="grid-diagram grid-diagram--split grid-diagram--4-4-4">
+          <div></div><div></div><div></div>
+        </div>
+        <span class="grid-splits-label">4 / 4 / 4 — three equal columns</span>
+
+        <div class="grid-diagram grid-diagram--split grid-diagram--3-3-3-3">
+          <div></div><div></div><div></div><div></div>
+        </div>
+        <span class="grid-splits-label">3 / 3 / 3 / 3 — four equal columns</span>
+      </div>
+
+      <ul>
+        <li>
+          <strong>Auto vs fixed width:</strong>
+          <ul>
+            <li><code>col</code>, <code>col-sm</code>, <code>col-md</code>, <code>col-lg</code>, <code>col-xl</code>, <code>col-xxl</code> — auto width, share remaining space.</li>
+            <li><code>col-1</code> … <code>col-12</code> and their <code>-sm</code> / <code>-md</code> / <code>-lg</code> variants — fixed spans.</li>
+            <li>In React-Bootstrap, these are expressed as props such as <code>xs=&#123;12&#125;</code>, <code>md=&#123;6&#125;</code>, <code>lg=&#123;4&#125;</code>.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Common spans:</strong> 6/12 (½), 4/12 (⅓), 8/12 (⅔), 3/12 (¼), 9/12 (¾). Prefer these before
+          more unusual splits.
+        </li>
+        <li>
+          <strong>Nesting:</strong> a column may contain its own <code>.row</code> with nested columns. Use this when
+          a region itself needs a responsive split (for example, avatar vs profile details inside a card).
+        </li>
+        <li>
+          <strong>Nesting guideline:</strong> aim for one structural grid per page section. Avoid more than
+          <strong>two levels of nesting</strong> unless you have a clear reason, as it quickly becomes hard to reason
+          about spacing and alignment.
+        </li>
+      </ul>
+
+      <div class="grid-diagram grid-diagram--nested">
+        <div class="grid-diagram-outer">
+          <span class="layout-thumb-label" style="margin-bottom:3px;font-size:7px;color:var(--ink-3);">outer col</span>
+          <div class="grid-diagram-inner">
+            <div class="grid-diagram-inner-col layout-thumb-label">col</div>
+            <div class="grid-diagram-inner-col layout-thumb-label">col</div>
+          </div>
+        </div>
+        <span class="grid-diagram-caption">A single outer column containing a nested row with two inner columns</span>
+      </div>
+
+      <ul style="margin-top:12px;">
+        <li>
+          <strong>Offsets:</strong> use <code>offset-*</code> classes (or the React-Bootstrap <code>offset</code> prop) to push
+          a column to the right. Offsets are measured in column units — <code>offset-md-3</code> shifts the column 3/12 from the left.
+        </li>
+      </ul>
+
+      <div class="offset-diagram">
+        <div class="offset-row">
+          <div class="offset-spacer" style="grid-column:span 3;"></div>
+          <div class="offset-col" style="grid-column:span 6;display:flex;align-items:center;justify-content:center;">
+            <span class="layout-thumb-label" style="color:#3A6AAA;">col-6 offset-3</span>
+          </div>
+        </div>
+        <span class="grid-diagram-caption">offset-3 pushes a 6-wide column to the centre of the row</span>
+      </div>
+    </AccordionSection>
+
+    <AccordionSection title="Breakpoints & SCSS mixins together">
+      <p>
+        We use Bootstrap’s breakpoint classes for <strong>structure</strong>, and SCSS mixins for
+        <strong>styling by device band</strong>.
+      </p>
+
+      <div class="bp-ruler">
+        <div class="bp-row">
+          <span class="bp-label">Grid</span>
+          <div class="bp-band bp-band--xs">xs</div>
+          <div class="bp-band bp-band--sm">sm</div>
+          <div class="bp-band bp-band--md">md</div>
+          <div class="bp-band bp-band--lg">lg</div>
+          <div class="bp-band bp-band--xl">xl</div>
+          <div class="bp-band bp-band--xxl">xxl</div>
+        </div>
+        <div class="bp-row">
+          <span class="bp-label">SCSS</span>
+          <div class="bp-band bp-band--mobile">mobile</div>
+          <div class="bp-band bp-band--tablet">tablet</div>
+          <div class="bp-band bp-band--desktop">desktop</div>
+        </div>
+      </div>
+
+      <ul>
+        <li>
+          <strong>Bootstrap grid breakpoints:</strong>
+          <ul>
+            <li><code>xs</code>: &lt; 576px — no infix (for example, <code>col-12</code>)</li>
+            <li><code>sm</code>: ≥ 576px — <code>col-sm-*</code></li>
+            <li><code>md</code>: ≥ 768px — <code>col-md-*</code></li>
+            <li><code>lg</code>: ≥ 992px — <code>col-lg-*</code></li>
+            <li><code>xl</code>: ≥ 1200px — <code>col-xl-*</code></li>
+            <li><code>xxl</code>: ≥ 1400px — <code>col-xxl-*</code></li>
+          </ul>
+        </li>
+        <li>
+          <strong>SCSS media mixins:</strong> in component SCSS we use:
+          <ul>
+            <li><code>@include mobileOnly</code> → <code>max-width: 767px</code></li>
+            <li><code>@include tabletOnly</code> → <code>768px–1023px</code></li>
+            <li><code>@include desktopOnly</code> → <code>min-width: 1024px</code></li>
+          </ul>
+          These decorate the grid with device-specific styling without changing the underlying column structure.
+        </li>
+        <li>
+          <strong>Mental model:</strong>
+          <ul>
+            <li>Use <strong>grid classes</strong> to decide how many columns each region gets at <code>xs/sm/md/lg/…</code>.</li>
+            <li>Use <strong>mixins</strong> to adjust padding, background, flex direction, and card widths at <code>mobileOnly/tabletOnly/desktopOnly</code>.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Example:</strong> a dashboard row might go from a single column at <code>xs</code> to
+          <code>md=7</code> main + <code>md=4</code> rail. The SCSS then uses <code>tabletOnly</code> /
+          <code>desktopOnly</code> to make the rail sticky, adjust gaps, and change background colour.
+        </li>
+        <li>
+          <strong>Row alignment utilities:</strong> use Bootstrap's flex utilities on rows to control vertical and horizontal
+          distribution of columns.
+          <ul>
+            <li><code>align-items-start</code> / <code>center</code> / <code>end</code> — vertical alignment of columns within a row.</li>
+            <li><code>justify-content-start</code> / <code>center</code> / <code>end</code> / <code>between</code> / <code>around</code> — horizontal distribution when columns don't fill all 12 slots.</li>
+          </ul>
+        </li>
+      </ul>
+    </AccordionSection>
+
+    <AccordionSection title="Containers">
+      <p>
+        Containers define the <strong>maximum width</strong> of a layout. We rely on Bootstrap’s container system,
+        with a strong preference for <strong>fluid containers</strong> and explicit max-widths when needed.
+      </p>
+
+      <div class="container-diagrams">
+        <div class="container-diagram">
+          <div class="container-viewport">
+            <div class="container-edge-left"></div>
+            <div class="container-fixed container-label">content</div>
+            <div class="container-edge-right"></div>
+          </div>
+          <span class="grid-diagram-caption">.container — fixed max-width, centred with auto margins</span>
+        </div>
+        <div class="container-diagram">
+          <div class="container-viewport">
+            <div class="container-fluid-bar container-label">content — 100% width</div>
+          </div>
+          <span class="grid-diagram-caption">.container-fluid — fills the entire viewport width</span>
+        </div>
+      </div>
+
+      <ul>
+        <li>
+          <strong>Bootstrap containers:</strong>
+          <ul>
+            <li><code>.container</code> — centred, fixed-width with responsive max-widths.</li>
+            <li><code>.container-fluid</code> — 100% width at all viewports.</li>
+            <li><code>.container-sm</code>, <code>.container-md</code>, etc. — full width until the breakpoint, then fixed.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>How we use them:</strong>
+          <ul>
+            <li>
+              <strong>Page shells / flows:</strong> use <code>&lt;Container fluid className="p-0 m-0"&gt;</code>
+              (or <code>container-fluid px-0</code>) so the layout can extend edge-to-edge, with spacing handled
+              by rows and columns.
+            </li>
+            <li>
+              <strong>Reading / form layouts:</strong> use a non-fluid <code>&lt;Container&gt;</code> with a
+              max-width class in SCSS (for example, 520–690px) for centred sheets such as feedback flows.
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Guideline:</strong> if content is meant to touch the viewport edge (dashboards, flows), start with
+          a fluid container. If it is text-heavy or form-heavy, start with a constrained container.
+        </li>
+      </ul>
+    </AccordionSection>
+
+    <AccordionSection title="Gutters & spacing">
+      <p>
+        Gutters are the gaps between columns. We use Bootstrap’s <code>g-*</code>, <code>gx-*</code>, and
+        <code>gy-*</code> utilities, plus <code>mx-*</code>/<code>px-*</code> for outer margins and padding.
+      </p>
+
+      <div class="gutter-diagrams">
+        <div>
+          <div class="gutter-row gutter-row--tight">
+            <div></div><div></div><div></div>
+          </div>
+          <span class="gutter-label">gap: 0.25rem</span>
+          <span class="grid-diagram-caption">g-1 · tight gutters · compact mobile layouts</span>
+        </div>
+        <div>
+          <div class="gutter-row gutter-row--loose">
+            <div></div><div></div><div></div>
+          </div>
+          <span class="gutter-label">gap: 3rem</span>
+          <span class="grid-diagram-caption">g-5 · generous gutters · spacious desktop layouts</span>
+        </div>
+      </div>
+
+      <ul>
+        <li>
+          <strong>Defaults:</strong> Bootstrap’s default grid gutter is 1.5rem in both directions.
+        </li>
+        <li>
+          <strong>Utilities:</strong>
+          <ul>
+            <li><code>g-0 … g-5</code> — both axes.</li>
+            <li><code>gx-0 … gx-5</code> — horizontal only.</li>
+            <li><code>gy-0 … gy-5</code> — vertical only.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Patterns we use:</strong>
+          <ul>
+            <li>
+              <strong>Tight on mobile, generous on desktop:</strong> dashboard and card-stack rows often use
+              <code>g-1</code> / <code>gx-1</code> on small screens, then <code>g-5</code> / <code>gx-5</code>
+              from <code>md</code> upwards.
+            </li>
+            <li>
+              <strong>Full-bleed flows & loaders:</strong> assessment flows, result screens, and skeleton loaders
+              frequently use <code>gx-0</code> (and <code>mx-0 px-0</code>) so content aligns exactly with the
+              viewport or card edges.
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>House rule:</strong> use <code>g-0</code> / <code>gx-0</code> for new work instead of the
+          legacy <code>no-gutters</code> class.
+        </li>
+      </ul>
+    </AccordionSection>
+
+    <AccordionSection title="Layout recipes (recommended patterns)" open>
+      <p>
+        These patterns cover the majority of our layouts. Start from these before inventing new grid combinations.
+      </p>
+      <ul>
+        <li>
+          <strong>Dashboard home – main + right rail</strong>
+          <div class="layout-thumb">
+            <div class="layout-thumb-row">
+              <div class="layout-thumb-main layout-thumb-label">main · 7</div>
+              <div class="layout-thumb-rail layout-thumb-label" style="color:#3A6AAA;">rail · 4</div>
+            </div>
+          </div>
+          <div class="responsive-table">
+            <div class="responsive-table-row responsive-table-row--head">
+              <span class="rt-col">Breakpoint</span>
+              <span class="rt-col">Main</span>
+              <span class="rt-col">Rail</span>
+            </div>
+            <div class="responsive-table-row">
+              <span class="rt-col">xs – sm</span>
+              <span class="rt-col">12/12</span>
+              <span class="rt-col">hidden</span>
+            </div>
+            <div class="responsive-table-row">
+              <span class="rt-col">md</span>
+              <span class="rt-col">7/12</span>
+              <span class="rt-col">4/12</span>
+            </div>
+            <div class="responsive-table-row">
+              <span class="rt-col">lg+</span>
+              <span class="rt-col">7/12</span>
+              <span class="rt-col">4/12 (sticky)</span>
+            </div>
+          </div>
+          <pre><code>&lt;Container fluid className="p-0 m-0"&gt;
+  &lt;Row className="gx-1 gx-md-5"&gt;
+    &lt;Col xs=&#123;12&#125; md=&#123;7&#125;&gt;
+      &#123;/* Main content */&#125;
+    &lt;/Col&gt;
+    &lt;Col md=&#123;4&#125; className="d-none d-lg-block"&gt;
+      &#123;/* Right rail */&#125;
+    &lt;/Col&gt;
+  &lt;/Row&gt;
+&lt;/Container&gt;</code></pre>
+        </li>
+        <li>
+          <strong>Full-width content strip (card stack)</strong>
+          <div class="layout-thumb">
+            <div class="layout-thumb-stack">
+              <div class="layout-thumb-label">card</div>
+              <div class="layout-thumb-label">card</div>
+              <div class="layout-thumb-label">card</div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>Use when:</strong> you want a stack of full-width cards with consistent horizontal margins.</li>
+            <li><strong>Behaviour:</strong> always one 12-column wrapper; cards inside handle their own layout.</li>
+          </ul>
+          <pre><code>&lt;Container fluid&gt;
+  &lt;Row className="mx-4 mx-md-5 g-1 g-md-5"&gt;
+    &lt;Col xs=&#123;12&#125;&gt;
+      &#123;/* Card stack */&#125;
+    &lt;/Col&gt;
+  &lt;/Row&gt;
+&lt;/Container&gt;</code></pre>
+        </li>
+        <li>
+          <strong>Centred narrow form / content sheet</strong>
+          <div class="layout-thumb">
+            <div class="layout-thumb-centered">
+              <div class="layout-thumb-center-card layout-thumb-label">form · 520–700px</div>
+            </div>
+          </div>
+          <div class="responsive-table">
+            <div class="responsive-table-row responsive-table-row--head">
+              <span class="rt-col">Breakpoint</span>
+              <span class="rt-col">Width</span>
+              <span class="rt-col">Behaviour</span>
+            </div>
+            <div class="responsive-table-row">
+              <span class="rt-col">xs – sm</span>
+              <span class="rt-col">100%</span>
+              <span class="rt-col">Full-width, edge to edge</span>
+            </div>
+            <div class="responsive-table-row">
+              <span class="rt-col">md+</span>
+              <span class="rt-col">520–700px</span>
+              <span class="rt-col">Centred, constrained</span>
+            </div>
+          </div>
+          <pre><code>&lt;Container className="customContainer"&gt;
+  &lt;Row&gt;
+    &lt;Col xs=&#123;12&#125;&gt;
+      &#123;/* Form / reading content */&#125;
+    &lt;/Col&gt;
+  &lt;/Row&gt;
+&lt;/Container&gt;
+
+// SCSS
+.customContainer &#123;
+  max-width: 690px;
+  @include mobileOnly &#123; max-width: 100%; &#125;
+&#125;</code></pre>
+        </li>
+        <li>
+          <strong>Centred assessment / exam card</strong>
+          <div class="layout-thumb">
+            <div class="layout-thumb-centered">
+              <div class="layout-thumb-center-card layout-thumb-label" style="width: 34%;">card</div>
+            </div>
+          </div>
+          <div class="responsive-table">
+            <div class="responsive-table-row responsive-table-row--head">
+              <span class="rt-col">Breakpoint</span>
+              <span class="rt-col">Col span</span>
+              <span class="rt-col">Offset</span>
+            </div>
+            <div class="responsive-table-row">
+              <span class="rt-col">xs</span>
+              <span class="rt-col">12/12</span>
+              <span class="rt-col">—</span>
+            </div>
+            <div class="responsive-table-row">
+              <span class="rt-col">md</span>
+              <span class="rt-col">8/12</span>
+              <span class="rt-col">offset-2</span>
+            </div>
+            <div class="responsive-table-row">
+              <span class="rt-col">lg</span>
+              <span class="rt-col">6/12</span>
+              <span class="rt-col">offset-3</span>
+            </div>
+            <div class="responsive-table-row">
+              <span class="rt-col">xl+</span>
+              <span class="rt-col">4/12</span>
+              <span class="rt-col">offset-4</span>
+            </div>
+          </div>
+          <pre><code>&lt;Container fluid&gt;
+  &lt;Row className="gx-0"&gt;
+    &lt;Col xs=&#123;12&#125; md=&#123;&#123; span: 8, offset: 2 &#125;&#125;
+         lg=&#123;&#123; span: 6, offset: 3 &#125;&#125;
+         xl=&#123;&#123; span: 4, offset: 4 &#125;&#125;&gt;
+      &#123;/* Assessment card */&#125;
+    &lt;/Col&gt;
+  &lt;/Row&gt;
+&lt;/Container&gt;</code></pre>
+        </li>
+        <li>
+          <strong>Profile / detail card with inner grid</strong>
+          <div class="layout-thumb">
+            <div class="layout-thumb-profile">
+              <div class="avatar layout-thumb-label">avatar</div>
+              <div class="body layout-thumb-label">body</div>
+              <div class="meta layout-thumb-label" style="background:#D3E2FF;">meta</div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>Use when:</strong> you need a structured information card (avatar + details + actions).</li>
+            <li><strong>Inner split:</strong> 3/7/2 arranges avatar, text, and actions within the card.</li>
+          </ul>
+          <pre><code>&lt;Col xl=&#123;8&#125;&gt;
+  &lt;Row&gt;
+    &lt;Col xs=&#123;3&#125;&gt;&#123;/* Avatar */&#125;&lt;/Col&gt;
+    &lt;Col xs=&#123;7&#125;&gt;&#123;/* Details */&#125;&lt;/Col&gt;
+    &lt;Col xs=&#123;2&#125;&gt;&#123;/* Actions */&#125;&lt;/Col&gt;
+  &lt;/Row&gt;
+&lt;/Col&gt;</code></pre>
+        </li>
+      </ul>
+    </AccordionSection>
+
+    <AccordionSection title="Common mistakes to avoid">
+      <p>
+        Side-by-side comparisons of patterns to avoid and their recommended alternatives.
+      </p>
+
+      <div class="do-dont-grid">
+        <div class="do-dont-card do-dont-card--dont">
+          <div class="do-dont-header">Don’t</div>
+          <div class="do-dont-body">
+            Use the legacy <code>no-gutters</code> class on rows.
+          </div>
+        </div>
+        <div class="do-dont-card do-dont-card--do">
+          <div class="do-dont-header">Do</div>
+          <div class="do-dont-body">
+            Use <code>g-0</code> or <code>gx-0</code> for zero-gutter layouts.
+          </div>
+        </div>
+      </div>
+
+      <div class="do-dont-grid">
+        <div class="do-dont-card do-dont-card--dont">
+          <div class="do-dont-header">Don’t</div>
+          <div class="do-dont-body">
+            Use <code>col-*</code> classes outside a <code>&lt;Container&gt;</code>. Widths become unpredictable and misalign with other pages.
+          </div>
+        </div>
+        <div class="do-dont-card do-dont-card--do">
+          <div class="do-dont-header">Do</div>
+          <div class="do-dont-body">
+            Wrap all structural rows in a <code>&lt;Container&gt;</code> or <code>&lt;Container fluid&gt;</code>.
+          </div>
+        </div>
+      </div>
+
+      <div class="do-dont-grid">
+        <div class="do-dont-card do-dont-card--dont">
+          <div class="do-dont-header">Don’t</div>
+          <div class="do-dont-body">
+            Put <code>max-width</code> and <code>col-*</code> spans on the same element. The two width systems fight each other.
+          </div>
+        </div>
+        <div class="do-dont-card do-dont-card--do">
+          <div class="do-dont-header">Do</div>
+          <div class="do-dont-body">
+            Let columns define section width. Apply <code>max-width</code> to content <em>inside</em> those columns.
+          </div>
+        </div>
+      </div>
+
+      <div class="do-dont-grid">
+        <div class="do-dont-card do-dont-card--dont">
+          <div class="do-dont-header">Don’t</div>
+          <div class="do-dont-body">
+            Nest multiple <code>&lt;Container&gt;</code>s in the same visual band. Spacing becomes hard to debug.
+          </div>
+        </div>
+        <div class="do-dont-card do-dont-card--do">
+          <div class="do-dont-header">Do</div>
+          <div class="do-dont-body">
+            Use one <code>&lt;Container&gt;</code> per band. Add nested <code>Row</code> / <code>Col</code> inside it.
+          </div>
+        </div>
+      </div>
+    </AccordionSection>
+
+    <AccordionSection title="Accessibility & readable widths">
+      <p>
+        Grid decisions affect readability and keyboard / screen reader experiences as much as they affect visual
+        layout. The most common accessibility issue in grid usage is <strong>excessively wide text columns</strong>
+        that force the eye to travel too far between line endings and beginnings.
+      </p>
+
+      <div class="text-width-diagram">
+        <div class="text-width-block text-width-block--too-wide">
+          <span class="text-width-tag">Avoid</span>
+          <div class="text-width-lines">
+            <div class="text-width-line"></div>
+            <div class="text-width-line"></div>
+            <div class="text-width-line"></div>
+            <div class="text-width-line"></div>
+            <div class="text-width-line"></div>
+            <div class="text-width-line"></div>
+          </div>
+          <span class="grid-diagram-caption">12/12 body text on desktop · ~120+ characters per line</span>
+        </div>
+        <div class="text-width-block text-width-block--good">
+          <span class="text-width-tag">Recommended</span>
+          <div class="text-width-lines">
+            <div class="text-width-line"></div>
+            <div class="text-width-line"></div>
+            <div class="text-width-line"></div>
+            <div class="text-width-line"></div>
+            <div class="text-width-line"></div>
+            <div class="text-width-line"></div>
+          </div>
+          <span class="grid-diagram-caption">4–8 columns or max 520–700px · ~45–75 characters per line</span>
+        </div>
+      </div>
+
+      <div class="info-box" style="margin-bottom:12px;">
+        <strong>The 45–75 rule:</strong> typographic research consistently finds that <strong>45–75 characters
+        per line</strong> (including spaces) is the optimal range for reading comfort. Shorter lines cause too many
+        line breaks; longer lines make it hard for the eye to track back to the start of the next line. At our 14px
+        body size, this translates to roughly <strong>520–700px</strong> of column width.
+      </div>
+
+      <div class="readable-width-table">
+        <div class="rw-row rw-row--head">
+          <span class="rw-col">Content type</span>
+          <span class="rw-col">Grid columns (desktop)</span>
+          <span class="rw-col">Max-width</span>
+          <span class="rw-col">Characters / line</span>
+        </div>
+        <div class="rw-row">
+          <span class="rw-col">Body text / articles</span>
+          <span class="rw-col">6–8 of 12</span>
+          <span class="rw-col">520–700px</span>
+          <span class="rw-col">~45–75</span>
+        </div>
+        <div class="rw-row">
+          <span class="rw-col">Forms / inputs</span>
+          <span class="rw-col">4–6 of 12</span>
+          <span class="rw-col">400–600px</span>
+          <span class="rw-col">—</span>
+        </div>
+        <div class="rw-row">
+          <span class="rw-col">Headings / banners</span>
+          <span class="rw-col">8–12 of 12</span>
+          <span class="rw-col">unconstrained</span>
+          <span class="rw-col">—</span>
+        </div>
+        <div class="rw-row">
+          <span class="rw-col">Dashboards / data</span>
+          <span class="rw-col">12 of 12</span>
+          <span class="rw-col">unconstrained</span>
+          <span class="rw-col">—</span>
+        </div>
+      </div>
+
+      <ul>
+        <li>
+          <strong>Readable widths:</strong> for long-form body text and primary forms, aim for at most
+          <strong>4–8 columns</strong> on desktop, or containers with a <strong>max-width around 520–700px</strong>.
+          Reserve 12/12 width on large viewports for short labels, headings, dashboards, or banners.
+        </li>
+        <li>
+          <strong>Mobile exception:</strong> on small viewports (xs/sm), content naturally fills the full width.
+          The 45–75 character guideline applies primarily to <code>md</code> and above where the viewport is wide
+          enough to benefit from constrained columns.
+        </li>
+        <li>
+          <strong>Ordering:</strong> current layouts do not rely on <code>.order-*</code> utilities; DOM order matches
+          visual order. If you introduce ordering utilities, do not change the reading order of primary content across
+          breakpoints.
+        </li>
+        <li>
+          <strong>Focus & tab order:</strong> keep important interactive elements in a logical sequence in the DOM.
+          Use the grid to align and size regions, not to swap the semantic order of main content and sidebars.
+        </li>
+        <li>
+          <strong>Touch targets:</strong> on mobile layouts where the grid collapses columns, ensure that interactive
+          elements maintain at least <strong>44×44px</strong> touch targets (WCAG 2.5.5). Tight grids with small
+          gutters can push buttons and links too close together.
+        </li>
+      </ul>
+    </AccordionSection>
   </div>
 
   <div class="footer">Nexus Design System · Grid</div>

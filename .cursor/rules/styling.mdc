@@ -25,5 +25,5 @@ alwaysApply: false
 ```
 
 ## Fonts
-- **DM Mono** (monospace) — UI text, labels, code
+- **JetBrains Mono** (monospace) — doc site token/code rendering, labels
 - **Fraunces** (serif) — headings, page titles, section titles

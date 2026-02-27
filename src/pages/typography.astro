@@ -1,17 +1,322 @@
 ---
 import Layout from '../layouts/Default.astro';
+
+const primitiveScale = [
+  { token: '100',  px: 10, rem: '0.625',  lhToken: '100', lhPx: 12, lhRem: '0.75',  ratio: '1.20' },
+  { token: '200',  px: 12, rem: '0.75',   lhToken: '200', lhPx: 16, lhRem: '1',     ratio: '1.33' },
+  { token: '300',  px: 14, rem: '0.875',  lhToken: '300', lhPx: 20, lhRem: '1.25',  ratio: '1.43' },
+  { token: '400',  px: 16, rem: '1',      lhToken: '400', lhPx: 24, lhRem: '1.5',   ratio: '1.50' },
+  { token: '500',  px: 20, rem: '1.25',   lhToken: '500', lhPx: 28, lhRem: '1.75',  ratio: '1.40' },
+  { token: '600',  px: 24, rem: '1.5',    lhToken: '600', lhPx: 32, lhRem: '2',     ratio: '1.33' },
+  { token: '700',  px: 28, rem: '1.75',   lhToken: '700', lhPx: 36, lhRem: '2.25',  ratio: '1.29' },
+  { token: '800',  px: 32, rem: '2',      lhToken: '800', lhPx: 40, lhRem: '2.5',   ratio: '1.25' },
+  { token: '900',  px: 40, rem: '2.5',    lhToken: '900', lhPx: 48, lhRem: '3',     ratio: '1.20' },
+  { token: '1000', px: 48, rem: '3',      lhToken: '1000',lhPx: 56, lhRem: '3.5',   ratio: '1.17' },
+];
+
+const semanticStyles = [
+  { group: 'Caption', styles: [
+    { name: 'typography-micro',             size: 10, lh: 12, weight: 500, wLabel: 'Medium',   ls: '0.02em', use: 'Badges, chips, overlines, fine print' },
+    { name: 'typography-caption',           size: 12, lh: 16, weight: 400, wLabel: 'Regular',  ls: '0.02em', use: 'Captions, helper text, timestamps' },
+    { name: 'typography-caption-emphasis',  size: 12, lh: 16, weight: 500, wLabel: 'Medium',   ls: '0.02em', use: 'Labels, tags, metadata emphasis' },
+  ]},
+  { group: 'Body', styles: [
+    { name: 'typography-body',              size: 14, lh: 20, weight: 400, wLabel: 'Regular',  ls: '0',       use: 'Default body text, UI components' },
+    { name: 'typography-body-emphasis',     size: 14, lh: 20, weight: 500, wLabel: 'Medium',   ls: '0',       use: 'Emphasis within body, nav items' },
+    { name: 'typography-body-strong',       size: 14, lh: 20, weight: 600, wLabel: 'Semibold', ls: '0',       use: 'Strong emphasis, inline labels' },
+    { name: 'typography-body-lg',           size: 16, lh: 24, weight: 400, wLabel: 'Regular',  ls: '0',       use: 'Paragraphs, longer-form reading' },
+    { name: 'typography-body-lg-emphasis',  size: 16, lh: 24, weight: 500, wLabel: 'Medium',   ls: '0',       use: 'Emphasised body large' },
+  ]},
+  { group: 'Title', styles: [
+    { name: 'typography-title-2xs',         size: 14, lh: 16, weight: 500, wLabel: 'Medium',   ls: '-0.01em', use: 'Compact list headings, nav labels' },
+    { name: 'typography-title-xs',          size: 16, lh: 20, weight: 500, wLabel: 'Medium',   ls: '-0.01em', use: 'Sidebar headings, small section labels' },
+    { name: 'typography-title-sm',          size: 20, lh: 28, weight: 500, wLabel: 'Medium',   ls: '-0.01em', use: 'Card headings, small titles' },
+    { name: 'typography-title-sm-strong',   size: 20, lh: 28, weight: 600, wLabel: 'Semibold', ls: '-0.01em', use: 'Emphasised card titles' },
+    { name: 'typography-title-md',          size: 24, lh: 32, weight: 600, wLabel: 'Semibold', ls: '-0.01em', use: 'Section headings' },
+    { name: 'typography-title-lg',          size: 28, lh: 36, weight: 600, wLabel: 'Semibold', ls: '-0.02em', use: 'Major section headings' },
+    { name: 'typography-title-xl',          size: 32, lh: 40, weight: 600, wLabel: 'Semibold', ls: '-0.02em', use: 'Page titles' },
+  ]},
+  { group: 'Display', styles: [
+    { name: 'typography-display-sm',        size: 40, lh: 48, weight: 500, wLabel: 'Medium',   ls: '-0.02em', use: 'Hero text, feature highlights' },
+    { name: 'typography-display-sm-strong', size: 40, lh: 48, weight: 600, wLabel: 'Semibold', ls: '-0.02em', use: 'Hero emphasis' },
+    { name: 'typography-display-lg',        size: 48, lh: 56, weight: 500, wLabel: 'Medium',   ls: '-0.02em', use: 'Large display' },
+    { name: 'typography-display-lg-strong', size: 48, lh: 56, weight: 600, wLabel: 'Semibold', ls: '-0.02em', use: 'Large display emphasis' },
+  ]},
+];
+
 ---
 
 <Layout title="Typography" section="typography">
   <h1 class="page-title">Typography</h1>
-  <p class="page-sub">Type scales · Font stacks · Line heights · Text styles</p>
+  <p class="page-sub">Inter · 10 sizes · 3 weights · 4px-grid line-heights · REM units</p>
 
-  <div class="placeholder">
-    <div class="placeholder-icon">Aa</div>
-    <span class="placeholder-badge">Up Next</span>
-    <p class="placeholder-text">
-      Type scale, font families, weights, line heights, letter spacing, and text style tokens will be defined here.
-    </p>
+  <!-- ═══════════════════════════════════════════════════════
+       FONT STACK
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Font Stack</span>
+      <span class="section-desc">Single typeface · All UI, body, and display text</span>
+    </div>
+
+    <div class="type-font-card-single">
+      <div class="type-font-card">
+        <div class="type-font-label">Sans-serif</div>
+        <div class="type-font-name" style="font-family: var(--sans);">Inter</div>
+        <div class="type-font-specimen" style="font-family: var(--sans);">
+          <span style="font-weight:400">Regular 400</span>
+          <span style="font-weight:500">Medium 500</span>
+          <span style="font-weight:600">Semi-bold 600</span>
+        </div>
+        <code class="type-font-stack">Inter, system-ui, -apple-system, sans-serif</code>
+        <div class="type-font-var">var(--sans)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PRIMITIVE SCALE
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Primitive Scale</span>
+      <span class="section-desc">Raw size tokens · Numbered 100–1000 · All line-heights on a 4px grid</span>
+    </div>
+
+    <div class="info-box" style="margin-bottom: 24px;">
+      Primitives are the raw value palette — they carry no usage opinion.
+      Semantic tokens (below) compose primitives into purposeful text styles.
+      Increment pattern: <strong>+2px</strong> (10–16) → <strong>+4px</strong> (16–32) → <strong>+8px</strong> (32–48).
+    </div>
+
+    <div class="type-table">
+      <div class="type-table-head">
+        <span class="tt-col tt-token">Token</span>
+        <span class="tt-col tt-px">px</span>
+        <span class="tt-col tt-rem">rem</span>
+        <span class="tt-col tt-lh">Line-height</span>
+        <span class="tt-col tt-lhrem">LH rem</span>
+        <span class="tt-col tt-ratio">Ratio</span>
+        <span class="tt-col tt-preview">Preview</span>
+      </div>
+      {primitiveScale.map((s) => (
+        <div class="type-table-row">
+          <span class="tt-col tt-token"><code>--font-size-{s.token}</code></span>
+          <span class="tt-col tt-px">{s.px}</span>
+          <span class="tt-col tt-rem">{s.rem}</span>
+          <span class="tt-col tt-lh">{s.lhPx}px</span>
+          <span class="tt-col tt-lhrem">{s.lhRem}</span>
+          <span class="tt-col tt-ratio">{s.ratio}</span>
+          <span class="tt-col tt-preview" style={`font-size: ${s.px}px; line-height: ${s.lhPx}px; font-family: var(--sans);`}>
+            Inter {s.px}px
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       WEIGHT & LETTER SPACING
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Weight &amp; Letter Spacing</span>
+      <span class="section-desc">Primitive tokens for font-weight and tracking</span>
+    </div>
+
+    <div class="type-dual-grid">
+      <div>
+        <div class="type-mini-table-title">Font Weight</div>
+        <div class="type-mini-table">
+          <div class="type-mini-row">
+            <code>--font-weight-regular</code>
+            <span>400</span>
+            <span style="font-weight:400; font-family:var(--sans);">The quick brown fox</span>
+          </div>
+          <div class="type-mini-row">
+            <code>--font-weight-medium</code>
+            <span>500</span>
+            <span style="font-weight:500; font-family:var(--sans);">The quick brown fox</span>
+          </div>
+          <div class="type-mini-row">
+            <code>--font-weight-semibold</code>
+            <span>600</span>
+            <span style="font-weight:600; font-family:var(--sans);">The quick brown fox</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="type-mini-table-title">Letter Spacing</div>
+        <div class="type-mini-table">
+          <div class="type-mini-row">
+            <code>--letter-spacing-wide</code>
+            <span>+0.02em</span>
+            <span style="letter-spacing:0.02em; font-family:var(--sans);">OVERLINE TEXT</span>
+          </div>
+          <div class="type-mini-row">
+            <code>--letter-spacing-normal</code>
+            <span>0</span>
+            <span style="letter-spacing:0; font-family:var(--sans);">Body text default</span>
+          </div>
+          <div class="type-mini-row">
+            <code>--letter-spacing-tight</code>
+            <span>-0.01em</span>
+            <span style="letter-spacing:-0.01em; font-family:var(--sans);">Title tightened</span>
+          </div>
+          <div class="type-mini-row">
+            <code>--letter-spacing-tighter</code>
+            <span>-0.02em</span>
+            <span style="letter-spacing:-0.02em; font-family:var(--sans);">Display tighter</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SEMANTIC TEXT STYLES
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Semantic Text Styles</span>
+      <span class="section-desc">Composed tokens · Size + line-height + weight + tracking bundled by purpose</span>
+    </div>
+
+    <div class="info-box" style="margin-bottom: 24px;">
+      Each semantic token is a full composition — preventing invalid size/weight combinations.
+      Weight variants exist where the design system needs them: body text gets all three weights,
+      titles default to semi-bold with a medium option at smaller sizes.
+    </div>
+
+    <div class="info-box" style="margin-bottom: 24px;">
+      <strong>Line-height by tier:</strong> each tier has a distinct line-height strategy.
+      Ratios decrease as text gets larger, and at any shared font size the tier determines the leading.
+      <br><br>
+      <strong>Body</strong> — generous (1.43–1.50×). Optimised for multi-line reading and long-form text.
+      <br>
+      <strong>Title</strong> — compact (1.14–1.40×). Tighter leading for scannable, single- or few-line headings.
+      <br>
+      <strong>Caption</strong> — moderate (1.20–1.33×). Legible at small sizes without excess space.
+      <br>
+      <strong>Display</strong> — tightest (1.17–1.20×). Large text needs minimal leading.
+      <br><br>
+      Where body and title share a font size (14px, 16px), line-height is the differentiator:
+      <code>typography-body</code> is 14/20 (1.43×) while <code>typography-title-2xs</code> is 14/16 (1.14×).
+      <code>typography-body-lg</code> is 16/24 (1.50×) while <code>typography-title-xs</code> is 16/20 (1.25×).
+    </div>
+
+    {semanticStyles.map((group) => (
+      <div class="type-semantic-group">
+        <div class="type-group-label">{group.group}</div>
+
+        {group.styles.map((s) => (
+          <div class="type-specimen-row">
+            <div class="type-specimen-meta">
+              <code class="type-specimen-token">{s.name}</code>
+              <span class="type-specimen-spec">
+                {s.size}/{s.lh} · {s.wLabel} {s.weight} · ls {s.ls}
+              </span>
+              <span class="type-specimen-use">{s.use}</span>
+            </div>
+            <div
+              class="type-specimen-preview"
+              style={`font-size: ${s.size}px; line-height: ${s.lh}px; font-weight: ${s.weight}; letter-spacing: ${s.ls}; font-family: var(--sans);`}
+            >
+              The quick brown fox jumps
+            </div>
+          </div>
+        ))}
+      </div>
+    ))}
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       LIVE TYPE TESTER
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Type Ramp</span>
+      <span class="section-desc">Full visual hierarchy · Display through micro</span>
+    </div>
+
+    <div class="type-ramp">
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-display-lg</span>
+        <span class="type-ramp-text" style="font-size:48px; line-height:56px; font-weight:500; letter-spacing:-0.02em;">Design Systems</span>
+      </div>
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-display-sm</span>
+        <span class="type-ramp-text" style="font-size:40px; line-height:48px; font-weight:500; letter-spacing:-0.02em;">Design Systems</span>
+      </div>
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-title-xl</span>
+        <span class="type-ramp-text" style="font-size:32px; line-height:40px; font-weight:600; letter-spacing:-0.02em;">Design Systems</span>
+      </div>
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-title-lg</span>
+        <span class="type-ramp-text" style="font-size:28px; line-height:36px; font-weight:600; letter-spacing:-0.02em;">Design Systems</span>
+      </div>
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-title-md</span>
+        <span class="type-ramp-text" style="font-size:24px; line-height:32px; font-weight:600; letter-spacing:-0.01em;">Design Systems</span>
+      </div>
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-title-sm</span>
+        <span class="type-ramp-text" style="font-size:20px; line-height:28px; font-weight:500; letter-spacing:-0.01em;">Design Systems</span>
+      </div>
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-body-lg</span>
+        <span class="type-ramp-text" style="font-size:16px; line-height:24px; font-weight:400; letter-spacing:0;">Design Systems</span>
+      </div>
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-title-xs</span>
+        <span class="type-ramp-text" style="font-size:16px; line-height:20px; font-weight:500; letter-spacing:-0.01em;">Design Systems</span>
+      </div>
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-body</span>
+        <span class="type-ramp-text" style="font-size:14px; line-height:20px; font-weight:400; letter-spacing:0;">Design Systems</span>
+      </div>
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-title-2xs</span>
+        <span class="type-ramp-text" style="font-size:14px; line-height:16px; font-weight:500; letter-spacing:-0.01em;">Design Systems</span>
+      </div>
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-caption</span>
+        <span class="type-ramp-text" style="font-size:12px; line-height:16px; font-weight:400; letter-spacing:0.02em;">Design Systems</span>
+      </div>
+      <div class="type-ramp-row">
+        <span class="type-ramp-label">typography-micro</span>
+        <span class="type-ramp-text" style="font-size:10px; line-height:12px; font-weight:500; letter-spacing:0.02em;">DESIGN SYSTEMS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       IMPLEMENTATION NOTES
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Implementation Notes</span>
+      <span class="section-desc">REM units · Root sizing · Responsive guidance</span>
+    </div>
+
+    <div class="info-box">
+      <strong>Root element stays at 16px</strong> (browser default). The 14px body base is expressed as
+      <code>0.875rem</code>, not by changing the root. This preserves user accessibility settings and
+      aligns with the rem expectations of every CSS framework and browser.
+      <br><br>
+      <strong>4px vertical grid:</strong> every line-height is a multiple of 4px (12, 16, 20, 24, 28, 32, 36, 40, 48, 56).
+      This ensures text blocks stack cleanly when mixed in layouts.
+      <br><br>
+      <strong>Mobile consideration:</strong> the <code>typography-micro</code> token (10px) should be avoided on small viewports.
+      Neither Apple iOS nor Google Material go below 11px on mobile. Use <code>typography-caption</code> (12px) as the
+      minimum on touch devices.
+      <br><br>
+      <strong>Token architecture:</strong> Primitive → Semantic → Component. Primitives define the raw value
+      palette (numbered scale). Semantic tokens compose them into purposeful styles. Component tokens
+      (deferred) will reference semantics for specific component contexts.
+    </div>
   </div>
 
   <div class="footer">Nexus Design System · Typography</div>
