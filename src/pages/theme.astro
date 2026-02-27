@@ -1,0 +1,461 @@
+---
+import Layout from '../layouts/Default.astro';
+
+/* ─── Colour data (reused from colours.astro) ──────────────── */
+function hexToLuminance(hex: string): number {
+  const h = hex.replace('#', '');
+  const toLinear = (c: number) => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  const r = toLinear(parseInt(h.substring(0, 2), 16) / 255);
+  const g = toLinear(parseInt(h.substring(2, 4), 16) / 255);
+  const b = toLinear(parseInt(h.substring(4, 6), 16) / 255);
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrastRatio(hex1: string, hex2: string): number {
+  const l1 = hexToLuminance(hex1);
+  const l2 = hexToLuminance(hex2);
+  return Number(((Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05)).toFixed(2));
+}
+
+const LIGHT_BG = '#FFFFFF';
+const DARK_BG  = '#080808';
+
+function buildScale(name: string, id: string, hexes: string[]) {
+  return {
+    name,
+    id,
+    steps: hexes.map((hex, i) => ({
+      step: i * 10,
+      hex,
+    })),
+  };
+}
+
+const scales = [
+  buildScale('Neutral Grey', 'grey', [
+    '#FAFAFA', '#DEDEDE', '#C3C3C3', '#A8A8A8', '#8E8E8E',
+    '#757575', '#5E5F5F', '#4B4B4A', '#373737', '#242424', '#080808',
+  ]),
+  buildScale('Cool Grey', 'cool', [
+    '#F8FAFD', '#DCDEE1', '#BFC3CA', '#A2A9B4', '#868F9F',
+    '#6C7688', '#565F6F', '#444B57', '#32373E', '#212427', '#070809',
+  ]),
+  buildScale('Warm Grey', 'warm', [
+    '#FBFAF9', '#DFDEDD', '#C5C2C1', '#ACA8A5', '#938D8A',
+    '#7B7470', '#635D5A', '#4E4A47', '#393634', '#252322', '#080807',
+  ]),
+  buildScale('Red', 'red', [
+    '#FBFBFB', '#FBD6D3', '#F8B1AB', '#F68D85', '#FC5C59',
+    '#E32631', '#BC1624', '#971A1F', '#700F14', '#490D0E', '#140706',
+  ]),
+  buildScale('Green', 'green', [
+    '#F4FEF6', '#C8E6CE', '#97D0A5', '#4EBF75', '#24A95B',
+    '#198647', '#136D39', '#0B582C', '#02401E', '#002A10', '#030D05',
+  ]),
+  buildScale('Yellow', 'yellow', [
+    '#FFFCF4', '#F5DCAA', '#EEBD4B', '#D3A330', '#B78D27',
+    '#93711D', '#775A14', '#62490D', '#483403', '#312200', '#0F0901',
+  ]),
+  buildScale('Blue', 'blue', [
+    '#FAFCFF', '#D1E0F6', '#ABC4EE', '#82ABF0', '#5692F6',
+    '#1C6EF1', '#1459C7', '#0C47A4', '#03337D', '#001F5C', '#050B15',
+  ]),
+];
+
+/* ─── Mirror pairs ──────────────────────────────────────────── */
+const mirrorPairs = [
+  { light: 0,  dark: 100 },
+  { light: 10, dark: 90 },
+  { light: 20, dark: 80 },
+  { light: 30, dark: 70 },
+  { light: 40, dark: 60 },
+  { light: 50, dark: 50 },
+];
+
+/* ─── Semantic token mappings ───────────────────────────────── */
+interface SemanticToken {
+  name: string;
+  category: string;
+  lightScale: string;
+  lightStep: number;
+  darkScale: string;
+  darkStep: number;
+  lightHex: string;
+  darkHex: string;
+}
+
+function getHex(scaleName: string, step: number): string {
+  const scale = scales.find(s => s.name === scaleName);
+  if (!scale) return '#000000';
+  const s = scale.steps.find(st => st.step === step);
+  return s ? s.hex : '#000000';
+}
+
+const semanticTokens: SemanticToken[] = [
+  // Backgrounds
+  { name: 'background-primary',   category: 'Background', lightScale: 'Neutral Grey', lightStep: 0,  darkScale: 'Neutral Grey', darkStep: 100, lightHex: getHex('Neutral Grey', 0),  darkHex: getHex('Neutral Grey', 100) },
+  { name: 'background-secondary', category: 'Background', lightScale: 'Warm Grey',    lightStep: 0,  darkScale: 'Warm Grey',    darkStep: 90,  lightHex: getHex('Warm Grey', 0),     darkHex: getHex('Warm Grey', 90) },
+  { name: 'background-success',   category: 'Background', lightScale: 'Green',        lightStep: 0,  darkScale: 'Green',        darkStep: 90,  lightHex: getHex('Green', 0),         darkHex: getHex('Green', 90) },
+  { name: 'background-error',     category: 'Background', lightScale: 'Red',          lightStep: 0,  darkScale: 'Red',          darkStep: 90,  lightHex: getHex('Red', 0),           darkHex: getHex('Red', 90) },
+  { name: 'background-warning',   category: 'Background', lightScale: 'Yellow',       lightStep: 0,  darkScale: 'Yellow',       darkStep: 90,  lightHex: getHex('Yellow', 0),        darkHex: getHex('Yellow', 90) },
+  { name: 'background-info',      category: 'Background', lightScale: 'Blue',         lightStep: 0,  darkScale: 'Blue',         darkStep: 90,  lightHex: getHex('Blue', 0),          darkHex: getHex('Blue', 90) },
+  // Text
+  { name: 'text-primary',         category: 'Text',       lightScale: 'Neutral Grey', lightStep: 90, darkScale: 'Neutral Grey', darkStep: 10,  lightHex: getHex('Neutral Grey', 90), darkHex: getHex('Neutral Grey', 10) },
+  { name: 'text-secondary',       category: 'Text',       lightScale: 'Neutral Grey', lightStep: 60, darkScale: 'Neutral Grey', darkStep: 40,  lightHex: getHex('Neutral Grey', 60), darkHex: getHex('Neutral Grey', 40) },
+  { name: 'text-tertiary',        category: 'Text',       lightScale: 'Neutral Grey', lightStep: 50, darkScale: 'Neutral Grey', darkStep: 50,  lightHex: getHex('Neutral Grey', 50), darkHex: getHex('Neutral Grey', 50) },
+  { name: 'text-success',         category: 'Text',       lightScale: 'Green',        lightStep: 60, darkScale: 'Green',        darkStep: 40,  lightHex: getHex('Green', 60),        darkHex: getHex('Green', 40) },
+  { name: 'text-error',           category: 'Text',       lightScale: 'Red',          lightStep: 50, darkScale: 'Red',          darkStep: 40,  lightHex: getHex('Red', 50),          darkHex: getHex('Red', 40) },
+  { name: 'text-link',            category: 'Text',       lightScale: 'Blue',         lightStep: 50, darkScale: 'Blue',         darkStep: 40,  lightHex: getHex('Blue', 50),         darkHex: getHex('Blue', 40) },
+  // Borders
+  { name: 'border-default',       category: 'Border',     lightScale: 'Neutral Grey', lightStep: 20, darkScale: 'Neutral Grey', darkStep: 80,  lightHex: getHex('Neutral Grey', 20), darkHex: getHex('Neutral Grey', 80) },
+  { name: 'border-strong',        category: 'Border',     lightScale: 'Neutral Grey', lightStep: 40, darkScale: 'Neutral Grey', darkStep: 60,  lightHex: getHex('Neutral Grey', 40), darkHex: getHex('Neutral Grey', 60) },
+  { name: 'border-error',         category: 'Border',     lightScale: 'Red',          lightStep: 50, darkScale: 'Red',          darkStep: 50,  lightHex: getHex('Red', 50),          darkHex: getHex('Red', 50) },
+  // Actions
+  { name: 'action-primary',       category: 'Action',     lightScale: 'Blue',         lightStep: 50, darkScale: 'Blue',         darkStep: 50,  lightHex: getHex('Blue', 50),         darkHex: getHex('Blue', 50) },
+  { name: 'action-destructive',   category: 'Action',     lightScale: 'Red',          lightStep: 50, darkScale: 'Red',          darkStep: 50,  lightHex: getHex('Red', 50),          darkHex: getHex('Red', 50) },
+  { name: 'action-success',       category: 'Action',     lightScale: 'Green',        lightStep: 50, darkScale: 'Green',        darkStep: 50,  lightHex: getHex('Green', 50),        darkHex: getHex('Green', 50) },
+];
+
+const tokenCategories = [...new Set(semanticTokens.map(t => t.category))];
+---
+
+<Layout title="Theme" section="theme">
+
+  <h1 class="page-title">Theme</h1>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 1 — HERO / CONCEPT EXPLAINER
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="theme-hero">
+    <h1 class="theme-hero-title">The Mirror Principle</h1>
+    <p class="theme-hero-subtitle">
+      A colour used at <strong>Step N</strong> in light theme maps to
+      <strong>Step (100 &minus; N)</strong> in dark theme. Step 50 is the
+      perceptual midpoint &mdash; the pivot around which every pair reflects.
+    </p>
+
+    <!-- Mirror Diagram — Blue scale -->
+    <div class="mirror-diagram">
+      <div class="mirror-label">Light theme</div>
+      <div class="mirror-label mirror-label--dark">Dark theme</div>
+
+      <div class="mirror-strip">
+        {scales[6].steps.map((s) => (
+          <div
+            class={`mirror-cell ${s.step <= 40 ? 'mc-light' : s.step >= 60 ? 'mc-dark' : 'mc-pivot'}`}
+            style={`background:${s.hex}`}
+          >
+            <span class="mirror-cell-n">{s.step}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="mirror-brackets">
+        {/* Brackets: outermost (0↔100) to innermost (40↔60) */}
+        {mirrorPairs.filter(p => p.light !== 50).map((pair, i, arr) => {
+          const colStart = (pair.light / 10) + 1;
+          const colEnd = (pair.dark / 10) + 2;
+          const depth = ((pair.dark - pair.light) / 20);
+          const opacity = 0.35 + (i / (arr.length - 1)) * 0.65;
+          return (
+            <div class="mirror-bracket-row" style={`grid-column: ${colStart} / ${colEnd}`}>
+              <div class="mirror-bracket" style={`height: ${8 + depth * 8}px; opacity: ${opacity}`}></div>
+              <span class="mirror-bracket-label">{pair.light} &#8596; {pair.dark}</span>
+            </div>
+          );
+        })}
+      </div>
+
+      <div class="mirror-pivot-marker">
+        <span class="mirror-pivot-tag">pivot</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 2 — SCALE MIRROR VISUALISATION
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Scale Mirrors</span>
+      <span class="section-desc">Every scale reflects around Step 50 &mdash; hover a swatch to highlight its mirror pair</span>
+    </div>
+
+    {scales.map((scale) => (
+      <div class="scale-mirror-block" data-scale={scale.id}>
+        <div class="scale-mirror-name">{scale.name}</div>
+        <div class="scale-mirror-row">
+          {scale.steps.map((s) => {
+            const mirrorStep = 100 - s.step;
+            const mirrorHex = scale.steps.find(st => st.step === mirrorStep)?.hex ?? '';
+            return (
+              <div
+                class={`scale-mirror-cell ${s.step <= 30 ? 'smc-light' : s.step >= 70 ? 'smc-dark' : 'smc-mid'}`}
+                style={`background:${s.hex}`}
+                data-step={s.step}
+                data-mirror={mirrorStep}
+                title={`Step ${s.step} (${s.hex}) ↔ Step ${mirrorStep} (${mirrorHex})`}
+              >
+                <span class="smc-n">{s.step}</span>
+              </div>
+            );
+          })}
+        </div>
+        <div class="scale-mirror-annotations">
+          {mirrorPairs.filter(p => p.light !== 50).map((pair) => {
+            const lightHex = scale.steps.find(st => st.step === pair.light)?.hex ?? '';
+            const darkHex  = scale.steps.find(st => st.step === pair.dark)?.hex ?? '';
+            return (
+              <div class="sma-pair" data-pair={`${pair.light}-${pair.dark}`}>
+                <span class="sma-dot" style={`background:${lightHex}`}></span>
+                <span class="sma-text">{pair.light}</span>
+                <span class="sma-arrow">&#8596;</span>
+                <span class="sma-text">{pair.dark}</span>
+                <span class="sma-dot" style={`background:${darkHex}`}></span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    ))}
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 3 — SEMANTIC TOKEN MAPPING TABLE
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Semantic Token Map</span>
+      <span class="section-desc">How semantic tokens resolve to primitives across themes</span>
+    </div>
+
+    <div class="token-table-wrap">
+      <table class="token-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Light Primitive</th>
+            <th></th>
+            <th>Dark Primitive</th>
+            <th></th>
+            <th class="tt-rule">Rule</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tokenCategories.map((cat) => (
+            <>
+              <tr class="tt-cat-row">
+                <td colspan="6">{cat}</td>
+              </tr>
+              {semanticTokens.filter(t => t.category === cat).map((t) => (
+                <tr>
+                  <td class="tt-name">{t.name}</td>
+                  <td class="tt-prim">
+                    <span class="tt-dot" style={`background:${t.lightHex}`}></span>
+                    {t.lightScale} {t.lightStep}
+                  </td>
+                  <td class="tt-hex">{t.lightHex}</td>
+                  <td class="tt-prim">
+                    <span class="tt-dot" style={`background:${t.darkHex}`}></span>
+                    {t.darkScale} {t.darkStep}
+                  </td>
+                  <td class="tt-hex">{t.darkHex}</td>
+                  <td class="tt-rule-val">
+                    {t.lightStep === (100 - t.darkStep) ? (
+                      <span class="tt-sym">&#10003; {t.lightStep} ↔ {t.darkStep}</span>
+                    ) : (
+                      <span class="tt-asym">~{t.lightStep} / {t.darkStep}</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 4 — SIDE-BY-SIDE COMPONENT SHOWCASE
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Components in Context</span>
+      <span class="section-desc">Identical markup, different themes &mdash; the mirror system at work</span>
+    </div>
+
+    <div class="theme-split">
+      <!-- ─── LIGHT PANEL ─── -->
+      <div class="theme-panel-side" data-theme="light">
+        <div class="tp-label">Light</div>
+
+        <!-- Inline Alerts -->
+        <div class="tp-group-title">Inline Alerts</div>
+
+        <div class="tp-alert tp-alert--success">
+          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <div>
+            <div class="tp-alert-title">Assignment submitted</div>
+            <div class="tp-alert-body">Your assignment has been received and is now pending review.</div>
+          </div>
+        </div>
+
+        <div class="tp-alert tp-alert--error">
+          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
+          <div>
+            <div class="tp-alert-title">Submission failed</div>
+            <div class="tp-alert-body">Your submission could not be processed. Please check the file format and try again.</div>
+          </div>
+        </div>
+
+        <div class="tp-alert tp-alert--warning">
+          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
+          <div>
+            <div class="tp-alert-title">Deadline approaching</div>
+            <div class="tp-alert-body">Assignment &lsquo;Research Methods&rsquo; is due in 24 hours. Submit your work soon.</div>
+          </div>
+        </div>
+
+        <div class="tp-alert tp-alert--info">
+          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
+          <div>
+            <div class="tp-alert-title">New course available</div>
+            <div class="tp-alert-body">Introduction to Data Science has been added to your learning path.</div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="tp-group-title">Buttons</div>
+        <div class="tp-button-row">
+          <button class="tp-btn tp-btn--primary">Enrol</button>
+          <button class="tp-btn tp-btn--destructive">Drop Course</button>
+          <button class="tp-btn tp-btn--ghost">Cancel</button>
+        </div>
+
+        <!-- Dialog -->
+        <div class="tp-group-title">Dialog</div>
+        <div class="tp-dialog">
+          <div class="tp-dialog-title">Drop this course?</div>
+          <div class="tp-dialog-body">You will lose access to all course materials, grades, and discussion posts. This cannot be undone.</div>
+          <div class="tp-dialog-actions">
+            <button class="tp-btn tp-btn--ghost">Cancel</button>
+            <button class="tp-btn tp-btn--destructive">Drop course</button>
+          </div>
+        </div>
+
+        <!-- Feedback states -->
+        <div class="tp-group-title">Feedback</div>
+        <div class="tp-feedback-row">
+          <div class="tp-feedback tp-feedback--success">Saved</div>
+          <div class="tp-feedback tp-feedback--error">Failed</div>
+          <div class="tp-feedback tp-feedback--warning">Retry</div>
+        </div>
+      </div>
+
+      <!-- ─── DARK PANEL ─── -->
+      <div class="theme-panel-side" data-theme="dark">
+        <div class="tp-label">Dark</div>
+
+        <!-- Inline Alerts -->
+        <div class="tp-group-title">Inline Alerts</div>
+
+        <div class="tp-alert tp-alert--success">
+          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <div>
+            <div class="tp-alert-title">Assignment submitted</div>
+            <div class="tp-alert-body">Your assignment has been received and is now pending review.</div>
+          </div>
+        </div>
+
+        <div class="tp-alert tp-alert--error">
+          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
+          <div>
+            <div class="tp-alert-title">Submission failed</div>
+            <div class="tp-alert-body">Your submission could not be processed. Please check the file format and try again.</div>
+          </div>
+        </div>
+
+        <div class="tp-alert tp-alert--warning">
+          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
+          <div>
+            <div class="tp-alert-title">Deadline approaching</div>
+            <div class="tp-alert-body">Assignment &lsquo;Research Methods&rsquo; is due in 24 hours. Submit your work soon.</div>
+          </div>
+        </div>
+
+        <div class="tp-alert tp-alert--info">
+          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
+          <div>
+            <div class="tp-alert-title">New course available</div>
+            <div class="tp-alert-body">Introduction to Data Science has been added to your learning path.</div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="tp-group-title">Buttons</div>
+        <div class="tp-button-row">
+          <button class="tp-btn tp-btn--primary">Enrol</button>
+          <button class="tp-btn tp-btn--destructive">Drop Course</button>
+          <button class="tp-btn tp-btn--ghost">Cancel</button>
+        </div>
+
+        <!-- Dialog -->
+        <div class="tp-group-title">Dialog</div>
+        <div class="tp-dialog">
+          <div class="tp-dialog-title">Drop this course?</div>
+          <div class="tp-dialog-body">You will lose access to all course materials, grades, and discussion posts. This cannot be undone.</div>
+          <div class="tp-dialog-actions">
+            <button class="tp-btn tp-btn--ghost">Cancel</button>
+            <button class="tp-btn tp-btn--destructive">Drop course</button>
+          </div>
+        </div>
+
+        <!-- Feedback states -->
+        <div class="tp-group-title">Feedback</div>
+        <div class="tp-feedback-row">
+          <div class="tp-feedback tp-feedback--success">Saved</div>
+          <div class="tp-feedback tp-feedback--error">Failed</div>
+          <div class="tp-feedback tp-feedback--warning">Retry</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Nexus Design System · Theme Symmetry
+  </div>
+
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Scale mirror hover: highlight mirror pairs
+    document.querySelectorAll('.scale-mirror-cell').forEach(cell => {
+      cell.addEventListener('mouseenter', () => {
+        const step = cell.getAttribute('data-step');
+        const mirror = cell.getAttribute('data-mirror');
+        const block = cell.closest('.scale-mirror-block');
+        if (!block) return;
+        block.querySelectorAll('.scale-mirror-cell').forEach(c => {
+          const s = c.getAttribute('data-step');
+          if (s === step || s === mirror) {
+            c.classList.add('smc-highlight');
+          } else {
+            c.classList.add('smc-dim');
+          }
+        });
+      });
+      cell.addEventListener('mouseleave', () => {
+        const block = cell.closest('.scale-mirror-block');
+        if (!block) return;
+        block.querySelectorAll('.scale-mirror-cell').forEach(c => {
+          c.classList.remove('smc-highlight', 'smc-dim');
+        });
+      });
+    });
+  });
+</script>
