@@ -573,6 +573,7 @@
   flex: 1;
   padding: 0 16px;
   min-width: 100px;
+  display: block;
 }
 .space-explorer-col--use {
   flex: 0 0 240px;
