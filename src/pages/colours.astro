@@ -78,38 +78,6 @@ const scales = [
   ]),
 ];
 
-// Button Text at 14px — curated samples per theme (data-driven from scales)
-const buttonTextSamples = {
-  light: [
-    { scaleName: 'Neutral Grey', step: 70 }, { scaleName: 'Neutral Grey', step: 60 }, { scaleName: 'Neutral Grey', step: 50 },
-    { scaleName: 'Red', step: 60 }, { scaleName: 'Red', step: 50 },
-    { scaleName: 'Green', step: 60 }, { scaleName: 'Green', step: 50 },
-    { scaleName: 'Yellow', step: 70 }, { scaleName: 'Yellow', step: 60 }, { scaleName: 'Yellow', step: 50 },
-    { scaleName: 'Blue', step: 60 }, { scaleName: 'Blue', step: 50, labelSuffix: ' — links' },
-  ],
-  dark: [
-    { scaleName: 'Neutral Grey', step: 30 }, { scaleName: 'Neutral Grey', step: 40 }, { scaleName: 'Neutral Grey', step: 50 },
-    { scaleName: 'Red', step: 40 }, { scaleName: 'Red', step: 50 },
-    { scaleName: 'Green', step: 40 }, { scaleName: 'Green', step: 50 },
-    { scaleName: 'Yellow', step: 40 }, { scaleName: 'Yellow', step: 30 },
-    { scaleName: 'Blue', step: 40 }, { scaleName: 'Blue', step: 50, labelSuffix: ' — links' },
-  ],
-};
-
-function getButtonTextRow(scaleName: string, step: number, theme: 'light' | 'dark') {
-  const scale = scales.find((s) => s.name === scaleName);
-  if (!scale) return null;
-  const stepData = scale.steps.find((s) => s.step === step);
-  if (!stepData) return null;
-  const metric = theme === 'light' ? stepData.onWhite : stepData.onDark;
-  return {
-    label: `${scaleName} ${step}`,
-    hex: stepData.hex,
-    ratio: metric.ratio,
-    level: metric.level,
-    isMarginal: metric.level === 'aalg',
-  };
-}
 ---
 
 <Layout title="Colours" section="colours">
@@ -159,66 +127,6 @@ function getButtonTextRow(scaleName: string, step: number, theme: 'light' | 'dar
       </div>
     </div>
   ))}
-
-  <!-- ═══════════════════════════════════════════════════════
-       TEXT USABILITY — 14px button text
-  ════════════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-title">Button Text at 14px</span>
-      <span class="section-desc">Which steps pass AA (≥ 4.5:1) for normal-weight 14px text on each theme background</span>
-    </div>
-
-    <div class="usability-grid">
-      <div class="theme-panel light">
-        <div class="theme-panel-head lh">Light theme — on #FFFFFF</div>
-        {buttonTextSamples.light.map((sample) => {
-          const row = getButtonTextRow(sample.scaleName, sample.step, 'light');
-          if (!row) return null;
-          const label = `${row.label}${sample.labelSuffix ?? ''}`;
-          return (
-            <div class="text-sample-row">
-              <div class="swatch-dot" style={`background:${row.hex}`}></div>
-              <div class="ts-meta">
-                <div class="ts-label">{label}</div>
-                <div class="ts-text" style={`color:${row.hex}`}>Button label text</div>
-                <div class="ts-info">{row.hex} · {Number(row.ratio).toFixed(2)}:1{row.isMarginal ? ' ⚠' : ''}</div>
-              </div>
-              <span class={`ts-badge ${row.level}`}>{levelLabels[row.level]}</span>
-            </div>
-          );
-        })}
-      </div>
-
-      <div class="theme-panel dark">
-        <div class="theme-panel-head dh">Dark theme — on #080808</div>
-        {buttonTextSamples.dark.map((sample) => {
-          const row = getButtonTextRow(sample.scaleName, sample.step, 'dark');
-          if (!row) return null;
-          const label = `${row.label}${sample.labelSuffix ?? ''}`;
-          return (
-            <div class="text-sample-row">
-              <div class="swatch-dot" style={`background:${row.hex};border-color:rgba(255,255,255,0.08)`}></div>
-              <div class="ts-meta">
-                <div class="ts-label" style="color:#9A9A9A">{label}</div>
-                <div class="ts-text" style={`color:${row.hex}`}>Button label text</div>
-                <div class="ts-info" style="color:#8E8E8E">{row.hex} · {Number(row.ratio).toFixed(2)}:1{row.isMarginal ? ' ⚠' : ''}</div>
-              </div>
-              <span class={`ts-badge ${row.level}`}>{levelLabels[row.level]}</span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-
-    <div class="info-box">
-      <strong>Rule for 14px button text (normal weight):</strong>
-      AA requires ≥ 4.5:1. For each scale, the minimum step that passes on white is <strong>Step 50</strong>. On dark (#080808), it's <strong>Step 40</strong> for chromatic scales and <strong>Step 40–50</strong> for greys.
-      Steps marked ⚠ clear 4.5:1 only marginally — prefer one step darker (higher step number on white; lower on dark) for robust compliance across display variability.
-      <br><br>
-      <strong>Yellow exception:</strong> Yellow 20–30 appear bright but sit at low contrast on white. Always use Yellow 50+ for text on white. Yellow is best used as a background tint with dark (Step 70+) text on top.
-    </div>
-  </div>
 
   <div class="footer">
     Nexus Design System · Colours

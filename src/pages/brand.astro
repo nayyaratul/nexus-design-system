@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Default.astro';
+---
+
+<Layout title="Brand" section="brand">
+
+  <header class="page-header">
+    <h1 class="page-title">Brand Colour</h1>
+    <p class="page-subtitle">
+      Override the primary colour across the entire design system to match any brand identity.
+      Use the picker bar above to preview changes in real-time.
+    </p>
+  </header>
+
+  <section class="content-block">
+    <h2>How it works</h2>
+    <p>
+      The design system defines a <code>--brand-*</code> scale (0&ndash;100 in steps of 10) that
+      maps to semantic tokens like <code>--action-primary</code>, focus rings, and active states.
+      Changing the brand colour regenerates the entire scale using perceptually uniform OKLCh colour
+      space, ensuring consistent contrast ratios at every step.
+    </p>
+  </section>
+
+  <section class="content-block">
+    <h2>The scale</h2>
+    <div class="brand-scale" id="brand-scale">
+      <!-- populated by JS -->
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>Usage</h2>
+    <div class="code-block">
+      <pre><code>import {'{'} setBrandColour {'}'} from 'src/utils/setBrandColour.js';
+
+// Apply a custom brand colour at runtime
+setBrandColour('#1C6EF1');
+
+// The function generates an 11-step OKLCh scale and sets
+// --brand-0 through --brand-100 on :root.</code></pre>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>Per-client override</h2>
+    <p>
+      For static builds, override the brand scale in your theme's CSS file. For runtime theming
+      (e.g. white-label products), call <code>setBrandColour()</code> on page load with the
+      client's primary hex.
+    </p>
+  </section>
+
+</Layout>
+
+<script>
+  import { generateBrandScale } from '../utils/setBrandColour.js';
+
+  function renderScale() {
+    const container = document.getElementById('brand-scale');
+    if (!container) return;
+
+    const root = getComputedStyle(document.documentElement);
+    const steps = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+
+    container.innerHTML = steps.map(step => {
+      const varName = `--brand-${step}`;
+      const colour = root.getPropertyValue(varName).trim() || '#A03AFF';
+      return `
+        <div class="scale-step" style="background:var(${varName})">
+          <span class="scale-label ${step >= 50 ? 'light' : 'dark'}">${step}</span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  renderScale();
+
+  // Re-render when brand changes (observe style mutations on :root)
+  const observer = new MutationObserver(renderScale);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
+</script>
+
+<style>
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: var(--font-size-900);
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-subtitle {
+    font-size: var(--font-size-400);
+    color: var(--ink-2);
+    max-width: 640px;
+    line-height: 1.6;
+  }
+
+  .content-block {
+    margin-bottom: 2.5rem;
+  }
+
+  .content-block h2 {
+    font-family: var(--sans);
+    font-size: var(--font-size-500);
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+
+  .content-block p {
+    font-size: var(--font-size-300);
+    color: var(--ink-2);
+    line-height: 1.7;
+    max-width: 640px;
+  }
+
+  .content-block code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--page-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--ink);
+  }
+
+  .code-block {
+    background: #1A1816;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    margin: 0;
+  }
+
+  .code-block code {
+    font-family: var(--mono);
+    font-size: var(--font-size-200);
+    color: #E8E4DF;
+    line-height: 1.7;
+    background: none;
+    padding: 0;
+  }
+
+  .brand-scale {
+    display: flex;
+    border-radius: var(--radius);
+    overflow: hidden;
+    height: 56px;
+  }
+
+  .scale-step {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scale-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .scale-label.light { color: #fff; }
+  .scale-label.dark  { color: #1A1816; }
+</style>

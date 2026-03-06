@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { TextareaShowcase } from '../../components/atoms/TextareaShowcase';
+---
+
+<Layout title="Textarea" section="atoms/textarea">
+  <h1 class="page-title">Textarea</h1>
+  <p class="page-sub">Multi-line text input with 3 sizes, resize control, error and disabled states</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — hover and focus to test states</span>
+    </div>
+    <TextareaShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm, md, lg — matching Input sizes</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">States</span><span>default, hover, focus, error, disabled</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Resize</span><span>none, vertical (default), both</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Rows</span><span>Default 3, configurable</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>aria-invalid on error</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>No — native textarea element with forwardRef</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Textarea Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

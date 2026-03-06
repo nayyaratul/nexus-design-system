@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { BadgeShowcase } from '../../components/atoms/BadgeShowcase';
+---
+
+<Layout title="Badge" section="atoms/badge">
+  <h1 class="page-title">Badge</h1>
+  <p class="page-sub">Status pills · Count badges · Dot indicators · 5 variants</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Leave status, grade indicators, notification counts</span>
+    </div>
+    <BadgeShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default, success, error, warning, info</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Modes</span><span>Text (children), Count (number, caps at 99+), Dot (8px indicator)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm, md, lg</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Radius</span><span>--radius-full (pill shape)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>No — native span element</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Badge Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

@@ -3,6 +3,7 @@ import Layout from '../layouts/Default.astro';
 import AccordionSection from '../components/AccordionSection.astro';
 
 const primitiveScale = [
+  { token: '000',  px: 0,  rem: '0',      use: 'None — explicit zero reset', pragmatic: false },
   { token: '025',  px: 2,  rem: '0.125',  use: 'Micro — hairline gaps, borders', pragmatic: false },
   { token: '050',  px: 4,  rem: '0.25',   use: 'Tight — icon gaps, compact padding', pragmatic: false },
   { token: '075',  px: 6,  rem: '0.375',  use: 'Pragmatic — legacy product patterns', pragmatic: true },
@@ -15,7 +16,9 @@ const primitiveScale = [
   { token: '400',  px: 32, rem: '2',      use: 'X-large', pragmatic: false },
   { token: '500',  px: 40, rem: '2.5',    use: 'XX-large', pragmatic: false },
   { token: '600',  px: 48, rem: '3',      use: 'Section blocks', pragmatic: false },
+  { token: '700',  px: 56, rem: '3.5',   use: 'Large sections', pragmatic: false },
   { token: '800',  px: 64, rem: '4',      use: 'Major sections', pragmatic: false },
+  { token: '900',  px: 72, rem: '4.5',   use: 'Extra-large sections', pragmatic: false },
   { token: '1000', px: 80, rem: '5',      use: 'Hero, large layouts', pragmatic: false },
 ];
 
@@ -26,7 +29,7 @@ const usageCategories = [
     subtitle: 'Micro interactions & tight spaces',
     accent: '#E8E4DE',
     mockupType: 'small',
-    tokens: ['space-025', 'space-050', 'space-075', 'space-100', 'space-125', 'space-150'],
+    tokens: ['space-000', 'space-025', 'space-050', 'space-075', 'space-100', 'space-125', 'space-150'],
     use: 'Icon gaps, compact padding, badge padding, inline spacing',
     samplePx: [4, 8, 12],
   },
@@ -46,7 +49,7 @@ const usageCategories = [
     subtitle: 'Page-level structure & rhythm',
     accent: '#D6F0E0',
     mockupType: 'large',
-    tokens: ['space-400', 'space-500', 'space-600', 'space-800', 'space-1000'],
+    tokens: ['space-400', 'space-500', 'space-600', 'space-700', 'space-800', 'space-900', 'space-1000'],
     use: 'Major sections, page padding, hero areas, vertical rhythm',
     samplePx: [32, 48, 64],
   },
@@ -85,7 +88,7 @@ const scssExample = `@use 'base' as *;
 
 <Layout title="Spacing" section="spacing">
   <h1 class="page-title">Spacing</h1>
-  <p class="page-sub">4px base grid · 2–80px scale · Margins · Padding · Gaps · REM units</p>
+  <p class="page-sub">4px base grid · 0–80px scale · Margins · Padding · Gaps · REM units</p>
 
   <!-- ═══════════════════════════════════════════════════════
        1. HERO OVERVIEW
@@ -134,7 +137,7 @@ const scssExample = `@use 'base' as *;
   <div class="section">
     <div class="section-header">
       <span class="section-title">The Scale</span>
-      <span class="section-desc">14 tokens · 2–80px · Click any row to copy the CSS variable</span>
+      <span class="section-desc">17 tokens · 0–80px · Click any row to copy the CSS variable</span>
     </div>
 
     <div class="info-box space-info-box">

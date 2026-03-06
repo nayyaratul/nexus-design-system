@@ -1,0 +1,28 @@
+.label {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--sans);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  cursor: default;
+  user-select: none;
+}
+
+.sm {
+  font-size: var(--font-size-200);
+  line-height: var(--line-height-200);
+}
+
+.md {
+  font-size: var(--font-size-300);
+  line-height: var(--line-height-300);
+}
+
+.disabled {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+
+.required {
+  color: var(--color-border-error);
+}

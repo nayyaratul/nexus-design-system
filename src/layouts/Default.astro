@@ -4,6 +4,8 @@ interface Props {
   section: string;
 }
 
+import BrandPicker from '../components/BrandPicker.jsx';
+
 const { title, section } = Astro.props;
 
 const navGroups = [
@@ -16,17 +18,43 @@ const navGroups = [
       { name: 'Grid',       href: '/grid',        id: 'grid',       icon: '▦' },
       { name: 'Iconography', href: '/iconography', id: 'iconography', icon: '◈' },
       { name: 'Theme',      href: '/theme',       id: 'theme',       icon: '◐' },
+      { name: 'Shape & Surface', href: '/shape-surface',  id: 'shape-surface',  icon: '◇' },
+      { name: 'Brand',  href: '/brand',  id: 'brand',  icon: '◆' },
     ],
   },
   {
     label: 'Components',
     items: [
-      { name: 'Atoms',      href: '/atoms',       id: 'atoms',      icon: '○' },
+      { name: 'Atoms', href: '/atoms', id: 'atoms', icon: '○', children: [
+        { name: 'Button',     href: '/atoms/button',     id: 'atoms/button' },
+        { name: 'Icon',       href: '/atoms/icon',       id: 'atoms/icon' },
+        { name: 'Heading',    href: '/atoms/heading',    id: 'atoms/heading' },
+        { name: 'Text',       href: '/atoms/text',       id: 'atoms/text' },
+        { name: 'Badge',      href: '/atoms/badge',      id: 'atoms/badge' },
+        { name: 'Avatar',     href: '/atoms/avatar',     id: 'atoms/avatar' },
+        { name: 'Spinner',    href: '/atoms/spinner',    id: 'atoms/spinner' },
+        { name: 'Label',      href: '/atoms/label',      id: 'atoms/label' },
+        { name: 'Input',      href: '/atoms/input',      id: 'atoms/input' },
+        { name: 'Textarea',   href: '/atoms/textarea',   id: 'atoms/textarea' },
+        { name: 'Checkbox',   href: '/atoms/checkbox',   id: 'atoms/checkbox' },
+        { name: 'Switch',     href: '/atoms/switch',     id: 'atoms/switch' },
+        { name: 'RadioGroup', href: '/atoms/radiogroup', id: 'atoms/radiogroup' },
+        { name: 'Select',     href: '/atoms/select',     id: 'atoms/select' },
+        { name: 'FormField',  href: '/atoms/formfield',  id: 'atoms/formfield' },
+      ]},
       { name: 'Molecules',  href: '/molecules',   id: 'molecules',  icon: '◎' },
       { name: 'Organisms',  href: '/organisms',   id: 'organisms',  icon: '◉' },
     ],
   },
+  {
+    label: 'Reference',
+    items: [
+      { name: 'Reference Tokens', href: '/blade-tokens', id: 'blade-tokens', icon: '⊕' },
+    ],
+  },
 ];
+
+const isAtomSection = section.startsWith('atoms');
 ---
 
 <!DOCTYPE html>
@@ -56,13 +84,27 @@ const navGroups = [
           <div class="nav-group">
             <div class="nav-group-title">{group.label}</div>
             {group.items.map((item) => (
-              <a
-                href={item.href}
-                class:list={['nav-link', { active: section === item.id }]}
-              >
-                <span class="nav-icon">{item.icon}</span>
-                {item.name}
-              </a>
+              <>
+                <a
+                  href={item.href}
+                  class:list={['nav-link', { active: section === item.id }]}
+                >
+                  <span class="nav-icon">{item.icon}</span>
+                  {item.name}
+                </a>
+                {item.children && isAtomSection && (
+                  <div class="nav-children">
+                    {item.children.map((child) => (
+                      <a
+                        href={child.href}
+                        class:list={['nav-link', 'nav-child-link', { active: section === child.id }]}
+                      >
+                        {child.name}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </>
             ))}
           </div>
         ))}
@@ -77,6 +119,7 @@ const navGroups = [
     </main>
 
   </div>
+  <BrandPicker client:load />
 </body>
 </html>
 
@@ -84,4 +127,5 @@ const navGroups = [
   @import '../styles/base.css';
   @import '../styles/layout.css';
   @import '../styles/components.css';
+  @import '../styles/tokens.scss';
 </style>

@@ -1,0 +1,379 @@
+---
+import Layout from '../layouts/Default.astro';
+
+const borderRadiusScale = [
+  { token: '000',  value: '0',          px: '0px',    use: 'Sharp — no rounding' },
+  { token: '025',  value: '0.0625rem',  px: '1px',    use: 'Hairline — subtle softening' },
+  { token: '050',  value: '0.125rem',   px: '2px',    use: 'Subtle — inputs, tags' },
+  { token: '100',  value: '0.25rem',    px: '4px',    use: 'Default — buttons, cards' },
+  { token: '150',  value: '0.5rem',     px: '8px',    use: 'Medium — panels, modals' },
+  { token: '200',  value: '0.75rem',    px: '12px',   use: 'Large — containers' },
+  { token: '300',  value: '1rem',       px: '16px',   use: 'Extra-large — hero cards' },
+  { token: '400',  value: '1.25rem',    px: '20px',   use: 'Prominent — featured sections' },
+  { token: '500',  value: '1.5rem',     px: '24px',   use: 'Display — large cards, modals' },
+  { token: 'full', value: '1000px',     px: '1000px', use: 'Pill — badges, avatars' },
+];
+
+const borderWidthScale = [
+  { token: '000', value: '0',     px: '0px',   use: 'None — remove border' },
+  { token: '050', value: '0.5px', px: '0.5px', use: 'Hairline — subtle separators' },
+  { token: '100', value: '1px',   px: '1px',   use: 'Default — dividers, inputs' },
+  { token: '150', value: '1.5px', px: '1.5px', use: 'Medium — emphasis borders' },
+  { token: '200', value: '2px',   px: '2px',   use: 'Emphasis — active states, focus rings' },
+  { token: '300', value: '3px',   px: '3px',   use: 'Strong — section dividers' },
+  { token: '400', value: '4px',   px: '4px',   use: 'Heavy — decorative borders' },
+];
+
+const opacityScale = [
+  { token: '000', value: '0',    pct: '0%',   use: 'Invisible' },
+  { token: '009', value: '0.09', pct: '9%',   use: 'Ghost — subtle hover tints' },
+  { token: '012', value: '0.12', pct: '12%',  use: 'Whisper — faint backgrounds' },
+  { token: '018', value: '0.18', pct: '18%',  use: 'Hint — light overlays' },
+  { token: '024', value: '0.24', pct: '24%',  use: 'Disabled states' },
+  { token: '032', value: '0.32', pct: '32%',  use: 'Muted — soft masks' },
+  { token: '048', value: '0.48', pct: '48%',  use: 'Medium overlays' },
+  { token: '056', value: '0.56', pct: '56%',  use: 'Placeholder text' },
+  { token: '064', value: '0.64', pct: '64%',  use: 'Secondary content' },
+  { token: '072', value: '0.72', pct: '72%',  use: 'Prominent — readable layers' },
+  { token: '080', value: '0.80', pct: '80%',  use: 'Strong — modal backdrops' },
+  { token: '088', value: '0.88', pct: '88%',  use: 'Near-opaque' },
+  { token: '100', value: '1',    pct: '100%', use: 'Fully opaque' },
+];
+---
+
+<Layout title="Shape & Surface" section="shape-surface">
+  <h1 class="page-title">Shape & Surface</h1>
+  <p class="page-sub">Border radius · Border width · Opacity — shape, weight, and transparency specimens</p>
+
+  <!-- ═══════════════════════════════════════════════════════
+       1. BORDER RADIUS
+  ════════════════════════════════════════════════════════ -->
+  <div class="prim-section" data-section="radius" style="animation-delay: 0ms">
+    <div class="section-header">
+      <span class="section-title">Border Radius</span>
+      <span class="section-desc">10 tokens · 0–1000px · Click to copy</span>
+    </div>
+
+    <div class="info-box">
+      Controls corner rounding across the system. Smaller values suit inputs and tags; larger values work for cards and panels. The <code>full</code> token creates pill shapes and circular avatars.
+    </div>
+
+    <div class="prim-table">
+      <div class="prim-head">
+        <span class="prim-col prim-col--token">Token</span>
+        <span class="prim-col prim-col--value">Value</span>
+        <span class="prim-col prim-col--px">px</span>
+        <span class="prim-col prim-col--preview">Preview</span>
+        <span class="prim-col prim-col--use">Use</span>
+      </div>
+      {borderRadiusScale.map((s) => (
+        <div class="prim-row" data-token={`var(--radius-${s.token})`}>
+          <span class="prim-col prim-col--token"><code>--radius-{s.token}</code></span>
+          <span class="prim-col prim-col--value">{s.value}</span>
+          <span class="prim-col prim-col--px">{s.px}</span>
+          <span class="prim-col prim-col--preview">
+            <div class="radius-preview" style={`border-radius: var(--radius-${s.token})`}></div>
+          </span>
+          <span class="prim-col prim-col--use">{s.use}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       2. BORDER WIDTH
+  ════════════════════════════════════════════════════════ -->
+  <div class="prim-section" data-section="width" style="animation-delay: 120ms">
+    <div class="section-header">
+      <span class="section-title">Border Width</span>
+      <span class="section-desc">7 tokens · 0–4px · Click to copy</span>
+    </div>
+
+    <div class="info-box">
+      A compact scale for stroke thickness. Most UI borders use <code>--border-width-100</code> (1px). Heavier weights serve focus rings and decorative rules.
+    </div>
+
+    <div class="prim-table">
+      <div class="prim-head">
+        <span class="prim-col prim-col--token">Token</span>
+        <span class="prim-col prim-col--value">Value</span>
+        <span class="prim-col prim-col--preview">Preview</span>
+        <span class="prim-col prim-col--use">Use</span>
+      </div>
+      {borderWidthScale.map((s) => (
+        <div class="prim-row" data-token={`var(--border-width-${s.token})`}>
+          <span class="prim-col prim-col--token"><code>--border-width-{s.token}</code></span>
+          <span class="prim-col prim-col--value">{s.value}</span>
+          <span class="prim-col prim-col--preview">
+            <div class="width-preview">
+              <div class="width-line" style={`height: var(--border-width-${s.token})`}></div>
+            </div>
+          </span>
+          <span class="prim-col prim-col--use">{s.use}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       3. OPACITY
+  ════════════════════════════════════════════════════════ -->
+  <div class="prim-section" data-section="opacity" style="animation-delay: 240ms">
+    <div class="section-header">
+      <span class="section-title">Opacity</span>
+      <span class="section-desc">13 tokens · 0–1 · Click to copy</span>
+    </div>
+
+    <div class="info-box">
+      Transparency levels for overlays, disabled states, and layered content. Each swatch shows <code>--ink</code> at the given opacity over a checkerboard so you can gauge the effect.
+    </div>
+
+    <div class="prim-table">
+      <div class="prim-head">
+        <span class="prim-col prim-col--token">Token</span>
+        <span class="prim-col prim-col--value">Value</span>
+        <span class="prim-col prim-col--pct">%</span>
+        <span class="prim-col prim-col--preview">Preview</span>
+        <span class="prim-col prim-col--use">Use</span>
+      </div>
+      {opacityScale.map((s) => (
+        <div class="prim-row" data-token={`var(--opacity-${s.token})`}>
+          <span class="prim-col prim-col--token"><code>--opacity-{s.token}</code></span>
+          <span class="prim-col prim-col--value">{s.value}</span>
+          <span class="prim-col prim-col--pct">{s.pct}</span>
+          <span class="prim-col prim-col--preview">
+            <div class="opacity-preview">
+              <div class="opacity-checker"></div>
+              <div class="opacity-swatch" style={`opacity: var(--opacity-${s.token})`}></div>
+            </div>
+          </span>
+          <span class="prim-col prim-col--use">{s.use}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Shape & Surface</div>
+
+  <div class="prim-toast" id="prim-toast">Copied!</div>
+</Layout>
+
+<script>
+  const toast = document.getElementById('prim-toast');
+  let hideTimer;
+
+  function showToast(text) {
+    toast.textContent = `Copied ${text}`;
+    toast.classList.add('prim-toast--visible');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => toast.classList.remove('prim-toast--visible'), 1800);
+  }
+
+  function flashEl(el) {
+    el.classList.add('copied');
+    setTimeout(() => el.classList.remove('copied'), 300);
+  }
+
+  // Table rows
+  document.querySelectorAll('.prim-row').forEach(row => {
+    row.addEventListener('click', () => {
+      const token = row.dataset.token;
+      if (!token) return;
+      navigator.clipboard.writeText(token);
+      flashEl(row);
+      showToast(token);
+    });
+  });
+</script>
+
+<style>
+  /* ─── PAGE ─────────────────────────────────────────────── */
+  .page-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 2.5rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .page-sub {
+    font-size: 14px;
+    color: var(--ink-3);
+    letter-spacing: 0.03em;
+    margin-bottom: 40px;
+  }
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-3);
+    padding: 32px 0 16px;
+    border-top: 1px solid var(--rule);
+    margin-top: 24px;
+  }
+
+  /* ─── SECTION STAGGER ANIMATION ─────────────────────────── */
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .prim-section {
+    margin-bottom: 56px;
+    animation: fadeSlideIn 0.5s ease-out both;
+  }
+
+  /* ─── INFO BOX OVERRIDE ───────────────────────────────── */
+  .prim-section .info-box {
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     EXPLORER TABLES
+  ════════════════════════════════════════════════════════ */
+  .prim-table {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .prim-head {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    background: var(--page-bg);
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+  }
+  .prim-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .prim-row:last-child { border-bottom: none; }
+  .prim-row:hover { background: rgba(0,0,0,0.025); }
+  .prim-row:active { background: rgba(0,0,0,0.05); }
+  .prim-row.copied { background: #F0EDE6; }
+
+  .prim-col { display: flex; align-items: center; }
+  .prim-col--token { flex: 0 0 200px; }
+  .prim-col--token code {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink);
+    background: var(--page-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .prim-col--value {
+    flex: 0 0 100px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-2);
+  }
+  .prim-col--px,
+  .prim-col--pct {
+    flex: 0 0 64px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .prim-col--preview { flex: 0 0 80px; justify-content: center; }
+  .prim-col--use {
+    flex: 1;
+    font-size: 13px;
+    color: var(--ink-2);
+    padding-left: 8px;
+  }
+
+  /* ─── RADIUS TABLE PREVIEW ──────────────────────────────── */
+  .radius-preview {
+    width: 40px;
+    height: 40px;
+    background: var(--ink);
+    transition: border-radius 0.3s ease;
+  }
+  .prim-row:hover .radius-preview {
+    border-radius: 0 !important;
+    animation: radiusMorph 0.6s ease forwards;
+  }
+  @keyframes radiusMorph {
+    0%   { border-radius: 0; }
+    100% { border-radius: var(--target-radius, 0); }
+  }
+
+  /* ─── WIDTH TABLE PREVIEW ───────────────────────────────── */
+  .width-preview {
+    width: 56px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+  }
+  .width-line {
+    width: 100%;
+    min-height: 0;
+    background: var(--ink);
+    border-radius: 1px;
+    transition: opacity 0.2s;
+  }
+  .prim-row:hover .width-line {
+    animation: widthPulse 1.2s ease-in-out infinite;
+  }
+  @keyframes widthPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* ─── OPACITY TABLE PREVIEW ─────────────────────────────── */
+  .opacity-preview {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .opacity-checker {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(45deg, #ccc 25%, transparent 25%),
+      linear-gradient(-45deg, #ccc 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #ccc 75%),
+      linear-gradient(-45deg, transparent 75%, #ccc 75%);
+    background-size: 8px 8px;
+    background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+  }
+  .opacity-swatch {
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+  }
+
+  /* ─── TOAST ─────────────────────────────────────────────── */
+  .prim-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: #F0EDE8;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 100;
+  }
+  .prim-toast--visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>

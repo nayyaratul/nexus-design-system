@@ -1,18 +1,206 @@
 ---
 import Layout from '../../layouts/Default.astro';
+
+const atoms = [
+  { name: 'Button',     href: '/atoms/button',     icon: '▸', desc: 'Primary, secondary, destructive, ghost variants with loading states and icon slots', status: 'ready' },
+  { name: 'Icon',       href: '/atoms/icon',        icon: '◈', desc: 'Lucide icon wrapper with 5 sizes, colour props, and a11y support', status: 'ready' },
+  { name: 'Heading',    href: '/atoms/heading',     icon: 'H', desc: 'h1–h6 mapped to typography tokens with truncation support', status: 'ready' },
+  { name: 'Text',       href: '/atoms/text',        icon: 'T', desc: 'Body, caption, micro, overline variants with weight overrides', status: 'ready' },
+  { name: 'Badge',      href: '/atoms/badge',       icon: '●', desc: 'Status pills, count badges, and dot indicators for 5 semantic states', status: 'ready' },
+  { name: 'Avatar',     href: '/atoms/avatar',      icon: '◐', desc: 'User photo with initials fallback, online indicator, and 5 sizes', status: 'ready' },
+  { name: 'Spinner',    href: '/atoms/spinner',     icon: '↻', desc: 'Spinning and dots loading indicators with semantic colour', status: 'ready' },
+  { name: 'Label',      href: '/atoms/label',       icon: 'L', desc: 'Radix label with required asterisk, disabled state, and 2 sizes', status: 'ready' },
+  { name: 'Input',      href: '/atoms/input',       icon: '▭', desc: 'Native input with 5 types, 3 sizes, error and disabled states', status: 'ready' },
+  { name: 'Textarea',   href: '/atoms/textarea',    icon: '▦', desc: 'Multi-line text input with resize control and 3 sizes', status: 'ready' },
+  { name: 'Checkbox',   href: '/atoms/checkbox',    icon: '☑', desc: 'Radix checkbox with checked, indeterminate, and 2 sizes', status: 'ready' },
+  { name: 'Switch',     href: '/atoms/switch',      icon: '⊘', desc: 'Radix toggle switch with 3 sizes and on/off states', status: 'ready' },
+  { name: 'RadioGroup', href: '/atoms/radiogroup',  icon: '◉', desc: 'Radix radio group with vertical/horizontal layout', status: 'ready' },
+  { name: 'Select',     href: '/atoms/select',      icon: '▾', desc: 'Radix select with grouped options, popper content, and 3 sizes', status: 'ready' },
+  { name: 'FormField',  href: '/atoms/formfield',   icon: '☷', desc: 'Composition wrapper — Label + children + error/hint spacing', status: 'ready' },
+];
+
+const upcoming = [
+  { name: 'Alert',       phase: 3 },
+  { name: 'Toast',       phase: 3 },
+  { name: 'Tooltip',     phase: 3 },
+  { name: 'ProgressBar', phase: 3 },
+  { name: 'Tag',         phase: 3 },
+  { name: 'Skeleton',    phase: 3 },
+  { name: 'Image',       phase: 4 },
+  { name: 'Thumbnail',   phase: 4 },
+  { name: 'Divider',     phase: 4 },
+  { name: 'VisuallyHidden', phase: 4 },
+  { name: 'AspectRatio', phase: 4 },
+  { name: 'Toggle',      phase: 5 },
+  { name: 'ToggleGroup', phase: 5 },
+  { name: 'Slider',      phase: 5 },
+  { name: 'Popover',     phase: 5 },
+  { name: 'Portal',      phase: 5 },
+  { name: 'Link',        phase: 5 },
+  { name: 'Code',        phase: 5 },
+  { name: 'IconButton',  phase: 5 },
+];
 ---
 
 <Layout title="Atoms" section="atoms">
   <h1 class="page-title">Atoms</h1>
-  <p class="page-sub">Buttons · Inputs · Icons · Badges · Tags · Foundational UI elements</p>
+  <p class="page-sub">The smallest reusable UI primitives — 34 atoms across 8 categories</p>
 
-  <div class="placeholder">
-    <div class="placeholder-icon">○</div>
-    <span class="placeholder-badge">Coming Soon</span>
-    <p class="placeholder-text">
-      The smallest building blocks — individual UI elements that can't be broken down further without losing meaning.
-    </p>
+  <!-- Ready atoms -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Phases 1 & 2 — Foundation + Form Atoms</span>
+      <span class="section-desc">15 of 34 complete</span>
+    </div>
+
+    <div class="atom-grid">
+      {atoms.map((atom) => (
+        <a href={atom.href} class="atom-card">
+          <div class="atom-card-icon">{atom.icon}</div>
+          <div class="atom-card-body">
+            <div class="atom-card-name">{atom.name}</div>
+            <div class="atom-card-desc">{atom.desc}</div>
+          </div>
+          <span class="atom-card-status atom-card-status--ready">Ready</span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Upcoming atoms -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Upcoming</span>
+      <span class="section-desc">Phases 3–5</span>
+    </div>
+
+    <div class="atom-upcoming">
+      {[3, 4, 5].map((phase) => (
+        <div class="atom-phase-group">
+          <div class="atom-phase-label">Phase {phase}</div>
+          <div class="atom-phase-items">
+            {upcoming.filter(a => a.phase === phase).map((a) => (
+              <span class="atom-chip">{a.name}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
   </div>
 
   <div class="footer">Nexus Design System · Atoms</div>
 </Layout>
+
+<style>
+  .atom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .atom-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .atom-card:hover {
+    border-color: var(--ink-3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .atom-card-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--page-bg);
+    border-radius: 8px;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: var(--ink-2);
+  }
+
+  .atom-card-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .atom-card-name {
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .atom-card-desc {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.4;
+  }
+
+  .atom-card-status {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 100px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .atom-card-status--ready {
+    background: #C8E6CE;
+    color: #136D39;
+  }
+
+  /* Upcoming */
+  .atom-upcoming {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .atom-phase-group {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .atom-phase-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    min-width: 60px;
+    flex-shrink: 0;
+  }
+
+  .atom-phase-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .atom-chip {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--page-bg);
+    border: 1px solid var(--rule);
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 640px) {
+    .atom-grid { grid-template-columns: 1fr; }
+    .atom-phase-group { flex-direction: column; gap: 6px; }
+  }
+</style>

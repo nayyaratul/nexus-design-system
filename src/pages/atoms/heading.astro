@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { HeadingShowcase } from '../../components/atoms/HeadingShowcase';
+---
+
+<Layout title="Heading" section="atoms/heading">
+  <h1 class="page-title">Heading</h1>
+  <p class="page-sub">h1–h6 · Typography tokens · Semantic levels · Truncation</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Maps to typography token scale</span>
+    </div>
+    <HeadingShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Levels</span><span>1 (40px) → 2 (32px) → 3 (28px) → 4 (24px) → 5 (20px) → 6 (16px)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Weight</span><span>h1–h4: semibold (600), h5–h6: medium (500)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tracking</span><span>h1–h2: tighter (-0.02em), h3–h6: tight (-0.01em)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>level, as, color, align, truncate</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>No — native heading elements</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Heading Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

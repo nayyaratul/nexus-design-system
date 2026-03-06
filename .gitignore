@@ -8,6 +8,9 @@ Thumbs.db
 # Astro
 .astro/
 
+# Storybook
+storybook-static/
+
 # Logs
 logs
 *.log

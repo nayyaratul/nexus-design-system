@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { AvatarShowcase } from '../../components/atoms/AvatarShowcase';
+---
+
+<Layout title="Avatar" section="atoms/avatar">
+  <h1 class="page-title">Avatar</h1>
+  <p class="page-sub">Photo · Initials fallback · Online indicator · 5 sizes</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Instructor profiles, learner avatars, team members</span>
+    </div>
+    <AvatarShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>xs (24px), sm (32px), md (40px), lg (48px), xl (64px)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Fallback</span><span>Broken/missing image → initials from name prop</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Indicator</span><span>online (green dot), offline (grey dot), or none</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Shape</span><span>Circle (--radius-full)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>No — native img + span</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Avatar Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

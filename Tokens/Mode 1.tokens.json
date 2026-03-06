@@ -1,0 +1,645 @@
+{
+  "listItemAsset": {
+    "color": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.4627451002597809,
+          0.5568627715110779,
+          0.6549019813537598
+        ],
+        "alpha": 1,
+        "hex": "#768EA7"
+      },
+      "$extensions": {
+        "com.figma.variableId": "VariableID:72423:48246",
+        "com.figma.hiddenFromPublishing": true,
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.codeSyntax": {
+          "WEB": "listItemAsset.color"
+        },
+        "com.figma.aliasData": {
+          "targetVariableId": "VariableID:3ffa360be063c0fb94ca293a8d945b344166a859/-1:-1",
+          "targetVariableName": "surface/text/gray/muted",
+          "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+          "targetVariableSetName": "Blade Theme Tokens"
+        },
+        "com.figma.isOverride": true
+      }
+    }
+  },
+  "link": {
+    "border": {
+      "positive": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0.6352941393852234,
+            0.3176470696926117
+          ],
+          "alpha": 1,
+          "hex": "#00A251"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:72328:150036",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "link.border.positive"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:a13006b86116668bc407d66d7ca9af3c82f00a62/-1:-1",
+            "targetVariableName": "interactive/text/positive/subtle",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "negative": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9411764740943909,
+            0.2666666805744171,
+            0.21960784494876862
+          ],
+          "alpha": 1,
+          "hex": "#F04438"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:72328:150037",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "link.border.negative"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:55c1d82529002f293fda765045b84addd4b5926b/-1:-1",
+            "targetVariableName": "interactive/text/negative/subtle",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "notice": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9137254953384399,
+            0.4117647111415863,
+            0.0470588244497776
+          ],
+          "alpha": 1,
+          "hex": "#E9690C"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:72328:150038",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "link.border.notice"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:2f0c35f2fe5d81b5104b7957c7d19282f285fada/-1:-1",
+            "targetVariableName": "interactive/text/notice/subtle",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "information": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.07058823853731155,
+            0.5686274766921997,
+            0.8156862854957581
+          ],
+          "alpha": 1,
+          "hex": "#1291D0"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:72328:150039",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "link.border.information"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:259f76e2682797bff5518d5069d71aa937ada4fe/-1:-1",
+            "targetVariableName": "interactive/text/information/subtle",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "neutral": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.250980406999588,
+            0.33725491166114807,
+            0.4274509847164154
+          ],
+          "alpha": 1,
+          "hex": "#40566D"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:72328:150040",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "link.border.neutral"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:4f786c04b56795f3a83063966ffe39f8deb4d601/-1:-1",
+            "targetVariableName": "interactive/text/neutral/subtle",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "primary": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1882352977991104,
+            0.3686274588108063,
+            1
+          ],
+          "alpha": 1,
+          "hex": "#305EFF"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:72328:150041",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "link.border.primary"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:4be2e3a0c0cae356484e3c61f7ae679086287f84/-1:-1",
+            "targetVariableName": "interactive/text/primary/subtle",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "staticWhite": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 0.800000011920929,
+          "hex": "#FFFFFF"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:72328:150042",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "link.border.staticWhite"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:90c6af9656cd1d780e37a81613951a6f4069c77c/-1:-1",
+            "targetVariableName": "interactive/text/staticWhite/subtle",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "staticBlack": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 0.800000011920929,
+          "hex": "#000000"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:72328:150043",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "link.border.staticBlack"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:b375368d450c17775abd7c4a5e113f0db966820b/-1:-1",
+            "targetVariableName": "interactive/text/staticBlack/subtle",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "gray": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.250980406999588,
+            0.33725491166114807,
+            0.4274509847164154
+          ],
+          "alpha": 1,
+          "hex": "#40566D"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:72328:150044",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "link.border.gray"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:a974ba821caf1bddae28c52e960fcf297bd20797/-1:-1",
+            "targetVariableName": "interactive/text/gray/subtle",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      }
+    }
+  },
+  "amount": {
+    "strikethrough": {
+      "positive": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0.529411792755127,
+            0.26274511218070984
+          ],
+          "alpha": 1,
+          "hex": "#008743"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:76258:55922",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "amount.strikethrough.positive"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:cff5abbf8ce9d14011e6c33476d6c73473fc6a8d/-1:-1",
+            "targetVariableName": "feedback/text/positive/intense",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "negative": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8509804010391235,
+            0.1764705926179886,
+            0.125490203499794
+          ],
+          "alpha": 1,
+          "hex": "#D92D20"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:76258:55923",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "amount.strikethrough.negative"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:67907b1503cd46abf99d4d6273905d7f658c2d79/-1:-1",
+            "targetVariableName": "feedback/text/negative/intense",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "notice": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7764706015586853,
+            0.3607843220233917,
+            0.062745101749897
+          ],
+          "alpha": 1,
+          "hex": "#C65C10"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:76258:55924",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "amount.strikethrough.notice"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:53f75bb6cdbf73421da3063a914631418c38cccf/-1:-1",
+            "targetVariableName": "feedback/text/notice/intense",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "information": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.05882352963089943,
+            0.47058823704719543,
+            0.6784313917160034
+          ],
+          "alpha": 1,
+          "hex": "#0F78AD"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:76258:55925",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "amount.strikethrough.information"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:e5fec276b0fb320471fa69e3b5a1670a83ddd613/-1:-1",
+            "targetVariableName": "feedback/text/information/intense",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "neutral": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1411764770746231,
+            0.2078431397676468,
+            0.27843138575553894
+          ],
+          "alpha": 1,
+          "hex": "#243547"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:76258:55926",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "amount.strikethrough.neutral"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:554e421c96b85fa4606b47cbdd792bbfde7d6585/-1:-1",
+            "targetVariableName": "feedback/text/neutral/intense",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "primary": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1882352977991104,
+            0.3686274588108063,
+            1
+          ],
+          "alpha": 1,
+          "hex": "#305EFF"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:76258:55927",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "amount.strikethrough.primary"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:f9c33a249ea45509bd4469182fb32b13241f1bd8/-1:-1",
+            "targetVariableName": "surface/text/primary/normal",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "staticWhite": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 1,
+          "hex": "#FFFFFF"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:76258:55928",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "amount.strikethrough.staticWhite"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:13bd662e6382c6397186f1bf91ea9fc7763e4f59/-1:-1",
+            "targetVariableName": "surface/text/staticWhite/normal",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "staticBlack": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 1,
+          "hex": "#000000"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:76258:55929",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "amount.strikethrough.staticBlack"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:7bed194aa2e88e1badd9d4f18b75a134830b9f6e/-1:-1",
+            "targetVariableName": "surface/text/staticBlack/normal",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "grayNormal": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.09803921729326248,
+            0.1568627506494522,
+            0.2235294133424759
+          ],
+          "alpha": 1,
+          "hex": "#192839"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:76258:55930",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "amount.strikethrough.grayNormal"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:f41d9165096a16bea19ed4550a826d155fc85ee9/-1:-1",
+            "targetVariableName": "surface/text/gray/normal",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "graySubtle": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.250980406999588,
+            0.33725491166114807,
+            0.4274509847164154
+          ],
+          "alpha": 1,
+          "hex": "#40566D"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:76347:8715",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "amount.strikethrough.graySubtle"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:9373f31130012989b4c108ce781cefd91cc8038a/-1:-1",
+            "targetVariableName": "surface/text/gray/subtle",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      },
+      "grayMuted": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4627451002597809,
+            0.5568627715110779,
+            0.6549019813537598
+          ],
+          "alpha": 1,
+          "hex": "#768EA7"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:76347:8716",
+          "com.figma.hiddenFromPublishing": true,
+          "com.figma.scopes": [
+            "STROKE"
+          ],
+          "com.figma.codeSyntax": {
+            "WEB": "amount.strikethrough.grayMuted"
+          },
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:3ffa360be063c0fb94ca293a8d945b344166a859/-1:-1",
+            "targetVariableName": "surface/text/gray/muted",
+            "targetVariableSetId": "VariableCollectionId:ad9ceae26ed55040f03ddb1d85bd4d7527f4b6dd/-1:-1",
+            "targetVariableSetName": "Blade Theme Tokens"
+          },
+          "com.figma.isOverride": true
+        }
+      }
+    }
+  },
+  "$extensions": {
+    "com.figma.modeName": "Mode 1"
+  }
+}

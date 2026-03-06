@@ -1,0 +1,23 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-050);
+}
+
+.disabled {
+  opacity: var(--opacity-048);
+}
+
+.hint {
+  font-family: var(--sans);
+  font-size: var(--font-size-200);
+  line-height: var(--line-height-200);
+  color: var(--color-text-tertiary);
+}
+
+.error {
+  font-family: var(--sans);
+  font-size: var(--font-size-200);
+  line-height: var(--line-height-200);
+  color: var(--color-border-error);
+}

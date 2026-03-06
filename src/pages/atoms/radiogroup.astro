@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { RadioGroupShowcase } from '../../components/atoms/RadioGroupShowcase';
+---
+
+<Layout title="RadioGroup" section="atoms/radiogroup">
+  <h1 class="page-title">RadioGroup</h1>
+  <p class="page-sub">Radix radio group with vertical/horizontal layout, disabled items, and indicator dot</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — click to select options</span>
+    </div>
+    <RadioGroupShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Exports</span><span>RadioGroup, RadioItem</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Orientation</span><span>vertical (default), horizontal</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Circle</span><span>20px, selected border --color-action-primary + inner 8px dot</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">States</span><span>unselected, selected, disabled</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>@radix-ui/react-radio-group</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · RadioGroup Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

@@ -1,0 +1,641 @@
+---
+import Layout from '../layouts/Default.astro';
+import AccordionSection from '../components/AccordionSection.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// ── Load all token JSON files ──────────────────────────────────────
+const tokensDir = path.resolve('Tokens');
+
+function loadJson(relativePath: string) {
+  const full = path.join(tokensDir, relativePath);
+  return JSON.parse(fs.readFileSync(full, 'utf-8'));
+}
+
+const valueTokens      = loadJson('Value.tokens.json');
+const globalTokens      = loadJson('Value.tokens 2.json');
+const onLightTokens     = loadJson('Blade Theme Tokens/onLight.tokens.json');
+const onDarkTokens      = loadJson('Blade Theme Tokens/onDark.tokens.json');
+const componentTokens   = loadJson('Mode 1.tokens.json');
+const defaultLight      = loadJson('Default/Light.tokens.json');
+const defaultDark       = loadJson('Default/Dark.tokens.json');
+const screenMobile      = loadJson('screenSize/Mobile (360px - 767px).tokens.json');
+const screenDesktop     = loadJson('screenSize/Desktop (768px - 1024px+).tokens.json');
+
+// ── Recursive token flattener ──────────────────────────────────────
+interface FlatToken {
+  path: string;
+  type: string;
+  value: any;
+  hex?: string;
+  alpha?: number;
+}
+
+function flatten(obj: any, prefix = ''): FlatToken[] {
+  const results: FlatToken[] = [];
+  for (const [key, val] of Object.entries(obj)) {
+    if (key === '$extensions') continue;
+    const currentPath = prefix ? `${prefix}/${key}` : key;
+    const v = val as any;
+    if (v && v.$type) {
+      const token: FlatToken = { path: currentPath, type: v.$type, value: v.$value };
+      if (v.$type === 'color' && v.$value?.hex) {
+        token.hex = v.$value.hex;
+        token.alpha = v.$value.alpha;
+      }
+      results.push(token);
+    } else if (v && typeof v === 'object' && !Array.isArray(v)) {
+      results.push(...flatten(v, currentPath));
+    }
+  }
+  return results;
+}
+
+// ── Flatten each collection ────────────────────────────────────────
+const valueFlat     = flatten(valueTokens);
+const globalFlat    = flatten(globalTokens);
+const onLightFlat   = flatten(onLightTokens).filter(t => !t.path.includes('\u274C'));
+const onDarkFlat    = flatten(onDarkTokens).filter(t => !t.path.includes('\u274C'));
+const componentFlat = flatten(componentTokens);
+const defaultLightFlat = flatten(defaultLight);
+const defaultDarkFlat  = flatten(defaultDark);
+const screenMobileFlat = flatten(screenMobile);
+const screenDesktopFlat = flatten(screenDesktop);
+
+// ── Group tokens by top-level key ──────────────────────────────────
+function groupByTop(tokens: FlatToken[]): Record<string, FlatToken[]> {
+  const groups: Record<string, FlatToken[]> = {};
+  for (const t of tokens) {
+    const top = t.path.split('/')[0];
+    (groups[top] ??= []).push(t);
+  }
+  return groups;
+}
+
+const valueGroups      = groupByTop(valueFlat);
+const globalGroups     = groupByTop(globalFlat);
+const onLightGroups    = groupByTop(onLightFlat);
+const onDarkGroups     = groupByTop(onDarkFlat);
+const componentGroups  = groupByTop(componentFlat);
+const defaultLightGroups = groupByTop(defaultLightFlat);
+const defaultDarkGroups  = groupByTop(defaultDarkFlat);
+const screenMobileGroups = groupByTop(screenMobileFlat);
+const screenDesktopGroups = groupByTop(screenDesktopFlat);
+
+// ── Helper: format value for display ───────────────────────────────
+function displayValue(token: FlatToken): string {
+  if (token.type === 'color') {
+    const hex = token.hex || '';
+    const alpha = token.alpha;
+    if (alpha !== undefined && alpha < 1) {
+      return `${hex} @${Math.round(alpha * 100)}%`;
+    }
+    return hex;
+  }
+  if (typeof token.value === 'object') {
+    return JSON.stringify(token.value);
+  }
+  return String(token.value);
+}
+
+function isColor(token: FlatToken): boolean {
+  return token.type === 'color' && !!token.hex;
+}
+
+// ── Stats ──────────────────────────────────────────────────────────
+const collections = [
+  { name: 'Value Tokens', count: valueFlat.length },
+  { name: 'Global Tokens', count: globalFlat.length },
+  { name: 'Blade Theme (Light)', count: onLightFlat.length },
+  { name: 'Blade Theme (Dark)', count: onDarkFlat.length },
+  { name: 'Component Tokens', count: componentFlat.length },
+  { name: 'Default (Light)', count: defaultLightFlat.length },
+  { name: 'Default (Dark)', count: defaultDarkFlat.length },
+  { name: 'Screen Size (Mobile)', count: screenMobileFlat.length },
+  { name: 'Screen Size (Desktop)', count: screenDesktopFlat.length },
+];
+const totalTokens = collections.reduce((s, c) => s + c.count, 0);
+---
+
+<Layout title="Reference Tokens" section="blade-tokens">
+  <h1 class="page-title">Reference Tokens</h1>
+  <p class="page-sub">Reference export from the Blade Design System (Razorpay) Figma community file &middot; {totalTokens.toLocaleString()} tokens across {collections.length} collections</p>
+
+  <!-- ═══ OVERVIEW ═══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Overview</span>
+      <span class="section-desc">Token counts per collection</span>
+    </div>
+
+    <div class="info-box">
+      This is a <strong>read-only reference</strong> of all design tokens exported from the Blade Design System Figma file. These are not linked to Nexus tokens. Click any token path to copy it.
+    </div>
+
+    <div class="bt-stats">
+      {collections.map(c => (
+        <div class="bt-stat-card">
+          <span class="bt-stat-count">{c.count}</span>
+          <span class="bt-stat-name">{c.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- ═══ 1. VALUE TOKENS ═══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Value Tokens</span>
+      <span class="section-desc">{valueFlat.length} tokens &middot; Primitive numeric values</span>
+    </div>
+
+    {Object.entries(valueGroups).map(([group, tokens]) => (
+      <AccordionSection title={`${group} (${tokens.length})`} open={group === 'spacing'}>
+        <div class="bt-table">
+          <div class="bt-table-head">
+            <span class="bt-col-path">Token</span>
+            <span class="bt-col-value">Value</span>
+          </div>
+          {tokens.map(t => (
+            <div class="bt-table-row" data-token={t.path}>
+              <span class="bt-col-path"><code>{t.path}</code></span>
+              <span class="bt-col-value">{displayValue(t)}</span>
+            </div>
+          ))}
+        </div>
+      </AccordionSection>
+    ))}
+  </div>
+
+  <!-- ═══ 2. GLOBAL TOKENS ═══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Global Tokens</span>
+      <span class="section-desc">{globalFlat.length} tokens &middot; Sizes and colour scales</span>
+    </div>
+
+    {Object.entries(globalGroups).map(([group, tokens]) => {
+      const hasColors = tokens.some(t => isColor(t));
+      return (
+        <AccordionSection title={`${group} (${tokens.length})`}>
+          {hasColors ? (
+            <div class="bt-color-grid">
+              {tokens.map(t => (
+                <div class="bt-color-chip" data-token={t.path}>
+                  {isColor(t) ? (
+                    <div class="bt-swatch" style={`background: ${t.hex}${t.alpha !== undefined && t.alpha < 1 ? Math.round(t.alpha * 255).toString(16).padStart(2, '0') : ''};`}></div>
+                  ) : (
+                    <div class="bt-swatch bt-swatch--number">{t.value}</div>
+                  )}
+                  <span class="bt-chip-label">{t.path.split('/').pop()}</span>
+                  <span class="bt-chip-value">{displayValue(t)}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="bt-table">
+              <div class="bt-table-head">
+                <span class="bt-col-path">Token</span>
+                <span class="bt-col-value">Value</span>
+              </div>
+              {tokens.map(t => (
+                <div class="bt-table-row" data-token={t.path}>
+                  <span class="bt-col-path"><code>{t.path}</code></span>
+                  <span class="bt-col-value">{displayValue(t)}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </AccordionSection>
+      );
+    })}
+  </div>
+
+  <!-- ═══ 3. BLADE THEME (LIGHT) ═══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Blade Theme (Light)</span>
+      <span class="section-desc">{onLightFlat.length} tokens &middot; Semantic colour aliases &middot; Deprecated tokens hidden</span>
+    </div>
+
+    {Object.entries(onLightGroups).map(([group, tokens]) => (
+      <AccordionSection title={`${group} (${tokens.length})`}>
+        <div class="bt-color-grid">
+          {tokens.map(t => (
+            <div class="bt-color-chip" data-token={t.path}>
+              {isColor(t) ? (
+                <div class="bt-swatch" style={`background: ${t.hex}${t.alpha !== undefined && t.alpha < 1 ? Math.round(t.alpha * 255).toString(16).padStart(2, '0') : ''};`}></div>
+              ) : (
+                <div class="bt-swatch bt-swatch--number">{String(t.value).slice(0, 4)}</div>
+              )}
+              <span class="bt-chip-label" title={t.path}>{t.path.split('/').slice(1).join('/')}</span>
+              <span class="bt-chip-value">{displayValue(t)}</span>
+            </div>
+          ))}
+        </div>
+      </AccordionSection>
+    ))}
+  </div>
+
+  <!-- ═══ 4. BLADE THEME (DARK) ═══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Blade Theme (Dark)</span>
+      <span class="section-desc">{onDarkFlat.length} tokens &middot; Dark mode values</span>
+    </div>
+
+    {Object.entries(onDarkGroups).map(([group, tokens]) => (
+      <AccordionSection title={`${group} (${tokens.length})`}>
+        <div class="bt-color-grid bt-color-grid--dark">
+          {tokens.map(t => (
+            <div class="bt-color-chip" data-token={t.path}>
+              {isColor(t) ? (
+                <div class="bt-swatch" style={`background: ${t.hex}${t.alpha !== undefined && t.alpha < 1 ? Math.round(t.alpha * 255).toString(16).padStart(2, '0') : ''};`}></div>
+              ) : (
+                <div class="bt-swatch bt-swatch--number">{String(t.value).slice(0, 4)}</div>
+              )}
+              <span class="bt-chip-label" title={t.path}>{t.path.split('/').slice(1).join('/')}</span>
+              <span class="bt-chip-value">{displayValue(t)}</span>
+            </div>
+          ))}
+        </div>
+      </AccordionSection>
+    ))}
+  </div>
+
+  <!-- ═══ 5. COMPONENT TOKENS ═══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Component Tokens</span>
+      <span class="section-desc">{componentFlat.length} tokens &middot; link, amount, listItemAsset</span>
+    </div>
+
+    {Object.entries(componentGroups).map(([group, tokens]) => (
+      <AccordionSection title={`${group} (${tokens.length})`} open>
+        <div class="bt-color-grid">
+          {tokens.map(t => (
+            <div class="bt-color-chip" data-token={t.path}>
+              {isColor(t) ? (
+                <div class="bt-swatch" style={`background: ${t.hex}${t.alpha !== undefined && t.alpha < 1 ? Math.round(t.alpha * 255).toString(16).padStart(2, '0') : ''};`}></div>
+              ) : (
+                <div class="bt-swatch bt-swatch--number">{t.value}</div>
+              )}
+              <span class="bt-chip-label" title={t.path}>{t.path.split('/').slice(1).join('/')}</span>
+              <span class="bt-chip-value">{displayValue(t)}</span>
+            </div>
+          ))}
+        </div>
+      </AccordionSection>
+    ))}
+  </div>
+
+  <!-- ═══ 6. DEFAULT TOKENS (LIGHT) ═══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Default Tokens (Light)</span>
+      <span class="section-desc">{defaultLightFlat.length} tokens &middot; Colour palettes, component tokens, sizing</span>
+    </div>
+
+    {Object.entries(defaultLightGroups).map(([group, tokens]) => {
+      const hasColors = tokens.some(t => isColor(t));
+      return (
+        <AccordionSection title={`${group} (${tokens.length})`}>
+          {hasColors ? (
+            <div class="bt-color-grid">
+              {tokens.map(t => (
+                <div class="bt-color-chip" data-token={t.path}>
+                  {isColor(t) ? (
+                    <div class="bt-swatch" style={`background: ${t.hex}${t.alpha !== undefined && t.alpha < 1 ? Math.round(t.alpha * 255).toString(16).padStart(2, '0') : ''};`}></div>
+                  ) : (
+                    <div class="bt-swatch bt-swatch--number">{String(t.value).slice(0, 4)}</div>
+                  )}
+                  <span class="bt-chip-label" title={t.path}>{t.path.split('/').slice(1).join('/')}</span>
+                  <span class="bt-chip-value">{displayValue(t)}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="bt-table">
+              <div class="bt-table-head">
+                <span class="bt-col-path">Token</span>
+                <span class="bt-col-value">Value</span>
+              </div>
+              {tokens.map(t => (
+                <div class="bt-table-row" data-token={t.path}>
+                  <span class="bt-col-path"><code>{t.path}</code></span>
+                  <span class="bt-col-value">{displayValue(t)}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </AccordionSection>
+      );
+    })}
+  </div>
+
+  <!-- ═══ 7. DEFAULT TOKENS (DARK) ═══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Default Tokens (Dark)</span>
+      <span class="section-desc">{defaultDarkFlat.length} tokens &middot; Dark mode counterparts</span>
+    </div>
+
+    {Object.entries(defaultDarkGroups).map(([group, tokens]) => {
+      const hasColors = tokens.some(t => isColor(t));
+      return (
+        <AccordionSection title={`${group} (${tokens.length})`}>
+          {hasColors ? (
+            <div class="bt-color-grid bt-color-grid--dark">
+              {tokens.map(t => (
+                <div class="bt-color-chip" data-token={t.path}>
+                  {isColor(t) ? (
+                    <div class="bt-swatch" style={`background: ${t.hex}${t.alpha !== undefined && t.alpha < 1 ? Math.round(t.alpha * 255).toString(16).padStart(2, '0') : ''};`}></div>
+                  ) : (
+                    <div class="bt-swatch bt-swatch--number">{String(t.value).slice(0, 4)}</div>
+                  )}
+                  <span class="bt-chip-label" title={t.path}>{t.path.split('/').slice(1).join('/')}</span>
+                  <span class="bt-chip-value">{displayValue(t)}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="bt-table">
+              <div class="bt-table-head">
+                <span class="bt-col-path">Token</span>
+                <span class="bt-col-value">Value</span>
+              </div>
+              {tokens.map(t => (
+                <div class="bt-table-row" data-token={t.path}>
+                  <span class="bt-col-path"><code>{t.path}</code></span>
+                  <span class="bt-col-value">{displayValue(t)}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </AccordionSection>
+      );
+    })}
+  </div>
+
+  <!-- ═══ 8. SCREEN SIZE ═══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Screen Size</span>
+      <span class="section-desc">{screenMobileFlat.length + screenDesktopFlat.length} tokens &middot; Responsive breakpoint overrides</span>
+    </div>
+
+    <AccordionSection title={`Mobile — 360px to 767px (${screenMobileFlat.length})`} open>
+      {Object.entries(screenMobileGroups).map(([group, tokens]) => (
+        <div class="bt-screen-group">
+          <h4 class="bt-screen-group-title">{group}</h4>
+          <div class="bt-table">
+            <div class="bt-table-head">
+              <span class="bt-col-path">Token</span>
+              <span class="bt-col-value">Value</span>
+            </div>
+            {tokens.map(t => (
+              <div class="bt-table-row" data-token={t.path}>
+                <span class="bt-col-path"><code>{t.path}</code></span>
+                <span class="bt-col-value">{displayValue(t)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </AccordionSection>
+
+    <AccordionSection title={`Desktop — 768px to 1024px+ (${screenDesktopFlat.length})`}>
+      {Object.entries(screenDesktopGroups).map(([group, tokens]) => (
+        <div class="bt-screen-group">
+          <h4 class="bt-screen-group-title">{group}</h4>
+          <div class="bt-table">
+            <div class="bt-table-head">
+              <span class="bt-col-path">Token</span>
+              <span class="bt-col-value">Value</span>
+            </div>
+            {tokens.map(t => (
+              <div class="bt-table-row" data-token={t.path}>
+                <span class="bt-col-path"><code>{t.path}</code></span>
+                <span class="bt-col-value">{displayValue(t)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </AccordionSection>
+  </div>
+
+  <div class="footer">Nexus Design System &middot; Reference Tokens</div>
+
+  <!-- Toast for copy feedback -->
+  <div class="bt-toast" id="bt-toast">Copied!</div>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const clickables = document.querySelectorAll('[data-token]');
+    const toast = document.getElementById('bt-toast');
+    let hideTimer: ReturnType<typeof setTimeout>;
+
+    clickables.forEach(el => {
+      el.addEventListener('click', () => {
+        const token = el.getAttribute('data-token');
+        if (!token) return;
+
+        navigator.clipboard.writeText(token).then(() => {
+          if (toast) {
+            toast.textContent = `Copied: ${token}`;
+            toast.classList.add('bt-toast--visible');
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+              toast.classList.remove('bt-toast--visible');
+            }, 1800);
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  /* ── Stats grid ─────────────────────────────────────────── */
+  .bt-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .bt-stat-card {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .bt-stat-count {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .bt-stat-name {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Token table ────────────────────────────────────────── */
+  .bt-table {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+  .bt-table-head {
+    display: flex;
+    background: var(--bg-subtle, #F8F6F3);
+    border-bottom: 1px solid var(--rule);
+    padding: 8px 14px;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+  }
+  .bt-table-row {
+    display: flex;
+    padding: 6px 14px;
+    border-bottom: 1px solid color-mix(in srgb, var(--rule) 50%, transparent);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .bt-table-row:last-child { border-bottom: none; }
+  .bt-table-row:hover { background: color-mix(in srgb, var(--rule) 30%, transparent); }
+  .bt-col-path {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .bt-col-path code {
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .bt-col-value {
+    flex: 0 0 140px;
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-2, #6B6560);
+  }
+
+  /* ── Colour chip grid ───────────────────────────────────── */
+  .bt-color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+  }
+  .bt-color-grid--dark {
+    background: #1a1a2e;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .bt-color-grid--dark .bt-chip-label,
+  .bt-color-grid--dark .bt-chip-value {
+    color: #ccc;
+  }
+  .bt-color-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .bt-color-chip:hover {
+    background: color-mix(in srgb, var(--rule) 40%, transparent);
+  }
+  .bt-color-grid--dark .bt-color-chip:hover {
+    background: rgba(255,255,255,0.08);
+  }
+  .bt-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.08);
+    flex-shrink: 0;
+  }
+  .bt-swatch--number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--paper);
+    color: var(--ink-3);
+    border: 1px solid var(--rule);
+  }
+  .bt-chip-label {
+    font-size: 10px;
+    color: var(--ink-2, #6B6560);
+    text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  .bt-chip-value {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-3);
+    text-align: center;
+  }
+
+  /* ── Screen size groups ─────────────────────────────────── */
+  .bt-screen-group {
+    margin-bottom: 16px;
+  }
+  .bt-screen-group-title {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-2, #6B6560);
+    margin: 12px 0 8px;
+    padding-left: 2px;
+  }
+
+  /* ── Toast ──────────────────────────────────────────────── */
+  .bt-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: #F0EDE8;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 1000;
+    max-width: 90vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .bt-toast--visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>

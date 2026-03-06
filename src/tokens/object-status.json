@@ -1,0 +1,73 @@
+{
+  "borderWidth": {
+    "none":     "0px",
+    "hairline": "0.5px",
+    "thin":     "1px",
+    "light":    "1.5px",
+    "medium":   "2px",
+    "semibold": "3px",
+    "thick":    "4px"
+  },
+
+  "borderRadius": {
+    "none": "0px",
+    "xs":   "1px",
+    "sm":   "2px",
+    "md":   "4px",
+    "lg":   "8px",
+    "xl":   "12px",
+    "2xl":  "16px",
+    "3xl":  "20px",
+    "4xl":  "24px",
+    "full": "1000px"
+  },
+
+  "opacity": {
+    "0":   0,
+    "9":   0.09,
+    "12":  0.12,
+    "18":  0.18,
+    "24":  0.24,
+    "32":  0.32,
+    "48":  0.48,
+    "56":  0.56,
+    "64":  0.64,
+    "72":  0.72,
+    "80":  0.80,
+    "88":  0.88,
+    "100": 1
+  },
+
+  "elevationColour": {
+    "ambient-1":       { "hex": "#080808", "opacity": 0.05 },
+    "ambient-default": { "hex": "#080808", "opacity": 0.06 },
+    "key-1":           { "hex": "#080808", "opacity": 0.05 },
+    "key-2":           { "hex": "#080808", "opacity": 0.08 },
+    "key-3":           { "hex": "#080808", "opacity": 0.10 },
+    "key-4":           { "hex": "#080808", "opacity": 0.12 },
+    "key-5":           { "hex": "#080808", "opacity": 0.14 },
+    "bottom-1":        { "hex": "#080808", "opacity": 0.05 },
+    "bottom-2":        { "hex": "#080808", "opacity": 0.10 },
+    "bottom-3":        { "hex": "#080808", "opacity": 0.12 },
+    "bottom-4":        { "hex": "#080808", "opacity": 0.14 },
+    "bottom-5":        { "hex": "#080808", "opacity": 0.16 }
+  },
+
+  "elevation": {
+    "0": "none",
+    "1": "0 1px 2px rgba(8, 8, 8, 0.05)",
+    "2": "0 2px 4px rgba(8, 8, 8, 0.1)",
+    "3": "0 4px 8px rgba(8, 8, 8, 0.12)",
+    "4": "0 8px 16px rgba(8, 8, 8, 0.14)",
+    "5": "0 16px 32px rgba(8, 8, 8, 0.16)"
+  },
+
+  "elevationLayered": {
+    "0": "none",
+    "1": "0 0 1px rgba(8, 8, 8, 0.05), 0 1px 2px rgba(8, 8, 8, 0.05)",
+    "2": "0 0 2px rgba(8, 8, 8, 0.06), 0 2px 4px rgba(8, 8, 8, 0.08)",
+    "3": "0 0 4px rgba(8, 8, 8, 0.06), 0 4px 8px rgba(8, 8, 8, 0.1)",
+    "4": "0 0 8px rgba(8, 8, 8, 0.06), 0 8px 16px rgba(8, 8, 8, 0.12)",
+    "5": "0 0 16px rgba(8, 8, 8, 0.06), 0 16px 32px rgba(8, 8, 8, 0.14)"
+  }
+}

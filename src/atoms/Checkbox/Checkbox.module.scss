@@ -1,0 +1,49 @@
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-width-100) solid var(--color-border-default);
+  border-radius: var(--radius-050);
+  background: var(--color-bg-primary);
+  color: var(--color-text-on-action);
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease;
+  flex-shrink: 0;
+
+  &:hover:not(:disabled) {
+    border-color: var(--color-border-strong);
+  }
+
+  &:focus-visible {
+    outline: var(--border-width-200) solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: var(--opacity-048);
+    cursor: not-allowed;
+  }
+
+  &[data-state='checked'],
+  &[data-state='indeterminate'] {
+    background: var(--color-action-primary);
+    border-color: var(--color-action-primary);
+  }
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Sizes ─── */
+.sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+.md {
+  width: 1.25rem;
+  height: 1.25rem;
+}
