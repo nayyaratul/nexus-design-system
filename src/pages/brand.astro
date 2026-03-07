@@ -24,6 +24,54 @@ import Layout from '../layouts/Default.astro';
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════
+       BRAND COLOUR SELECTION — choose palette first
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Choose brand colour</span>
+      <span class="section-desc">Click a card to apply that brand colour system-wide</span>
+    </div>
+
+    <div class="multibrand-row" id="multibrand" role="list">
+      <div class="multibrand-card mb-active" role="listitem" tabindex="0" data-hex="#A03AFF" aria-pressed="true" aria-label="Apply Nexus Purple brand">
+        <div class="mb-swatch" style="background: #A03AFF;" aria-hidden="true"></div>
+        <div class="mb-info">
+          <span class="mb-name">Nexus Purple</span>
+          <span class="mb-hex">#A03AFF</span>
+        </div>
+      </div>
+      <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#1C6EF1" aria-pressed="false" aria-label="Apply Ocean Blue brand">
+        <div class="mb-swatch" style="background: #1C6EF1;" aria-hidden="true"></div>
+        <div class="mb-info">
+          <span class="mb-name">Ocean Blue</span>
+          <span class="mb-hex">#1C6EF1</span>
+        </div>
+      </div>
+      <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#059669" aria-pressed="false" aria-label="Apply Emerald brand">
+        <div class="mb-swatch" style="background: #059669;" aria-hidden="true"></div>
+        <div class="mb-info">
+          <span class="mb-name">Emerald</span>
+          <span class="mb-hex">#059669</span>
+        </div>
+      </div>
+      <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#E32631" aria-pressed="false" aria-label="Apply Signal Red brand">
+        <div class="mb-swatch" style="background: #E32631;" aria-hidden="true"></div>
+        <div class="mb-info">
+          <span class="mb-name">Signal Red</span>
+          <span class="mb-hex">#E32631</span>
+        </div>
+      </div>
+      <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#F59E0B" aria-pressed="false" aria-label="Apply Amber brand">
+        <div class="mb-swatch" style="background: #F59E0B;" aria-hidden="true"></div>
+        <div class="mb-info">
+          <span class="mb-name">Amber</span>
+          <span class="mb-hex">#F59E0B</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
        SECTION 1 — Full OKLCh Scale
   ══════════════════════════════════════════════════════════════ -->
   <div class="section">
@@ -207,59 +255,6 @@ import Layout from '../layouts/Default.astro';
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════
-       SECTION 4 — Multi-brand Comparison
-  ══════════════════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-title">Multi-Brand</span>
-      <span class="section-desc">Same component, different brand identities &mdash; click a swatch to apply system-wide</span>
-    </div>
-
-    <div class="multibrand-row" id="multibrand">
-      <button class="multibrand-card" data-hex="#A03AFF">
-        <div class="mb-scale-mini" data-brand="#A03AFF"></div>
-        <div class="mb-info">
-          <span class="mb-name">Nexus Purple</span>
-          <span class="mb-hex">#A03AFF</span>
-        </div>
-        <button class="mb-btn" style="background: #A03AFF;">Enrol</button>
-      </button>
-      <button class="multibrand-card" data-hex="#1C6EF1">
-        <div class="mb-scale-mini" data-brand="#1C6EF1"></div>
-        <div class="mb-info">
-          <span class="mb-name">Ocean Blue</span>
-          <span class="mb-hex">#1C6EF1</span>
-        </div>
-        <button class="mb-btn" style="background: #1C6EF1;">Enrol</button>
-      </button>
-      <button class="multibrand-card" data-hex="#059669">
-        <div class="mb-scale-mini" data-brand="#059669"></div>
-        <div class="mb-info">
-          <span class="mb-name">Emerald</span>
-          <span class="mb-hex">#059669</span>
-        </div>
-        <button class="mb-btn" style="background: #059669;">Enrol</button>
-      </button>
-      <button class="multibrand-card" data-hex="#E32631">
-        <div class="mb-scale-mini" data-brand="#E32631"></div>
-        <div class="mb-info">
-          <span class="mb-name">Signal Red</span>
-          <span class="mb-hex">#E32631</span>
-        </div>
-        <button class="mb-btn" style="background: #E32631;">Enrol</button>
-      </button>
-      <button class="multibrand-card" data-hex="#F59E0B">
-        <div class="mb-scale-mini" data-brand="#F59E0B"></div>
-        <div class="mb-info">
-          <span class="mb-name">Amber</span>
-          <span class="mb-hex">#F59E0B</span>
-        </div>
-        <button class="mb-btn" style="background: #F59E0B;">Enrol</button>
-      </button>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════════
        SECTION 5 — Usage / API
   ══════════════════════════════════════════════════════════════ -->
   <div class="section">
@@ -355,7 +350,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
 </Layout>
 
 <script>
-  import { generateBrandScale, setBrandColour } from '../utils/setBrandColour.js';
+  import { setBrandColour } from '../utils/setBrandColour.js';
 
   const STEPS = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
@@ -415,18 +410,6 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     });
   }
 
-  function renderMiniBrands() {
-    document.querySelectorAll('.mb-scale-mini').forEach(el => {
-      const hex = el.getAttribute('data-brand');
-      if (!hex) return;
-      const scale = generateBrandScale(hex);
-      const steps = [10, 30, 50, 70, 90];
-      el.innerHTML = steps.map(s =>
-        `<div class="mb-mini-cell" style="background:${scale[s]}"></div>`
-      ).join('');
-    });
-  }
-
   function renderAll() {
     renderScale();
     renderHero();
@@ -434,21 +417,75 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   }
 
   renderAll();
-  renderMiniBrands();
 
-  // Re-render on brand change
-  const obs = new MutationObserver(renderAll);
+  // Multi-brand: click or keyboard to apply
+  function setActiveCard(activeCard) {
+    document.querySelectorAll('.multibrand-card').forEach(c => {
+      c.classList.remove('mb-active');
+      c.setAttribute('aria-pressed', c === activeCard ? 'true' : 'false');
+    });
+    if (activeCard) activeCard.classList.add('mb-active');
+  }
+
+  function applyBrandFromCard(card) {
+    const hex = card.getAttribute('data-hex');
+    if (hex) setBrandColour(hex);
+    setActiveCard(card);
+  }
+
+  // Sync active card from a known selected hex (e.g. from floating bar)
+  function syncActiveCardFromHex(selectedHex) {
+    const want = (selectedHex || '').trim().toUpperCase();
+    if (!want) return;
+    const cards = document.querySelectorAll('.multibrand-card');
+    for (const card of cards) {
+      const hex = (card.getAttribute('data-hex') || '').toUpperCase();
+      if (hex === want) {
+        setActiveCard(card);
+        return;
+      }
+    }
+    setActiveCard(null);
+  }
+
+  // When brand colour changes from floating bar (or anywhere), sync the selected card
+  window.addEventListener('nexus:brandcolourchange', (e) => {
+    renderAll();
+    syncActiveCardFromHex(e.detail?.hex);
+  });
+
+  // Re-render when DOM style changes (e.g. setBrandColour from same page)
+  const obs = new MutationObserver(() => renderAll());
   obs.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
 
-  // Multi-brand click-to-apply
   document.querySelectorAll('.multibrand-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const hex = card.getAttribute('data-hex');
-      if (hex) setBrandColour(hex);
-      document.querySelectorAll('.multibrand-card').forEach(c => c.classList.remove('mb-active'));
-      card.classList.add('mb-active');
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      applyBrandFromCard(card);
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        applyBrandFromCard(card);
+      }
     });
   });
+
+  // Set initial active state to match current brand (from DOM or default)
+  function syncActiveCardFromDOM() {
+    const root = getComputedStyle(document.documentElement);
+    const currentHex = (root.getPropertyValue('--brand-50').trim() || '').toUpperCase();
+    const cards = document.querySelectorAll('.multibrand-card');
+    for (const card of cards) {
+      const hex = (card.getAttribute('data-hex') || '').toUpperCase();
+      if (hex && hex === currentHex) {
+        setActiveCard(card);
+        return;
+      }
+    }
+    if (cards.length) setActiveCard(cards[0]);
+  }
+  syncActiveCardFromDOM();
 </script>
 
 <style>
@@ -534,53 +571,67 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   }
 
   /* ═══════════════════════════════════════════════════════════
-     SCALE
+     SCALE — :global() required for JS-injected .scale-cell / .sc-hex
   ══════════════════════════════════════════════════════════════ */
   .scale-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     margin-bottom: 20px;
   }
 
   .scale-strip {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
     border-radius: var(--radius);
     overflow: hidden;
     height: 88px;
+    min-width: 0;
   }
 
-  .scale-cell {
-    flex: 1;
+  .scale-strip :global(.scale-cell) {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     cursor: pointer;
-    transition: flex 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s;
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease;
     position: relative;
     overflow: hidden;
+    min-width: 0;
+    padding-bottom: 6px;
   }
 
-  .scale-cell:hover {
-    flex: 2.4;
+  .scale-strip :global(.scale-cell:hover) {
     z-index: 2;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.22);
   }
 
-  .scale-cell:active { transform: scale(0.97); }
+  .scale-strip :global(.scale-cell:active) { transform: scale(0.98); }
 
-  .sc-hex {
+  .scale-strip :global(.sc-hex) {
     font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 500;
-    opacity: 0;
-    transition: opacity 0.15s;
+    font-size: 11px;
+    font-weight: 600;
     white-space: nowrap;
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
-  .scale-cell:hover .sc-hex { opacity: 1; }
+  .scale-strip :global(.sc-light .sc-hex) {
+    background: rgba(255, 255, 255, 0.35);
+    color: #1a1816;
+  }
 
-  .sc-light .sc-hex { color: #1A1816; }
-  .sc-dark .sc-hex  { color: #F0EDE8; }
+  .scale-strip :global(.sc-dark .sc-hex) {
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.95);
+  }
 
-  .sc-copied::after {
+  .scale-strip :global(.sc-copied::after) {
     content: 'Copied';
     position: absolute;
     inset: 0;
@@ -602,23 +653,28 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   }
 
   .scale-labels {
-    display: flex;
-    margin-top: 6px;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 0;
+    min-width: 0;
   }
 
-  .scale-label-n {
-    flex: 1;
+  .scale-labels :global(.scale-label-n) {
     text-align: center;
     font-family: var(--mono);
     font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--ink-3);
+    white-space: nowrap;
   }
 
   .scale-meta {
     display: flex;
-    gap: 32px;
-    margin-top: 16px;
-    padding: 14px 20px;
+    flex-wrap: wrap;
+    gap: 24px 32px;
+    margin-top: 20px;
+    padding: 18px 22px;
     background: var(--card-bg);
     border: 1px solid var(--rule);
     border-radius: var(--radius);
@@ -627,7 +683,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   .scale-meta-item {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
   }
 
   .scale-meta-label {
@@ -640,6 +696,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
 
   .scale-meta-value {
     font-size: 13px;
+    line-height: 1.4;
     color: var(--ink);
   }
 
@@ -913,43 +970,63 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   .multibrand-row {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
 
   .multibrand-card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
+    gap: 6px;
+    padding: 12px;
     background: var(--card-bg);
-    border: 1.5px solid var(--rule);
+    border: 2px solid var(--rule);
     border-radius: var(--radius);
     cursor: pointer;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s ease;
     text-align: left;
     font-family: inherit;
+    outline: none;
   }
 
   .multibrand-card:hover {
     border-color: var(--ink-3);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     transform: translateY(-2px);
   }
 
+  .multibrand-card:focus-visible {
+    border-color: var(--border-focus, var(--ink));
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+  }
+
   .multibrand-card.mb-active {
-    border-color: var(--ink);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    border-color: var(--brand-50, var(--ink));
+    box-shadow: 0 0 0 2px var(--page-bg), 0 0 0 4px var(--brand-50, var(--ink));
+    background: var(--card-bg);
   }
 
-  .mb-scale-mini {
-    display: flex;
+  .multibrand-card.mb-active::before {
+    content: 'In use';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-family: var(--mono);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 5px;
+    border-radius: 3px;
+    background: var(--brand-50, var(--ink));
+    color: #fff;
+  }
+
+  .mb-swatch {
+    width: 100%;
+    height: 28px;
     border-radius: 4px;
-    overflow: hidden;
-    height: 24px;
-  }
-
-  .mb-mini-cell {
-    flex: 1;
+    flex-shrink: 0;
   }
 
   .mb-info {
@@ -960,7 +1037,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
 
   .mb-name {
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--ink);
   }
 
@@ -968,18 +1045,6 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     font-family: var(--mono);
     font-size: 11px;
     color: var(--ink-3);
-  }
-
-  .mb-btn {
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 500;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 6px 14px;
-    cursor: pointer;
-    pointer-events: none;
   }
 
   /* ═══════════════════════════════════════════════════════════
@@ -1138,6 +1203,13 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
 
   @media (max-width: 520px) {
     .multibrand-row { grid-template-columns: repeat(2, 1fr); }
-    .scale-meta { flex-direction: column; gap: 12px; }
+    .scale-meta { flex-direction: column; gap: 12px; padding: 14px 18px; }
+    .scale-strip { height: 72px; }
+  }
+
+  @media (max-width: 400px) {
+    .scale-container { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+    .scale-strip,
+    .scale-labels { min-width: 440px; }
   }
 </style>

@@ -1,5 +1,20 @@
 # Nexus Design System — Updates & Decisions
 
+## 2026-03-08
+
+### Brand page — The Scale section
+- **Alignment:** Replaced separate flex rows with a shared 11-column grid for `.scale-strip` and `.scale-labels` so step numbers stay aligned with colour cells.
+- **Hover:** Removed `flex: 2.4` on cell hover (it broke label alignment). Hover now uses `transform: scale(1.03)` and box-shadow only.
+- **Responsive:** At 520px strip height reduced to 72px; at 400px the scale gets `overflow-x: auto` and `min-width: 440px` on strip and labels so both scroll together on very narrow viewports.
+- **Visual:** Scale meta block given more padding and gap; labels use `white-space: nowrap` and slight letter-spacing; meta can wrap with `flex-wrap: wrap`.
+- **Hex readability:** Scale cell hex values now appear in a small pill (padding, rounded corners) with opaque background (dark pill + white text on dark cells, light pill + dark text on light cells), 11px font, so they remain readable on every step.
+
+### Brand page — Multi-Brand section
+- **Select UX:** Section copy updated to “Click a card to apply that brand colour system-wide”. Each card is now a `<div>` with `role="button"`, `tabindex="0"`, and `aria-label="Apply [Name] brand"` (no nested buttons). Explicit “Apply this brand” label added under the hex.
+- **Colour clarity:** Large primary swatch (`.mb-swatch`, 40px height) added at top of each card so the brand colour is obvious at a glance; mini scale retained below.
+- **Active state:** Selected card shows a clear “In use” badge (top-right), brand-coloured focus ring (double ring: 2px brand + 2px page bg), and “Apply this brand” in brand colour. Initial active card synced from current `--brand-50` on load; keyboard (Enter/Space) supported.
+- **Section order:** Brand colour selection moved to the top of the page (directly after the hero, above "The Scale") so users choose the palette first; section retitled to "Choose brand colour".
+
 ## 2025-02-25
 
 ### Project Scaffolding

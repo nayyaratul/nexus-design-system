@@ -1,7 +1,13 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { setBrandColour } from '../utils/setBrandColour.js';
 
 const DEFAULT_HEX = '#A03AFF';
+
+function getBrandFromDOM() {
+  if (typeof document === 'undefined') return DEFAULT_HEX;
+  const hex = getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim();
+  return (hex || DEFAULT_HEX).toUpperCase();
+}
 
 const PRESETS = [
   { label: 'Purple',  hex: '#A03AFF' },
@@ -13,8 +19,15 @@ const PRESETS = [
 ];
 
 export default function BrandPicker() {
-  const [active, setActive] = useState(DEFAULT_HEX);
+  const [active, setActive] = useState(() => getBrandFromDOM());
   const inputRef = useRef(null);
+
+  // Sync when brand changes from elsewhere (e.g. Choose brand colour cards on /brand)
+  useEffect(() => {
+    const sync = (e) => setActive(e?.detail?.hex ? String(e.detail.hex).toUpperCase() : getBrandFromDOM());
+    window.addEventListener('nexus:brandcolourchange', sync);
+    return () => window.removeEventListener('nexus:brandcolourchange', sync);
+  }, []);
 
   function apply(hex) {
     setActive(hex);
@@ -66,8 +79,8 @@ export default function BrandPicker() {
               height: 22,
               borderRadius: '50%',
               background: preset.hex,
-              border: active === preset.hex ? '2px solid var(--ink)' : '2px solid transparent',
-              outline: active === preset.hex ? '2px solid var(--card-bg)' : 'none',
+              border: active.toUpperCase() === preset.hex.toUpperCase() ? '2px solid var(--ink)' : '2px solid transparent',
+              outline: active.toUpperCase() === preset.hex.toUpperCase() ? '2px solid var(--card-bg)' : 'none',
               cursor: 'pointer',
               transition: 'border 0.15s, outline 0.15s',
               padding: 0,

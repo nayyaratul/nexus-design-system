@@ -100,4 +100,7 @@ export function setBrandColour(brandHex) {
   Object.entries(scale).forEach(([step, hex]) => {
     root.style.setProperty(`--brand-${step}`, hex);
   });
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('nexus:brandcolourchange', { detail: { hex: brandHex } }));
+  }
 }
