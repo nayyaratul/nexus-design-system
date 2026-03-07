@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { LinkShowcase } from '../../components/atoms/LinkShowcase';
+---
+
+<Layout title="Link" section="atoms/link">
+  <h1 class="page-title">Link</h1>
+  <p class="page-sub">Semantic anchor element with default and subtle variants, external detection, and accessible disabled state</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — hover and focus links</span>
+    </div>
+    <LinkShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Element</span><span>&lt;a&gt; — semantic anchor</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default (text-link colour), subtle (text-secondary colour)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">External</span><span>Appends ExternalLink icon (12px), adds target="_blank" and rel="noopener noreferrer"</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Disabled</span><span>aria-disabled, tabIndex -1, pointer-events none, 48% opacity</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Focus</span><span>focus-visible outline with border-width-200 and border-focus colour</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Font</span><span>font: inherit — adapts to surrounding text size</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Link Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

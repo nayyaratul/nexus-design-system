@@ -1,0 +1,35 @@
+/* ─── Base ─── */
+.timer {
+  font-family: var(--sans);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Sizes ─── */
+.sm {
+  font-size: var(--font-size-200);
+  line-height: var(--line-height-200);
+}
+
+.md {
+  font-size: var(--font-size-400);
+  line-height: var(--line-height-400);
+}
+
+.lg {
+  font-size: var(--font-size-600);
+  line-height: var(--line-height-600);
+}
+
+/* ─── Variants (semantic colour) ─── */
+.default {
+  color: var(--color-text-primary);
+}
+
+.warning {
+  color: var(--color-text-warning);
+}
+
+.danger {
+  color: var(--color-text-error);
+}

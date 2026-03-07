@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { SliderShowcase } from '../../components/atoms/SliderShowcase';
+---
+
+<Layout title="Slider" section="atoms/slider">
+  <h1 class="page-title">Slider</h1>
+  <p class="page-sub">Radix slider with single and range modes, two sizes, optional value display, and step control</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — drag thumbs to adjust values</span>
+    </div>
+    <SliderShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>@radix-ui/react-slider</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Modes</span><span>Single thumb, range (two thumbs)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm (4px track, 14px thumb), md (6px track, 18px thumb)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Track</span><span>--color-border-default background, 9999px radius</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Range</span><span>--color-action-primary fill between thumbs</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Thumb</span><span>Elevated bg, 2px action-primary border, grab cursor, scale on hover</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">showValue</span><span>Optional value display below slider in --color-text-secondary</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Disabled</span><span>opacity-048, no pointer events</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Slider Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

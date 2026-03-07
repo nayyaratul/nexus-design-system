@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { CalendarShowcase } from '../../components/atoms/CalendarShowcase';
+---
+
+<Layout title="Calendar" section="atoms/calendar">
+  <h1 class="page-title">Calendar</h1>
+  <p class="page-sub">Date picker grid with keyboard navigation, locale support, and disabled date ranges</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive selection, ranges, sizes, and themes</span>
+    </div>
+    <CalendarShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Anatomy</span></div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Structure</span><span>Header (nav + month label) + weekday row + day grid</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm (32px cells), md (40px cells), lg (48px cells)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Week start</span><span>Configurable via weekStartsOn (0 = Sunday, 1 = Monday)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Locale</span><span>Intl.DateTimeFormat for month and weekday names</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Constraints</span><span>min/max dates, disabledDates array or predicate function</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Keyboard</span><span>Arrow keys, Home/End, PageUp/PageDown for month nav, Enter/Space to select</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>role="grid", aria-selected on chosen day, aria-live on month title</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Mobile</span><span>44px min tap targets, fluid width on small screens</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Calendar Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

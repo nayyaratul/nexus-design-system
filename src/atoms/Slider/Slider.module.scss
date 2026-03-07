@@ -1,0 +1,85 @@
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  touch-action: none;
+  user-select: none;
+}
+
+.disabled {
+  opacity: var(--opacity-048);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.track {
+  position: relative;
+  flex-grow: 1;
+  background: var(--color-border-default);
+  border-radius: 9999px;
+}
+
+.range {
+  position: absolute;
+  height: 100%;
+  background: var(--color-action-primary);
+  border-radius: 9999px;
+}
+
+.thumb {
+  display: block;
+  position: relative;
+  background: var(--color-bg-elevated);
+  border: 2px solid var(--color-action-primary);
+  border-radius: 9999px;
+  cursor: grab;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+
+  /* Invisible touch target — 44×44px minimum for mobile */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:focus-visible {
+    outline: var(--border-width-200) solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+.value {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-200);
+  margin-top: var(--space-050);
+  text-align: center;
+}
+
+/* Sizes */
+.sm .track {
+  height: 4px;
+}
+
+.sm .thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.md .track {
+  height: 6px;
+}
+
+.md .thumb {
+  width: 20px;
+  height: 20px;
+}

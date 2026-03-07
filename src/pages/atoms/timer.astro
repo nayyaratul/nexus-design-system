@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { TimerShowcase } from '../../components/atoms/TimerShowcase';
+---
+
+<Layout title="Timer" section="atoms/timer">
+  <h1 class="page-title">Timer</h1>
+  <p class="page-sub">Display-only time value for assessments and countdowns (mm:ss or hh:mm:ss)</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Sizes, formats, variants, and live-update demo</span>
+    </div>
+    <TimerShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">value</span><span>number (seconds) or string (preformatted). Negative numbers are clamped to 0.</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">format</span><span>d: h: m (default, e.g. 1d: 20h : 29m), mm:ss, or hh:mm:ss when value is a number. Ignored when value is a string.</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">size</span><span>sm, md, lg — maps to --font-size-200/400/600 and --line-height-200/400/600.</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">variant</span><span>default (--color-text-primary), warning (--color-text-warning), danger (--color-text-error).</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Accessibility</span><span>role="timer", aria-live="polite". font-variant-numeric: tabular-nums for stable digit width.</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Behaviour</span><span>No internal interval. Parent supplies updated value (e.g. from a countdown hook).</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Timer Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: var(--space-125) var(--space-200);
+    font-size: var(--font-size-300);
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: var(--font-weight-medium);
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

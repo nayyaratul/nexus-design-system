@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { TagShowcase } from '../../components/atoms/TagShowcase';
+---
+
+<Layout title="Tag" section="atoms/tag">
+  <h1 class="page-title">Tag</h1>
+  <p class="page-sub">Interactive pill tags with 5 variants, leading icons, and dismissible behaviour</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — click X to dismiss tags</span>
+    </div>
+    <TagShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default, info, success, warning, error</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm (24px), md (28px)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Features</span><span>Leading icon, dismissible with X button</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Shape</span><span>Pill (border-radius full), border --border-width-100</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">vs Badge</span><span>Interactive, supports icon + dismiss, always has text</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Custom</span><span>No Radix dependency</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Tag Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

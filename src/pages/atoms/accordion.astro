@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { AccordionShowcase } from '../../components/atoms/AccordionShowcase';
+---
+
+<Layout title="Accordion" section="atoms/accordion">
+  <h1 class="page-title">Accordion</h1>
+  <p class="page-sub">A vertically stacked set of collapsible content sections, built on Radix Accordion primitive</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Single, multiple, disabled, and themed variants</span>
+    </div>
+    <AccordionShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Anatomy</span></div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>@radix-ui/react-accordion</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default (line-separated), bordered (card-style with background)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Types</span><span>single (one open at a time), multiple (many open)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Collapsible</span><span>When type="single", allows closing all items</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Icon</span><span>Optional leading icon via icon prop on AccordionTrigger</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Animation</span><span>Slide down/up using --radix-accordion-content-height</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">States</span><span>open, closed, disabled, hover highlight</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Focus</span><span>2px solid focus ring with 2px offset</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Mobile</span><span>48px min touch target, responsive padding</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Accordion Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

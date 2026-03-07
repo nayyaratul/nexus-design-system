@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { MenuShowcase } from '../../components/atoms/MenuShowcase';
+---
+
+<Layout title="Menu" section="atoms/menu">
+  <h1 class="page-title">Menu</h1>
+  <p class="page-sub">A vertical list of actionable items for navigation, commands, and selections with full keyboard support</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Icons, shortcuts, checkbox/radio, groups, sizes, and themes</span>
+    </div>
+    <MenuShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Anatomy</span></div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Components</span><span>Menu, MenuItem, MenuGroup, MenuDivider</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm, md (default), lg — controls item density via context</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Panel</span><span>Boolean prop — adds elevated card styling (bg, border, shadow, radius)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default, destructive (red colouring for dangerous actions)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Roles</span><span>menuitem (default), menuitemcheckbox, menuitemradio</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Polymorphic</span><span>Renders button by default, anchor with href, or custom via as prop</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Slots</span><span>icon (leading), description, shortcut (trailing text), trailing (node)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Keyboard</span><span>Arrow keys, Home/End, Enter/Space, Escape, typeahead (500ms buffer)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">States</span><span>hover, focus-visible, active (selected), disabled, checked</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Focus</span><span>2px solid focus ring with -2px offset</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Menu Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

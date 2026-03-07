@@ -1,0 +1,229 @@
+/* ─── Root ─── */
+.root {
+  display: inline-flex;
+  flex-direction: column;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-100);
+  padding: var(--space-150);
+  font-family: var(--sans);
+  user-select: none;
+}
+
+/* ─── Sizes ─── */
+.size-sm {
+  padding: var(--space-100);
+
+  .dayButton {
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-size-100);
+  }
+
+  .weekday {
+    font-size: var(--font-size-050);
+    height: 28px;
+  }
+
+  .monthLabel {
+    font-size: var(--font-size-200);
+  }
+
+  .navButton {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.size-md {
+  .dayButton {
+    width: 40px;
+    height: 40px;
+    font-size: var(--font-size-200);
+  }
+
+  .weekday {
+    font-size: var(--font-size-100);
+    height: 32px;
+  }
+
+  .monthLabel {
+    font-size: var(--font-size-300);
+  }
+
+  .navButton {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.size-lg {
+  .dayButton {
+    width: 48px;
+    height: 48px;
+    font-size: var(--font-size-300);
+  }
+
+  .weekday {
+    font-size: var(--font-size-200);
+    height: 36px;
+  }
+
+  .monthLabel {
+    font-size: var(--font-size-400);
+  }
+
+  .navButton {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* ─── Header ─── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-100);
+}
+
+.monthLabel {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  border-radius: var(--radius-050);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+
+  &:hover {
+    background: var(--color-interactive-hover);
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    outline: var(--border-width-200) solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* ─── Grid rows ─── */
+.weekRow,
+.dayRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Day button ─── */
+.dayButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  border-radius: var(--radius-full);
+  font-family: var(--sans);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  position: relative;
+  transition: background 150ms ease, color 150ms ease;
+
+  &:hover:not(:disabled) {
+    background: var(--color-interactive-hover);
+  }
+
+  &:focus-visible {
+    outline: var(--border-width-200) solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+.dayButton--overflow {
+  color: var(--color-text-tertiary);
+  opacity: 0.4;
+}
+
+.dayButton--today {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-action-primary);
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: var(--radius-full);
+    background: var(--color-action-primary);
+  }
+}
+
+.dayButton--selected {
+  background: var(--color-action-primary);
+  color: var(--color-text-on-action);
+  font-weight: var(--font-weight-semibold);
+
+  &:hover:not(:disabled) {
+    background: var(--color-action-primary);
+    opacity: 0.9;
+  }
+
+  &::after {
+    display: none;
+  }
+}
+
+/* Range mode: start/end reuse .dayButton--selected; in-between gets subtle fill */
+.dayButton--inRange {
+  background: color-mix(in srgb, var(--color-action-primary) 15%, transparent);
+  color: var(--color-text-primary);
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-action-primary) 22%, transparent);
+  }
+
+  &::after {
+    display: none;
+  }
+}
+
+.dayButton--disabled {
+  opacity: var(--opacity-048);
+  cursor: not-allowed;
+
+  &:hover {
+    background: none;
+  }
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 480px) {
+  .root {
+    width: 100%;
+  }
+
+  .dayButton {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}

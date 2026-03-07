@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { PaginationShowcase } from '../../components/atoms/PaginationShowcase';
+---
+
+<Layout title="Pagination" section="atoms/pagination">
+  <h1 class="page-title">Pagination</h1>
+  <p class="page-sub">Page navigation with dynamic range computation, ellipsis, and keyboard support</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — click page numbers to navigate</span>
+    </div>
+    <PaginationShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Structure</span><span>&lt;nav&gt; with &lt;ul&gt; list of page buttons, prev/next chevrons, and ellipsis spans</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm (32px), md (36px), lg (44px) — min-width and height</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Siblings</span><span>Number of pages shown on each side of current page (default 1)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Boundary</span><span>Number of pages always shown at start/end (default 1)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">States</span><span>Default, hover, active (brand primary bg), focus-visible, disabled</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>aria-current="page" on active, aria-label on all buttons, aria-hidden on ellipsis</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Mobile</span><span>Buttons expand to 44px minimum tap targets below 480px</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Pagination Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

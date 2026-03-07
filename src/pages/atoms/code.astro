@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { CodeShowcase } from '../../components/atoms/CodeShowcase';
+---
+
+<Layout title="Code" section="atoms/code">
+  <h1 class="page-title">Code</h1>
+  <p class="page-sub">Inline and block code display with monospace font, subtle backgrounds, and optional copy-to-clipboard</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — try the copy button on block code</span>
+    </div>
+    <CodeShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>inline (default) and block</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Inline element</span><span>&lt;code&gt; — flows within text at 0.875em</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Block element</span><span>&lt;pre&gt;&lt;code&gt; — scrollable with border and padding</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Copy button</span><span>Optional for block variant — uses navigator.clipboard with check feedback</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Font</span><span>var(--mono) — monospace font family</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Highlighting</span><span>No syntax highlighting — plain text display only</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Code Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

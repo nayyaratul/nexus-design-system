@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { SkeletonShowcase } from '../../components/atoms/SkeletonShowcase';
+---
+
+<Layout title="Skeleton" section="atoms/skeleton">
+  <h1 class="page-title">Skeleton</h1>
+  <p class="page-sub">Animated placeholder shapes for content loading states — lines, circles, and cards</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Pulse animation runs continuously</span>
+    </div>
+    <SkeletonShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>width, height, borderRadius, circle, count</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Animation</span><span>Pulse shimmer (1.5s ease-in-out infinite)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Circle mode</span><span>Equal width/height, border-radius 50%</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Count</span><span>Stacks multiple skeletons with --space-075 gap</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>aria-hidden="true" (decorative)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Custom</span><span>No Radix dependency — pure CSS animation</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Skeleton Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

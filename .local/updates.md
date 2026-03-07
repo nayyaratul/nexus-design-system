@@ -188,3 +188,91 @@
 - **Colours page — dark theme panel:** added `background: #111110` to `.theme-panel.dark` so empty space at the bottom (when grid stretches columns) uses dark background instead of light page background.
 - **Colours page — Button Text section visibility:** dark theme metadata (labels, hex/ratio) was nearly invisible (#555, #444 on black). Updated to `#9A9A9A` and `#8E8E8E`; added `font-weight: 500` to `.ts-label` and `.ts-info` for both themes.
 - **Typography page — Weight & Letter Spacing:** Font Weight (3 rows) and Letter Spacing (4 rows) containers had mismatched heights. Added `align-items: stretch` to `.type-dual-grid`, flex column layout on grid items, and `flex: 1` on `.type-mini-table` so both containers match height.
+
+## 2026-03-07
+
+### LMS ESS PWA — Pending Atoms and Molecules
+
+- **Context:** Design system is being extended for an LMS ESS PWA (Courses, Assessment, Survey, Playlist, Catalogue, Feeds, Chatbot, 1:1 talks, Profile, Notifications, Reels).
+- **Pending atoms (to implement):** Overlay (done), Timer (done), StoryProgress (done), Countdown (optional wrapper), FileInput, RatingStar, MenuItem, TableCell, TableRow.
+- **Molecules (not yet implemented):** Foundation — Card, EmptyState, Modal, Drawer, Breadcrumb, Menu, SearchInput, ConfirmDialog, Rating, Dropzone, Table. Module-specific — CourseCard, CourseListItem, QuestionCard, AssessmentTimer, ChatBubble, ChatInput, NotificationItem, ReelFrame, DataTable, and others (see Molecules plan below).
+- **Segregation:** Atoms = primitives only; molecules = composed patterns from atoms.
+
+### Design Token Rules (Semantic → Primitive)
+
+- **No hardcoded values** in components or showcases; use design tokens only.
+- **Semantic tokens must reference primitives.** Chain: semantic → primitive(s).
+- **Option A (chosen for overlay):** Semantic references primitives directly. E.g. `--color-bg-overlay` = `color-mix(in srgb, var(--grey-100) calc(var(--opacity-048) * 100%), transparent)` (light) and same with `--opacity-072` (dark). No new tokens; uses existing `--grey-100`, `--opacity-048`, `--opacity-072`.
+- **Option B (alternative):** Introduce intermediate semantics (e.g. `--opacity-overlay`) that reference primitives; overlay then references only those semantics. Rejected for overlay in favour of Option A for simplicity.
+
+### Overlay Atom
+
+- **Implemented.** Presentational only; no built-in close or focus trap. Parent (e.g. Modal) controls visibility.
+- Props: `visible`, `onClick` (optional), `className`, `...rest`. Root: `<div>`, fixed/inset 0, `background: var(--color-bg-overlay)`, `role="presentation"`, `aria-hidden="true"`.
+- No Portal in the atom; Modal/Drawer molecules handle portalling.
+
+### Timer Atom
+
+- **Implemented.** Display-only; parent supplies `value` (seconds or string) and any countdown logic.
+- **Default format:** `d: h: m` (e.g. `1d: 20h : 29m`). Also: `mm:ss`, `hh:mm:ss`.
+- Props: `value`, `format`, `size` (sm/md/lg), `variant` (default/warning/danger). Typography: `var(--sans)`, `var(--font-weight-semibold)`, size/line-height tokens, variant colour tokens. A11y: `role="timer"`, `aria-live="polite"`, `tabular-nums`.
+- Showcase and doc page use tokens only; no hardcoded px/rem for typography or spacing.
+
+### Molecules Plan and Scope
+
+- **Foundation / shared:** Card, EmptyState, Modal, Drawer, Breadcrumb, Menu, SearchInput, ConfirmDialog, Rating, Dropzone, Table.
+- **By module:** CourseCard, CourseListItem, ModuleSection, LessonRow, ProgressSummary; QuestionCard, AssessmentTimer, AssessmentProgress, SubmitBar; SurveyQuestion, LikertScale, SurveyProgress; PlaylistItem, PlaylistHeader; FilterChips, CatalogueFilters, SortDropdown; FeedCard, FeedFilters; ChatBubble, ChatInput, SuggestedChips, TypingIndicator; MessageBubble, ConversationHeader, MessageInput; ProfileHeader, ProfileStat, SettingsRow, EditableField, AvatarUpload; NotificationItem, NotificationGroup; ReelFrame, ReelOverlay; DataTable, ListSkeleton.
+- **Suggested build order:** (1) Foundation — Card, EmptyState, Modal, Breadcrumb, SearchInput, Menu, ConfirmDialog; (2) Courses + Catalogue; (3) Assessment + Survey; (4) Chat / messaging; (5) Profile + Notifications; (6) Reels; (7) Data.
+- **Dependencies:** Modal/Drawer need Overlay; AssessmentTimer needs Timer; Rating needs RatingStar; Menu needs MenuItem; Dropzone needs FileInput; Table needs TableCell, TableRow; ReelFrame needs StoryProgress.
+
+### StoryProgress Atom
+
+- **Implemented.** Segmented progress indicator for reels/stories; consumed by ReelFrame; parent controls timing.
+- Props: `segments`, `activeIndex`, `progress` (0–1 within active segment), `size` (xs/sm/md/lg), `variant` (default/subtle), `className`, `...rest`.
+- Root: `role="progressbar"`, `aria-valuemin/valuemax/valuenow`, `aria-label` (e.g. "Segment 2 of 5, 40%").
+- Tokens: track `--color-bg-secondary`, fill `--color-action-primary`, gap `--space-050`, heights `--space-025` (xs) through `--space-150` (lg), `--radius-full`. Fill transition: width 200ms ease-out.
+- **Sizes:** xs (2px), sm, md, lg. **Variants:** default (solid); subtle (semi-transparent white for overlay — see below).
+
+### Subtle Variant and 2px (xs) Size — StoryProgress and ProgressBar
+
+- **Design goal:** Instagram-style progress bar — not distracting, works on dark gradient or any background (black/white). Semi-transparent so the bar is visible without strong colour.
+- **Option chosen:** Option A — add `variant="subtle"` alongside existing default; do not replace default.
+- **Height:** Instagram stories bar is very thin (reported 2–4px). Added **2px** as `size="xs"` using existing `--space-025` (no new tokens).
+- **StoryProgress:** Added `variant="subtle"` and `size="xs"`. Subtle uses `color-mix(in srgb, var(--grey-0) calc(var(--opacity-032) * 100%), transparent)` for track and `--opacity-080` for fill. Root gets `styles[variant]` so `.subtle .segment` and `.subtle .fill` apply.
+- **ProgressBar:** Added `size="xs"` (`.track-xs` = `var(--space-025)`). Tokenised all heights: sm/md/lg now use `--space-050`, `--space-100`, `--space-150`. Added `variant="subtle"`: Root gets `trackSubtle` (track background), Indicator gets `subtle` (fill); same color-mix as StoryProgress.
+- **Tokens:** No new tokens. Primitives used: `--grey-0`, `--opacity-032`, `--opacity-080`, `--space-025`.
+- **Usage:** For reels/stories overlays use `variant="subtle"` with `size="xs"` (2px) on both StoryProgress and ProgressBar. Showcase and Storybook include dark-background demos for visibility.
+
+### Rules for Creating Atoms
+
+- **Structure:** One folder per atom: `src/atoms/<Name>/` with `Name.jsx`, `Name.module.scss`, `Name.stories.jsx`. Export in `src/atoms/index.js` (alphabetically). Nav entry in `src/layouts/Default.astro`. Atom card and count in `src/pages/atoms/index.astro`. Doc page `src/pages/atoms/<name>.astro` and showcase `src/components/atoms/<Name>Showcase.jsx`.
+- **Naming:** British English everywhere; URLs lowercase (e.g. `/atoms/overlay`).
+- **Styling:** SCSS modules and semantic tokens only; no raw hex/px/rem in component SCSS or showcase inline styles. Semantic tokens must reference primitives.
+- **Component:** Use `classnames` (cx), `className`, `...rest`; `forwardRef` when a DOM ref is needed. Accessibility: appropriate `role`, `aria-*`; complex a11y in molecules.
+- **Storybook:** Default plus key variants (sizes, formats, states); use `var(--space-*)` for gaps in stories.
+- **Anatomy / doc spec:** Prefer tokens for padding, font-size, font-weight in spec block. `.atom-spec-label` min-width 120px is doc-site convention (no token).
+- **Verification:** Storybook shows stories; doc site shows card and page; lint clean; build succeeds.
+
+## 2026-03-07
+
+### Table components (TableCell, TableRow, TableHead + Table molecule)
+- **Atoms:** TableRow (`<tr>`), TableCell (`<td>`, align, dense), TableHead (`<th>`, scope, align, dense). Token-only styling; border and padding from semantic tokens. Table header background: `--color-table-header-bg` (grey-10 light, grey-90 dark) in `tokens.scss`.
+- **Molecule:** Table — scrollable wrapper (`overflow-x: auto`), optional `caption` and `dense` prop. TableHeader (thead), TableBody (tbody), TableFooter (tfoot), TableCaption exported. Dense reduces cell padding via wrapper class. Mobile: horizontal scroll; tables best on desktop; card-stack pattern deferred to DataTable.
+- **Doc:** Showcases and anatomy blocks for all four; nav and atoms index updated (45 atoms); molecule page at `/molecules/table`.
+
+### Upload File — Light and dark themes section
+- **Upload File atom page** (`src/pages/atoms/fileinput.astro`): Added a "Light and dark themes" section at the bottom, above the footer.
+- Section shows the same Upload File examples (default and with file chosen) side by side in light and dark theme using the existing `theme-split` and `theme-panel-side` layout from `components.css`.
+- New helper component `ThemeUploadFileDemo` (`src/components/atoms/ThemeUploadFileDemo.jsx`) renders two FileInput instances for use inside each theme panel; each panel gets its own React root so tokens resolve correctly per `data-theme`.
+
+### RatingStar atom
+- **RatingStar** added as presentational atom: single star with states `filled`, `empty`, `half`. Sizes `sm`/`md`/`lg` map to `--font-size-400`/`--font-size-500`/`--font-size-600`. Colours: `--color-text-warning` (filled), `--color-text-tertiary` (empty); disabled uses `--opacity-048`. No hardcoded values in SCSS.
+- **Blade token alignment:** RatingStar `md` size uses `--font-size-500` (20px), matching Blade’s `rateStarSize: 20` in `Tokens/Default/*.tokens.json`. Future token pipelines that emit Blade tokens to CSS can alias `--rating-star-size` to `--font-size-500` if desired.
+
+### RatingStar — refinements and doc page
+- **Filled colour:** Introduced semantic token `--color-rating-filled` in `tokens.scss` (light and dark), set to `var(--yellow-20)` as the standard exception for a brighter star. Replaced `--color-text-warning` in RatingStar SCSS.
+- **Sizes:** Extended to five sizes to match Icon: `xs`/`sm`/`md`/`lg`/`xl` using `--font-size-200`/`400`/`500`/`600`/`800`. Stories, showcase, and anatomy spec updated.
+- **Showcase layout:** Hero block (5 stars at xl), card-style sections with `blockStyle` (padding, border, radius tokens), staggered fade-in animation (with `prefers-reduced-motion`). Theme comparison made responsive via `.theme-comparison` from `components.css`.
+- **Token-only audit:** Replaced hardcoded values with project tokens: border width, font-weight, letter-spacing, space, anatomy row padding/radius in `ratingstar.astro`; `RatingStarShowcase` uses `--font-weight-medium`/`--font-weight-semibold`, `--letter-spacing-wide`, `--border-width-100`, `--space-*` throughout. Remaining exceptions: transition duration in SCSS, one letter-spacing (0.08em), animation timings, doc convention min-width.
+- **Padding and consistency:** Block padding set to `var(--space-250)`; anatomy rows use `var(--space-125)`/`var(--space-200)`. Theme comparison section aligned with Button/Switch: no outer card, section label "Theme Comparison", panels with `padding: var(--space-250)`, `borderRadius: var(--radius)`, "LIGHT"/"DARK" labels.
+- **Gap between containers:** Gap between showcase sections applied inline on the showcase root (`display: flex`, `flexDirection: column`, `gap: var(--space-300)`) so spacing is reliable regardless of page scoped CSS.

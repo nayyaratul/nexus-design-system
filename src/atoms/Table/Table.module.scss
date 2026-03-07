@@ -1,0 +1,178 @@
+/* ─── Table Atom ─────────────────────────────────────────────── */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-family: var(--sans);
+  color: var(--color-text-primary);
+
+  &.fixed {
+    table-layout: fixed;
+  }
+}
+
+/* ─── Sizes ─── */
+.sm {
+  font-size: var(--font-size-200);
+
+  .cell,
+  .head {
+    padding: var(--space-050) var(--space-100);
+  }
+}
+
+.md {
+  font-size: var(--font-size-300);
+
+  .cell,
+  .head {
+    padding: var(--space-100) var(--space-150);
+  }
+}
+
+.lg {
+  font-size: var(--font-size-400);
+
+  .cell,
+  .head {
+    padding: var(--space-150) var(--space-200);
+  }
+}
+
+/* ─── Header ─── */
+.header {
+  background: var(--grey-10);
+
+  [data-theme="dark"] & {
+    background: var(--grey-90);
+  }
+}
+
+.sticky {
+  position: sticky;
+  z-index: 1;
+  background: var(--grey-10);
+
+  [data-theme="dark"] & {
+    background: var(--grey-90);
+  }
+}
+
+/* ─── Head (th) ─── */
+.head {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85em;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  border-bottom: 2px solid var(--color-border-default);
+  white-space: nowrap;
+}
+
+/* ─── Cell (td) ─── */
+.cell {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+/* ─── Body ─── */
+.body {}
+
+/* ─── Footer ─── */
+.footer {
+  background: var(--grey-10);
+
+  [data-theme="dark"] & {
+    background: var(--grey-90);
+  }
+
+  .cell {
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    border-bottom: none;
+    border-top: 2px solid var(--color-border-default);
+  }
+}
+
+/* ─── Caption ─── */
+.caption {
+  caption-side: bottom;
+  padding: var(--space-100) 0;
+  font-size: var(--font-size-200);
+  color: var(--color-text-tertiary);
+  text-align: left;
+}
+
+/* ─── Row ─── */
+.row {}
+
+/* ─── Variants ─── */
+.striped {
+  .body .row:nth-child(even) {
+    background: color-mix(in srgb, var(--color-text-primary) 4%, transparent);
+  }
+}
+
+.hoverable {
+  .body .row {
+    transition: background-color 150ms ease;
+
+    &:hover {
+      background: color-mix(in srgb, var(--color-text-primary) 7%, transparent);
+    }
+  }
+}
+
+/* ─── Bordered ─── */
+.bordered {
+  border: 1px solid var(--color-border-default);
+
+  .head,
+  .cell {
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .head {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--color-border-default);
+  }
+}
+
+/* ─── Selected row ─── */
+.selected {
+  background: var(--color-bg-info);
+}
+
+/* ─── Alignment ─── */
+.alignLeft   { text-align: left; }
+.alignCenter { text-align: center; }
+.alignRight  { text-align: right; }
+
+/* ─── Sort button ─── */
+.sortButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-050);
+  background: none;
+  border: none;
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-transform: inherit;
+  letter-spacing: inherit;
+
+  &:focus-visible {
+    outline: var(--border-width-200) solid var(--color-border-focus);
+    outline-offset: var(--space-025);
+    border-radius: var(--space-025);
+  }
+}
+
+.sortIcon {
+  display: inline-flex;
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+}

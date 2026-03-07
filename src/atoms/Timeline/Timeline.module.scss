@@ -1,0 +1,198 @@
+/* ─── Timeline container ─── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ─── Vertical layout ─── */
+.vertical .item {
+  display: flex;
+  gap: var(--space-150);
+}
+
+.vertical .markerCol {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vertical .connector {
+  width: 2px;
+  flex: 1;
+  background: var(--color-border-default);
+  min-height: 24px;
+}
+
+.vertical .item:last-child .connector {
+  visibility: hidden;
+}
+
+.vertical .content {
+  flex: 1;
+  padding-bottom: var(--space-200);
+}
+
+.vertical .item:last-child .content {
+  padding-bottom: 0;
+}
+
+/* ─── Horizontal layout ─── */
+.horizontal {
+  flex-direction: row;
+  overflow-x: auto;
+}
+
+.horizontal .item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+  flex: 1;
+}
+
+.horizontal .markerCol {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.horizontal .marker {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+}
+
+.horizontal .connector {
+  height: 2px;
+  background: var(--color-border-default);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: calc(-50%);
+  transform: translateY(-50%);
+}
+
+.horizontal .item:last-child .connector {
+  display: none;
+}
+
+.horizontal .content {
+  padding-top: var(--space-100);
+  text-align: center;
+}
+
+/* ─── Marker base ─── */
+.marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  box-sizing: border-box;
+}
+
+/* ─── Marker types ─── */
+.marker-dot {
+  width: 12px;
+  height: 12px;
+}
+
+.marker-ring {
+  width: 12px;
+  height: 12px;
+  background: transparent !important;
+  border: 2px solid;
+}
+
+.marker-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.marker-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ─── Status colours ─── */
+.status-default {
+  background: var(--color-action-primary);
+  color: var(--color-text-on-action);
+}
+
+.status-default.marker-ring {
+  border-color: var(--color-action-primary);
+}
+
+.status-success {
+  background: var(--color-text-success);
+  color: var(--color-text-on-action);
+}
+
+.status-success.marker-ring {
+  border-color: var(--color-text-success);
+}
+
+.status-error {
+  background: var(--color-text-error);
+  color: var(--color-text-on-action);
+}
+
+.status-error.marker-ring {
+  border-color: var(--color-text-error);
+}
+
+.status-warning {
+  background: var(--color-text-warning);
+  color: var(--color-text-on-action);
+}
+
+.status-warning.marker-ring {
+  border-color: var(--color-text-warning);
+}
+
+.status-info {
+  background: var(--color-text-info);
+  color: var(--color-text-on-action);
+}
+
+.status-info.marker-ring {
+  border-color: var(--color-text-info);
+}
+
+/* ─── Label ─── */
+.label {
+  font-size: var(--font-size-100);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-050);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ─── Content body ─── */
+.body {
+  font-size: var(--font-size-200);
+  color: var(--color-text-secondary);
+}
+
+/* ─── Alternate variant (vertical only) ─── */
+.alternate.vertical .item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.alternate.vertical .item:nth-child(even) .content {
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .alternate.vertical .item:nth-child(even) {
+    flex-direction: row;
+  }
+
+  .alternate.vertical .item:nth-child(even) .content {
+    text-align: left;
+  }
+}

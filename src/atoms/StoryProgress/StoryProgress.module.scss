@@ -1,0 +1,87 @@
+/* ─── StoryProgress: cinematic segmented progress (stories/reels) ─── */
+.root {
+  display: flex;
+  gap: var(--space-075);
+  width: 100%;
+  max-width: 680px;
+  align-items: center;
+}
+
+.segment {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  border-radius: var(--radius-full);
+  /* Inset channel: soft inner depth so segments read as tracks */
+  background: var(--color-bg-secondary);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--grey-100) 10%, transparent);
+}
+
+/* ─── Sizes ─── */
+.trackXs { height: var(--space-025); }
+.trackSm { height: var(--space-050); }
+.trackMd { height: var(--space-100); }
+.trackLg { height: var(--space-150); }
+
+/* ─── Fill: gradient + leading-edge highlight, smooth motion ─── */
+.fill {
+  position: relative;
+  height: 100%;
+  min-width: 2px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    90deg,
+    var(--color-action-primary) 0%,
+    color-mix(in srgb, var(--color-action-primary) 78%, var(--grey-0)) 100%
+  );
+  transition: width 280ms cubic-bezier(0.33, 1, 0.68, 1);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-action-primary) 28%, transparent);
+}
+
+/* Soft highlight at the leading edge (playhead feel) */
+.fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--grey-0) 40%, transparent)
+  );
+  pointer-events: none;
+}
+
+/* ─── Variants ─── */
+.default .fill {
+  background: linear-gradient(
+    90deg,
+    var(--color-action-primary) 0%,
+    color-mix(in srgb, var(--color-action-primary) 78%, var(--grey-0)) 100%
+  );
+}
+
+.subtle .segment {
+  background: color-mix(in srgb, var(--grey-0) calc(var(--opacity-032) * 100%), transparent);
+  box-shadow: none;
+}
+
+.subtle .fill {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--grey-0) calc(var(--opacity-064) * 100%), transparent) 0%,
+    color-mix(in srgb, var(--grey-0) calc(var(--opacity-088) * 100%), transparent) 100%
+  );
+  box-shadow: 0 0 8px color-mix(in srgb, var(--grey-0) calc(var(--opacity-024) * 100%), transparent);
+}
+
+.subtle .fill::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--grey-0) 30%, transparent)
+  );
+}

@@ -89,6 +89,35 @@ export function FormFieldShowcase() {
           </FormField>
         </div>
       </div>
+
+      {/* Dark theme preview */}
+      <div>
+        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Theme Comparison</div>
+        <div className="theme-comparison">
+          <div data-theme="light" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
+            <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>LIGHT</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <FormField label="Email" htmlFor="theme-email" hint="We'll never share your email">
+                <Input id="theme-email" placeholder="you@example.com" />
+              </FormField>
+              <FormField label="Password" htmlFor="theme-pass" required error="Must be 8+ characters">
+                <Input id="theme-pass" type="password" error placeholder="Enter password" />
+              </FormField>
+            </div>
+          </div>
+          <div data-theme="dark" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
+            <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>DARK</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <FormField label="Email" htmlFor="theme-email-dark" hint="We'll never share your email">
+                <Input id="theme-email-dark" placeholder="you@example.com" />
+              </FormField>
+              <FormField label="Password" htmlFor="theme-pass-dark" required error="Must be 8+ characters">
+                <Input id="theme-pass-dark" type="password" error placeholder="Enter password" />
+              </FormField>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

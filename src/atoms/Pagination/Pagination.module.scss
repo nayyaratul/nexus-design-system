@@ -1,0 +1,114 @@
+.pagination {
+  display: inline-flex;
+}
+
+.list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-050);
+}
+
+/* ─── Button base ─── */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-100);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--sans);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  padding: 0;
+  line-height: 1;
+  user-select: none;
+
+  &:hover:not(:disabled):not(.active) {
+    background: var(--color-interactive-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: var(--opacity-048);
+    cursor: not-allowed;
+  }
+}
+
+/* ─── Active page ─── */
+.active {
+  background: var(--color-action-primary);
+  color: var(--color-text-on-action);
+  border-color: var(--color-action-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--color-action-primary);
+    border-color: var(--color-action-primary);
+  }
+}
+
+/* ─── Ellipsis ─── */
+.ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  cursor: default;
+  user-select: none;
+}
+
+/* ─── Prev / Next ─── */
+.prevNext {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Sizes ─── */
+.sm {
+  .button,
+  .ellipsis {
+    min-width: 32px;
+    height: 32px;
+    font-size: var(--font-size-100);
+  }
+}
+
+.md {
+  .button,
+  .ellipsis {
+    min-width: 36px;
+    height: 36px;
+    font-size: var(--font-size-200);
+  }
+}
+
+.lg {
+  .button,
+  .ellipsis {
+    min-width: 44px;
+    height: 44px;
+    font-size: var(--font-size-300);
+  }
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 479px) {
+  .button,
+  .ellipsis {
+    min-width: 44px;
+    height: 44px;
+  }
+}

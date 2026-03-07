@@ -26,23 +26,55 @@ const navGroups = [
     label: 'Components',
     items: [
       { name: 'Atoms', href: '/atoms', id: 'atoms', icon: '○', children: [
-        { name: 'Button',     href: '/atoms/button',     id: 'atoms/button' },
-        { name: 'Icon',       href: '/atoms/icon',       id: 'atoms/icon' },
-        { name: 'Heading',    href: '/atoms/heading',    id: 'atoms/heading' },
-        { name: 'Text',       href: '/atoms/text',       id: 'atoms/text' },
-        { name: 'Badge',      href: '/atoms/badge',      id: 'atoms/badge' },
-        { name: 'Avatar',     href: '/atoms/avatar',     id: 'atoms/avatar' },
-        { name: 'Spinner',    href: '/atoms/spinner',    id: 'atoms/spinner' },
-        { name: 'Label',      href: '/atoms/label',      id: 'atoms/label' },
-        { name: 'Input',      href: '/atoms/input',      id: 'atoms/input' },
-        { name: 'Textarea',   href: '/atoms/textarea',   id: 'atoms/textarea' },
-        { name: 'Checkbox',   href: '/atoms/checkbox',   id: 'atoms/checkbox' },
-        { name: 'Switch',     href: '/atoms/switch',     id: 'atoms/switch' },
-        { name: 'RadioGroup', href: '/atoms/radiogroup', id: 'atoms/radiogroup' },
-        { name: 'Select',     href: '/atoms/select',     id: 'atoms/select' },
-        { name: 'FormField',  href: '/atoms/formfield',  id: 'atoms/formfield' },
+        { name: 'Accordion',      href: '/atoms/accordion',      id: 'atoms/accordion' },
+        { name: 'Alert',           href: '/atoms/alert',           id: 'atoms/alert' },
+        { name: 'AspectRatio',     href: '/atoms/aspectratio',     id: 'atoms/aspectratio' },
+        { name: 'Avatar',          href: '/atoms/avatar',          id: 'atoms/avatar' },
+        { name: 'Badge',           href: '/atoms/badge',           id: 'atoms/badge' },
+        { name: 'Button',          href: '/atoms/button',          id: 'atoms/button' },
+        { name: 'Calendar',        href: '/atoms/calendar',        id: 'atoms/calendar' },
+        { name: 'Checkbox',        href: '/atoms/checkbox',        id: 'atoms/checkbox' },
+        { name: 'Code',            href: '/atoms/code',            id: 'atoms/code' },
+        { name: 'Divider',         href: '/atoms/divider',         id: 'atoms/divider' },
+        { name: 'FileInput',       href: '/atoms/fileinput',       id: 'atoms/fileinput' },
+        { name: 'FormField',       href: '/atoms/formfield',       id: 'atoms/formfield' },
+        { name: 'Heading',         href: '/atoms/heading',         id: 'atoms/heading' },
+        { name: 'Icon',            href: '/atoms/icon',            id: 'atoms/icon' },
+        { name: 'Image',           href: '/atoms/image',           id: 'atoms/image' },
+        { name: 'Input',           href: '/atoms/input',           id: 'atoms/input' },
+        { name: 'Label',           href: '/atoms/label',           id: 'atoms/label' },
+        { name: 'Link',            href: '/atoms/link',            id: 'atoms/link' },
+        { name: 'Menu',            href: '/atoms/menu',            id: 'atoms/menu' },
+        { name: 'Overlay',         href: '/atoms/overlay',         id: 'atoms/overlay' },
+        { name: 'Pagination',      href: '/atoms/pagination',      id: 'atoms/pagination' },
+        { name: 'Popover',         href: '/atoms/popover',         id: 'atoms/popover' },
+        { name: 'ProgressBar',     href: '/atoms/progressbar',     id: 'atoms/progressbar' },
+        { name: 'RadioGroup',      href: '/atoms/radiogroup',      id: 'atoms/radiogroup' },
+        { name: 'RatingStar',      href: '/atoms/ratingstar',      id: 'atoms/ratingstar' },
+        { name: 'Select',          href: '/atoms/select',          id: 'atoms/select' },
+        { name: 'Skeleton',        href: '/atoms/skeleton',        id: 'atoms/skeleton' },
+        { name: 'Slider',          href: '/atoms/slider',          id: 'atoms/slider' },
+        { name: 'Spinner',         href: '/atoms/spinner',         id: 'atoms/spinner' },
+        { name: 'Steps',           href: '/atoms/steps',           id: 'atoms/steps' },
+        { name: 'StoryProgress',   href: '/atoms/storyprogress',   id: 'atoms/storyprogress' },
+        { name: 'Switch',          href: '/atoms/switch',          id: 'atoms/switch' },
+        { name: 'Table',           href: '/atoms/table',           id: 'atoms/table' },
+        { name: 'Tabs',            href: '/atoms/tabs',            id: 'atoms/tabs' },
+        { name: 'Tag',             href: '/atoms/tag',             id: 'atoms/tag' },
+        { name: 'Text',            href: '/atoms/text',            id: 'atoms/text' },
+        { name: 'Textarea',        href: '/atoms/textarea',        id: 'atoms/textarea' },
+        { name: 'Thumbnail',       href: '/atoms/thumbnail',       id: 'atoms/thumbnail' },
+        { name: 'Timeline',        href: '/atoms/timeline',        id: 'atoms/timeline' },
+        { name: 'Timer',           href: '/atoms/timer',           id: 'atoms/timer' },
+        { name: 'Toast',           href: '/atoms/toast',           id: 'atoms/toast' },
+        { name: 'Toggle',          href: '/atoms/toggle',          id: 'atoms/toggle' },
+        { name: 'ToggleGroup',     href: '/atoms/togglegroup',     id: 'atoms/togglegroup' },
+        { name: 'Tooltip',         href: '/atoms/tooltip',         id: 'atoms/tooltip' },
+        { name: 'VisuallyHidden',  href: '/atoms/visuallyhidden',  id: 'atoms/visuallyhidden' },
       ]},
-      { name: 'Molecules',  href: '/molecules',   id: 'molecules',  icon: '◎' },
+      { name: 'Molecules',  href: '/molecules',   id: 'molecules',  icon: '◎', children: [
+        { name: 'Dropzone', href: '/molecules/dropzone', id: 'molecules/dropzone' },
+      ]},
       { name: 'Organisms',  href: '/organisms',   id: 'organisms',  icon: '◉' },
     ],
   },
@@ -92,7 +124,7 @@ const isAtomSection = section.startsWith('atoms');
                   <span class="nav-icon">{item.icon}</span>
                   {item.name}
                 </a>
-                {item.children && isAtomSection && (
+                {item.children && (isAtomSection || section.startsWith('molecules')) && (
                   <div class="nav-children">
                     {item.children.map((child) => (
                       <a
@@ -120,6 +152,27 @@ const isAtomSection = section.startsWith('atoms');
 
   </div>
   <BrandPicker client:load />
+<script>
+  const sidebar = document.querySelector('.sidebar');
+  if (sidebar) {
+    const key = 'nexus-sidebar-scroll';
+    const saved = sessionStorage.getItem(key);
+    if (saved) {
+      sidebar.scrollTop = Number(saved);
+    } else {
+      const active = sidebar.querySelector('.nav-link.active, .nav-child-link.active');
+      if (active) active.scrollIntoView({ block: 'center' });
+    }
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem(key, String(sidebar.scrollTop));
+    });
+    document.querySelectorAll('.sidebar a[href]').forEach((a) => {
+      a.addEventListener('click', () => {
+        sessionStorage.setItem(key, String(sidebar.scrollTop));
+      });
+    });
+  }
+</script>
 </body>
 </html>
 

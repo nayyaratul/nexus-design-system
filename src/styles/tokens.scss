@@ -137,7 +137,7 @@
   --color-bg-elevated:      #FFFFFF;
   --color-bg-sunken:        var(--cool-0);
   --color-bg-disabled:      var(--grey-10);
-  --color-bg-overlay:       rgba(8, 8, 8, 0.48);
+  --color-bg-overlay:       color-mix(in srgb, var(--grey-100) calc(var(--opacity-048) * 100%), transparent);
 
   /* Background — status */
   --color-bg-success:       var(--green-0);
@@ -177,6 +177,16 @@
   /* Interactive */
   --color-interactive-hover:  var(--grey-10);
   --color-interactive-active: var(--grey-20);
+
+  /* Tooltip */
+  --tooltip-bg:    var(--grey-90);
+  --tooltip-color: var(--grey-0);
+
+  /* Rating star — filled state uses yellow-20 (standard exception for brighter star) */
+  --color-rating-filled: var(--yellow-20);
+
+  /* Table — header background (semantic → primitive) */
+  --color-table-header-bg: var(--grey-10);
 }
 
 
@@ -202,7 +212,7 @@
   --color-bg-elevated:      var(--grey-90);
   --color-bg-sunken:        var(--cool-100);
   --color-bg-disabled:      var(--grey-90);
-  --color-bg-overlay:       rgba(8, 8, 8, 0.72);
+  --color-bg-overlay:       color-mix(in srgb, var(--grey-100) calc(var(--opacity-072) * 100%), transparent);
 
   /* Background — status (mirror: 0→90) */
   --color-bg-success:       var(--green-90);
@@ -242,4 +252,14 @@
   /* Interactive */
   --color-interactive-hover:  var(--grey-90);
   --color-interactive-active: var(--grey-80);
+
+  /* Tooltip */
+  --tooltip-bg:    var(--grey-10);
+  --tooltip-color: var(--grey-100);
+
+  /* Rating star — filled state uses yellow-20 (standard exception for brighter star) */
+  --color-rating-filled: var(--yellow-20);
+
+  /* Table — header background (semantic → primitive) */
+  --color-table-header-bg: var(--grey-90);
 }

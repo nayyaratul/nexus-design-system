@@ -1,0 +1,93 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { RatingStarShowcase } from '../../components/atoms/RatingStarShowcase';
+---
+
+<Layout title="RatingStar" section="atoms/ratingstar">
+  <h1 class="page-title">RatingStar</h1>
+  <p class="page-sub">Single star atom (filled, empty, half) for use inside the Rating molecule — token-only styling</p>
+
+  <div class="section rating-star-page">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">States, sizes, disabled, and theme comparison</span>
+    </div>
+    <RatingStarShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">State</span><span>filled, empty, half — required; drives colour and half clip</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Size</span><span>xs/sm/md/lg/xl (match Icon): --font-size-200/400/500/600/800; default md</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Disabled</span><span>opacity: var(--opacity-048); colours unchanged</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Filled colour</span><span>var(--color-rating-filled) → yellow-20 (standard exception)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Empty colour</span><span>var(--color-text-tertiary)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Half</span><span>Two layers: empty full star + filled star clipped to left 50%</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Role</span><span>Presentational only; parent Rating molecule owns interaction and ARIA</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · RatingStar Atom</div>
+</Layout>
+
+<style>
+  /* Showcase layout: hero + card-style blocks with stagger (gap set inline in component for reliability) */
+  .rating-star-page .rating-star-showcase {
+    max-width: 100%;
+  }
+
+  .rating-star-showcase__hero {
+    text-align: center;
+  }
+
+  .rating-star-showcase__block {
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .rating-star-showcase__block,
+    .rating-star-showcase__hero {
+      animation: rating-star-fade-in 0.4s ease-out backwards;
+    }
+    .rating-star-showcase__hero { animation-delay: 0.05s; }
+    .rating-star-showcase__block:nth-child(2) { animation-delay: 0.1s; }
+    .rating-star-showcase__block:nth-child(3) { animation-delay: 0.15s; }
+    .rating-star-showcase__block:nth-child(4) { animation-delay: 0.2s; }
+    .rating-star-showcase__block:nth-child(5) { animation-delay: 0.25s; }
+    .rating-star-showcase__block:nth-child(6) { animation-delay: 0.3s; }
+  }
+
+  @keyframes rating-star-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(var(--space-100));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .atom-spec {
+    background: var(--card-bg);
+    border: var(--border-width-100) solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: var(--space-125) var(--space-200);
+    font-size: var(--font-size-300);
+    border-bottom: var(--border-width-100) solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: var(--font-weight-medium);
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

@@ -2793,6 +2793,22 @@
   --tp-danger:      #FC5C59;
 }
 
+/* ─── THEME COMPARISON (atom showcases: light/dark side-by-side) ─── */
+.theme-comparison {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-200);
+  max-width: 100%;
+}
+.theme-comparison > * {
+  min-width: 0;
+  flex: 1 1 260px;
+  max-width: 100%;
+}
+.theme-comparison-panel-content {
+  max-width: 100%;
+}
+
 .tp-label {
   font-family: var(--mono);
   font-size: 11px;

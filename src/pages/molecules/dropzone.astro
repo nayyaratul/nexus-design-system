@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { DropzoneShowcase } from '../../components/molecules/DropzoneShowcase';
+---
+
+<Layout title="Dropzone" section="molecules/dropzone">
+  <h1 class="page-title">Dropzone</h1>
+  <p class="page-sub">File upload with drop zone — drag-and-drop and click-to-browse, composed from Upload File</p>
+
+  <p class="page-intro">
+    A focusable drop area that opens the native file picker on click or keyboard. Composes the Upload File atom and VisuallyHidden for accessibility. Use with FormField for labels and validation messages.
+  </p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Drag files onto the area or click to browse</span>
+    </div>
+    <div class="showcase-wrap">
+      <DropzoneShowcase client:load />
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Composes</span><span>Upload File (atom), VisuallyHidden (atom)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>accept, multiple, size, disabled, error, prompt, hint, browseLabel, showIcon, onChange, onFilesChange, id, name</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Ref</span><span>Forwarded to underlying Upload File for form submission</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Behaviour</span><span>Click or Enter/Space opens file picker; drag-over/drop sets files and fires change</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>role="button", tabIndex=0, aria-label from prompt; keyboard triggers input</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens</span><span>--color-border-default, --color-bg-elevated, --color-border-focus, --space-*</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Mobile</span><span>Prefer size sm for inline forms (48px tap target); use md/lg for drop area. Tap opens picker; drag-and-drop secondary on touch.</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Dropzone Molecule</div>
+</Layout>
+
+<style>
+  .page-intro {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-400);
+    max-width: 52ch;
+  }
+  .showcase-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    padding: var(--space-300);
+  }
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    align-items: baseline;
+    padding: var(--space-150) var(--space-200);
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-300);
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 140px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+</style>

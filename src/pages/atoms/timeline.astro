@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { TimelineShowcase } from '../../components/atoms/TimelineShowcase';
+---
+
+<Layout title="Timeline" section="atoms/timeline">
+  <h1 class="page-title">Timeline</h1>
+  <p class="page-sub">Vertical and horizontal timelines with dot, ring, and icon markers plus status colouring</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">All orientations, markers, and status variants</span>
+    </div>
+    <TimelineShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Structure</span><span>role="list" container with role="listitem" children; marker column + content area</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Orientation</span><span>vertical (default), horizontal with overflow-x auto</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default (single-side), alternate (items alternate left/right)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Markers</span><span>dot (12px filled circle), ring (12px outlined), icon (24px circle with Lucide icon)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Status</span><span>default (brand-primary), success, error, warning, info</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Label</span><span>Optional label above content, font-size-100, colour text-tertiary</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Mobile</span><span>Alternate falls back to single-side below 640px; horizontal scrolls</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Timeline Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

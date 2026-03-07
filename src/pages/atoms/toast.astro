@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { ToastShowcase } from '../../components/atoms/ToastShowcase';
+---
+
+<Layout title="Toast" section="atoms/toast">
+  <h1 class="page-title">Toast</h1>
+  <p class="page-sub">Radix toast notifications with 4 variants, auto-dismiss, swipe gestures, and action buttons</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — click buttons to trigger toasts</span>
+    </div>
+    <ToastShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default, success, error, warning</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Position</span><span>Fixed bottom-right, z-index 9999</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Animation</span><span>Slide in from right, fade out</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Exports</span><span>ToastProvider, Toast, ToastTitle, ToastDescription, ToastAction, ToastClose, ToastViewport</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>@radix-ui/react-toast</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Toast Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

@@ -1,0 +1,54 @@
+/* Custom trigger + optional filename. No native file button — matches Input/Button design. */
+.root {
+  display: block;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-150);
+  flex-wrap: wrap;
+}
+
+.fileLabel {
+  font-family: var(--sans);
+  color: var(--color-text-tertiary);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileLabel.hasFile {
+  color: var(--color-text-primary);
+}
+
+.label_sm {
+  font-size: var(--font-size-200);
+  line-height: var(--line-height-200);
+}
+
+.label_md {
+  font-size: var(--font-size-300);
+  line-height: var(--line-height-300);
+}
+
+.label_lg {
+  font-size: var(--font-size-400);
+  line-height: var(--line-height-400);
+}
+
+.error .fileLabel {
+  color: var(--color-border-error);
+}
+
+.disabled .fileLabel {
+  color: var(--color-text-disabled);
+}
+
+/* Tooltip for truncated filename — centre text */
+.fileLabelTooltipContent {
+  text-align: center;
+}

@@ -1,0 +1,110 @@
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-125);
+  padding: var(--space-150);
+  border-radius: var(--radius-100);
+  border-left: 3px solid;
+  font-family: var(--sans);
+
+  @media (max-width: 480px) {
+    padding: var(--space-100);
+    gap: var(--space-100);
+  }
+}
+
+.icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  margin-top: 1px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-300);
+  line-height: var(--line-height-300);
+}
+
+.body {
+  font-size: var(--font-size-300);
+  line-height: var(--line-height-300);
+  margin-top: var(--space-050);
+  color: var(--color-text-secondary);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-100);
+  margin-top: var(--space-100);
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.dismiss {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-050);
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.6;
+  transition: opacity 150ms ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+/* ─── Variants ─── */
+.info {
+  background: var(--color-bg-info-subtle);
+  border-left-color: var(--color-text-info);
+  color: var(--color-text-primary);
+
+  .icon { color: var(--color-text-info); }
+  .title { color: var(--color-text-info); }
+}
+
+.success {
+  background: var(--color-bg-success-subtle);
+  border-left-color: var(--color-text-success);
+  color: var(--color-text-primary);
+
+  .icon { color: var(--color-text-success); }
+  .title { color: var(--color-text-success); }
+}
+
+.warning {
+  background: var(--color-bg-warning-subtle);
+  border-left-color: var(--color-text-warning);
+  color: var(--color-text-primary);
+
+  .icon { color: var(--color-text-warning); }
+  .title { color: var(--color-text-warning); }
+}
+
+.error {
+  background: var(--color-bg-error-subtle);
+  border-left-color: var(--color-text-error);
+  color: var(--color-text-primary);
+
+  .icon { color: var(--color-text-error); }
+  .title { color: var(--color-text-error); }
+}

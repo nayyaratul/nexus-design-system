@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { ProgressBarShowcase } from '../../components/atoms/ProgressBarShowcase';
+---
+
+<Layout title="ProgressBar" section="atoms/progressbar">
+  <h1 class="page-title">ProgressBar</h1>
+  <p class="page-sub">Radix progress bar with 4 sizes (xs–lg), 5 variants including subtle overlay, and smooth animated fill</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Animated fill cycles 0–100%</span>
+    </div>
+    <ProgressBarShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>xs (2px), sm (4px), md (8px), lg (12px) — via --space-025, --space-050, --space-100, --space-150.</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default, success, warning, error, subtle (semi-transparent white for overlay).</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Track</span><span>--color-bg-secondary (default). Subtle: color-mix(--grey-0, --opacity-032). border-radius full.</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Fill</span><span>--color-action-primary (default), variant colours. Subtle: color-mix(--grey-0, --opacity-080).</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Transition</span><span>width 300ms ease</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>@radix-ui/react-progress</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · ProgressBar Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

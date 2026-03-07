@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { TabsShowcase } from '../../components/atoms/TabsShowcase';
+---
+
+<Layout title="Tabs" section="atoms/tabs">
+  <h1 class="page-title">Tabs</h1>
+  <p class="page-sub">A set of layered content panels, activated one at a time via tabbed navigation, built on Radix Tabs primitive</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Default, underline, pills, icons, sizes, and themed variants</span>
+    </div>
+    <TabsShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Anatomy</span></div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>@radix-ui/react-tabs</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default (bottom border fill), underline (brand underline), pills (rounded brand bg)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm (32px, font-size-100), md (36px, font-size-200), lg (44px, font-size-300)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Orientation</span><span>horizontal (default), vertical</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Icon</span><span>Optional leading icon via icon prop on TabsTrigger</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">States</span><span>active, hover, focus-visible, disabled</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Focus</span><span>2px solid focus ring with 2px offset</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Mobile</span><span>Horizontal scroll with snap, hidden scrollbar, touch-friendly</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Context</span><span>TabsContext shares variant and size from root to children</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System &middot; Tabs Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

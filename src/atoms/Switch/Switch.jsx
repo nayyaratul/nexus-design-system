@@ -6,6 +6,7 @@ import styles from './Switch.module.scss';
 export const Switch = forwardRef(function Switch(
   {
     checked,
+    defaultChecked,
     onCheckedChange,
     disabled = false,
     size = 'md',
@@ -14,11 +15,14 @@ export const Switch = forwardRef(function Switch(
   },
   ref,
 ) {
+  const controlledProps = checked !== undefined
+    ? { checked, onCheckedChange }
+    : { defaultChecked, onCheckedChange };
+
   return (
     <SwitchPrimitive.Root
       ref={ref}
-      checked={checked}
-      onCheckedChange={onCheckedChange}
+      {...controlledProps}
       disabled={disabled}
       className={cx(
         styles.track,

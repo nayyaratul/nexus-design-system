@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { ToggleGroupShowcase } from '../../components/atoms/ToggleGroupShowcase';
+---
+
+<Layout title="ToggleGroup" section="atoms/togglegroup">
+  <h1 class="page-title">ToggleGroup</h1>
+  <p class="page-sub">A set of joined two-state buttons for single or multiple selection, built on Radix Toggle Group primitive</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive toggle group configurations</span>
+    </div>
+    <ToggleGroupShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Anatomy</span></div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>@radix-ui/react-toggle-group</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Type</span><span>single (one value) or multiple (array of values)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default (transparent bg), outline (bordered)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm (32px), md (40px), lg (48px)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Orientation</span><span>horizontal (default), vertical</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Joined borders</span><span>Items share borders, rounded on first/last only</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">States</span><span>off, on (data-state="on"), hover, disabled</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Focus</span><span>2px solid focus ring with 2px offset</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · ToggleGroup Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

@@ -4,171 +4,1140 @@ import Layout from '../layouts/Default.astro';
 
 <Layout title="Brand" section="brand">
 
-  <header class="page-header">
-    <h1 class="page-title">Brand Colour</h1>
-    <p class="page-subtitle">
-      Override the primary colour across the entire design system to match any brand identity.
-      Use the picker bar above to preview changes in real-time.
-    </p>
-  </header>
-
-  <section class="content-block">
-    <h2>How it works</h2>
-    <p>
-      The design system defines a <code>--brand-*</code> scale (0&ndash;100 in steps of 10) that
-      maps to semantic tokens like <code>--action-primary</code>, focus rings, and active states.
-      Changing the brand colour regenerates the entire scale using perceptually uniform OKLCh colour
-      space, ensuring consistent contrast ratios at every step.
-    </p>
-  </section>
-
-  <section class="content-block">
-    <h2>The scale</h2>
-    <div class="brand-scale" id="brand-scale">
-      <!-- populated by JS -->
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO — Immersive brand colour reveal
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="brand-hero">
+    <div class="brand-hero-content">
+      <p class="brand-hero-overline">Dynamic Theming</p>
+      <h1 class="brand-hero-title">Brand Colour</h1>
+      <p class="brand-hero-sub">
+        One hex input regenerates an 11-step OKLCh colour scale, rewriting every
+        semantic token across the entire system. White-label&nbsp;ready.
+      </p>
     </div>
-  </section>
-
-  <section class="content-block">
-    <h2>Usage</h2>
-    <div class="code-block">
-      <pre><code>import {'{'} setBrandColour {'}'} from 'src/utils/setBrandColour.js';
-
-// Apply a custom brand colour at runtime
-setBrandColour('#1C6EF1');
-
-// The function generates an 11-step OKLCh scale and sets
-// --brand-0 through --brand-100 on :root.</code></pre>
+    <div class="brand-hero-swatch" id="hero-swatch">
+      <div class="hero-swatch-inner">
+        <span class="hero-swatch-hex" id="hero-hex">#A03AFF</span>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <section class="content-block">
-    <h2>Per-client override</h2>
-    <p>
-      For static builds, override the brand scale in your theme's CSS file. For runtime theming
-      (e.g. white-label products), call <code>setBrandColour()</code> on page load with the
-      client's primary hex.
-    </p>
-  </section>
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 1 — Full OKLCh Scale
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">The Scale</span>
+      <span class="section-desc">11 perceptually uniform steps via OKLCh &mdash; hover to inspect, click to copy</span>
+    </div>
+
+    <div class="scale-container">
+      <div class="scale-strip" id="brand-scale"></div>
+      <div class="scale-labels" id="scale-labels"></div>
+    </div>
+
+    <div class="scale-meta">
+      <div class="scale-meta-item">
+        <span class="scale-meta-label">Colour space</span>
+        <span class="scale-meta-value">OKLCh (perceptual)</span>
+      </div>
+      <div class="scale-meta-item">
+        <span class="scale-meta-label">Steps</span>
+        <span class="scale-meta-value">0 &ndash; 100 (increments of 10)</span>
+      </div>
+      <div class="scale-meta-item">
+        <span class="scale-meta-label">Chroma</span>
+        <span class="scale-meta-value">Reduced at extremes to prevent clipping</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 2 — Token Mapping
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Token Mapping</span>
+      <span class="section-desc">How the brand scale maps to semantic tokens</span>
+    </div>
+
+    <div class="token-map">
+      <div class="token-map-row token-map-header">
+        <span class="token-map-cell tm-token">Semantic Token</span>
+        <span class="token-map-cell tm-step">Scale Step</span>
+        <span class="token-map-cell tm-preview">Preview</span>
+      </div>
+      <div class="token-map-row" data-step="50">
+        <span class="token-map-cell tm-token"><code>--action-primary</code></span>
+        <span class="token-map-cell tm-step">brand-50</span>
+        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-50"></span></span>
+      </div>
+      <div class="token-map-row" data-step="40">
+        <span class="token-map-cell tm-token"><code>--action-primary-hover</code></span>
+        <span class="token-map-cell tm-step">brand-40</span>
+        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-40"></span></span>
+      </div>
+      <div class="token-map-row" data-step="60">
+        <span class="token-map-cell tm-token"><code>--action-primary-active</code></span>
+        <span class="token-map-cell tm-step">brand-60</span>
+        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-60"></span></span>
+      </div>
+      <div class="token-map-row" data-step="30">
+        <span class="token-map-cell tm-token"><code>--border-focus</code></span>
+        <span class="token-map-cell tm-step">brand-30</span>
+        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-30"></span></span>
+      </div>
+      <div class="token-map-row" data-step="10">
+        <span class="token-map-cell tm-token"><code>--bg-action-subtle</code></span>
+        <span class="token-map-cell tm-step">brand-10</span>
+        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-10"></span></span>
+      </div>
+      <div class="token-map-row" data-step="80">
+        <span class="token-map-cell tm-token"><code>--text-on-action</code></span>
+        <span class="token-map-cell tm-step">brand-0 (white)</span>
+        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-0"></span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 3 — Live Component Preview
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">In Context</span>
+      <span class="section-desc">Live preview of the brand colour applied to UI components</span>
+    </div>
+
+    <div class="preview-grid">
+      <!-- Buttons -->
+      <div class="preview-card">
+        <div class="preview-card-label">Buttons</div>
+        <div class="preview-card-body">
+          <button class="pv-btn pv-btn--primary">Enrol Now</button>
+          <button class="pv-btn pv-btn--outline">View Syllabus</button>
+          <button class="pv-btn pv-btn--ghost">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Focus ring -->
+      <div class="preview-card">
+        <div class="preview-card-label">Focus Ring</div>
+        <div class="preview-card-body">
+          <input type="text" class="pv-input pv-input--focused" value="jane@university.edu" readonly />
+        </div>
+      </div>
+
+      <!-- Badge & Tags -->
+      <div class="preview-card">
+        <div class="preview-card-label">Badges & Links</div>
+        <div class="preview-card-body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span class="pv-badge">Active</span>
+            <span class="pv-badge pv-badge--subtle">3 new</span>
+          </div>
+          <a href="#" class="pv-link" onclick="event.preventDefault()">View course details &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Toggle / Switch -->
+      <div class="preview-card">
+        <div class="preview-card-label">Toggle</div>
+        <div class="preview-card-body">
+          <div class="pv-switch-row">
+            <span class="pv-switch-label">Notifications</span>
+            <div class="pv-switch pv-switch--on">
+              <div class="pv-switch-thumb"></div>
+            </div>
+          </div>
+          <div class="pv-switch-row">
+            <span class="pv-switch-label">Dark mode</span>
+            <div class="pv-switch">
+              <div class="pv-switch-thumb"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="preview-card preview-card--wide">
+        <div class="preview-card-label">Progress</div>
+        <div class="preview-card-body" style="flex-direction: column; gap: 12px;">
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+              <span style="font-size: 12px; font-weight: 500;">Course Completion</span>
+              <span style="font-size: 12px; color: var(--ink-3);">68%</span>
+            </div>
+            <div class="pv-progress">
+              <div class="pv-progress-bar" style="width: 68%;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+              <span style="font-size: 12px; font-weight: 500;">Quiz Score</span>
+              <span style="font-size: 12px; color: var(--ink-3);">92%</span>
+            </div>
+            <div class="pv-progress">
+              <div class="pv-progress-bar" style="width: 92%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selection / Radio -->
+      <div class="preview-card preview-card--wide">
+        <div class="preview-card-label">Selection</div>
+        <div class="preview-card-body" style="gap: 16px;">
+          <label class="pv-radio">
+            <span class="pv-radio-circle pv-radio-circle--selected"></span>
+            <span>Monthly</span>
+          </label>
+          <label class="pv-radio">
+            <span class="pv-radio-circle"></span>
+            <span>Annual</span>
+          </label>
+          <label class="pv-radio">
+            <span class="pv-radio-circle"></span>
+            <span>Lifetime</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 4 — Multi-brand Comparison
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Multi-Brand</span>
+      <span class="section-desc">Same component, different brand identities &mdash; click a swatch to apply system-wide</span>
+    </div>
+
+    <div class="multibrand-row" id="multibrand">
+      <button class="multibrand-card" data-hex="#A03AFF">
+        <div class="mb-scale-mini" data-brand="#A03AFF"></div>
+        <div class="mb-info">
+          <span class="mb-name">Nexus Purple</span>
+          <span class="mb-hex">#A03AFF</span>
+        </div>
+        <button class="mb-btn" style="background: #A03AFF;">Enrol</button>
+      </button>
+      <button class="multibrand-card" data-hex="#1C6EF1">
+        <div class="mb-scale-mini" data-brand="#1C6EF1"></div>
+        <div class="mb-info">
+          <span class="mb-name">Ocean Blue</span>
+          <span class="mb-hex">#1C6EF1</span>
+        </div>
+        <button class="mb-btn" style="background: #1C6EF1;">Enrol</button>
+      </button>
+      <button class="multibrand-card" data-hex="#059669">
+        <div class="mb-scale-mini" data-brand="#059669"></div>
+        <div class="mb-info">
+          <span class="mb-name">Emerald</span>
+          <span class="mb-hex">#059669</span>
+        </div>
+        <button class="mb-btn" style="background: #059669;">Enrol</button>
+      </button>
+      <button class="multibrand-card" data-hex="#E32631">
+        <div class="mb-scale-mini" data-brand="#E32631"></div>
+        <div class="mb-info">
+          <span class="mb-name">Signal Red</span>
+          <span class="mb-hex">#E32631</span>
+        </div>
+        <button class="mb-btn" style="background: #E32631;">Enrol</button>
+      </button>
+      <button class="multibrand-card" data-hex="#F59E0B">
+        <div class="mb-scale-mini" data-brand="#F59E0B"></div>
+        <div class="mb-info">
+          <span class="mb-name">Amber</span>
+          <span class="mb-hex">#F59E0B</span>
+        </div>
+        <button class="mb-btn" style="background: #F59E0B;">Enrol</button>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 5 — Usage / API
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Usage</span>
+      <span class="section-desc">Runtime and build-time integration</span>
+    </div>
+
+    <div class="usage-grid">
+      <div class="usage-card">
+        <div class="usage-card-label">Runtime</div>
+        <div class="usage-card-desc">
+          For white-label products or user-customisable themes, call <code>setBrandColour()</code>
+          on page load. It regenerates the full OKLCh scale and patches <code>:root</code> CSS variables.
+        </div>
+        <div class="code-block">
+          <pre><code><span class="ck">import</span> {'{'} setBrandColour {'}'} <span class="ck">from</span> <span class="cs">'nexus/utils/setBrandColour'</span>;
+
+<span class="cc">// Apply client brand colour</span>
+setBrandColour(<span class="cs">'#1C6EF1'</span>);
+
+<span class="cc">// Sets --brand-0 through --brand-100 on :root</span>
+<span class="cc">// All semantic tokens update automatically</span></code></pre>
+        </div>
+      </div>
+      <div class="usage-card">
+        <div class="usage-card-label">Static / Build-time</div>
+        <div class="usage-card-desc">
+          For static builds, override the brand scale directly in your theme CSS. Each step maps
+          to the OKLCh lightness target for consistent contrast ratios.
+        </div>
+        <div class="code-block">
+          <pre><code><span class="ck">:root</span> {'{'}
+  <span class="cp">--brand-0</span>:   <span class="cs">#F0F4FF</span>;
+  <span class="cp">--brand-10</span>:  <span class="cs">#D1E0F6</span>;
+  <span class="cp">--brand-20</span>:  <span class="cs">#ABC4EE</span>;
+  <span class="cp">--brand-50</span>:  <span class="cs">#1C6EF1</span>;  <span class="cc">/* primary */</span>
+  <span class="cp">--brand-100</span>: <span class="cs">#050B15</span>;
+{'}'}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 6 — How it Works
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">How It Works</span>
+      <span class="section-desc">The pipeline from a single hex to a full token system</span>
+    </div>
+
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <div class="pipeline-num">1</div>
+        <div class="pipeline-body">
+          <div class="pipeline-title">Input hex</div>
+          <div class="pipeline-desc">Any valid 6-digit hex colour is accepted as the brand seed.</div>
+        </div>
+      </div>
+      <div class="pipeline-connector"></div>
+      <div class="pipeline-step">
+        <div class="pipeline-num">2</div>
+        <div class="pipeline-body">
+          <div class="pipeline-title">Convert to OKLCh</div>
+          <div class="pipeline-desc">sRGB &rarr; linear RGB &rarr; Oklab &rarr; OKLCh. Preserves hue and chroma.</div>
+        </div>
+      </div>
+      <div class="pipeline-connector"></div>
+      <div class="pipeline-step">
+        <div class="pipeline-num">3</div>
+        <div class="pipeline-body">
+          <div class="pipeline-title">Generate 11 steps</div>
+          <div class="pipeline-desc">Target lightness values (0.97 &rarr; 0.10) with chroma reduction at extremes to avoid gamut clipping.</div>
+        </div>
+      </div>
+      <div class="pipeline-connector"></div>
+      <div class="pipeline-step">
+        <div class="pipeline-num">4</div>
+        <div class="pipeline-body">
+          <div class="pipeline-title">Patch CSS</div>
+          <div class="pipeline-desc"><code>--brand-0</code> through <code>--brand-100</code> set on <code>:root</code>. Semantic tokens cascade automatically.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Nexus Design System &middot; Brand Colour
+  </div>
 
 </Layout>
 
 <script>
-  import { generateBrandScale } from '../utils/setBrandColour.js';
+  import { generateBrandScale, setBrandColour } from '../utils/setBrandColour.js';
 
-  function renderScale() {
-    const container = document.getElementById('brand-scale');
-    if (!container) return;
+  const STEPS = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
+  function getScale() {
     const root = getComputedStyle(document.documentElement);
-    const steps = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-
-    container.innerHTML = steps.map(step => {
+    return STEPS.map(step => {
       const varName = `--brand-${step}`;
-      const colour = root.getPropertyValue(varName).trim() || '#A03AFF';
-      return `
-        <div class="scale-step" style="background:var(${varName})">
-          <span class="scale-label ${step >= 50 ? 'light' : 'dark'}">${step}</span>
-        </div>
-      `;
-    }).join('');
+      return { step, hex: root.getPropertyValue(varName).trim() || '#A03AFF' };
+    });
   }
 
-  renderScale();
+  function renderScale() {
+    const scale = getScale();
+    const container = document.getElementById('brand-scale');
+    const labels = document.getElementById('scale-labels');
+    if (!container || !labels) return;
 
-  // Re-render when brand changes (observe style mutations on :root)
-  const observer = new MutationObserver(renderScale);
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
+    container.innerHTML = scale.map(({ step, hex }) => `
+      <div class="scale-cell ${step >= 50 ? 'sc-dark' : 'sc-light'}"
+           style="background:var(--brand-${step})"
+           data-step="${step}"
+           data-hex="${hex}"
+           title="brand-${step}: ${hex}">
+        <span class="sc-hex">${hex}</span>
+      </div>
+    `).join('');
+
+    labels.innerHTML = scale.map(({ step }) => `
+      <span class="scale-label-n">${step}</span>
+    `).join('');
+
+    // Click to copy
+    container.querySelectorAll('.scale-cell').forEach(cell => {
+      cell.addEventListener('click', () => {
+        const hex = cell.getAttribute('data-hex');
+        if (hex) navigator.clipboard.writeText(hex);
+        cell.classList.add('sc-copied');
+        setTimeout(() => cell.classList.remove('sc-copied'), 800);
+      });
+    });
+  }
+
+  function renderHero() {
+    const root = getComputedStyle(document.documentElement);
+    const swatch = document.getElementById('hero-swatch');
+    const hexLabel = document.getElementById('hero-hex');
+    const hex50 = root.getPropertyValue('--brand-50').trim() || '#A03AFF';
+    if (swatch) swatch.style.background = `var(--brand-50)`;
+    if (hexLabel) hexLabel.textContent = hex50;
+  }
+
+  function renderTokenDots() {
+    const root = getComputedStyle(document.documentElement);
+    [0, 10, 30, 40, 50, 60, 80].forEach(step => {
+      const dot = document.getElementById(`tm-${step}`);
+      if (dot) dot.style.background = root.getPropertyValue(`--brand-${step}`).trim();
+    });
+  }
+
+  function renderMiniBrands() {
+    document.querySelectorAll('.mb-scale-mini').forEach(el => {
+      const hex = el.getAttribute('data-brand');
+      if (!hex) return;
+      const scale = generateBrandScale(hex);
+      const steps = [10, 30, 50, 70, 90];
+      el.innerHTML = steps.map(s =>
+        `<div class="mb-mini-cell" style="background:${scale[s]}"></div>`
+      ).join('');
+    });
+  }
+
+  function renderAll() {
+    renderScale();
+    renderHero();
+    renderTokenDots();
+  }
+
+  renderAll();
+  renderMiniBrands();
+
+  // Re-render on brand change
+  const obs = new MutationObserver(renderAll);
+  obs.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
+
+  // Multi-brand click-to-apply
+  document.querySelectorAll('.multibrand-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const hex = card.getAttribute('data-hex');
+      if (hex) setBrandColour(hex);
+      document.querySelectorAll('.multibrand-card').forEach(c => c.classList.remove('mb-active'));
+      card.classList.add('mb-active');
+    });
+  });
 </script>
 
 <style>
-  .page-header {
-    margin-bottom: 3rem;
+  /* ═══════════════════════════════════════════════════════════
+     HERO
+  ══════════════════════════════════════════════════════════════ */
+  .brand-hero {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .page-title {
+  .brand-hero-overline {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+  }
+
+  .brand-hero-title {
     font-family: var(--serif);
-    font-size: var(--font-size-900);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 600;
     color: var(--ink);
-    margin-bottom: 0.5rem;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
   }
 
-  .page-subtitle {
+  .brand-hero-sub {
     font-size: var(--font-size-400);
     color: var(--ink-2);
-    max-width: 640px;
-    line-height: 1.6;
-  }
-
-  .content-block {
-    margin-bottom: 2.5rem;
-  }
-
-  .content-block h2 {
-    font-family: var(--sans);
-    font-size: var(--font-size-500);
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 0.75rem;
-  }
-
-  .content-block p {
-    font-size: var(--font-size-300);
-    color: var(--ink-2);
     line-height: 1.7;
-    max-width: 640px;
+    max-width: 520px;
   }
 
-  .content-block code {
+  .brand-hero-swatch {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    background: var(--brand-50, #A03AFF);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.06),
+      0 8px 40px -8px rgba(0,0,0,0.18),
+      0 24px 60px -12px rgba(0,0,0,0.10);
+    transition: background 300ms ease, box-shadow 300ms ease;
+    position: relative;
+  }
+
+  .brand-hero-swatch::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(145deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-swatch-inner {
+    padding: 16px;
+    width: 100%;
+  }
+
+  .hero-swatch-hex {
     font-family: var(--mono);
-    font-size: 0.85em;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    background: rgba(0,0,0,0.2);
+    padding: 4px 10px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     SCALE
+  ══════════════════════════════════════════════════════════════ */
+  .scale-container {
+    margin-bottom: 20px;
+  }
+
+  .scale-strip {
+    display: flex;
+    border-radius: var(--radius);
+    overflow: hidden;
+    height: 88px;
+  }
+
+  .scale-cell {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: flex 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scale-cell:hover {
+    flex: 2.4;
+    z-index: 2;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  .scale-cell:active { transform: scale(0.97); }
+
+  .sc-hex {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+  }
+
+  .scale-cell:hover .sc-hex { opacity: 1; }
+
+  .sc-light .sc-hex { color: #1A1816; }
+  .sc-dark .sc-hex  { color: #F0EDE8; }
+
+  .sc-copied::after {
+    content: 'Copied';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    animation: copiedFlash 0.8s ease forwards;
+  }
+
+  @keyframes copiedFlash {
+    0%   { opacity: 1; }
+    70%  { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .scale-labels {
+    display: flex;
+    margin-top: 6px;
+  }
+
+  .scale-label-n {
+    flex: 1;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-3);
+  }
+
+  .scale-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 16px;
+    padding: 14px 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+
+  .scale-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .scale-meta-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+  }
+
+  .scale-meta-value {
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     TOKEN MAP
+  ══════════════════════════════════════════════════════════════ */
+  .token-map {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .token-map-row {
+    display: grid;
+    grid-template-columns: 1fr 120px 48px;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--rule);
+    align-items: center;
+    transition: background 0.1s;
+  }
+
+  .token-map-row:last-child { border-bottom: none; }
+  .token-map-row:not(.token-map-header):hover { background: rgba(0,0,0,0.02); }
+
+  .token-map-header {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    background: var(--page-bg);
+  }
+
+  .tm-token code {
+    font-family: var(--mono);
+    font-size: 12px;
     background: var(--page-bg);
     padding: 2px 6px;
     border-radius: 4px;
     color: var(--ink);
   }
 
-  .code-block {
-    background: #1A1816;
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    overflow-x: auto;
+  .tm-step {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-2);
   }
 
-  .code-block pre {
-    margin: 0;
+  .tm-dot {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.08);
+    transition: background 300ms ease;
   }
+
+  /* ═══════════════════════════════════════════════════════════
+     LIVE PREVIEW
+  ══════════════════════════════════════════════════════════════ */
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .preview-card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: border-color 0.15s;
+  }
+
+  .preview-card:hover { border-color: var(--ink-3); }
+  .preview-card--wide { grid-column: span 2; }
+
+  .preview-card-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+  }
+
+  .preview-card-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* Preview: Buttons */
+  .pv-btn {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 150ms ease;
+    border: none;
+  }
+
+  .pv-btn--primary {
+    background: var(--brand-50, #A03AFF);
+    color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+  .pv-btn--primary:hover { filter: brightness(1.08); }
+
+  .pv-btn--outline {
+    background: transparent;
+    color: var(--brand-50, #A03AFF);
+    border: 1.5px solid var(--brand-50, #A03AFF);
+  }
+  .pv-btn--outline:hover { background: var(--brand-10, #F0E6FF); }
+
+  .pv-btn--ghost {
+    background: transparent;
+    color: var(--ink-2);
+    border: 1px solid var(--rule);
+  }
+  .pv-btn--ghost:hover { background: rgba(0,0,0,0.03); }
+
+  /* Preview: Input */
+  .pv-input {
+    font-family: var(--sans);
+    font-size: 13px;
+    width: 100%;
+    padding: 9px 14px;
+    border: 1.5px solid var(--rule);
+    border-radius: 6px;
+    background: var(--card-bg);
+    color: var(--ink);
+    outline: none;
+  }
+
+  .pv-input--focused {
+    border-color: var(--brand-30, #8B5CF6);
+    box-shadow: 0 0 0 3px var(--brand-10, rgba(139, 92, 246, 0.15));
+  }
+
+  /* Preview: Badge */
+  .pv-badge {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--brand-50, #A03AFF);
+    color: white;
+  }
+
+  .pv-badge--subtle {
+    background: var(--brand-10, #F0E6FF);
+    color: var(--brand-60, #7C2DD8);
+  }
+
+  /* Preview: Link */
+  .pv-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--brand-50, #A03AFF) !important;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .pv-link:hover { border-bottom-color: var(--brand-50, #A03AFF); }
+
+  /* Preview: Switch */
+  .pv-switch-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 4px 0;
+  }
+
+  .pv-switch-label {
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  .pv-switch {
+    width: 36px;
+    height: 20px;
+    border-radius: 10px;
+    background: var(--rule);
+    position: relative;
+    cursor: pointer;
+    transition: background 150ms;
+    flex-shrink: 0;
+  }
+
+  .pv-switch--on {
+    background: var(--brand-50, #A03AFF);
+  }
+
+  .pv-switch-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+    transition: transform 150ms;
+  }
+
+  .pv-switch--on .pv-switch-thumb {
+    transform: translateX(16px);
+  }
+
+  /* Preview: Progress */
+  .pv-progress {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--rule);
+    overflow: hidden;
+  }
+
+  .pv-progress-bar {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--brand-50, #A03AFF);
+    transition: background 300ms;
+  }
+
+  /* Preview: Radio */
+  .pv-radio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--ink);
+  }
+
+  .pv-radio-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 150ms;
+  }
+
+  .pv-radio-circle--selected {
+    border-color: var(--brand-50, #A03AFF);
+  }
+
+  .pv-radio-circle--selected::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--brand-50, #A03AFF);
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     MULTI-BRAND
+  ══════════════════════════════════════════════════════════════ */
+  .multibrand-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .multibrand-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--rule);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    text-align: left;
+    font-family: inherit;
+  }
+
+  .multibrand-card:hover {
+    border-color: var(--ink-3);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .multibrand-card.mb-active {
+    border-color: var(--ink);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+
+  .mb-scale-mini {
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 24px;
+  }
+
+  .mb-mini-cell {
+    flex: 1;
+  }
+
+  .mb-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .mb-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .mb-hex {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+
+  .mb-btn {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    cursor: pointer;
+    pointer-events: none;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     USAGE / CODE
+  ══════════════════════════════════════════════════════════════ */
+  .usage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .usage-card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .usage-card-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+  }
+
+  .usage-card-desc {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  .usage-card-desc code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--page-bg);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  .code-block {
+    background: #1A1816;
+    border-radius: 8px;
+    padding: 18px 20px;
+    overflow-x: auto;
+    margin-top: auto;
+  }
+
+  .code-block pre { margin: 0; }
 
   .code-block code {
     font-family: var(--mono);
-    font-size: var(--font-size-200);
+    font-size: 12px;
     color: #E8E4DF;
-    line-height: 1.7;
+    line-height: 1.8;
     background: none;
     padding: 0;
   }
 
-  .brand-scale {
+  /* Syntax colours */
+  .ck { color: #C98FD0; }   /* keyword */
+  .cs { color: #A8D08D; }   /* string */
+  .cc { color: #6A6560; }   /* comment */
+  .cp { color: #82C0F7; }   /* property */
+
+  /* ═══════════════════════════════════════════════════════════
+     PIPELINE
+  ══════════════════════════════════════════════════════════════ */
+  .pipeline {
     display: flex;
-    border-radius: var(--radius);
-    overflow: hidden;
-    height: 56px;
+    align-items: flex-start;
+    gap: 0;
   }
 
-  .scale-step {
+  .pipeline-step {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .pipeline-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--brand-50, #A03AFF);
+    color: white;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background 300ms ease;
+    flex-shrink: 0;
   }
 
-  .scale-label {
+  .pipeline-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .pipeline-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .pipeline-desc {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.5;
+    max-width: 180px;
+    margin: 0 auto;
+  }
+
+  .pipeline-desc code {
     font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
+    font-size: 0.85em;
+    background: var(--page-bg);
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: var(--ink);
   }
 
-  .scale-label.light { color: #fff; }
-  .scale-label.dark  { color: #1A1816; }
+  .pipeline-connector {
+    width: 40px;
+    height: 2px;
+    background: var(--rule);
+    margin-top: 18px;
+    flex-shrink: 0;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════════════════════════════ */
+  @media (max-width: 860px) {
+    .brand-hero { grid-template-columns: 1fr; }
+    .brand-hero-swatch { width: 120px; height: 120px; }
+    .preview-grid { grid-template-columns: 1fr; }
+    .preview-card--wide { grid-column: span 1; }
+    .multibrand-row { grid-template-columns: repeat(3, 1fr); }
+    .usage-grid { grid-template-columns: 1fr; }
+    .pipeline { flex-direction: column; align-items: flex-start; }
+    .pipeline-step { flex-direction: row; text-align: left; }
+    .pipeline-body { align-items: flex-start; }
+    .pipeline-desc { margin: 0; }
+    .pipeline-connector { width: 2px; height: 20px; margin: 0 0 0 18px; }
+  }
+
+  @media (max-width: 520px) {
+    .multibrand-row { grid-template-columns: repeat(2, 1fr); }
+    .scale-meta { flex-direction: column; gap: 12px; }
+  }
 </style>

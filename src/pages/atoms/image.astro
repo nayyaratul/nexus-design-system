@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { ImageShowcase } from '../../components/atoms/ImageShowcase';
+---
+
+<Layout title="Image" section="atoms/image">
+  <h1 class="page-title">Image</h1>
+  <p class="page-sub">Fluid image container with 4:3 aspect ratio, blurred letterbox fill, skeleton loading, and error fallback</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Images of varying aspect ratios rendered in a fixed 4:3 container</span>
+    </div>
+    <ImageShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Aspect Ratio</span><span>4:3 enforced via CSS aspect-ratio</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Object Fit</span><span>contain — image never cropped, blurred background fills gaps</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Blur Layer</span><span>Same src as background-image with 20px blur + scale(1.1)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Loading</span><span>Skeleton placeholder while image loads (native lazy loading)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Error</span><span>Lucide ImageOff icon centred on tertiary background</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizing</span><span>Fluid — fills parent width, height derived from aspect ratio</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Custom</span><span>No Radix dependency — native img element</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Image Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { PopoverShowcase } from '../../components/atoms/PopoverShowcase';
+---
+
+<Layout title="Popover" section="atoms/popover">
+  <h1 class="page-title">Popover</h1>
+  <p class="page-sub">Radix popover with 4 placements, close button, arrow, and smooth slide-fade animations</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — click buttons to open popovers</span>
+    </div>
+    <PopoverShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>@radix-ui/react-popover</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Content</span><span>Elevated bg, --radius-100, --space-200 padding, 200px min-width</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Placement</span><span>top, right, bottom (default), left with 4px offset</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Close button</span><span>Optional X icon, absolute top-right, hover highlight</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Arrow</span><span>Filled with --color-bg-elevated, auto-positioned</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Animation</span><span>Slide + fade (150ms ease-out) per side direction</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Z-index</span><span>9998</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Popover Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

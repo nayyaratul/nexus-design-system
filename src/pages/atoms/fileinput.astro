@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { FileInputShowcase } from '../../components/atoms/FileInputShowcase';
+---
+
+<Layout title="Upload File" section="atoms/fileinput">
+  <h1 class="page-title">Upload File</h1>
+  <p class="page-sub">Native file input primitive with accept, multiple, 3 sizes, error and disabled states</p>
+
+  <p class="page-intro">
+    A styled <code>&lt;input type="file"&gt;</code> that matches the Input and Button design language. Use with FormField for labels and validation, or as the primitive inside the Dropzone molecule.
+  </p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — try selecting files</span>
+    </div>
+    <div class="showcase-wrap">
+      <FileInputShowcase client:load />
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Element</span><span>Hidden native input + Button trigger + optional filename line</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm (32px), md (40px), lg (48px)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">States</span><span>default, hover, focus, error, disabled</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>accept, multiple, size, error, disabled, showFileLabel, chooseLabel, hideTrigger; forwardRef</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>aria-invalid on error; use with FormField + Label (htmlFor/id)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens</span><span>--color-border-default, --color-bg-elevated, --radius-100, --space-*</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Mobile</span><span>Use size md (40px) or lg (48px) for 44px+ touch target (WCAG 2.5.5).</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Upload File Atom</div>
+</Layout>
+
+<style>
+  .page-intro {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-400);
+    max-width: 52ch;
+  }
+  .page-intro code {
+    font-family: var(--mono);
+    font-size: var(--font-size-200);
+    padding: var(--space-025) var(--space-050);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-050);
+  }
+  .showcase-wrap {
+    background: var(--card-bg);
+    border: var(--border-width-100) solid var(--rule);
+    border-radius: var(--radius-100);
+    padding: var(--space-300);
+  }
+  .atom-spec {
+    background: var(--card-bg);
+    border: var(--border-width-100) solid var(--rule);
+    border-radius: var(--radius-100);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    align-items: baseline;
+    padding: var(--space-150) var(--space-200);
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-300);
+    border-bottom: var(--border-width-100) solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: calc(8.75 * var(--space-200));
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+</style>

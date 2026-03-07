@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { TableShowcase } from '../../components/atoms/TableShowcase';
+---
+
+<Layout title="Table" section="atoms/table">
+  <h1 class="page-title">Table</h1>
+  <p class="page-sub">Compound table with sizes, striped/hoverable variants, sticky headers, and sort indicators</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — click sortable headers to sort</span>
+    </div>
+    <TableShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Sub-components</span><span>Table, Header, Body, Footer, Row, Head, Cell, Caption</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm (12px / 4-8px pad), md (14px / 8-12px pad), lg (16px / 12-16px pad)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>simple, striped</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Features</span><span>hoverable, bordered, sticky header, sort indicators</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sort icons</span><span>Lucide ChevronUp / ChevronDown / ChevronsUpDown</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens (bg)</span><span>--color-bg-elevated, --color-bg-secondary, --color-bg-tertiary</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens (border)</span><span>--color-border-default, --color-border-subtle</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>scope="col" on th, aria-sort on sortable, button for keyboard sort</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Table Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-3);
+    flex-shrink: 0;
+  }
+</style>

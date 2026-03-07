@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { AlertShowcase } from '../../components/atoms/AlertShowcase';
+---
+
+<Layout title="Alert" section="atoms/alert">
+  <h1 class="page-title">Alert</h1>
+  <p class="page-sub">Contextual feedback messages with 4 semantic variants, auto-mapped icons, and optional dismiss</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive — click dismiss to hide</span>
+    </div>
+    <AlertShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>info, success, warning, error</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Icons</span><span>Lucide Info, CheckCircle2, AlertTriangle, XCircle (auto-mapped)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Layout</span><span>Icon left + title/body/action stack, optional dismiss right</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Action</span><span>Optional ReactNode rendered below body for buttons/links</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Border</span><span>3px left accent in variant colour</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>role="alert" for screen readers</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Custom</span><span>No Radix dependency</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Alert Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

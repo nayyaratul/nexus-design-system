@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { VisuallyHiddenShowcase } from '../../components/atoms/VisuallyHiddenShowcase';
+---
+
+<Layout title="VisuallyHidden" section="atoms/visuallyhidden">
+  <h1 class="page-title">VisuallyHidden</h1>
+  <p class="page-sub">Accessibility utility that hides content visually while keeping it available to screen readers</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Icon buttons with hidden labels for assistive technology</span>
+    </div>
+    <VisuallyHiddenShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Element</span><span>span (default) or child element via asChild</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Technique</span><span>sr-only: absolute, 1px, clip, overflow hidden</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">asChild</span><span>Merges styles onto child element via cloneElement</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Use case</span><span>Icon-only buttons, skip links, form hints</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Custom</span><span>No Radix dependency — pure CSS approach</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · VisuallyHidden Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

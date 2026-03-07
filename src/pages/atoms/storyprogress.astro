@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { StoryProgressShowcase } from '../../components/atoms/StoryProgressShowcase';
+---
+
+<Layout title="StoryProgress" section="atoms/storyprogress">
+  <h1 class="page-title">StoryProgress</h1>
+  <p class="page-sub">Segmented progress for reels and stories · smooth fill transition · parent controls timing</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Sizes, segment states, and live auto-advancing demo</span>
+    </div>
+    <StoryProgressShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">segments</span><span>Number of segments (e.g. bars). Default 5.</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">activeIndex</span><span>Zero-based index of the segment currently playing.</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">progress</span><span>Fill within the active segment, 0–1 (e.g. 0.3 = 30% of that bar).</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">size</span><span>xs (2px), sm, md, lg — track height via --space-025, --space-050, --space-100, --space-150.</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">variant</span><span>default (solid brand/secondary). subtle (semi-transparent white for overlay; track --opacity-032, fill --opacity-080 on --grey-0). For reels/stories overlays use variant="subtle" with size="xs" (2px).</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens</span><span>Default: track --color-bg-secondary, fill --color-action-primary. Subtle: color-mix(--grey-0, opacity). Gap: --space-050. Radius: --radius-full. Transition: width 200ms ease-out.</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Accessibility</span><span>role="progressbar", aria-valuemin, aria-valuemax, aria-valuenow (active + progress), aria-label (e.g. "Segment 2 of 5, 40%").</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Behaviour</span><span>Presentational only. No internal interval. Parent (e.g. ReelFrame) supplies activeIndex and progress.</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · StoryProgress Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: var(--space-125) var(--space-200);
+    font-size: var(--font-size-300);
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: var(--font-weight-medium);
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>

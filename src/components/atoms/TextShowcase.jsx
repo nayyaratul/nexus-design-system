@@ -28,13 +28,13 @@ export function TextShowcase() {
       {/* Theme comparison */}
       <div>
         <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Theme Comparison</div>
-        <div style={{ display: 'flex', gap: '16px' }}>
-          <div data-theme="light" style={{ flex: 1, padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
+        <div className="theme-comparison">
+          <div data-theme="light" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
             <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>LIGHT</div>
             <Text variant="body">Your leave request has been approved.</Text>
             <Text variant="caption">Submitted on 5 March 2026</Text>
           </div>
-          <div data-theme="dark" style={{ flex: 1, padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
+          <div data-theme="dark" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
             <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>DARK</div>
             <Text variant="body">Your leave request has been approved.</Text>
             <Text variant="caption">Submitted on 5 March 2026</Text>
