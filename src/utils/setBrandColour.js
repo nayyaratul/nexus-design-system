@@ -1,6 +1,11 @@
-// Target lightness values matching our existing scale curves (0=lightest, 100=darkest)
-const TARGET_LIGHTNESS = [0.97, 0.88, 0.79, 0.70, 0.61, 0.52, 0.43, 0.35, 0.27, 0.19, 0.10];
+// Contrast-driven scale: same method as colours page. See .local/colour-scale-method.md
 const STEPS = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+const TARGET_CR = [1.02, 1.31, 1.73, 2.33, 3.10, 4.48, 3.10, 2.33, 1.73, 1.31, 1.02];
+const TARGET_Y = TARGET_CR.map((cr, i) =>
+  i <= 5 ? 1.05 / cr - 0.05 : cr * 0.05 - 0.05
+);
+const L_SEARCH_TOL = 1e-4;
+const L_SEARCH_MAX_ITER = 50;
 
 function srgbToLinear(c) {
   return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
@@ -25,6 +30,14 @@ function rgbToHex(r, g, b) {
     return v.toString(16).padStart(2, '0').toUpperCase();
   };
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+}
+
+function relativeLuminance(hex) {
+  const [r, g, b] = hexToRgb(hex);
+  const lr = srgbToLinear(r);
+  const lg = srgbToLinear(g);
+  const lb = srgbToLinear(b);
+  return 0.2126 * lr + 0.7152 * lg + 0.0722 * lb;
 }
 
 function rgbToOklab(r, g, b) {
@@ -83,13 +96,28 @@ export function oklchToHex(L, C, h) {
   return rgbToHex(r, g, bb);
 }
 
+function findLForTargetY(Y_target, C, h) {
+  let lo = 0.002;
+  let hi = 0.998;
+  for (let iter = 0; iter < L_SEARCH_MAX_ITER; iter++) {
+    const L = (lo + hi) / 2;
+    const hex = oklchToHex(L, C, h);
+    const Y = relativeLuminance(hex);
+    if (Math.abs(Y - Y_target) < L_SEARCH_TOL) return hex;
+    if (Y < Y_target) lo = L;
+    else hi = L;
+  }
+  return oklchToHex((lo + hi) / 2, C, h);
+}
+
 export function generateBrandScale(brandHex) {
   const { C, h } = hexToOklch(brandHex);
   return Object.fromEntries(
     STEPS.map((step, i) => {
-      // Reduce chroma at extremes to avoid clipping
       const chromaScale = step <= 10 || step >= 90 ? 0.3 : step <= 20 || step >= 80 ? 0.7 : 1;
-      return [step, oklchToHex(TARGET_LIGHTNESS[i], C * chromaScale, h)];
+      const C_step = C * chromaScale;
+      const hex = findLForTargetY(TARGET_Y[i], C_step, h);
+      return [step, hex];
     })
   );
 }

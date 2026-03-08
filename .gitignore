@@ -5,6 +5,9 @@ Thumbs.db
 # Local scripts / plugins
 .local/
 
+# Addon icons (generated / local assets)
+addon-icons/
+
 # Astro
 .astro/
 
