@@ -226,6 +226,18 @@
   --color-tag-warning-border: var(--yellow-20);
   --color-tag-info-bg:      var(--blue-0);
   --color-tag-info-border:    var(--blue-20);
+
+  /* Badge — one shade lower than Tag in light: step 10 (Tag uses 0) */
+  --color-badge-default-bg:   var(--grey-10);
+  --color-badge-default-border: var(--grey-20);
+  --color-badge-success-bg:   var(--green-10);
+  --color-badge-success-border: var(--green-20);
+  --color-badge-error-bg:     var(--red-10);
+  --color-badge-error-border:   var(--red-20);
+  --color-badge-warning-bg:   var(--yellow-10);
+  --color-badge-warning-border: var(--yellow-20);
+  --color-badge-info-bg:      var(--blue-10);
+  --color-badge-info-border:    var(--blue-20);
 }
 
 
@@ -330,4 +342,16 @@
   --color-tag-warning-border: var(--yellow-80);
   --color-tag-info-bg:      var(--blue-100);
   --color-tag-info-border:    var(--blue-80);
+
+  /* Badge — one shade lighter than Tag in dark: step 90 (Tag uses 100) */
+  --color-badge-default-bg:   var(--grey-90);
+  --color-badge-default-border: var(--grey-80);
+  --color-badge-success-bg:   var(--green-90);
+  --color-badge-success-border: var(--green-80);
+  --color-badge-error-bg:     var(--red-90);
+  --color-badge-error-border:   var(--red-80);
+  --color-badge-warning-bg:   var(--yellow-90);
+  --color-badge-warning-border: var(--yellow-80);
+  --color-badge-info-bg:      var(--blue-90);
+  --color-badge-info-border:    var(--blue-80);
 }
