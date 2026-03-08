@@ -5,6 +5,7 @@
   font-family: var(--sans);
   font-weight: var(--font-weight-medium);
   border-radius: var(--radius-full);
+  border: var(--border-width-100) solid transparent;
   white-space: nowrap;
 }
 
@@ -36,27 +37,32 @@
 
 /* ─── Variants ─── */
 .default {
-  background: var(--color-bg-tertiary);
+  background: var(--color-badge-default-bg);
+  border-color: var(--color-badge-default-border);
   color: var(--color-text-primary);
 }
 
 .success {
-  background: var(--color-bg-success-subtle);
+  background: var(--color-badge-success-bg);
+  border-color: var(--color-badge-success-border);
   color: var(--color-text-success);
 }
 
 .error {
-  background: var(--color-bg-error-subtle);
+  background: var(--color-badge-error-bg);
+  border-color: var(--color-badge-error-border);
   color: var(--color-text-error);
 }
 
 .warning {
-  background: var(--color-bg-warning-subtle);
+  background: var(--color-badge-warning-bg);
+  border-color: var(--color-badge-warning-border);
   color: var(--color-text-warning);
 }
 
 .info {
-  background: var(--color-bg-info-subtle);
+  background: var(--color-badge-info-bg);
+  border-color: var(--color-badge-info-border);
   color: var(--color-text-info);
 }
 
