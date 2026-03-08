@@ -44,7 +44,7 @@ function ThemeComparisonTooltips() {
           data-theme="light"
           style={{
             padding: '20px',
-            background: 'var(--color-bg-primary)',
+            background: 'var(--color-bg-theme-panel)',
             borderRadius: '10px',
             border: '1px solid var(--color-border-default)',
             position: 'relative',
@@ -65,7 +65,7 @@ function ThemeComparisonTooltips() {
           data-theme="dark"
           style={{
             padding: '20px',
-            background: 'var(--color-bg-primary)',
+            background: 'var(--color-bg-theme-panel)',
             borderRadius: '10px',
             border: '1px solid var(--color-border-default)',
             position: 'relative',

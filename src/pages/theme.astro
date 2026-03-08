@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Default.astro';
+import { ThemeAlertsInContext } from '../components/ThemeAlertsInContext';
+import { ThemeButtonsInContext } from '../components/ThemeButtonsInContext';
+import { ThemeFeedbackInContext } from '../components/ThemeFeedbackInContext';
 
 /* ─── Colour data (reused from colours.astro) ──────────────── */
 function hexToLuminance(hex: string): number {
@@ -45,7 +48,7 @@ const scales = [
     '#7B7470', '#635D5A', '#4E4A47', '#393634', '#252322', '#080807',
   ]),
   buildScale('Red', 'red', [
-    '#FBFBFB', '#FBD6D3', '#F8B1AB', '#F68D85', '#FC5C59',
+    '#FFF9F8', '#FBD6D3', '#F8B1AB', '#F68D85', '#FC5C59',
     '#E32631', '#BC1624', '#971A1F', '#700F14', '#490D0E', '#140706',
   ]),
   buildScale('Green', 'green', [
@@ -94,18 +97,18 @@ function getHex(scaleName: string, step: number): string {
 const semanticTokens: SemanticToken[] = [
   // Backgrounds
   { name: 'background-primary',   category: 'Background', lightScale: 'Neutral Grey', lightStep: 0,  darkScale: 'Neutral Grey', darkStep: 100, lightHex: getHex('Neutral Grey', 0),  darkHex: getHex('Neutral Grey', 100) },
-  { name: 'background-secondary', category: 'Background', lightScale: 'Warm Grey',    lightStep: 0,  darkScale: 'Warm Grey',    darkStep: 90,  lightHex: getHex('Warm Grey', 0),     darkHex: getHex('Warm Grey', 90) },
-  { name: 'background-success',   category: 'Background', lightScale: 'Green',        lightStep: 0,  darkScale: 'Green',        darkStep: 90,  lightHex: getHex('Green', 0),         darkHex: getHex('Green', 90) },
-  { name: 'background-error',     category: 'Background', lightScale: 'Red',          lightStep: 0,  darkScale: 'Red',          darkStep: 90,  lightHex: getHex('Red', 0),           darkHex: getHex('Red', 90) },
-  { name: 'background-warning',   category: 'Background', lightScale: 'Yellow',       lightStep: 0,  darkScale: 'Yellow',       darkStep: 90,  lightHex: getHex('Yellow', 0),        darkHex: getHex('Yellow', 90) },
-  { name: 'background-info',      category: 'Background', lightScale: 'Blue',         lightStep: 0,  darkScale: 'Blue',         darkStep: 90,  lightHex: getHex('Blue', 0),          darkHex: getHex('Blue', 90) },
+  { name: 'background-secondary', category: 'Background', lightScale: 'Warm Grey',    lightStep: 0,  darkScale: 'Warm Grey',    darkStep: 100, lightHex: getHex('Warm Grey', 0),     darkHex: getHex('Warm Grey', 100) },
+  { name: 'background-success',   category: 'Background', lightScale: 'Green',        lightStep: 0,  darkScale: 'Green',        darkStep: 100, lightHex: getHex('Green', 0),         darkHex: getHex('Green', 100) },
+  { name: 'background-error',     category: 'Background', lightScale: 'Red',          lightStep: 0,  darkScale: 'Red',          darkStep: 100, lightHex: getHex('Red', 0),           darkHex: getHex('Red', 100) },
+  { name: 'background-warning',   category: 'Background', lightScale: 'Yellow',       lightStep: 0,  darkScale: 'Yellow',       darkStep: 100, lightHex: getHex('Yellow', 0),        darkHex: getHex('Yellow', 100) },
+  { name: 'background-info',      category: 'Background', lightScale: 'Blue',         lightStep: 0,  darkScale: 'Blue',         darkStep: 100, lightHex: getHex('Blue', 0),          darkHex: getHex('Blue', 100) },
   // Text
   { name: 'text-primary',         category: 'Text',       lightScale: 'Neutral Grey', lightStep: 90, darkScale: 'Neutral Grey', darkStep: 10,  lightHex: getHex('Neutral Grey', 90), darkHex: getHex('Neutral Grey', 10) },
   { name: 'text-secondary',       category: 'Text',       lightScale: 'Neutral Grey', lightStep: 60, darkScale: 'Neutral Grey', darkStep: 40,  lightHex: getHex('Neutral Grey', 60), darkHex: getHex('Neutral Grey', 40) },
   { name: 'text-tertiary',        category: 'Text',       lightScale: 'Neutral Grey', lightStep: 50, darkScale: 'Neutral Grey', darkStep: 50,  lightHex: getHex('Neutral Grey', 50), darkHex: getHex('Neutral Grey', 50) },
   { name: 'text-success',         category: 'Text',       lightScale: 'Green',        lightStep: 60, darkScale: 'Green',        darkStep: 40,  lightHex: getHex('Green', 60),        darkHex: getHex('Green', 40) },
-  { name: 'text-error',           category: 'Text',       lightScale: 'Red',          lightStep: 50, darkScale: 'Red',          darkStep: 40,  lightHex: getHex('Red', 50),          darkHex: getHex('Red', 40) },
-  { name: 'text-link',            category: 'Text',       lightScale: 'Blue',         lightStep: 50, darkScale: 'Blue',         darkStep: 40,  lightHex: getHex('Blue', 50),         darkHex: getHex('Blue', 40) },
+  { name: 'text-error',           category: 'Text',       lightScale: 'Red',          lightStep: 50, darkScale: 'Red',          darkStep: 50,  lightHex: getHex('Red', 50),          darkHex: getHex('Red', 50) },
+  { name: 'text-link',            category: 'Text',       lightScale: 'Blue',         lightStep: 50, darkScale: 'Blue',         darkStep: 50,  lightHex: getHex('Blue', 50),         darkHex: getHex('Blue', 50) },
   // Borders
   { name: 'border-default',       category: 'Border',     lightScale: 'Neutral Grey', lightStep: 20, darkScale: 'Neutral Grey', darkStep: 80,  lightHex: getHex('Neutral Grey', 20), darkHex: getHex('Neutral Grey', 80) },
   { name: 'border-strong',        category: 'Border',     lightScale: 'Neutral Grey', lightStep: 40, darkScale: 'Neutral Grey', darkStep: 60,  lightHex: getHex('Neutral Grey', 40), darkHex: getHex('Neutral Grey', 60) },
@@ -290,51 +293,16 @@ const tokenCategories = [...new Set(semanticTokens.map(t => t.category))];
 
     <div class="theme-split">
       <!-- ─── LIGHT PANEL ─── -->
-      <div class="theme-panel-side" data-theme="light">
+        <div class="theme-panel-side" data-theme="light">
         <div class="tp-label">Light</div>
 
         <!-- Inline Alerts -->
         <div class="tp-group-title">Inline Alerts</div>
-
-        <div class="tp-alert tp-alert--success">
-          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
-          <div>
-            <div class="tp-alert-title">Assignment submitted</div>
-            <div class="tp-alert-body">Your assignment has been received and is now pending review.</div>
-          </div>
-        </div>
-
-        <div class="tp-alert tp-alert--error">
-          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
-          <div>
-            <div class="tp-alert-title">Submission failed</div>
-            <div class="tp-alert-body">Your submission could not be processed. Please check the file format and try again.</div>
-          </div>
-        </div>
-
-        <div class="tp-alert tp-alert--warning">
-          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
-          <div>
-            <div class="tp-alert-title">Deadline approaching</div>
-            <div class="tp-alert-body">Assignment &lsquo;Research Methods&rsquo; is due in 24 hours. Submit your work soon.</div>
-          </div>
-        </div>
-
-        <div class="tp-alert tp-alert--info">
-          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
-          <div>
-            <div class="tp-alert-title">New course available</div>
-            <div class="tp-alert-body">Introduction to Data Science has been added to your learning path.</div>
-          </div>
-        </div>
+        <ThemeAlertsInContext client:load />
 
         <!-- Buttons -->
         <div class="tp-group-title">Buttons</div>
-        <div class="tp-button-row">
-          <button class="tp-btn tp-btn--primary">Enrol</button>
-          <button class="tp-btn tp-btn--destructive">Drop Course</button>
-          <button class="tp-btn tp-btn--ghost">Cancel</button>
-        </div>
+        <ThemeButtonsInContext client:load />
 
         <!-- Dialog -->
         <div class="tp-group-title">Dialog</div>
@@ -349,11 +317,7 @@ const tokenCategories = [...new Set(semanticTokens.map(t => t.category))];
 
         <!-- Feedback states -->
         <div class="tp-group-title">Feedback</div>
-        <div class="tp-feedback-row">
-          <div class="tp-feedback tp-feedback--success">Saved</div>
-          <div class="tp-feedback tp-feedback--error">Failed</div>
-          <div class="tp-feedback tp-feedback--warning">Retry</div>
-        </div>
+        <ThemeFeedbackInContext client:load />
       </div>
 
       <!-- ─── DARK PANEL ─── -->
@@ -362,46 +326,11 @@ const tokenCategories = [...new Set(semanticTokens.map(t => t.category))];
 
         <!-- Inline Alerts -->
         <div class="tp-group-title">Inline Alerts</div>
-
-        <div class="tp-alert tp-alert--success">
-          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
-          <div>
-            <div class="tp-alert-title">Assignment submitted</div>
-            <div class="tp-alert-body">Your assignment has been received and is now pending review.</div>
-          </div>
-        </div>
-
-        <div class="tp-alert tp-alert--error">
-          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
-          <div>
-            <div class="tp-alert-title">Submission failed</div>
-            <div class="tp-alert-body">Your submission could not be processed. Please check the file format and try again.</div>
-          </div>
-        </div>
-
-        <div class="tp-alert tp-alert--warning">
-          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
-          <div>
-            <div class="tp-alert-title">Deadline approaching</div>
-            <div class="tp-alert-body">Assignment &lsquo;Research Methods&rsquo; is due in 24 hours. Submit your work soon.</div>
-          </div>
-        </div>
-
-        <div class="tp-alert tp-alert--info">
-          <span class="tp-alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
-          <div>
-            <div class="tp-alert-title">New course available</div>
-            <div class="tp-alert-body">Introduction to Data Science has been added to your learning path.</div>
-          </div>
-        </div>
+        <ThemeAlertsInContext client:load />
 
         <!-- Buttons -->
         <div class="tp-group-title">Buttons</div>
-        <div class="tp-button-row">
-          <button class="tp-btn tp-btn--primary">Enrol</button>
-          <button class="tp-btn tp-btn--destructive">Drop Course</button>
-          <button class="tp-btn tp-btn--ghost">Cancel</button>
-        </div>
+        <ThemeButtonsInContext client:load />
 
         <!-- Dialog -->
         <div class="tp-group-title">Dialog</div>
@@ -416,11 +345,7 @@ const tokenCategories = [...new Set(semanticTokens.map(t => t.category))];
 
         <!-- Feedback states -->
         <div class="tp-group-title">Feedback</div>
-        <div class="tp-feedback-row">
-          <div class="tp-feedback tp-feedback--success">Saved</div>
-          <div class="tp-feedback tp-feedback--error">Failed</div>
-          <div class="tp-feedback tp-feedback--warning">Retry</div>
-        </div>
+        <ThemeFeedbackInContext client:load />
       </div>
     </div>
   </div>

@@ -2,13 +2,13 @@
   display: flex;
   align-items: flex-start;
   gap: var(--space-125);
-  padding: var(--space-150);
-  border-radius: var(--radius-100);
-  border-left: 3px solid;
+  padding: var(--space-150) var(--space-200);
+  border-radius: var(--radius-150);
+  border: var(--border-width-100) solid;
   font-family: var(--sans);
 
   @media (max-width: 480px) {
-    padding: var(--space-100);
+    padding: var(--space-125) var(--space-150);
     gap: var(--space-100);
   }
 }
@@ -17,7 +17,9 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  margin-top: 1px;
+  margin-top: var(--space-025);
+  font-size: var(--font-size-400);
+  line-height: 1;
 }
 
 .content {
@@ -26,9 +28,13 @@
 }
 
 .title {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-300);
   line-height: var(--line-height-300);
+}
+
+.content:has(.body) .title {
+  margin-bottom: var(--space-025);
 }
 
 .body {
@@ -36,6 +42,10 @@
   line-height: var(--line-height-300);
   margin-top: var(--space-050);
   color: var(--color-text-secondary);
+}
+
+.body:first-child {
+  margin-top: 0;
 }
 
 .actions {
@@ -57,25 +67,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: var(--space-300);
+  height: var(--space-300);
   border: none;
   background: none;
   border-radius: var(--radius-050);
   cursor: pointer;
   color: inherit;
-  opacity: 0.6;
+  opacity: var(--opacity-064);
   transition: opacity 150ms ease;
 
   &:hover {
-    opacity: 1;
+    opacity: var(--opacity-100);
   }
 }
 
-/* ─── Variants ─── */
+/* ─── Variants (use Alert-specific tokens: step 0 bg, step 20 border in light; 100/80 in dark) ─── */
 .info {
-  background: var(--color-bg-info-subtle);
-  border-left-color: var(--color-text-info);
+  background: var(--color-alert-info-bg);
+  border-color: var(--color-alert-info-border);
   color: var(--color-text-primary);
 
   .icon { color: var(--color-text-info); }
@@ -83,8 +93,8 @@
 }
 
 .success {
-  background: var(--color-bg-success-subtle);
-  border-left-color: var(--color-text-success);
+  background: var(--color-alert-success-bg);
+  border-color: var(--color-alert-success-border);
   color: var(--color-text-primary);
 
   .icon { color: var(--color-text-success); }
@@ -92,8 +102,8 @@
 }
 
 .warning {
-  background: var(--color-bg-warning-subtle);
-  border-left-color: var(--color-text-warning);
+  background: var(--color-alert-warning-bg);
+  border-color: var(--color-alert-warning-border);
   color: var(--color-text-primary);
 
   .icon { color: var(--color-text-warning); }
@@ -101,8 +111,8 @@
 }
 
 .error {
-  background: var(--color-bg-error-subtle);
-  border-left-color: var(--color-text-error);
+  background: var(--color-alert-error-bg);
+  border-color: var(--color-alert-error-border);
   color: var(--color-text-primary);
 
   .icon { color: var(--color-text-error); }

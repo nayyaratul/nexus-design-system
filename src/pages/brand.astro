@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Default.astro';
+import BrandInContextShowcase from '../components/BrandInContextShowcase';
 ---
 
 <Layout title="Brand" section="brand">
@@ -9,10 +10,10 @@ import Layout from '../layouts/Default.astro';
   ══════════════════════════════════════════════════════════════ -->
   <div class="brand-hero">
     <div class="brand-hero-content">
-      <h1 class="page-title">Brand Colour</h1>
+      <h1 class="page-title">Brand</h1>
       <p class="page-sub">OKLCh · 11-step scale · Presets · Custom hue · Token mapping</p>
       <p class="brand-hero-instruction">
-        <em>Choose brand colour</em> <span class="brand-hero-instruction-hint">Click a card to apply system-wide</span>
+        <em>Choose brand</em> <span class="brand-hero-instruction-hint">Click a card to apply system-wide</span>
       </p>
     </div>
     <div class="brand-hero-swatch" id="hero-swatch">
@@ -71,6 +72,13 @@ import Layout from '../layouts/Default.astro';
         <div class="brand-picker-strips">
           <span class="hue-wheel-section-label">Custom colour</span>
           <div class="brand-strips-container">
+            <div class="brand-strip-row brand-hex-row">
+              <label for="custom-hex" class="brand-slider-label">Hex</label>
+              <div class="brand-hex-controls">
+                <input type="text" id="custom-hex" class="brand-hex-input" placeholder="#RRGGBB" aria-label="Brand colour hex" autocomplete="off" />
+                <span class="brand-hex-swatch" id="custom-hex-swatch" aria-hidden="true"></span>
+              </div>
+            </div>
             <div class="brand-strip-row">
               <label for="hue-slider" class="brand-slider-label">Hue</label>
               <div class="brand-strip" id="hue-strip" role="img" aria-label="Hue spectrum"></div>
@@ -132,20 +140,15 @@ import Layout from '../layouts/Default.astro';
                 <span class="token-map-cell tm-step">brand-50</span>
                 <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-border-focus"></span></span>
               </div>
-              <div class="token-map-row" data-step-light="brand-10" data-step-dark="brand-10">
-                <span class="token-map-cell tm-token"><code>--brand-10</code> <span class="tm-meta">(e.g. outline hover)</span></span>
-                <span class="token-map-cell tm-step">brand-10</span>
-                <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-10"></span></span>
-              </div>
               <div class="token-map-row" data-step-light="— (absolute)" data-step-dark="— (absolute)">
                 <span class="token-map-cell tm-token"><code>--white</code></span>
                 <span class="token-map-cell tm-step">— (absolute)</span>
                 <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-white"></span></span>
               </div>
-              <div class="token-map-row" data-step-light="grey-0" data-step-dark="grey-0">
-                <span class="token-map-cell tm-token"><code>--color-text-on-action</code></span>
-                <span class="token-map-cell tm-step">grey-0</span>
-                <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-text-on-action"></span></span>
+              <div class="token-map-row" data-step-light="— (absolute)" data-step-dark="— (absolute)">
+                <span class="token-map-cell tm-token"><code>--black</code></span>
+                <span class="token-map-cell tm-step">— (absolute)</span>
+                <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-black"></span></span>
               </div>
             </div>
           </div>
@@ -230,107 +233,24 @@ import Layout from '../layouts/Default.astro';
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════
-       SECTION 3 — Live Component Preview
+       SECTION 3 — Live Component Preview (In Context)
   ══════════════════════════════════════════════════════════════ -->
   <div class="section">
-    <div class="section-header">
-      <span class="section-title">In Context</span>
-      <span class="section-desc">Live preview of the brand colour applied to UI components</span>
+    <div class="in-context-head">
+      <div class="section-header in-context-section-header">
+        <div class="in-context-header-text">
+          <span class="section-title">In Context</span>
+          <span class="section-desc">Live preview of the brand applied to UI components</span>
+        </div>
+        <div class="in-context-theme-toggle" role="group" aria-label="Theme for in-context preview">
+          <button type="button" class="in-context-theme-toggle-btn is-active" data-theme="light" aria-pressed="true">Light</button>
+          <button type="button" class="in-context-theme-toggle-btn" data-theme="dark" aria-pressed="false">Dark</button>
+        </div>
+      </div>
     </div>
 
-    <div class="preview-grid">
-      <!-- Buttons -->
-      <div class="preview-card">
-        <div class="preview-card-label">Buttons</div>
-        <div class="preview-card-body">
-          <button class="pv-btn pv-btn--primary">Enrol Now</button>
-          <button class="pv-btn pv-btn--outline">View Syllabus</button>
-          <button class="pv-btn pv-btn--ghost">Cancel</button>
-        </div>
-      </div>
-
-      <!-- Focus ring -->
-      <div class="preview-card">
-        <div class="preview-card-label">Focus Ring</div>
-        <div class="preview-card-body">
-          <input type="text" class="pv-input pv-input--focused" value="jane@university.edu" readonly />
-        </div>
-      </div>
-
-      <!-- Badge & Tags -->
-      <div class="preview-card">
-        <div class="preview-card-label">Badges & Links</div>
-        <div class="preview-card-body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div style="display: flex; gap: 8px; align-items: center;">
-            <span class="pv-badge">Active</span>
-            <span class="pv-badge pv-badge--subtle">3 new</span>
-          </div>
-          <a href="#" class="pv-link" onclick="event.preventDefault()">View course details &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Toggle / Switch -->
-      <div class="preview-card">
-        <div class="preview-card-label">Toggle</div>
-        <div class="preview-card-body">
-          <div class="pv-switch-row">
-            <span class="pv-switch-label">Notifications</span>
-            <div class="pv-switch pv-switch--on">
-              <div class="pv-switch-thumb"></div>
-            </div>
-          </div>
-          <div class="pv-switch-row">
-            <span class="pv-switch-label">Dark mode</span>
-            <div class="pv-switch">
-              <div class="pv-switch-thumb"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Progress -->
-      <div class="preview-card preview-card--wide">
-        <div class="preview-card-label">Progress</div>
-        <div class="preview-card-body" style="flex-direction: column; gap: 12px;">
-          <div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-              <span style="font-size: 12px; font-weight: 500;">Course Completion</span>
-              <span style="font-size: 12px; color: var(--ink-3);">68%</span>
-            </div>
-            <div class="pv-progress">
-              <div class="pv-progress-bar" style="width: 68%;"></div>
-            </div>
-          </div>
-          <div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-              <span style="font-size: 12px; font-weight: 500;">Quiz Score</span>
-              <span style="font-size: 12px; color: var(--ink-3);">92%</span>
-            </div>
-            <div class="pv-progress">
-              <div class="pv-progress-bar" style="width: 92%;"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Selection / Radio -->
-      <div class="preview-card preview-card--wide">
-        <div class="preview-card-label">Selection</div>
-        <div class="preview-card-body" style="gap: 16px;">
-          <label class="pv-radio">
-            <span class="pv-radio-circle pv-radio-circle--selected"></span>
-            <span>Monthly</span>
-          </label>
-          <label class="pv-radio">
-            <span class="pv-radio-circle"></span>
-            <span>Annual</span>
-          </label>
-          <label class="pv-radio">
-            <span class="pv-radio-circle"></span>
-            <span>Lifetime</span>
-          </label>
-        </div>
-      </div>
+    <div id="in-context-theme-wrapper" data-theme="light">
+      <BrandInContextShowcase client:load />
     </div>
   </div>
 
@@ -424,7 +344,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   </div>
 
   <div class="footer">
-    Nexus Design System &middot; Brand Colour
+    Nexus Design System &middot; Brand
   </div>
 
   <div class="colour-toast" id="colour-toast">Copied!</div>
@@ -477,6 +397,35 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     return hexToOklch(hex);
   }
 
+  function normaliseHex(raw) {
+    const s = (raw || '').trim().replace(/^#+/, '');
+    if (/^[0-9A-Fa-f]{3}$/.test(s)) {
+      return '#' + (s[0] + s[0] + s[1] + s[1] + s[2] + s[2]).toUpperCase();
+    }
+    if (/^[0-9A-Fa-f]{6}$/.test(s)) {
+      return '#' + s.toUpperCase();
+    }
+    return null;
+  }
+
+  function applyFromHex(hex) {
+    setBrandColour(hex);
+    const { L, C, h } = hexToOklch(hex);
+    lastOklch = { L, C, h };
+    syncSlidersFromOklch(L, C, h);
+    updateChromaStrip(L, h);
+    updateLightnessStrip(C, h);
+    renderAll();
+    syncActiveCardFromHex(hex);
+  }
+
+  function syncHexInput(hex) {
+    const el = document.getElementById('custom-hex');
+    const swatch = document.getElementById('custom-hex-swatch');
+    if (el) el.value = hex || '';
+    if (swatch && hex) swatch.style.background = hex;
+  }
+
   function updateHueStrip() {
     const el = document.getElementById('hue-strip');
     if (!el) return;
@@ -518,6 +467,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     lastOklch = { L, C, h };
     updateChromaStrip(L, h);
     updateLightnessStrip(C, h);
+    syncHexInput(hex);
   }
 
   function syncSlidersFromOklch(L, C, h) {
@@ -627,9 +577,8 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     setDot('tm-60', get('--color-action-primary-hover'));
     setDot('tm-70', get('--color-action-primary-active'));
     setDot('tm-border-focus', get('--color-border-focus'));
-    setDot('tm-10', get('--brand-10'));
     setDot('tm-white', get('--white'));
-    setDot('tm-text-on-action', get('--color-text-on-action'));
+    setDot('tm-black', get('--black'));
   }
 
   function updateTokenMapStepLabels(theme) {
@@ -659,6 +608,24 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
         });
         updateTokenMapStepLabels(theme);
         renderTokenDots();
+      });
+    });
+  }
+
+  function initInContextThemeToggle() {
+    const wrapper = document.getElementById('in-context-theme-wrapper');
+    const btns = document.querySelectorAll('.in-context-theme-toggle-btn');
+    if (!wrapper || !btns.length) return;
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-theme');
+        if (!theme) return;
+        wrapper.setAttribute('data-theme', theme);
+        btns.forEach(b => {
+          const isActive = b.getAttribute('data-theme') === theme;
+          b.classList.toggle('is-active', isActive);
+          b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
       });
     });
   }
@@ -751,6 +718,30 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     syncSlidersFromOklch(lastOklch.L, lastOklch.C, lastOklch.h);
   }
 
+  function initHexInput() {
+    const hexInput = document.getElementById('custom-hex');
+    if (!hexInput) return;
+    function commitHex() {
+      const normalised = normaliseHex(hexInput.value);
+      if (normalised) {
+        applyFromHex(normalised);
+        syncHexInput(normalised);
+      } else {
+        const current = getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#A03AFF';
+        syncHexInput(current);
+      }
+    }
+    hexInput.addEventListener('blur', commitHex);
+    hexInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        commitHex();
+      }
+    });
+    const currentHex = getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#A03AFF';
+    syncHexInput(currentHex);
+  }
+
   // Multi-brand: click or keyboard to apply
   function setActiveCard(activeCard) {
     document.querySelectorAll('.multibrand-card').forEach(c => {
@@ -791,6 +782,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     syncSlidersFromOklch(L, C, h);
     updateChromaStrip(L, h);
     updateLightnessStrip(C, h);
+    syncHexInput(hex);
   });
 
   // Re-render when DOM style changes (e.g. setBrandColour from same page)
@@ -827,7 +819,9 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   syncActiveCardFromDOM();
   initStrips();
   initSliders();
+  initHexInput();
   initTokenMapToggle();
+  initInContextThemeToggle();
 </script>
 
 <style>
@@ -962,6 +956,42 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     overflow: hidden;
   }
 
+  /* Theme background only on the table, not the wrapper — keeps row hierarchy (Custom colour | Token mapping) in sync */
+  #token-map-theme-wrapper .token-map {
+    background: var(--white);
+  }
+
+  #token-map-theme-wrapper[data-theme="dark"] .token-map {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-default);
+  }
+
+  #token-map-theme-wrapper[data-theme="dark"] .token-map-header {
+    color: var(--color-text-secondary);
+    background: var(--color-bg-tertiary);
+  }
+
+  #token-map-theme-wrapper[data-theme="dark"] .token-map-row {
+    border-bottom-color: var(--color-border-default);
+  }
+
+  #token-map-theme-wrapper[data-theme="dark"] .token-map-row:not(.token-map-header):hover {
+    background: var(--color-interactive-hover);
+  }
+
+  #token-map-theme-wrapper[data-theme="dark"] .tm-token code {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  #token-map-theme-wrapper[data-theme="dark"] .tm-step {
+    color: var(--color-text-secondary);
+  }
+
+  #token-map-theme-wrapper[data-theme="dark"] .tm-meta {
+    color: var(--color-text-tertiary);
+  }
+
   .token-map-row {
     display: grid;
     grid-template-columns: 1fr 120px 48px;
@@ -1008,212 +1038,131 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   }
 
   /* ═══════════════════════════════════════════════════════════
-     LIVE PREVIEW
+     LIVE PREVIEW (In Context — atoms only, tokens for layout)
+     :global() so styles apply to client-rendered BrandInContextShowcase
   ══════════════════════════════════════════════════════════════ */
-  .preview-grid {
+  :global(.preview-grid) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: var(--space-150);
   }
 
-  .preview-card {
+  :global(.preview-card) {
     background: var(--card-bg);
     border: 1px solid var(--rule);
     border-radius: var(--radius);
-    padding: 20px;
+    padding: var(--space-250);
     transition: border-color 0.15s;
+    overflow: visible;
   }
 
-  .preview-card:hover { border-color: var(--ink-3); }
-  .preview-card--wide { grid-column: span 2; }
+  :global(.preview-card:hover) { border-color: var(--ink-3); }
+  :global(.preview-card--wide) { grid-column: span 2; }
 
-  .preview-card-label {
+  :global(.preview-card-label) {
     font-size: 10px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--ink-3);
-    margin-bottom: 14px;
+    margin-bottom: var(--space-150);
   }
 
-  .preview-card-body {
+  :global(.preview-card-body) {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--space-125);
     flex-wrap: wrap;
+    overflow: visible;
   }
 
-  /* Preview: Buttons */
-  .pv-btn {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 500;
-    padding: 8px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 150ms ease;
-    border: none;
+  /* In Context — header row with theme toggle; border under full row, less gap to cards */
+  .in-context-head {
+    margin-bottom: var(--space-100);
   }
 
-  .pv-btn--primary {
-    background: var(--brand-50, #A03AFF);
-    color: white;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-  }
-  .pv-btn--primary:hover { filter: brightness(1.08); }
-
-  .pv-btn--outline {
-    background: transparent;
-    color: var(--brand-50, #A03AFF);
-    border: 1.5px solid var(--brand-50, #A03AFF);
-  }
-  .pv-btn--outline:hover { background: var(--brand-10, #F0E6FF); }
-
-  .pv-btn--ghost {
-    background: transparent;
-    color: var(--ink-2);
-    border: 1px solid var(--rule);
-  }
-  .pv-btn--ghost:hover { background: rgba(0,0,0,0.03); }
-
-  /* Preview: Input */
-  .pv-input {
-    font-family: var(--sans);
-    font-size: 13px;
+  .in-context-head .section-header.in-context-section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
     width: 100%;
-    padding: 9px 14px;
-    border: 1.5px solid var(--rule);
-    border-radius: 6px;
-    background: var(--card-bg);
-    color: var(--ink);
-    outline: none;
   }
 
-  .pv-input--focused {
-    border-color: var(--brand-30, #8B5CF6);
-    box-shadow: 0 0 0 3px var(--brand-10, rgba(139, 92, 246, 0.15));
+  .in-context-header-text {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
   }
 
-  /* Preview: Badge */
-  .pv-badge {
+  .in-context-theme-toggle {
+    display: flex;
+    border-radius: var(--radius-100);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    background: var(--page-bg);
+  }
+
+  .in-context-theme-toggle-btn {
     font-family: var(--sans);
     font-size: 11px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 100px;
-    background: var(--brand-50, #A03AFF);
-    color: white;
-  }
-
-  .pv-badge--subtle {
-    background: var(--brand-10, #F0E6FF);
-    color: var(--brand-60, #7C2DD8);
-  }
-
-  /* Preview: Link */
-  .pv-link {
-    font-size: 13px;
     font-weight: 500;
-    color: var(--brand-50, #A03AFF) !important;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s;
-  }
-  .pv-link:hover { border-bottom-color: var(--brand-50, #A03AFF); }
-
-  /* Preview: Switch */
-  .pv-switch-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 4px 0;
-  }
-
-  .pv-switch-label {
-    font-size: 13px;
-    color: var(--ink);
-  }
-
-  .pv-switch {
-    width: 36px;
-    height: 20px;
-    border-radius: 10px;
-    background: var(--rule);
-    position: relative;
+    padding: 4px 10px;
+    border: none;
+    background: transparent;
+    color: var(--ink-2);
     cursor: pointer;
-    transition: background 150ms;
-    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
   }
 
-  .pv-switch--on {
-    background: var(--brand-50, #A03AFF);
-  }
-
-  .pv-switch-thumb {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: white;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.12);
-    transition: transform 150ms;
-  }
-
-  .pv-switch--on .pv-switch-thumb {
-    transform: translateX(16px);
-  }
-
-  /* Preview: Progress */
-  .pv-progress {
-    width: 100%;
-    height: 6px;
-    border-radius: 3px;
-    background: var(--rule);
-    overflow: hidden;
-  }
-
-  .pv-progress-bar {
-    height: 100%;
-    border-radius: 3px;
-    background: var(--brand-50, #A03AFF);
-    transition: background 300ms;
-  }
-
-  /* Preview: Radio */
-  .pv-radio {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    cursor: pointer;
+  .in-context-theme-toggle-btn:hover {
     color: var(--ink);
+    background: rgba(0, 0, 0, 0.04);
   }
 
-  .pv-radio-circle {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2px solid var(--rule);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: border-color 150ms;
+  .in-context-theme-toggle-btn.is-active {
+    background: var(--card-bg);
+    color: var(--ink);
+    box-shadow: 0 0 0 1px var(--rule);
   }
 
-  .pv-radio-circle--selected {
-    border-color: var(--brand-50, #A03AFF);
+  .in-context-theme-toggle-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-border-focus, var(--ink-3));
   }
 
-  .pv-radio-circle--selected::after {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--brand-50, #A03AFF);
+  /* Wrapper always transparent — no outer card, no padding; only .preview-card define the surface */
+  #in-context-theme-wrapper {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  /* Dark: cards and elevated surfaces use grey-100 for consistent dark surface (no pure black) */
+  #in-context-theme-wrapper[data-theme="dark"] {
+    --color-bg-elevated: var(--grey-100);
+    --color-bg-tertiary: var(--grey-100);
+  }
+
+  #in-context-theme-wrapper[data-theme="dark"] :global(.preview-card) {
+    background: var(--grey-100);
+    border-color: var(--color-border-default);
+  }
+
+  #in-context-theme-wrapper[data-theme="dark"] :global(.preview-card:hover) {
+    border-color: var(--color-border-strong);
+  }
+
+  #in-context-theme-wrapper[data-theme="dark"] :global(.preview-card-label) {
+    color: var(--color-text-secondary);
+  }
+
+  #in-context-theme-wrapper[data-theme="dark"] :global(.preview-card),
+  #in-context-theme-wrapper[data-theme="dark"] :global(.preview-card-body) {
+    color: var(--color-text-primary);
   }
 
   /* ═══════════════════════════════════════════════════════════
@@ -1244,6 +1193,13 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     grid-template-columns: 1fr 1fr;
     gap: 24px;
     align-items: stretch;
+  }
+
+  #token-map-theme-wrapper {
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .token-map-block {
@@ -1346,6 +1302,43 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     display: flex;
     flex-direction: column;
     gap: 8px;
+  }
+
+  .brand-hex-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-hex-input {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
+    padding: 6px 8px;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--card-bg);
+    min-width: 0;
+    flex: 1;
+  }
+
+  .brand-hex-input::placeholder {
+    color: var(--ink-3);
+  }
+
+  .brand-hex-input:focus {
+    outline: none;
+    border-color: var(--border-focus, var(--ink-3));
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.06);
+  }
+
+  .brand-hex-swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+    transition: background 300ms ease;
   }
 
   .brand-strip {
@@ -1754,8 +1747,8 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     .brand-hero { grid-template-columns: 1fr; }
     .brand-hero-swatch { width: 120px; height: 120px; }
     .brand-picker-row { grid-template-columns: 1fr; }
-    .preview-grid { grid-template-columns: 1fr; }
-    .preview-card--wide { grid-column: span 1; }
+    :global(.preview-grid) { grid-template-columns: 1fr; }
+    :global(.preview-card--wide) { grid-column: span 1; }
     .multibrand-row { grid-template-columns: repeat(3, 1fr); }
     .alpha-strip { grid-template-columns: repeat(2, 1fr); }
     .usage-grid { grid-template-columns: 1fr; }

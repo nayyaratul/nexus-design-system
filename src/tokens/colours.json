@@ -61,7 +61,7 @@
     "hue": 25,
     "usage": "Error · Destructive actions · Alerts",
     "steps": [
-      { "step": 0,   "hex": "#FBFBFB" },
+      { "step": 0,   "hex": "#FFF9F8" },
       { "step": 10,  "hex": "#FBD6D3" },
       { "step": 20,  "hex": "#F8B1AB" },
       { "step": 30,  "hex": "#F68D85" },

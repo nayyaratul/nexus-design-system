@@ -84,14 +84,14 @@ export function ProgressBarShowcase() {
       <div>
         <div style={{ fontSize: 'var(--font-size-200)', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: 'var(--letter-spacing-wide)', textTransform: 'uppercase', marginBottom: 'var(--space-100)' }}>Theme Comparison</div>
         <div className="theme-comparison">
-          <div data-theme="light" style={{ padding: 'var(--space-250)', background: 'var(--color-bg-primary)', borderRadius: 'var(--radius-150)', border: '1px solid var(--color-border-default)' }}>
+          <div data-theme="light" style={{ padding: 'var(--space-250)', background: 'var(--color-bg-theme-panel)', borderRadius: 'var(--radius-150)', border: '1px solid var(--color-border-default)' }}>
             <div style={{ fontSize: 'var(--font-size-200)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-100)', fontWeight: 500 }}>LIGHT</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-125)' }}>
               <ProgressBar value={70} size="md" />
               <ProgressBar value={70} size="md" variant="success" />
             </div>
           </div>
-          <div data-theme="dark" style={{ padding: 'var(--space-250)', background: 'var(--color-bg-primary)', borderRadius: 'var(--radius-150)', border: '1px solid var(--color-border-default)' }}>
+          <div data-theme="dark" style={{ padding: 'var(--space-250)', background: 'var(--color-bg-theme-panel)', borderRadius: 'var(--radius-150)', border: '1px solid var(--color-border-default)' }}>
             <div style={{ fontSize: 'var(--font-size-200)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-100)', fontWeight: 500 }}>DARK</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-125)' }}>
               <ProgressBar value={70} size="md" />

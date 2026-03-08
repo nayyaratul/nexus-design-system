@@ -30,7 +30,7 @@ export function Alert({
     >
       {IconComponent && (
         <span className={styles.icon}>
-          {typeof IconComponent === 'function' || IconComponent?.$$typeof ? <IconComponent size={18} /> : IconComponent}
+          {typeof IconComponent === 'function' || IconComponent?.$$typeof ? <IconComponent size={16} /> : IconComponent}
         </span>
       )}
       <div className={styles.content}>
@@ -45,7 +45,7 @@ export function Alert({
           aria-label="Dismiss alert"
           type="button"
         >
-          <X size={16} />
+          <X size={16} aria-hidden />
         </button>
       )}
     </div>

@@ -51,7 +51,7 @@
   --warm-100: #080807;
 
   /* Red */
-  --red-0:   #FBFBFB;
+  --red-0:   #FFF9F8;
   --red-10:  #FBD6D3;
   --red-20:  #F8B1AB;
   --red-30:  #F68D85;
@@ -201,6 +201,31 @@
 
   /* Table — header background (semantic → primitive) */
   --color-table-header-bg: var(--grey-10);
+
+  /* Theme comparison panel — pure white in light (not grey-0) */
+  --color-bg-theme-panel: var(--white);
+
+  /* Alert — 0↔100 mirror: light step 0 (bg), step 20 (border); dark uses 100 and 80 */
+  --color-alert-success-bg:   var(--green-0);
+  --color-alert-success-border: var(--green-20);
+  --color-alert-error-bg:     var(--red-0);
+  --color-alert-error-border:   var(--red-20);
+  --color-alert-warning-bg:   var(--yellow-0);
+  --color-alert-warning-border: var(--yellow-20);
+  --color-alert-info-bg:      var(--blue-0);
+  --color-alert-info-border:    var(--blue-20);
+
+  /* Tag — 0↔100 mirror: light step 0 (bg), step 20 (border); dark uses 100 and 80 */
+  --color-tag-default-bg:   var(--grey-0);
+  --color-tag-default-border: var(--grey-20);
+  --color-tag-success-bg:   var(--green-0);
+  --color-tag-success-border: var(--green-20);
+  --color-tag-error-bg:     var(--red-0);
+  --color-tag-error-border:   var(--red-20);
+  --color-tag-warning-bg:   var(--yellow-0);
+  --color-tag-warning-border: var(--yellow-20);
+  --color-tag-info-bg:      var(--blue-0);
+  --color-tag-info-border:    var(--blue-20);
 }
 
 
@@ -218,25 +243,25 @@
   --color-text-inverse:     var(--grey-100);
   --color-text-on-action:   var(--grey-0);
   --color-text-success:     var(--green-40);
-  --color-text-error:       var(--red-40);
+  --color-text-error:       var(--red-50);
   --color-text-warning:     var(--yellow-40);
   --color-text-info:        var(--blue-40);
-  --color-text-link:        var(--brand-40);
+  --color-text-link:        var(--brand-50);
 
-  /* Backgrounds — mirror: 0→100, warm-0→warm-90, 10→90 */
+  /* Backgrounds — mirror: 0→100 (N↔100−N), 10→90 */
   --color-bg-primary:       var(--grey-100);
-  --color-bg-secondary:     var(--warm-90);
+  --color-bg-secondary:     var(--warm-100);
   --color-bg-tertiary:      var(--grey-90);
   --color-bg-elevated:      var(--grey-90);
   --color-bg-sunken:        var(--cool-100);
   --color-bg-disabled:      var(--grey-90);
   --color-bg-overlay:       color-mix(in srgb, var(--grey-100) calc(var(--opacity-072) * 100%), transparent);
 
-  /* Background — status (mirror: 0→90) */
-  --color-bg-success:       var(--green-90);
-  --color-bg-error:         var(--red-90);
-  --color-bg-warning:       var(--yellow-90);
-  --color-bg-info:          var(--blue-90);
+  /* Background — status (mirror: 0→100, N↔100−N) */
+  --color-bg-success:       var(--green-100);
+  --color-bg-error:         var(--red-100);
+  --color-bg-warning:       var(--yellow-100);
+  --color-bg-info:          var(--blue-100);
 
   /* Background — subtle status (mirror: 10→80) */
   --color-bg-success-subtle: var(--green-80);
@@ -280,4 +305,29 @@
 
   /* Table — header background (semantic → primitive) */
   --color-table-header-bg: var(--grey-90);
+
+  /* Theme comparison panel — pure black in dark (not grey-100) */
+  --color-bg-theme-panel: var(--black);
+
+  /* Alert — 0↔100: dark step 100 (bg), step 80 (border) */
+  --color-alert-success-bg:   var(--green-100);
+  --color-alert-success-border: var(--green-80);
+  --color-alert-error-bg:     var(--red-100);
+  --color-alert-error-border:   var(--red-80);
+  --color-alert-warning-bg:   var(--yellow-100);
+  --color-alert-warning-border: var(--yellow-80);
+  --color-alert-info-bg:      var(--blue-100);
+  --color-alert-info-border:    var(--blue-80);
+
+  /* Tag — 0↔100: dark step 100 (bg), step 80 (border) */
+  --color-tag-default-bg:   var(--grey-100);
+  --color-tag-default-border: var(--grey-80);
+  --color-tag-success-bg:   var(--green-100);
+  --color-tag-success-border: var(--green-80);
+  --color-tag-error-bg:     var(--red-100);
+  --color-tag-error-border:   var(--red-80);
+  --color-tag-warning-bg:   var(--yellow-100);
+  --color-tag-warning-border: var(--yellow-80);
+  --color-tag-info-bg:      var(--blue-100);
+  --color-tag-info-border:    var(--blue-80);
 }

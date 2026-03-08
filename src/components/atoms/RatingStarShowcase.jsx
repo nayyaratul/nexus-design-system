@@ -16,7 +16,7 @@ const sectionLabelStyle = {
 };
 const blockStyle = {
   padding: 'var(--space-250)',
-  background: 'var(--color-bg-primary)',
+  background: 'var(--color-bg-theme-panel)',
   borderRadius: 'var(--radius-200)',
   borderWidth: 'var(--border-width-100)',
   borderStyle: 'solid',
@@ -107,7 +107,7 @@ export function RatingStarShowcase() {
       <div>
         <div style={{ fontSize: 'var(--font-size-100)', fontWeight: 'var(--font-weight-medium)', color: 'var(--color-text-tertiary)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 'var(--space-150)' }}>Theme Comparison</div>
         <div className="theme-comparison">
-          <div data-theme="light" style={{ padding: 'var(--space-250)', background: 'var(--color-bg-primary)', borderRadius: 'var(--radius)', borderWidth: 'var(--border-width-100)', borderStyle: 'solid', borderColor: 'var(--color-border-default)' }}>
+          <div data-theme="light" style={{ padding: 'var(--space-250)', background: 'var(--color-bg-theme-panel)', borderRadius: 'var(--radius)', borderWidth: 'var(--border-width-100)', borderStyle: 'solid', borderColor: 'var(--color-border-default)' }}>
             <div style={{ fontSize: 'var(--font-size-100)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-150)', fontWeight: 'var(--font-weight-medium)' }}>LIGHT</div>
             <div style={{ display: 'flex', gap: 'var(--space-100)' }}>
               <RatingStar state="filled" size="md" />
@@ -115,7 +115,7 @@ export function RatingStarShowcase() {
               <RatingStar state="half" size="md" />
             </div>
           </div>
-          <div data-theme="dark" style={{ padding: 'var(--space-250)', background: 'var(--color-bg-primary)', borderRadius: 'var(--radius)', borderWidth: 'var(--border-width-100)', borderStyle: 'solid', borderColor: 'var(--color-border-default)' }}>
+          <div data-theme="dark" style={{ padding: 'var(--space-250)', background: 'var(--color-bg-theme-panel)', borderRadius: 'var(--radius)', borderWidth: 'var(--border-width-100)', borderStyle: 'solid', borderColor: 'var(--color-border-default)' }}>
             <div style={{ fontSize: 'var(--font-size-100)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-150)', fontWeight: 'var(--font-weight-medium)' }}>DARK</div>
             <div style={{ display: 'flex', gap: 'var(--space-100)' }}>
               <RatingStar state="filled" size="md" />

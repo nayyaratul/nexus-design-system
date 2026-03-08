@@ -271,7 +271,7 @@ export function AspectRatioShowcase() {
               data-theme={theme}
               style={{
                 padding: '20px',
-                background: 'var(--color-bg-primary)',
+                background: 'var(--color-bg-theme-panel)',
                 borderRadius: '10px',
                 border: '1px solid var(--color-border-default)',
               }}

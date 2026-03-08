@@ -67,7 +67,7 @@ export function FormFieldShowcase() {
       {/* Complete form example */}
       <div>
         <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Form Example</div>
-        <div style={{ maxWidth: 400, display: 'flex', flexDirection: 'column', gap: '16px', padding: '20px', background: 'var(--color-bg-primary)', border: '1px solid var(--color-border-default)', borderRadius: '10px' }}>
+        <div style={{ maxWidth: 400, display: 'flex', flexDirection: 'column', gap: '16px', padding: '20px', background: 'var(--color-bg-theme-panel)', border: '1px solid var(--color-border-default)', borderRadius: '10px' }}>
           <FormField label="Full name" htmlFor="name" required>
             <Input id="name" placeholder="Jane Doe" />
           </FormField>
@@ -94,7 +94,7 @@ export function FormFieldShowcase() {
       <div>
         <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Theme Comparison</div>
         <div className="theme-comparison">
-          <div data-theme="light" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
+          <div data-theme="light" style={{ padding: '20px', background: 'var(--color-bg-theme-panel)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
             <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>LIGHT</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <FormField label="Email" htmlFor="theme-email" hint="We'll never share your email">
@@ -105,7 +105,7 @@ export function FormFieldShowcase() {
               </FormField>
             </div>
           </div>
-          <div data-theme="dark" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
+          <div data-theme="dark" style={{ padding: '20px', background: 'var(--color-bg-theme-panel)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
             <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>DARK</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <FormField label="Email" htmlFor="theme-email-dark" hint="We'll never share your email">

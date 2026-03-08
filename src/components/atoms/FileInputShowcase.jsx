@@ -88,7 +88,7 @@ export function FileInputShowcase() {
             data-theme="light"
             style={{
               padding: 'var(--space-250)',
-              background: 'var(--color-bg-primary)',
+              background: 'var(--color-bg-theme-panel)',
               borderRadius: 'var(--radius-150)',
               border: 'var(--border-width-100) solid var(--color-border-default)',
             }}
@@ -112,7 +112,7 @@ export function FileInputShowcase() {
             data-theme="dark"
             style={{
               padding: 'var(--space-250)',
-              background: 'var(--color-bg-primary)',
+              background: 'var(--color-bg-theme-panel)',
               borderRadius: 'var(--radius-150)',
               border: 'var(--border-width-100) solid var(--color-border-default)',
             }}

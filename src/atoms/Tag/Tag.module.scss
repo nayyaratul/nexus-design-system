@@ -11,14 +11,14 @@
 
 /* ─── Sizes ─── */
 .sm {
-  height: 24px;
+  height: var(--space-300);
   padding: 0 var(--space-075);
   font-size: var(--font-size-100);
   line-height: var(--line-height-100);
 }
 
 .md {
-  height: 28px;
+  height: var(--line-height-500);
   padding: 0 var(--space-100);
   font-size: var(--font-size-200);
   line-height: var(--line-height-200);
@@ -48,42 +48,42 @@
   margin-left: var(--space-025);
   cursor: pointer;
   color: inherit;
-  opacity: 0.6;
+  opacity: var(--opacity-064);
   border-radius: var(--radius-full);
   transition: opacity 150ms ease;
 
   &:hover {
-    opacity: 1;
+    opacity: var(--opacity-100);
   }
 }
 
 /* ─── Variants ─── */
 .default {
-  background: var(--color-bg-tertiary);
-  border-color: var(--color-border-default);
+  background: var(--color-tag-default-bg);
+  border-color: var(--color-tag-default-border);
   color: var(--color-text-primary);
 }
 
 .info {
-  background: var(--color-bg-info-subtle);
-  border-color: var(--color-text-info);
+  background: var(--color-tag-info-bg);
+  border-color: var(--color-tag-info-border);
   color: var(--color-text-info);
 }
 
 .success {
-  background: var(--color-bg-success-subtle);
-  border-color: var(--color-text-success);
+  background: var(--color-tag-success-bg);
+  border-color: var(--color-tag-success-border);
   color: var(--color-text-success);
 }
 
 .warning {
-  background: var(--color-bg-warning-subtle);
-  border-color: var(--color-text-warning);
+  background: var(--color-tag-warning-bg);
+  border-color: var(--color-tag-warning-border);
   color: var(--color-text-warning);
 }
 
 .error {
-  background: var(--color-bg-error-subtle);
-  border-color: var(--color-text-error);
+  background: var(--color-tag-error-bg);
+  border-color: var(--color-tag-error-border);
   color: var(--color-text-error);
 }

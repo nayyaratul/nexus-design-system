@@ -64,7 +64,7 @@
   text-align: left;
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-secondary);
-  border-bottom: var(--border-width-200) solid var(--color-border-default);
+  border-bottom: var(--border-width-100) solid var(--color-border-subtle);
   white-space: nowrap;
 }
 
@@ -135,8 +135,8 @@
   }
 
   .head {
-    border-bottom-width: var(--border-width-200);
-    border-bottom-color: var(--color-border-default);
+    border-bottom-width: var(--border-width-100);
+    border-bottom-color: var(--color-border-subtle);
   }
 }
 

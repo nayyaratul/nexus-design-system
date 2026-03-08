@@ -283,7 +283,7 @@ export function TableShowcase() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem' }}>
         <div data-theme="light" style={{
           padding: '24px',
-          background: 'var(--color-bg-primary)',
+          background: 'var(--color-bg-theme-panel)',
           borderRadius: '12px',
           border: '1px solid var(--rule)',
           boxShadow: '0 1px 3px rgba(26,24,22,0.04), 0 4px 12px rgba(26,24,22,0.02)',
@@ -321,7 +321,7 @@ export function TableShowcase() {
         </div>
         <div data-theme="dark" style={{
           padding: '24px',
-          background: 'var(--color-bg-primary)',
+          background: 'var(--color-bg-theme-panel)',
           borderRadius: '12px',
           border: '1px solid var(--color-border-default)',
         }}>

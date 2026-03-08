@@ -8,12 +8,21 @@ export function TagShowcase() {
   const removeTag = (tag) => setTags((prev) => prev.filter((t) => t !== tag));
   const resetTags = () => setTags(['React', 'TypeScript', 'Radix', 'Tailwind']);
 
+  const sectionLabelStyle = {
+    fontSize: 'var(--font-size-200)',
+    fontWeight: 'var(--font-weight-medium)',
+    color: 'var(--color-text-tertiary)',
+    letterSpacing: 'var(--letter-spacing-wide)',
+    textTransform: 'uppercase',
+    marginBottom: 'var(--space-150)',
+  };
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-400)' }}>
       {/* Variants */}
       <div>
-        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Variants</div>
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        <div style={sectionLabelStyle}>Variants</div>
+        <div style={{ display: 'flex', gap: 'var(--space-100)', flexWrap: 'wrap' }}>
           <Tag variant="default">Default</Tag>
           <Tag variant="info">Info</Tag>
           <Tag variant="success">Success</Tag>
@@ -24,8 +33,8 @@ export function TagShowcase() {
 
       {/* Sizes */}
       <div>
-        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Sizes</div>
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+        <div style={sectionLabelStyle}>Sizes</div>
+        <div style={{ display: 'flex', gap: 'var(--space-100)', alignItems: 'center' }}>
           <Tag size="sm" variant="info">Small (24px)</Tag>
           <Tag size="md" variant="info">Medium (28px)</Tag>
         </div>
@@ -33,8 +42,8 @@ export function TagShowcase() {
 
       {/* With icons */}
       <div>
-        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>With Icons</div>
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        <div style={sectionLabelStyle}>With Icons</div>
+        <div style={{ display: 'flex', gap: 'var(--space-100)', flexWrap: 'wrap' }}>
           <Tag icon={<Star size={12} />} variant="warning">Featured</Tag>
           <Tag icon={<Zap size={12} />} variant="info">Fast</Tag>
           <Tag icon={<Heart size={12} />} variant="error">Favourite</Tag>
@@ -44,8 +53,8 @@ export function TagShowcase() {
 
       {/* Dismissible */}
       <div>
-        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Dismissible</div>
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
+        <div style={sectionLabelStyle}>Dismissible</div>
+        <div style={{ display: 'flex', gap: 'var(--space-100)', flexWrap: 'wrap', alignItems: 'center' }}>
           {tags.map((tag) => (
             <Tag key={tag} dismissible variant="info" onDismiss={() => removeTag(tag)}>
               {tag}
@@ -54,7 +63,16 @@ export function TagShowcase() {
           {tags.length < 4 && (
             <button
               onClick={resetTags}
-              style={{ fontSize: '12px', padding: '4px 10px', cursor: 'pointer', border: '1px solid var(--rule)', borderRadius: '6px', background: 'var(--card-bg)', color: 'inherit' }}
+              style={{
+                fontSize: 'var(--font-size-200)',
+                padding: 'var(--space-050) var(--space-125)',
+                cursor: 'pointer',
+                border: 'var(--border-width-100) solid var(--color-border-default)',
+                borderRadius: 'var(--radius-100)',
+                background: 'var(--color-bg-elevated)',
+                color: 'inherit',
+                fontFamily: 'var(--sans)',
+              }}
             >
               Reset
             </button>
@@ -62,13 +80,21 @@ export function TagShowcase() {
         </div>
       </div>
 
-      {/* Dark theme preview */}
+      {/* Theme comparison */}
       <div>
-        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Theme Comparison</div>
+        <div style={sectionLabelStyle}>Theme Comparison</div>
         <div className="theme-comparison">
-          <div data-theme="light" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
-            <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>LIGHT</div>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <div
+            data-theme="light"
+            style={{
+              padding: 'var(--space-250)',
+              background: 'var(--color-bg-theme-panel)',
+              borderRadius: 'var(--radius-150)',
+              border: 'var(--border-width-100) solid var(--color-border-default)',
+            }}
+          >
+            <div style={{ fontSize: 'var(--font-size-100)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-150)', fontWeight: 'var(--font-weight-medium)' }}>LIGHT</div>
+            <div style={{ display: 'flex', gap: 'var(--space-100)', flexWrap: 'wrap' }}>
               <Tag variant="default">Default</Tag>
               <Tag variant="info">Info</Tag>
               <Tag variant="success">Success</Tag>
@@ -76,9 +102,17 @@ export function TagShowcase() {
               <Tag variant="error">Error</Tag>
             </div>
           </div>
-          <div data-theme="dark" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
-            <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>DARK</div>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <div
+            data-theme="dark"
+            style={{
+              padding: 'var(--space-250)',
+              background: 'var(--color-bg-theme-panel)',
+              borderRadius: 'var(--radius-150)',
+              border: 'var(--border-width-100) solid var(--color-border-default)',
+            }}
+          >
+            <div style={{ fontSize: 'var(--font-size-100)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-150)', fontWeight: 'var(--font-weight-medium)' }}>DARK</div>
+            <div style={{ display: 'flex', gap: 'var(--space-100)', flexWrap: 'wrap' }}>
               <Tag variant="default">Default</Tag>
               <Tag variant="info">Info</Tag>
               <Tag variant="success">Success</Tag>

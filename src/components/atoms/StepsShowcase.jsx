@@ -126,7 +126,7 @@ export function StepsShowcase() {
       <div>
         <div style={sty.label}>Theme comparison</div>
         <div className="theme-comparison">
-          <div data-theme="light" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
+          <div data-theme="light" style={{ padding: '20px', background: 'var(--color-bg-theme-panel)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
             <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>LIGHT</div>
             <Steps activeStep={1} orientation="vertical" size="sm">
               <StepItem label="Configure" icon={Settings} />
@@ -134,7 +134,7 @@ export function StepsShowcase() {
               <StepItem label="Complete" icon={Check} />
             </Steps>
           </div>
-          <div data-theme="dark" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
+          <div data-theme="dark" style={{ padding: '20px', background: 'var(--color-bg-theme-panel)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
             <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>DARK</div>
             <Steps activeStep={1} orientation="vertical" size="sm">
               <StepItem label="Configure" icon={Settings} />

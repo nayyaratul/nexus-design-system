@@ -2,15 +2,24 @@ import { useState } from 'react';
 import { Alert } from '../../atoms/Alert/Alert';
 import { Button } from '../../atoms/Button/Button';
 
+const sectionLabelStyle = {
+  fontSize: 'var(--font-size-200)',
+  fontWeight: 'var(--font-weight-medium)',
+  color: 'var(--color-text-tertiary)',
+  letterSpacing: 'var(--letter-spacing-wide)',
+  textTransform: 'uppercase',
+  marginBottom: 'var(--space-150)',
+};
+
 export function AlertShowcase() {
   const [dismissed, setDismissed] = useState(false);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-400)' }}>
       {/* Variants */}
       <div>
-        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Variants</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div style={sectionLabelStyle}>Variants</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-150)' }}>
           <Alert variant="info" title="Info">This is an informational message.</Alert>
           <Alert variant="success" title="Success">Your changes have been saved successfully.</Alert>
           <Alert variant="warning" title="Warning">This action cannot be undone.</Alert>
@@ -20,7 +29,7 @@ export function AlertShowcase() {
 
       {/* Dismissible */}
       <div>
-        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Dismissible</div>
+        <div style={sectionLabelStyle}>Dismissible</div>
         {!dismissed ? (
           <Alert variant="warning" title="Heads up" dismissible onDismiss={() => setDismissed(true)}>
             Click the dismiss button to hide this alert.
@@ -28,7 +37,16 @@ export function AlertShowcase() {
         ) : (
           <button
             onClick={() => setDismissed(false)}
-            style={{ fontSize: '13px', padding: '6px 12px', cursor: 'pointer', border: '1px solid var(--rule)', borderRadius: '6px', background: 'var(--card-bg)', color: 'inherit' }}
+            style={{
+              fontSize: 'var(--font-size-300)',
+              padding: 'var(--space-075) var(--space-150)',
+              cursor: 'pointer',
+              border: 'var(--border-width-100) solid var(--color-border-default)',
+              borderRadius: 'var(--radius-150)',
+              background: 'var(--color-bg-elevated)',
+              color: 'inherit',
+              fontFamily: 'var(--sans)',
+            }}
           >
             Show alert again
           </button>
@@ -37,8 +55,8 @@ export function AlertShowcase() {
 
       {/* With Action */}
       <div>
-        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>With Action</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div style={sectionLabelStyle}>With Action</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-150)' }}>
           <Alert
             variant="info"
             title="New version available"
@@ -67,24 +85,40 @@ export function AlertShowcase() {
 
       {/* Title only */}
       <div>
-        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Title Only</div>
+        <div style={sectionLabelStyle}>Title Only</div>
         <Alert variant="success" title="File uploaded successfully" />
       </div>
 
-      {/* Dark theme preview */}
+      {/* Theme comparison */}
       <div>
-        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Theme Comparison</div>
+        <div style={sectionLabelStyle}>Theme Comparison</div>
         <div className="theme-comparison">
-          <div data-theme="light" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
-            <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>LIGHT</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div
+            data-theme="light"
+            style={{
+              padding: 'var(--space-250)',
+              background: 'var(--color-bg-theme-panel)',
+              borderRadius: 'var(--radius-150)',
+              border: 'var(--border-width-100) solid var(--color-border-default)',
+            }}
+          >
+            <div style={{ fontSize: 'var(--font-size-100)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-150)', fontWeight: 'var(--font-weight-medium)' }}>LIGHT</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-125)' }}>
               <Alert variant="info" title="Info">This is an informational message.</Alert>
               <Alert variant="error" title="Error">Something went wrong. Please try again.</Alert>
             </div>
           </div>
-          <div data-theme="dark" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
-            <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>DARK</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div
+            data-theme="dark"
+            style={{
+              padding: 'var(--space-250)',
+              background: 'var(--color-bg-theme-panel)',
+              borderRadius: 'var(--radius-150)',
+              border: 'var(--border-width-100) solid var(--color-border-default)',
+            }}
+          >
+            <div style={{ fontSize: 'var(--font-size-100)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-150)', fontWeight: 'var(--font-weight-medium)' }}>DARK</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-125)' }}>
               <Alert variant="info" title="Info">This is an informational message.</Alert>
               <Alert variant="error" title="Error">Something went wrong. Please try again.</Alert>
             </div>

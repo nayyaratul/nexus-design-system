@@ -139,7 +139,7 @@ export function AccordionShowcase() {
       <div>
         <div style={sty.label}>Theme Comparison</div>
         <div className="theme-comparison">
-          <div data-theme="light" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
+          <div data-theme="light" style={{ padding: '20px', background: 'var(--color-bg-theme-panel)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
             <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>LIGHT</div>
             <Accordion type="single" collapsible defaultValue="t-1" variant="bordered">
               <AccordionItem value="t-1">
@@ -152,7 +152,7 @@ export function AccordionShowcase() {
               </AccordionItem>
             </Accordion>
           </div>
-          <div data-theme="dark" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
+          <div data-theme="dark" style={{ padding: '20px', background: 'var(--color-bg-theme-panel)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
             <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>DARK</div>
             <Accordion type="single" collapsible defaultValue="t-1" variant="bordered">
               <AccordionItem value="t-1">
