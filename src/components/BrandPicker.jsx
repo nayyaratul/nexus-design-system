@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { setBrandColour } from '../utils/setBrandColour.js';
 
-const DEFAULT_HEX = '#A03AFF';
+const DEFAULT_HEX = '#1C6EF1';
 
 function getBrandFromDOM() {
   if (typeof document === 'undefined') return DEFAULT_HEX;
@@ -10,8 +10,8 @@ function getBrandFromDOM() {
 }
 
 const PRESETS = [
-  { label: 'Purple',  hex: '#A03AFF' },
   { label: 'Blue',    hex: '#1C6EF1' },
+  { label: 'Purple',  hex: '#A03AFF' },
   { label: 'Teal',    hex: '#059669' },
   { label: 'Red',     hex: '#E32631' },
   { label: 'Amber',   hex: '#F59E0B' },

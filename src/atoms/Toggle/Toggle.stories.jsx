@@ -21,6 +21,15 @@ export const Outline = {
   ),
 };
 
+export const Pill = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '12px', padding: '40px' }}>
+      <Toggle variant="pill">All</Toggle>
+      <Toggle variant="pill" pressed>Courses</Toggle>
+    </div>
+  ),
+};
+
 export const Sizes = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', alignItems: 'center', padding: '40px' }}>

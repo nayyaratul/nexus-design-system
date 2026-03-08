@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Default.astro';
 import BrandInContextShowcase from '../components/BrandInContextShowcase';
+import BrandAppPreviewSection from '../components/BrandAppPreviewSection';
 ---
 
 <Layout title="Brand" section="brand">
@@ -16,9 +17,11 @@ import BrandInContextShowcase from '../components/BrandInContextShowcase';
         <em>Choose brand</em> <span class="brand-hero-instruction-hint">Click a card to apply system-wide</span>
       </p>
     </div>
-    <div class="brand-hero-swatch" id="hero-swatch">
-      <div class="hero-swatch-inner">
-        <span class="hero-swatch-hex" id="hero-hex">#A03AFF</span>
+    <div class="brand-hero-swatch-wrap">
+      <div class="brand-hero-swatch" id="hero-swatch">
+        <div class="hero-swatch-inner">
+          <span class="hero-swatch-hex" id="hero-hex">#1C6EF1</span>
+        </div>
       </div>
     </div>
   </div>
@@ -31,18 +34,18 @@ import BrandInContextShowcase from '../components/BrandInContextShowcase';
       <div class="brand-picker-presets">
         <span class="hue-wheel-section-label">Presets</span>
         <div class="multibrand-row" id="multibrand" role="list">
-          <div class="multibrand-card mb-active" role="listitem" tabindex="0" data-hex="#A03AFF" aria-pressed="true" aria-label="Apply Nexus Purple brand">
-            <div class="mb-swatch" style="background: #A03AFF;" aria-hidden="true"></div>
-            <div class="mb-info">
-              <span class="mb-name">Nexus Purple</span>
-              <span class="mb-hex">#A03AFF</span>
-            </div>
-          </div>
-          <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#1C6EF1" aria-pressed="false" aria-label="Apply Ocean Blue brand">
+          <div class="multibrand-card mb-active" role="listitem" tabindex="0" data-hex="#1C6EF1" aria-pressed="true" aria-label="Apply Ocean Blue brand">
             <div class="mb-swatch" style="background: #1C6EF1;" aria-hidden="true"></div>
             <div class="mb-info">
               <span class="mb-name">Ocean Blue</span>
               <span class="mb-hex">#1C6EF1</span>
+            </div>
+          </div>
+          <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#A03AFF" aria-pressed="false" aria-label="Apply Nexus Purple brand">
+            <div class="mb-swatch" style="background: #A03AFF;" aria-hidden="true"></div>
+            <div class="mb-info">
+              <span class="mb-name">Nexus Purple</span>
+              <span class="mb-hex">#A03AFF</span>
             </div>
           </div>
           <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#059669" aria-pressed="false" aria-label="Apply Emerald brand">
@@ -255,6 +258,15 @@ import BrandInContextShowcase from '../components/BrandInContextShowcase';
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════
+       SECTION 4 — App preview (mobile)
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="section app-preview-section">
+    <div class="app-preview-stage">
+      <BrandAppPreviewSection client:load />
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
        SECTION 5 — Usage / API
   ══════════════════════════════════════════════════════════════ -->
   <div class="section">
@@ -393,7 +405,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   let lastOklch = { L: 0.52, C: 0.15, h: 0 };
 
   function getBrandOklch() {
-    const hex = getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#A03AFF';
+    const hex = getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#1C6EF1';
     return hexToOklch(hex);
   }
 
@@ -498,7 +510,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     const root = getComputedStyle(document.documentElement);
     return STEPS.map(step => {
       const varName = `--brand-${step}`;
-      return { step, hex: root.getPropertyValue(varName).trim() || '#A03AFF' };
+      return { step, hex: root.getPropertyValue(varName).trim() || '#1C6EF1' };
     });
   }
 
@@ -559,7 +571,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     const root = getComputedStyle(document.documentElement);
     const swatch = document.getElementById('hero-swatch');
     const hexLabel = document.getElementById('hero-hex');
-    const hex50 = root.getPropertyValue('--brand-50').trim() || '#A03AFF';
+    const hex50 = root.getPropertyValue('--brand-50').trim() || '#1C6EF1';
     if (swatch) swatch.style.background = `var(--brand-50)`;
     if (hexLabel) hexLabel.textContent = hex50;
   }
@@ -630,9 +642,69 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     });
   }
 
+  function initMobilePreviewThemeToggle() {
+    const wrapper = document.getElementById('brand-mobile-preview-wrapper');
+    const btns = document.querySelectorAll('.mobile-preview-theme-toggle-btn');
+    if (!wrapper || !btns.length) return;
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-theme');
+        if (!theme) return;
+        wrapper.setAttribute('data-theme', theme);
+        btns.forEach(b => {
+          const isActive = b.getAttribute('data-theme') === theme;
+          b.classList.toggle('is-active', isActive);
+          b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+      });
+    });
+  }
+
+  async function captureAndDownload(element, filename) {
+    const { default: html2canvas } = await import('html2canvas');
+    const canvas = await html2canvas(element, {
+      scale: 2,
+      useCORS: true,
+      logging: false,
+      backgroundColor: null,
+    });
+    return new Promise((resolve, reject) => {
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          reject(new Error('Failed to create image blob'));
+          return;
+        }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 200);
+        resolve();
+      }, 'image/png');
+    });
+  }
+
+  function initDownloadButtons() {
+    const previewBtn = document.getElementById('download-mobile-preview-btn');
+    const mobileWrapper = document.getElementById('brand-mobile-preview-wrapper');
+
+    if (previewBtn && mobileWrapper) {
+      previewBtn.addEventListener('click', () => {
+        previewBtn.disabled = true;
+        captureAndDownload(mobileWrapper, 'nexus-mobile-preview.png').finally(() => {
+          previewBtn.disabled = false;
+        });
+      });
+    }
+  }
+
   function renderAlphaTints() {
     const root = getComputedStyle(document.documentElement);
-    const hex50 = root.getPropertyValue('--brand-50').trim() || '#A03AFF';
+    const hex50 = root.getPropertyValue('--brand-50').trim() || '#1C6EF1';
     const ALPHA_STEPS = [
       { id: 'alpha-a50',  pct: 0.09 },
       { id: 'alpha-a100', pct: 0.18 },
@@ -727,7 +799,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
         applyFromHex(normalised);
         syncHexInput(normalised);
       } else {
-        const current = getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#A03AFF';
+        const current = getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#1C6EF1';
         syncHexInput(current);
       }
     }
@@ -738,7 +810,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
         commitHex();
       }
     });
-    const currentHex = getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#A03AFF';
+    const currentHex = getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#1C6EF1';
     syncHexInput(currentHex);
   }
 
@@ -776,7 +848,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   window.addEventListener('nexus:brandcolourchange', (e) => {
     renderAll();
     syncActiveCardFromHex(e.detail?.hex);
-    const hex = e.detail?.hex || getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#A03AFF';
+    const hex = e.detail?.hex || getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#1C6EF1';
     const { L, C, h } = hexToOklch(hex);
     lastOklch = { L, C, h };
     syncSlidersFromOklch(L, C, h);
@@ -822,6 +894,8 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   initHexInput();
   initTokenMapToggle();
   initInContextThemeToggle();
+  initMobilePreviewThemeToggle();
+  setTimeout(initDownloadButtons, 300);
 </script>
 
 <style>
@@ -870,11 +944,18 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     color: #9a9590;
   }
 
+  .brand-hero-swatch-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
   .brand-hero-swatch {
     width: 160px;
     height: 160px;
     border-radius: 20px;
-    background: var(--brand-50, #A03AFF);
+    background: var(--brand-50, #1C6EF1);
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -1163,6 +1244,56 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   #in-context-theme-wrapper[data-theme="dark"] :global(.preview-card),
   #in-context-theme-wrapper[data-theme="dark"] :global(.preview-card-body) {
     color: var(--color-text-primary);
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     APP PREVIEW (MOBILE) — editorial stage + refined controls
+  ══════════════════════════════════════════════════════════════ */
+  .app-preview-section {
+    margin-bottom: 56px;
+  }
+
+  .app-preview-stage {
+    --app-preview-radius: 20px;
+    --app-preview-padding: 28px;
+    background: linear-gradient(165deg, color-mix(in srgb, var(--color-bg-primary) 98%, var(--grey-90)) 0%, color-mix(in srgb, var(--color-bg-secondary) 96%, var(--grey-80)) 100%);
+    border-radius: var(--app-preview-radius);
+    padding: var(--app-preview-padding);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-border-subtle) 60%, transparent),
+      0 4px 24px -4px rgba(0, 0, 0, 0.08),
+      0 24px 48px -12px rgba(0, 0, 0, 0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .app-preview-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(ellipse 120% 80% at 50% -20%, color-mix(in srgb, var(--brand-50) 6%, transparent) 0%, transparent 50%);
+  }
+
+  #brand-mobile-preview-wrapper {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  #brand-mobile-preview-wrapper[data-theme="dark"] {
+    --color-bg-primary: var(--grey-100);
+    --color-bg-elevated: var(--grey-90);
+    --color-bg-tertiary: var(--grey-90);
+    --color-text-primary: var(--grey-0);
+    --color-text-secondary: var(--grey-30);
+    --color-text-tertiary: var(--grey-40);
+    --color-border-default: var(--grey-80);
+    --color-border-strong: var(--grey-70);
+    --brand-logo-bg: var(--grey-100);
   }
 
   /* ═══════════════════════════════════════════════════════════
@@ -1614,7 +1745,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: var(--brand-50, #A03AFF);
+    background: var(--brand-50, #1C6EF1);
     color: white;
     font-family: var(--mono);
     font-size: 14px;

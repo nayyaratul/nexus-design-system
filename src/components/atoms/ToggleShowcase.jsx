@@ -27,6 +27,14 @@ export function ToggleShowcase() {
             <Toggle variant="outline" pressed>Outline</Toggle>
             <span style={{ fontSize: '13px', color: 'var(--ink-3)' }}>on</span>
           </div>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <Toggle variant="pill">Pill</Toggle>
+            <span style={{ fontSize: '13px', color: 'var(--ink-3)' }}>off</span>
+          </div>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <Toggle variant="pill" pressed>Pill</Toggle>
+            <span style={{ fontSize: '13px', color: 'var(--ink-3)' }}>on</span>
+          </div>
         </div>
       </div>
 

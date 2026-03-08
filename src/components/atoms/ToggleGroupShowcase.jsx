@@ -44,6 +44,17 @@ export function ToggleGroupShowcase() {
         </ToggleGroup>
       </div>
 
+      {/* Pill (filter / segmented) */}
+      <div>
+        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Pill (filter / segmented)</div>
+        <ToggleGroup type="single" variant="pill" defaultValue="all">
+          <ToggleGroupItem value="all">All</ToggleGroupItem>
+          <ToggleGroupItem value="courses">Courses</ToggleGroupItem>
+          <ToggleGroupItem value="assessments">Assessments</ToggleGroupItem>
+          <ToggleGroupItem value="playlist">Playlist</ToggleGroupItem>
+        </ToggleGroup>
+      </div>
+
       {/* Vertical */}
       <div>
         <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Vertical</div>

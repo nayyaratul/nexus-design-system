@@ -102,19 +102,19 @@
   --blue-90:  #001F5C;
   --blue-100: #050B15;
 
-  /* Brand colour scale — default: Purple (Nexus brand) */
+  /* Brand colour scale — default: Ocean Blue (matches --blue-* above) */
   /* Override per client via setBrandColour() or CSS file swap */
-  --brand-0:   #FCF9FF;
-  --brand-10:  #EDD5FF;
-  --brand-20:  #DDB2FF;
-  --brand-30:  #CC8DFF;
-  --brand-40:  #B866FF;
-  --brand-50:  #A03AFF;
-  --brand-60:  #7A00FF;
-  --brand-70:  #6200CD;
-  --brand-80:  #4A009B;
-  --brand-90:  #33006B;
-  --brand-100: #110024;
+  --brand-0:   #FAFCFF;
+  --brand-10:  #D1E0F6;
+  --brand-20:  #ABC4EE;
+  --brand-30:  #82ABF0;
+  --brand-40:  #5692F6;
+  --brand-50:  #1C6EF1;
+  --brand-60:  #1459C7;
+  --brand-70:  #0C47A4;
+  --brand-80:  #03337D;
+  --brand-90:  #001F5C;
+  --brand-100: #050B15;
 
   /* Brand alpha tints — derived from brand-50 */
   --brand-a50:  color-mix(in srgb, var(--brand-50) 9%, transparent);
@@ -227,17 +227,12 @@
   --color-tag-info-bg:      var(--blue-0);
   --color-tag-info-border:    var(--blue-20);
 
-  /* Badge — one shade lower than Tag in light: step 10 (Tag uses 0) */
-  --color-badge-default-bg:   var(--grey-10);
-  --color-badge-default-border: var(--grey-20);
-  --color-badge-success-bg:   var(--green-10);
-  --color-badge-success-border: var(--green-20);
-  --color-badge-error-bg:     var(--red-10);
-  --color-badge-error-border:   var(--red-20);
-  --color-badge-warning-bg:   var(--yellow-10);
-  --color-badge-warning-border: var(--yellow-20);
-  --color-badge-info-bg:      var(--blue-10);
-  --color-badge-info-border:    var(--blue-20);
+  /* Badge — step 0 (lightest) for light theme, bg only */
+  --color-badge-default-bg:   var(--grey-0);
+  --color-badge-success-bg:   var(--green-0);
+  --color-badge-error-bg:     var(--red-0);
+  --color-badge-warning-bg:   var(--yellow-0);
+  --color-badge-info-bg:      var(--blue-0);
 }
 
 
@@ -343,15 +338,10 @@
   --color-tag-info-bg:      var(--blue-100);
   --color-tag-info-border:    var(--blue-80);
 
-  /* Badge — one shade lighter than Tag in dark: step 90 (Tag uses 100) */
-  --color-badge-default-bg:   var(--grey-90);
-  --color-badge-default-border: var(--grey-80);
-  --color-badge-success-bg:   var(--green-90);
-  --color-badge-success-border: var(--green-80);
-  --color-badge-error-bg:     var(--red-90);
-  --color-badge-error-border:   var(--red-80);
-  --color-badge-warning-bg:   var(--yellow-90);
-  --color-badge-warning-border: var(--yellow-80);
-  --color-badge-info-bg:      var(--blue-90);
-  --color-badge-info-border:    var(--blue-80);
+  /* Badge — step 100 (darkest) for dark theme, bg only */
+  --color-badge-default-bg:   var(--grey-100);
+  --color-badge-success-bg:   var(--green-100);
+  --color-badge-error-bg:     var(--red-100);
+  --color-badge-warning-bg:   var(--yellow-100);
+  --color-badge-info-bg:      var(--blue-100);
 }

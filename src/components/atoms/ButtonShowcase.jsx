@@ -27,6 +27,28 @@ export function ButtonShowcase() {
         </div>
       </div>
 
+      {/* Shape */}
+      <div>
+        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Shape</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Button shape="default">Default</Button>
+            <Button shape="rounded">Rounded</Button>
+            <Button shape="pill">Pill</Button>
+          </div>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Button variant="secondary" shape="default">Secondary default</Button>
+            <Button variant="secondary" shape="rounded">Secondary rounded</Button>
+            <Button variant="secondary" shape="pill">Secondary pill</Button>
+          </div>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Button variant="ghost" shape="default">Ghost default</Button>
+            <Button variant="ghost" shape="rounded">Ghost rounded</Button>
+            <Button variant="ghost" shape="pill">Ghost pill</Button>
+          </div>
+        </div>
+      </div>
+
       {/* With icons */}
       <div>
         <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>With Icons</div>

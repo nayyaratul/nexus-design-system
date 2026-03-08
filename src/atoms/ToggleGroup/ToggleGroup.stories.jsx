@@ -39,6 +39,19 @@ export const Outline = {
   ),
 };
 
+export const Pill = {
+  render: () => (
+    <div style={{ padding: '40px' }}>
+      <ToggleGroup type="single" variant="pill" defaultValue="all">
+        <ToggleGroupItem value="all">All</ToggleGroupItem>
+        <ToggleGroupItem value="courses">Courses</ToggleGroupItem>
+        <ToggleGroupItem value="assessments">Assessments</ToggleGroupItem>
+        <ToggleGroupItem value="playlist">Playlist</ToggleGroupItem>
+      </ToggleGroup>
+    </div>
+  ),
+};
+
 export const Vertical = {
   render: () => (
     <div style={{ padding: '40px' }}>

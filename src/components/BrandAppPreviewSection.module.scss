@@ -1,0 +1,285 @@
+/* ─── App preview: single top bar + phone stage ─── */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+  position: relative;
+  z-index: 1;
+}
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-150);
+  margin-bottom: var(--space-150);
+}
+
+.topBarHeading {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--font-size-200);
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+}
+
+.topBarTitle {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--color-text-primary);
+}
+
+.topBarSeparator {
+  margin: 0 var(--space-050);
+  color: var(--color-text-tertiary);
+}
+
+.topBarDesc {
+  color: var(--color-text-secondary);
+}
+
+.topBarControls {
+  --control-height: 32px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-100);
+  flex-wrap: wrap;
+}
+
+.themeToggle {
+  display: inline-flex;
+  align-items: stretch;
+  height: var(--control-height);
+  border-radius: var(--radius-full);
+  padding: 2px;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.themeToggleBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-family: var(--sans);
+  font-size: var(--font-size-100);
+  font-weight: var(--font-weight-semibold);
+  padding: 0 14px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.themeToggleBtn:hover {
+  color: var(--color-text-primary);
+  background: color-mix(in srgb, var(--color-bg-elevated) 80%, transparent);
+}
+
+.themeToggleBtnActive {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.themeToggleBtn:focus-visible,
+.downloadBtn:focus-visible,
+.uploadZone:focus-within,
+.resetBtn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-border-focus);
+}
+
+.downloadBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--control-height);
+  font-family: var(--sans);
+  font-size: var(--font-size-100);
+  font-weight: var(--font-weight-semibold);
+  padding: 0 12px;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-100);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.downloadBtn:hover:not(:disabled) {
+  background: var(--color-interactive-hover);
+  border-color: var(--color-border-strong);
+}
+
+.downloadBtn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.uploadZone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-050);
+  height: var(--control-height);
+  padding: 0 12px;
+  border: 1px dashed var(--color-border-default);
+  border-radius: var(--radius-100);
+  background: color-mix(in srgb, var(--color-bg-tertiary) 50%, transparent);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  box-sizing: border-box;
+}
+
+.uploadZone:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-bg-tertiary);
+}
+
+.uploadZoneIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+}
+
+.uploadZone:hover .uploadZoneIcon {
+  color: var(--color-action-primary);
+}
+
+.uploadZoneText {
+  font-family: var(--sans);
+  font-size: var(--font-size-100);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.uploadZone:hover .uploadZoneText {
+  color: var(--color-text-primary);
+}
+
+.uploadInput {
+  position: absolute;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.resetBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--control-height);
+  font-family: var(--sans);
+  font-size: var(--font-size-100);
+  font-weight: var(--font-weight-semibold);
+  padding: 0 10px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.resetBtn:hover {
+  background: var(--color-interactive-hover);
+  color: var(--color-text-primary);
+}
+
+.phoneStage {
+  width: 22.5rem;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: var(--space-200) 0;
+}
+
+.phoneStage :global(#brand-mobile-preview-wrapper) {
+  filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.12)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.06));
+}
+
+.downloadError {
+  margin-top: var(--space-200);
+  padding: var(--space-200);
+  background: color-mix(in srgb, var(--red-50) 20%, var(--color-bg-elevated));
+  border: 1px solid var(--red-30);
+  border-radius: var(--radius-300);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-150);
+  flex-wrap: wrap;
+}
+
+.downloadErrorText {
+  margin: 0;
+  font-size: var(--font-size-200);
+  color: var(--color-text-primary);
+}
+
+.downloadErrorDismiss {
+  font-family: var(--sans);
+  font-size: var(--font-size-100);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-075) var(--space-150);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-200);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.downloadErrorDismiss:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.downloadFallback {
+  margin-top: var(--space-200);
+  padding: var(--space-200);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-300);
+}
+
+.downloadFallbackHint {
+  margin: 0 0 var(--space-150);
+  font-size: var(--font-size-100);
+  color: var(--color-text-secondary);
+}
+
+.downloadFallbackActions {
+  margin-bottom: var(--space-150);
+}
+
+.downloadFallbackCopyBtn {
+  font-family: var(--sans);
+  font-size: var(--font-size-100);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-075) var(--space-150);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-200);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.downloadFallbackCopyBtn:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.downloadFallbackImg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-200);
+}

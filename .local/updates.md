@@ -1,6 +1,25 @@
 # Nexus Design System — Updates & Decisions
 
+## 2026-03-09
+
+### Badge pill design aligned with Tag
+
+- Badge pills use dedicated semantic tokens `--color-badge-{variant}-bg` and `--color-badge-{variant}-border`.
+- Light theme: bg one shade lower than Tag (step 10: grey-10, green-10, etc.); dark theme: step 90 (grey-90, green-90, etc.).
+- Pill variants get a 1px border like Tag; dot variant unchanged.
+- BadgeShowcase updated to use design tokens throughout.
+
 ## 2026-03-08
+
+### Pill variant for Toggle and ToggleGroup
+
+Added `variant="pill"` to the Toggle atom and ToggleGroup. Toggle: same colour behaviour as outline, shape uses `--radius-full` for a fully rounded pill. ToggleGroup: separate pills with gap (`--space-075`), each item fully rounded, no joining; colours match outline (transparent + border when off, primary fill when on). Use for filter bars and segmented controls (e.g. All / Assigned / Completed / Expired). No new token; uses existing `--radius-full`.
+
+### Button shape prop
+
+Added `shape` prop to the Button atom: `default` (radius-100), `rounded` (radius-200), `pill` (radius-full). All variants (primary, secondary, dash, destructive, ghost) combine with any shape. Implemented via `data-shape` and existing radius tokens; no new tokens.
+
+---
 
 ### Molecules Implementation Plan
 

@@ -2,10 +2,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   border: var(--border-width-100) solid transparent;
   border-radius: var(--radius-100);
   font-family: var(--sans);
   font-weight: var(--font-weight-medium);
+  line-height: 1;
   cursor: pointer;
   transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
   user-select: none;
@@ -43,6 +45,28 @@
 }
 
 .outline {
+  background: transparent;
+  color: var(--color-text-primary);
+  border-color: var(--color-border-default);
+
+  &:hover:not(:disabled) {
+    background: var(--color-interactive-hover);
+  }
+
+  &[data-state='on'] {
+    background: var(--color-action-primary);
+    color: var(--color-text-on-action);
+    border-color: var(--color-action-primary);
+
+    &:hover:not(:disabled) {
+      background: var(--color-action-primary-hover);
+      border-color: var(--color-action-primary-hover);
+    }
+  }
+}
+
+.pill {
+  border-radius: var(--radius-full);
   background: transparent;
   color: var(--color-text-primary);
   border-color: var(--color-border-default);

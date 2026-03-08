@@ -24,6 +24,15 @@
   }
 }
 
+/* ─── Shape (border-radius) ─── */
+[data-shape='rounded'] {
+  border-radius: var(--radius-200);
+}
+
+[data-shape='pill'] {
+  border-radius: var(--radius-full);
+}
+
 /* ─── Sizes (32 / 40 / 48 / 56) ─── */
 .sm {
   height: 2rem;          /* 32px */

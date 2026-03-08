@@ -7,6 +7,7 @@ export const Button = forwardRef(function Button(
   {
     variant = 'primary',
     size = 'md',
+    shape = 'default',
     disabled = false,
     loading = false,
     fullWidth = false,
@@ -22,6 +23,7 @@ export const Button = forwardRef(function Button(
   return (
     <button
       ref={ref}
+      data-shape={shape}
       className={cx(
         styles.button,
         styles[variant],
