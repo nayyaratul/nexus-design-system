@@ -13,7 +13,6 @@ import styles from './BrandMobilePreview.module.scss';
 const COURSE_IMAGE_1 = '/addon-icons/banner_1.png';
 const COURSE_IMAGE_2 = '/addon-icons/banner_2.png';
 const COURSE_IMAGE_3 = '/addon-icons/banner_3.png';
-// Use same-origin image so html2canvas export is not tainted (external URLs produce 0 KB downloads)
 const CAROUSEL_IMAGE = '/addon-icons/banner_1.png';
 
 const LOGO_HEIGHT = 40;
@@ -131,7 +130,6 @@ export default function BrandMobilePreview({ logoUrl = null }) {
                   src={CAROUSEL_IMAGE}
                   alt=""
                   className={styles.carouselImage}
-                  crossOrigin="anonymous"
                 />
                 <div className={styles.carouselBadge}>
                   <Badge variant="error" size="sm">
@@ -182,7 +180,7 @@ export default function BrandMobilePreview({ logoUrl = null }) {
               <div className={styles.courseCards}>
                 <article className={styles.courseCard}>
                   <div className={styles.courseCardThumb}>
-                    <img src={COURSE_IMAGE_1} alt="" crossOrigin="anonymous" />
+                    <img src={COURSE_IMAGE_1} alt="" />
                     <div className={styles.courseCardPlay}>
                       <Icon name="Play" size="lg" aria-hidden />
                     </div>
@@ -206,7 +204,7 @@ export default function BrandMobilePreview({ logoUrl = null }) {
                 </article>
                 <article className={styles.courseCard}>
                   <div className={styles.courseCardThumb}>
-                    <img src={COURSE_IMAGE_2} alt="" crossOrigin="anonymous" />
+                    <img src={COURSE_IMAGE_2} alt="" />
                     <div className={styles.courseCardPlay}>
                       <Icon name="Play" size="lg" aria-hidden />
                     </div>
@@ -230,7 +228,7 @@ export default function BrandMobilePreview({ logoUrl = null }) {
                 </article>
                 <article className={styles.courseCard}>
                   <div className={styles.courseCardThumb}>
-                    <img src={COURSE_IMAGE_3} alt="" crossOrigin="anonymous" />
+                    <img src={COURSE_IMAGE_3} alt="" />
                     <div className={styles.courseCardPlay}>
                       <Icon name="Play" size="lg" aria-hidden />
                     </div>
