@@ -78,6 +78,11 @@ const scales = [
   ]),
 ];
 
+const primaryTokens = [
+  { name: 'White', token: '--white', semantic: '--color-white (light) / --color-black (dark)', hex: '#FFFFFF', txt: 'on-light' },
+  { name: 'Black', token: '--black', semantic: '--color-black (light) / --color-white (dark)', hex: '#000000', txt: 'on-dark' },
+];
+
 ---
 
 <Layout title="Colours" section="colours">
@@ -128,6 +133,25 @@ const scales = [
     </div>
   ))}
 
+  <!-- ═══════════════════════════════════════════════════════
+       PRIMARY COLOURS (absolute extremes)
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Primary</span>
+      <span class="section-desc">Pure white & pure black · Primitives: --white / --black · Semantic: --color-white / --color-black (theme mirror)</span>
+    </div>
+    <div class="scale primary-tokens">
+      {primaryTokens.map((p) => (
+        <div class={`step ${p.txt}`} style={`background:${p.hex}`}>
+          <span class="n">{p.name}</span>
+          <span class="h">{p.hex}</span>
+          <span class="token" data-token={p.token}>{p.token}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
   <div class="footer">
     Nexus Design System · Colours
   </div>
@@ -144,13 +168,15 @@ const scales = [
     steps.forEach(step => {
       step.addEventListener('click', () => {
         const hexEl = step.querySelector('.h');
-        if (!hexEl) return;
-        const hex = hexEl.textContent?.trim();
-        if (!hex) return;
+        const tokenEl = step.querySelector('.token');
+        const hex = hexEl?.textContent?.trim();
+        const token = tokenEl?.getAttribute('data-token');
+        const toCopy = token ?? hex;
+        if (!toCopy) return;
 
-        navigator.clipboard.writeText(hex).then(() => {
+        navigator.clipboard.writeText(toCopy).then(() => {
           if (toast) {
-            toast.textContent = `Copied ${hex}`;
+            toast.textContent = `Copied ${toCopy}`;
             toast.classList.add('colour-toast--visible');
             clearTimeout(hideTimer);
             hideTimer = setTimeout(() => {

@@ -71,13 +71,13 @@ function oklchToOklab(L, C, h) {
   return { L, a: C * Math.cos(h), b: C * Math.sin(h) };
 }
 
-function hexToOklch(hex) {
+export function hexToOklch(hex) {
   const [r, g, b] = hexToRgb(hex);
   const lab = rgbToOklab(r, g, b);
   return oklabToOklch(lab.L, lab.a, lab.b);
 }
 
-function oklchToHex(L, C, h) {
+export function oklchToHex(L, C, h) {
   const { a, b } = oklchToOklab(L, C, h);
   const [r, g, bb] = oklabToRgb(L, a, b);
   return rgbToHex(r, g, bb);

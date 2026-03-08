@@ -30,7 +30,6 @@ export { Spinner } from './Spinner/Spinner';
 export { StoryProgress } from './StoryProgress/StoryProgress';
 export { Steps, StepItem } from './Steps/Steps';
 export { Switch } from './Switch/Switch';
-export { Table } from './Table/Table';
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs/Tabs';
 export { Tag } from './Tag/Tag';
 export { Timer } from './Timer/Timer';

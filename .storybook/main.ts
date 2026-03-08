@@ -12,6 +12,13 @@ const config: StorybookConfig = {
     "@storybook/addon-docs",
     "@storybook/addon-onboarding"
   ],
-  "framework": "@storybook/react-vite"
+  "framework": "@storybook/react-vite",
+  viteFinal: (config) => {
+    config.esbuild = {
+      ...config.esbuild,
+      jsx: 'automatic',
+    };
+    return config;
+  },
 };
 export default config;

@@ -42,38 +42,35 @@
 
 /* ─── Header ─── */
 .header {
-  background: var(--grey-10);
+  background: var(--grey-0);
 
   [data-theme="dark"] & {
-    background: var(--grey-90);
+    background: var(--grey-100);
   }
 }
 
 .sticky {
   position: sticky;
   z-index: 1;
-  background: var(--grey-10);
+  background: var(--grey-0);
 
   [data-theme="dark"] & {
-    background: var(--grey-90);
+    background: var(--grey-100);
   }
 }
 
 /* ─── Head (th) ─── */
 .head {
   text-align: left;
-  font-weight: 600;
-  font-size: 0.85em;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--color-text-tertiary);
-  border-bottom: 2px solid var(--color-border-default);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  border-bottom: var(--border-width-200) solid var(--color-border-default);
   white-space: nowrap;
 }
 
 /* ─── Cell (td) ─── */
 .cell {
-  border-bottom: 1px solid var(--color-border-subtle);
+  border-bottom: var(--border-width-100) solid var(--color-border-subtle);
 }
 
 /* ─── Body ─── */
@@ -81,17 +78,21 @@
 
 /* ─── Footer ─── */
 .footer {
-  background: var(--grey-10);
+  background: var(--brand-a50);
 
   [data-theme="dark"] & {
-    background: var(--grey-90);
+    background: var(--brand-a50);
   }
 
   .cell {
-    font-weight: 600;
-    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-semibold);
+    color: var(--brand-80);
     border-bottom: none;
-    border-top: 2px solid var(--color-border-default);
+    border-top: var(--border-width-200) solid var(--color-border-default);
+
+    [data-theme="dark"] & {
+      color: var(--brand-20);
+    }
   }
 }
 
@@ -126,15 +127,15 @@
 
 /* ─── Bordered ─── */
 .bordered {
-  border: 1px solid var(--color-border-default);
+  border: var(--border-width-100) solid var(--color-border-default);
 
   .head,
   .cell {
-    border: 1px solid var(--color-border-subtle);
+    border: var(--border-width-100) solid var(--color-border-subtle);
   }
 
   .head {
-    border-bottom-width: 2px;
+    border-bottom-width: var(--border-width-200);
     border-bottom-color: var(--color-border-default);
   }
 }
@@ -157,7 +158,7 @@
   background: none;
   border: none;
   font: inherit;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: inherit;
   cursor: pointer;
   padding: 0;

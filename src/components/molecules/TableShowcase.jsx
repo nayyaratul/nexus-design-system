@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Table } from '../../atoms/Table/Table';
+import { Table } from '../../molecules/Table/Table';
 
 const sampleData = [
   { name: 'Alice Johnson', subject: 'Mathematics', score: 95, grade: 'A+' },
@@ -9,7 +9,36 @@ const sampleData = [
   { name: 'Eva Brown', subject: 'English', score: 68, grade: 'C+' },
 ];
 
-const sectionTitle = { fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' };
+function Card({ label, children, style }) {
+  return (
+    <div style={{
+      background: 'var(--card-bg)',
+      borderRadius: '12px',
+      border: '1px solid var(--rule)',
+      boxShadow: '0 1px 3px rgba(26,24,22,0.04), 0 4px 12px rgba(26,24,22,0.02)',
+      padding: '24px',
+      ...style,
+    }}>
+      {label && (
+        <div style={{
+          display: 'inline-block',
+          fontSize: '10px',
+          fontWeight: 600,
+          fontFamily: 'var(--mono)',
+          color: 'var(--ink-3)',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          marginBottom: '16px',
+          background: 'var(--page-bg)',
+          padding: '3px 8px',
+          borderRadius: '4px',
+          border: '1px solid var(--rule)',
+        }}>{label}</div>
+      )}
+      {children}
+    </div>
+  );
+}
 
 export function TableShowcase() {
   const [sortCol, setSortCol] = useState('name');
@@ -33,87 +62,77 @@ export function TableShowcase() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       {/* Sizes */}
-      <div>
-        <div style={sectionTitle}>Sizes</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          {['sm', 'md', 'lg'].map((size) => (
-            <div key={size}>
-              <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)', marginBottom: '6px', fontWeight: 500 }}>{size.toUpperCase()}</div>
-              <Table size={size}>
-                <Table.Header>
-                  <Table.Row>
-                    <Table.Head>Name</Table.Head>
-                    <Table.Head>Subject</Table.Head>
-                    <Table.Head align="right">Score</Table.Head>
+      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        {['sm', 'md', 'lg'].map((size) => (
+          <Card key={size} label={size} style={{ flex: '1 1 280px', minWidth: 0 }}>
+            <Table size={size}>
+              <Table.Header>
+                <Table.Row>
+                  <Table.Head>Name</Table.Head>
+                  <Table.Head>Subject</Table.Head>
+                  <Table.Head align="right">Score</Table.Head>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {sampleData.slice(0, 3).map((row) => (
+                  <Table.Row key={row.name}>
+                    <Table.Cell>{row.name}</Table.Cell>
+                    <Table.Cell>{row.subject}</Table.Cell>
+                    <Table.Cell align="right">{row.score}</Table.Cell>
                   </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  {sampleData.slice(0, 3).map((row) => (
-                    <Table.Row key={row.name}>
-                      <Table.Cell>{row.name}</Table.Cell>
-                      <Table.Cell>{row.subject}</Table.Cell>
-                      <Table.Cell align="right">{row.score}</Table.Cell>
-                    </Table.Row>
-                  ))}
-                </Table.Body>
-              </Table>
-            </div>
-          ))}
-        </div>
+                ))}
+              </Table.Body>
+            </Table>
+          </Card>
+        ))}
       </div>
 
       {/* Variants */}
-      <div>
-        <div style={sectionTitle}>Variants</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          <div>
-            <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)', marginBottom: '6px', fontWeight: 500 }}>SIMPLE</div>
-            <Table variant="simple">
-              <Table.Header>
-                <Table.Row>
-                  <Table.Head>Name</Table.Head>
-                  <Table.Head>Subject</Table.Head>
-                  <Table.Head align="right">Score</Table.Head>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '1rem' }}>
+        <Card label="Simple">
+          <Table variant="simple">
+            <Table.Header>
+              <Table.Row>
+                <Table.Head>Name</Table.Head>
+                <Table.Head>Subject</Table.Head>
+                <Table.Head align="right">Score</Table.Head>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {sampleData.map((row) => (
+                <Table.Row key={row.name}>
+                  <Table.Cell>{row.name}</Table.Cell>
+                  <Table.Cell>{row.subject}</Table.Cell>
+                  <Table.Cell align="right">{row.score}</Table.Cell>
                 </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {sampleData.map((row) => (
-                  <Table.Row key={row.name}>
-                    <Table.Cell>{row.name}</Table.Cell>
-                    <Table.Cell>{row.subject}</Table.Cell>
-                    <Table.Cell align="right">{row.score}</Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          </div>
-          <div>
-            <div style={{ fontSize: '10px', color: 'var(--color-text-tertiary)', marginBottom: '6px', fontWeight: 500 }}>STRIPED</div>
-            <Table variant="striped">
-              <Table.Header>
-                <Table.Row>
-                  <Table.Head>Name</Table.Head>
-                  <Table.Head>Subject</Table.Head>
-                  <Table.Head align="right">Score</Table.Head>
+              ))}
+            </Table.Body>
+          </Table>
+        </Card>
+        <Card label="Striped">
+          <Table variant="striped">
+            <Table.Header>
+              <Table.Row>
+                <Table.Head>Name</Table.Head>
+                <Table.Head>Subject</Table.Head>
+                <Table.Head align="right">Score</Table.Head>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {sampleData.map((row) => (
+                <Table.Row key={row.name}>
+                  <Table.Cell>{row.name}</Table.Cell>
+                  <Table.Cell>{row.subject}</Table.Cell>
+                  <Table.Cell align="right">{row.score}</Table.Cell>
                 </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {sampleData.map((row) => (
-                  <Table.Row key={row.name}>
-                    <Table.Cell>{row.name}</Table.Cell>
-                    <Table.Cell>{row.subject}</Table.Cell>
-                    <Table.Cell align="right">{row.score}</Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          </div>
-        </div>
+              ))}
+            </Table.Body>
+          </Table>
+        </Card>
       </div>
 
       {/* Hoverable */}
-      <div>
-        <div style={sectionTitle}>Hoverable</div>
+      <Card label="Hoverable">
         <Table hoverable>
           <Table.Header>
             <Table.Row>
@@ -134,11 +153,10 @@ export function TableShowcase() {
             ))}
           </Table.Body>
         </Table>
-      </div>
+      </Card>
 
       {/* Bordered */}
-      <div>
-        <div style={sectionTitle}>Bordered</div>
+      <Card label="Bordered">
         <Table bordered>
           <Table.Header>
             <Table.Row>
@@ -159,12 +177,11 @@ export function TableShowcase() {
             ))}
           </Table.Body>
         </Table>
-      </div>
+      </Card>
 
       {/* Sticky Header */}
-      <div>
-        <div style={sectionTitle}>Sticky Header</div>
-        <div style={{ height: '200px', overflow: 'auto', border: '1px solid var(--color-border-subtle)', borderRadius: '8px' }}>
+      <Card label="Sticky header">
+        <div style={{ height: '220px', overflow: 'auto', borderRadius: '8px', border: '1px solid var(--rule)' }}>
           <Table>
             <Table.Header sticky>
               <Table.Row>
@@ -184,11 +201,10 @@ export function TableShowcase() {
             </Table.Body>
           </Table>
         </div>
-      </div>
+      </Card>
 
       {/* Sortable Headers */}
-      <div>
-        <div style={sectionTitle}>Sortable Headers</div>
+      <Card label="Sortable headers">
         <Table hoverable>
           <Table.Header>
             <Table.Row>
@@ -228,11 +244,10 @@ export function TableShowcase() {
             ))}
           </Table.Body>
         </Table>
-      </div>
+      </Card>
 
       {/* With Footer and Caption */}
-      <div>
-        <div style={sectionTitle}>Footer &amp; Caption</div>
+      <Card label="Footer & Caption">
         <Table variant="striped">
           <Table.Caption>Student grades for Q1 2026</Table.Caption>
           <Table.Header>
@@ -262,50 +277,83 @@ export function TableShowcase() {
             </Table.Row>
           </Table.Footer>
         </Table>
-      </div>
+      </Card>
 
       {/* Theme Comparison */}
-      <div>
-        <div style={sectionTitle}>Theme Comparison</div>
-        <div className="theme-comparison">
-          <div data-theme="light" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
-            <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>LIGHT</div>
-            <Table size="sm" variant="striped" hoverable>
-              <Table.Header>
-                <Table.Row>
-                  <Table.Head>Name</Table.Head>
-                  <Table.Head align="right">Score</Table.Head>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem' }}>
+        <div data-theme="light" style={{
+          padding: '24px',
+          background: 'var(--color-bg-primary)',
+          borderRadius: '12px',
+          border: '1px solid var(--rule)',
+          boxShadow: '0 1px 3px rgba(26,24,22,0.04), 0 4px 12px rgba(26,24,22,0.02)',
+        }}>
+          <div style={{
+            display: 'inline-block',
+            fontSize: '10px',
+            fontWeight: 600,
+            fontFamily: 'var(--mono)',
+            color: 'var(--ink-3)',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            marginBottom: '16px',
+            background: 'var(--page-bg)',
+            padding: '3px 8px',
+            borderRadius: '4px',
+            border: '1px solid var(--rule)',
+          }}>Light</div>
+          <Table size="sm" variant="striped" hoverable>
+            <Table.Header>
+              <Table.Row>
+                <Table.Head>Name</Table.Head>
+                <Table.Head align="right">Score</Table.Head>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {sampleData.slice(0, 3).map((row) => (
+                <Table.Row key={row.name}>
+                  <Table.Cell>{row.name}</Table.Cell>
+                  <Table.Cell align="right">{row.score}</Table.Cell>
                 </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {sampleData.slice(0, 3).map((row) => (
-                  <Table.Row key={row.name}>
-                    <Table.Cell>{row.name}</Table.Cell>
-                    <Table.Cell align="right">{row.score}</Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          </div>
-          <div data-theme="dark" style={{ padding: '20px', background: 'var(--color-bg-primary)', borderRadius: '10px', border: '1px solid var(--color-border-default)' }}>
-            <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>DARK</div>
-            <Table size="sm" variant="striped" hoverable>
-              <Table.Header>
-                <Table.Row>
-                  <Table.Head>Name</Table.Head>
-                  <Table.Head align="right">Score</Table.Head>
+              ))}
+            </Table.Body>
+          </Table>
+        </div>
+        <div data-theme="dark" style={{
+          padding: '24px',
+          background: 'var(--color-bg-primary)',
+          borderRadius: '12px',
+          border: '1px solid var(--color-border-default)',
+        }}>
+          <div style={{
+            display: 'inline-block',
+            fontSize: '10px',
+            fontWeight: 600,
+            fontFamily: 'var(--mono)',
+            color: 'var(--color-text-tertiary)',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            marginBottom: '16px',
+            padding: '3px 8px',
+            borderRadius: '4px',
+            border: '1px solid var(--color-border-default)',
+          }}>Dark</div>
+          <Table size="sm" variant="striped" hoverable>
+            <Table.Header>
+              <Table.Row>
+                <Table.Head>Name</Table.Head>
+                <Table.Head align="right">Score</Table.Head>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {sampleData.slice(0, 3).map((row) => (
+                <Table.Row key={row.name}>
+                  <Table.Cell>{row.name}</Table.Cell>
+                  <Table.Cell align="right">{row.score}</Table.Cell>
                 </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {sampleData.slice(0, 3).map((row) => (
-                  <Table.Row key={row.name}>
-                    <Table.Cell>{row.name}</Table.Cell>
-                    <Table.Cell align="right">{row.score}</Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          </div>
+              ))}
+            </Table.Body>
+          </Table>
         </div>
       </div>
     </div>

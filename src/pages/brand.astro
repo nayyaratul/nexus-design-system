@@ -5,15 +5,14 @@ import Layout from '../layouts/Default.astro';
 <Layout title="Brand" section="brand">
 
   <!-- ═══════════════════════════════════════════════════════════
-       HERO — Immersive brand colour reveal
+       HERO — Title, sub, instruction (left) + swatch (right), top-aligned
   ══════════════════════════════════════════════════════════════ -->
   <div class="brand-hero">
     <div class="brand-hero-content">
-      <p class="brand-hero-overline">Dynamic Theming</p>
-      <h1 class="brand-hero-title">Brand Colour</h1>
-      <p class="brand-hero-sub">
-        One hex input regenerates an 11-step OKLCh colour scale, rewriting every
-        semantic token across the entire system. White-label&nbsp;ready.
+      <h1 class="page-title">Brand Colour</h1>
+      <p class="page-sub">OKLCh · 11-step scale · Presets · Custom hue · Token mapping</p>
+      <p class="brand-hero-instruction">
+        <em>Choose brand colour</em> <span class="brand-hero-instruction-hint">Click a card to apply system-wide</span>
       </p>
     </div>
     <div class="brand-hero-swatch" id="hero-swatch">
@@ -27,45 +26,129 @@ import Layout from '../layouts/Default.astro';
        BRAND COLOUR SELECTION — choose palette first
   ══════════════════════════════════════════════════════════════ -->
   <div class="section">
-    <div class="section-header">
-      <span class="section-title">Choose brand colour</span>
-      <span class="section-desc">Click a card to apply that brand colour system-wide</span>
-    </div>
-
-    <div class="multibrand-row" id="multibrand" role="list">
-      <div class="multibrand-card mb-active" role="listitem" tabindex="0" data-hex="#A03AFF" aria-pressed="true" aria-label="Apply Nexus Purple brand">
-        <div class="mb-swatch" style="background: #A03AFF;" aria-hidden="true"></div>
-        <div class="mb-info">
-          <span class="mb-name">Nexus Purple</span>
-          <span class="mb-hex">#A03AFF</span>
+    <div class="brand-picker-layout">
+      <div class="brand-picker-presets">
+        <span class="hue-wheel-section-label">Presets</span>
+        <div class="multibrand-row" id="multibrand" role="list">
+          <div class="multibrand-card mb-active" role="listitem" tabindex="0" data-hex="#A03AFF" aria-pressed="true" aria-label="Apply Nexus Purple brand">
+            <div class="mb-swatch" style="background: #A03AFF;" aria-hidden="true"></div>
+            <div class="mb-info">
+              <span class="mb-name">Nexus Purple</span>
+              <span class="mb-hex">#A03AFF</span>
+            </div>
+          </div>
+          <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#1C6EF1" aria-pressed="false" aria-label="Apply Ocean Blue brand">
+            <div class="mb-swatch" style="background: #1C6EF1;" aria-hidden="true"></div>
+            <div class="mb-info">
+              <span class="mb-name">Ocean Blue</span>
+              <span class="mb-hex">#1C6EF1</span>
+            </div>
+          </div>
+          <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#059669" aria-pressed="false" aria-label="Apply Emerald brand">
+            <div class="mb-swatch" style="background: #059669;" aria-hidden="true"></div>
+            <div class="mb-info">
+              <span class="mb-name">Emerald</span>
+              <span class="mb-hex">#059669</span>
+            </div>
+          </div>
+          <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#E32631" aria-pressed="false" aria-label="Apply Signal Red brand">
+            <div class="mb-swatch" style="background: #E32631;" aria-hidden="true"></div>
+            <div class="mb-info">
+              <span class="mb-name">Signal Red</span>
+              <span class="mb-hex">#E32631</span>
+            </div>
+          </div>
+          <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#F59E0B" aria-pressed="false" aria-label="Apply Amber brand">
+            <div class="mb-swatch" style="background: #F59E0B;" aria-hidden="true"></div>
+            <div class="mb-info">
+              <span class="mb-name">Amber</span>
+              <span class="mb-hex">#F59E0B</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#1C6EF1" aria-pressed="false" aria-label="Apply Ocean Blue brand">
-        <div class="mb-swatch" style="background: #1C6EF1;" aria-hidden="true"></div>
-        <div class="mb-info">
-          <span class="mb-name">Ocean Blue</span>
-          <span class="mb-hex">#1C6EF1</span>
+      <div class="brand-picker-row">
+        <div class="brand-picker-strips">
+          <span class="hue-wheel-section-label">Custom colour</span>
+          <div class="brand-strips-container">
+            <div class="brand-strip-row">
+              <label for="hue-slider" class="brand-slider-label">Hue</label>
+              <div class="brand-strip" id="hue-strip" role="img" aria-label="Hue spectrum"></div>
+              <div class="brand-slider-controls">
+                <input type="range" id="hue-slider" class="brand-slider-input" min="0" max="360" step="1" aria-valuetext="Hue">
+                <input type="number" id="hue-value" class="brand-slider-value" min="0" max="360" step="1" aria-label="Hue in degrees">
+              </div>
+            </div>
+            <div class="brand-strip-row">
+              <label for="chroma-slider" class="brand-slider-label">Chroma</label>
+              <div class="brand-strip" id="chroma-strip" role="img" aria-label="Chroma range"></div>
+              <div class="brand-slider-controls">
+                <input type="range" id="chroma-slider" class="brand-slider-input" min="0" max="0.25" step="0.01" aria-valuetext="Chroma">
+                <input type="number" id="chroma-value" class="brand-slider-value" min="0" max="0.25" step="0.01" aria-label="Chroma">
+              </div>
+            </div>
+            <div class="brand-strip-row">
+              <label for="lightness-slider" class="brand-slider-label">Lightness</label>
+              <div class="brand-strip" id="lightness-strip" role="img" aria-label="Lightness range"></div>
+              <div class="brand-slider-controls">
+                <input type="range" id="lightness-slider" class="brand-slider-input" min="0.2" max="0.9" step="0.01" aria-valuetext="Lightness">
+                <input type="number" id="lightness-value" class="brand-slider-value" min="0.2" max="0.9" step="0.01" aria-label="Lightness">
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#059669" aria-pressed="false" aria-label="Apply Emerald brand">
-        <div class="mb-swatch" style="background: #059669;" aria-hidden="true"></div>
-        <div class="mb-info">
-          <span class="mb-name">Emerald</span>
-          <span class="mb-hex">#059669</span>
-        </div>
-      </div>
-      <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#E32631" aria-pressed="false" aria-label="Apply Signal Red brand">
-        <div class="mb-swatch" style="background: #E32631;" aria-hidden="true"></div>
-        <div class="mb-info">
-          <span class="mb-name">Signal Red</span>
-          <span class="mb-hex">#E32631</span>
-        </div>
-      </div>
-      <div class="multibrand-card" role="listitem" tabindex="0" data-hex="#F59E0B" aria-pressed="false" aria-label="Apply Amber brand">
-        <div class="mb-swatch" style="background: #F59E0B;" aria-hidden="true"></div>
-        <div class="mb-info">
-          <span class="mb-name">Amber</span>
-          <span class="mb-hex">#F59E0B</span>
+        <div id="token-map-theme-wrapper" data-theme="light">
+          <div class="token-map-block">
+            <div class="token-map-head">
+              <span class="hue-wheel-section-label">Token mapping</span>
+              <div class="token-map-toggle" role="group" aria-label="Theme for token mapping">
+                <button type="button" class="token-map-toggle-btn is-active" data-theme="light" aria-pressed="true">Light</button>
+                <button type="button" class="token-map-toggle-btn" data-theme="dark" aria-pressed="false">Dark</button>
+              </div>
+            </div>
+            <div class="token-map">
+              <div class="token-map-row token-map-header">
+                <span class="token-map-cell tm-token">Semantic Token</span>
+                <span class="token-map-cell tm-step">Scale Step</span>
+                <span class="token-map-cell tm-preview">Preview</span>
+              </div>
+              <div class="token-map-row" data-step-light="brand-50" data-step-dark="brand-50">
+                <span class="token-map-cell tm-token"><code>--color-action-primary</code></span>
+                <span class="token-map-cell tm-step">brand-50</span>
+                <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-50"></span></span>
+              </div>
+              <div class="token-map-row" data-step-light="brand-60" data-step-dark="brand-40">
+                <span class="token-map-cell tm-token"><code>--color-action-primary-hover</code></span>
+                <span class="token-map-cell tm-step">brand-60</span>
+                <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-60"></span></span>
+              </div>
+              <div class="token-map-row" data-step-light="brand-70" data-step-dark="brand-30">
+                <span class="token-map-cell tm-token"><code>--color-action-primary-active</code></span>
+                <span class="token-map-cell tm-step">brand-70</span>
+                <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-70"></span></span>
+              </div>
+              <div class="token-map-row" data-step-light="brand-50" data-step-dark="brand-40">
+                <span class="token-map-cell tm-token"><code>--color-border-focus</code></span>
+                <span class="token-map-cell tm-step">brand-50</span>
+                <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-border-focus"></span></span>
+              </div>
+              <div class="token-map-row" data-step-light="brand-10" data-step-dark="brand-10">
+                <span class="token-map-cell tm-token"><code>--brand-10</code> <span class="tm-meta">(e.g. outline hover)</span></span>
+                <span class="token-map-cell tm-step">brand-10</span>
+                <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-10"></span></span>
+              </div>
+              <div class="token-map-row" data-step-light="— (absolute)" data-step-dark="— (absolute)">
+                <span class="token-map-cell tm-token"><code>--white</code></span>
+                <span class="token-map-cell tm-step">— (absolute)</span>
+                <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-white"></span></span>
+              </div>
+              <div class="token-map-row" data-step-light="grey-0" data-step-dark="grey-0">
+                <span class="token-map-cell tm-token"><code>--color-text-on-action</code></span>
+                <span class="token-map-cell tm-step">grey-0</span>
+                <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-text-on-action"></span></span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -80,10 +163,7 @@ import Layout from '../layouts/Default.astro';
       <span class="section-desc">11 perceptually uniform steps via OKLCh &mdash; hover to inspect, click to copy</span>
     </div>
 
-    <div class="scale-container">
-      <div class="scale-strip" id="brand-scale"></div>
-      <div class="scale-labels" id="scale-labels"></div>
-    </div>
+    <div id="brand-scale-wrapper"></div>
 
     <div class="scale-meta">
       <div class="scale-meta-item">
@@ -102,50 +182,50 @@ import Layout from '../layouts/Default.astro';
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════
-       SECTION 2 — Token Mapping
+       SECTION 1b — Alpha Tints
   ══════════════════════════════════════════════════════════════ -->
   <div class="section">
     <div class="section-header">
-      <span class="section-title">Token Mapping</span>
-      <span class="section-desc">How the brand scale maps to semantic tokens</span>
+      <span class="section-title">Alpha Tints</span>
+      <span class="section-desc">Translucent washes of brand-50 for subtle surfaces, hover states, and emphasis</span>
     </div>
 
-    <div class="token-map">
-      <div class="token-map-row token-map-header">
-        <span class="token-map-cell tm-token">Semantic Token</span>
-        <span class="token-map-cell tm-step">Scale Step</span>
-        <span class="token-map-cell tm-preview">Preview</span>
+    <div class="alpha-strip">
+      <div class="alpha-cell" data-token="--brand-a50">
+        <div class="alpha-swatch"><div class="alpha-overlay" id="alpha-a50"></div></div>
+        <div class="alpha-info">
+          <span class="alpha-name">a50</span>
+          <span class="alpha-value">9%</span>
+        </div>
       </div>
-      <div class="token-map-row" data-step="50">
-        <span class="token-map-cell tm-token"><code>--action-primary</code></span>
-        <span class="token-map-cell tm-step">brand-50</span>
-        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-50"></span></span>
+      <div class="alpha-cell" data-token="--brand-a100">
+        <div class="alpha-swatch"><div class="alpha-overlay" id="alpha-a100"></div></div>
+        <div class="alpha-info">
+          <span class="alpha-name">a100</span>
+          <span class="alpha-value">18%</span>
+        </div>
       </div>
-      <div class="token-map-row" data-step="40">
-        <span class="token-map-cell tm-token"><code>--action-primary-hover</code></span>
-        <span class="token-map-cell tm-step">brand-40</span>
-        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-40"></span></span>
+      <div class="alpha-cell" data-token="--brand-a150">
+        <div class="alpha-swatch"><div class="alpha-overlay" id="alpha-a150"></div></div>
+        <div class="alpha-info">
+          <span class="alpha-name">a150</span>
+          <span class="alpha-value">24%</span>
+        </div>
       </div>
-      <div class="token-map-row" data-step="60">
-        <span class="token-map-cell tm-token"><code>--action-primary-active</code></span>
-        <span class="token-map-cell tm-step">brand-60</span>
-        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-60"></span></span>
+      <div class="alpha-cell" data-token="--brand-a200">
+        <div class="alpha-swatch"><div class="alpha-overlay" id="alpha-a200"></div></div>
+        <div class="alpha-info">
+          <span class="alpha-name">a200</span>
+          <span class="alpha-value">32%</span>
+        </div>
       </div>
-      <div class="token-map-row" data-step="30">
-        <span class="token-map-cell tm-token"><code>--border-focus</code></span>
-        <span class="token-map-cell tm-step">brand-30</span>
-        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-30"></span></span>
-      </div>
-      <div class="token-map-row" data-step="10">
-        <span class="token-map-cell tm-token"><code>--bg-action-subtle</code></span>
-        <span class="token-map-cell tm-step">brand-10</span>
-        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-10"></span></span>
-      </div>
-      <div class="token-map-row" data-step="80">
-        <span class="token-map-cell tm-token"><code>--text-on-action</code></span>
-        <span class="token-map-cell tm-step">brand-0 (white)</span>
-        <span class="token-map-cell tm-preview"><span class="tm-dot" id="tm-0"></span></span>
-      </div>
+    </div>
+
+    <div class="alpha-usage">
+      <div class="alpha-usage-row"><span class="alpha-usage-token">--brand-a50</span><span>Subtle wash — footer backgrounds, faint highlights</span></div>
+      <div class="alpha-usage-row"><span class="alpha-usage-token">--brand-a100</span><span>Selected rows, hover states, soft emphasis</span></div>
+      <div class="alpha-usage-row"><span class="alpha-usage-token">--brand-a150</span><span>Active states, pressed feedback</span></div>
+      <div class="alpha-usage-row"><span class="alpha-usage-token">--brand-a200</span><span>Strong tint — badges, tags, visual anchors</span></div>
     </div>
   </div>
 
@@ -347,12 +427,122 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     Nexus Design System &middot; Brand Colour
   </div>
 
+  <div class="colour-toast" id="colour-toast">Copied!</div>
 </Layout>
 
 <script>
-  import { setBrandColour } from '../utils/setBrandColour.js';
+  import { setBrandColour, hexToOklch, oklchToHex } from '../utils/setBrandColour.js';
 
   const STEPS = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+
+  const HUE_STRIP_L = 0.65;
+  const HUE_STRIP_C = 0.15;
+  const L_MIN = 0.2;
+  const L_MAX = 0.9;
+  const C_MAX = 0.25;
+
+  const GRADIENT_STOPS = 10;
+  const HUE_STRIP_STOPS = 36;
+
+  const LIGHT_BG = '#FFFFFF';
+  const DARK_BG = '#080808';
+  const levelLabels = { aaa: 'AAA', aa: 'AA', aalg: 'AA Lg', fail: 'Fail' };
+
+  function hexToLuminance(hex) {
+    const h = hex.replace('#', '');
+    const toLinear = (c) => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    const r = toLinear(parseInt(h.substring(0, 2), 16) / 255);
+    const g = toLinear(parseInt(h.substring(2, 4), 16) / 255);
+    const b = toLinear(parseInt(h.substring(4, 6), 16) / 255);
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+
+  function contrastRatio(hex1, hex2) {
+    const l1 = hexToLuminance(hex1);
+    const l2 = hexToLuminance(hex2);
+    return Number(((Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05)).toFixed(2));
+  }
+
+  function wcagLevel(ratio) {
+    if (ratio >= 7) return 'aaa';
+    if (ratio >= 4.5) return 'aa';
+    if (ratio >= 3) return 'aalg';
+    return 'fail';
+  }
+
+  let lastOklch = { L: 0.52, C: 0.15, h: 0 };
+
+  function getBrandOklch() {
+    const hex = getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#A03AFF';
+    return hexToOklch(hex);
+  }
+
+  function updateHueStrip() {
+    const el = document.getElementById('hue-strip');
+    if (!el) return;
+    const stops = [];
+    for (let i = 0; i <= HUE_STRIP_STOPS; i++) {
+      const h = (i / HUE_STRIP_STOPS) * 2 * Math.PI;
+      stops.push(oklchToHex(HUE_STRIP_L, HUE_STRIP_C, h));
+    }
+    el.style.background = 'linear-gradient(to right, ' + stops.join(', ') + ')';
+  }
+
+  function updateChromaStrip(L, h) {
+    const el = document.getElementById('chroma-strip');
+    if (!el) return;
+    const stops = [];
+    for (let i = 0; i <= GRADIENT_STOPS; i++) {
+      const c = (i / GRADIENT_STOPS) * C_MAX;
+      stops.push(oklchToHex(L, c, h));
+    }
+    el.style.background = 'linear-gradient(to right, ' + stops.join(', ') + ')';
+  }
+
+  function updateLightnessStrip(C, h) {
+    const el = document.getElementById('lightness-strip');
+    if (!el) return;
+    const stops = [];
+    for (let i = 0; i <= GRADIENT_STOPS; i++) {
+      const l = L_MIN + (i / GRADIENT_STOPS) * (L_MAX - L_MIN);
+      stops.push(oklchToHex(l, C, h));
+    }
+    el.style.background = 'linear-gradient(to right, ' + stops.join(', ') + ')';
+  }
+
+  function applyFromOklch(L, C, h) {
+    const hex = oklchToHex(L, C, h);
+    setBrandColour(hex);
+    renderAll();
+    syncSlidersFromOklch(L, C, h);
+    lastOklch = { L, C, h };
+    updateChromaStrip(L, h);
+    updateLightnessStrip(C, h);
+  }
+
+  function syncSlidersFromOklch(L, C, h) {
+    const hueSlider = document.getElementById('hue-slider');
+    const lightnessSlider = document.getElementById('lightness-slider');
+    const chromaSlider = document.getElementById('chroma-slider');
+    const hueValue = document.getElementById('hue-value');
+    const lightnessValue = document.getElementById('lightness-value');
+    const chromaValue = document.getElementById('chroma-value');
+    if (hueSlider && hueValue) {
+      const deg = ((Math.round((h * 180) / Math.PI) % 360) + 360) % 360;
+      hueSlider.value = String(deg);
+      hueValue.value = String(deg);
+    }
+    if (lightnessSlider && lightnessValue) {
+      const lVal = Math.max(L_MIN, Math.min(L_MAX, L));
+      lightnessSlider.value = String(lVal);
+      lightnessValue.value = Number(lVal).toFixed(2);
+    }
+    if (chromaSlider && chromaValue) {
+      const cVal = Math.max(0, Math.min(C_MAX, C));
+      chromaSlider.value = String(cVal);
+      chromaValue.value = Number(cVal).toFixed(2);
+    }
+  }
 
   function getScale() {
     const root = getComputedStyle(document.documentElement);
@@ -362,33 +552,55 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     });
   }
 
+  let colourToastHideTimer;
+
   function renderScale() {
     const scale = getScale();
-    const container = document.getElementById('brand-scale');
-    const labels = document.getElementById('scale-labels');
-    if (!container || !labels) return;
+    const wrapper = document.getElementById('brand-scale-wrapper');
+    if (!wrapper) return;
 
-    container.innerHTML = scale.map(({ step, hex }) => `
-      <div class="scale-cell ${step >= 50 ? 'sc-dark' : 'sc-light'}"
-           style="background:var(--brand-${step})"
-           data-step="${step}"
-           data-hex="${hex}"
-           title="brand-${step}: ${hex}">
-        <span class="sc-hex">${hex}</span>
-      </div>
-    `).join('');
+    const stepsWithContrast = scale.map(({ step, hex }) => {
+      const onWhite = contrastRatio(hex, LIGHT_BG);
+      const onDark = contrastRatio(hex, DARK_BG);
+      return {
+        step,
+        hex,
+        txt: step <= 30 ? 'on-light' : 'on-dark',
+        onWhite: { ratio: onWhite, level: wcagLevel(onWhite) },
+        onDark: { ratio: onDark, level: wcagLevel(onDark) },
+      };
+    });
 
-    labels.innerHTML = scale.map(({ step }) => `
-      <span class="scale-label-n">${step}</span>
-    `).join('');
+    const scaleHtml = '<div class="scale">' + stepsWithContrast.map((s) =>
+      `<div class="step ${s.txt}" style="background:${s.hex}"><span class="n">${s.step}</span><span class="h">${s.hex}</span></div>`
+    ).join('') + '</div>';
 
-    // Click to copy
-    container.querySelectorAll('.scale-cell').forEach(cell => {
-      cell.addEventListener('click', () => {
-        const hex = cell.getAttribute('data-hex');
-        if (hex) navigator.clipboard.writeText(hex);
-        cell.classList.add('sc-copied');
-        setTimeout(() => cell.classList.remove('sc-copied'), 800);
+    const badgeRow1Html = '<div class="badge-row">' + stepsWithContrast.map((s) =>
+      `<div class="badge-cell b-${s.onWhite.level}" data-ratio="${s.onWhite.ratio}:1">${levelLabels[s.onWhite.level]}</div>`
+    ).join('') + '</div>';
+
+    const badgeRow2Html = '<div class="badge-row">' + stepsWithContrast.map((s) =>
+      `<div class="badge-cell b-${s.onDark.level}" data-ratio="${s.onDark.ratio}:1">${levelLabels[s.onDark.level]}</div>`
+    ).join('') + '</div>';
+
+    wrapper.innerHTML = scaleHtml + badgeRow1Html + badgeRow2Html;
+
+    const toast = document.getElementById('colour-toast');
+    wrapper.querySelectorAll('.step').forEach((stepEl) => {
+      stepEl.addEventListener('click', () => {
+        const hexEl = stepEl.querySelector('.h');
+        const hex = hexEl ? hexEl.textContent.trim() : '';
+        if (!hex) return;
+        navigator.clipboard.writeText(hex).then(() => {
+          if (toast) {
+            toast.textContent = 'Copied ' + hex;
+            toast.classList.add('colour-toast--visible');
+            clearTimeout(colourToastHideTimer);
+            colourToastHideTimer = setTimeout(() => {
+              toast.classList.remove('colour-toast--visible');
+            }, 1800);
+          }
+        });
       });
     });
   }
@@ -402,11 +614,69 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     if (hexLabel) hexLabel.textContent = hex50;
   }
 
+  function getTokenMapRoot() {
+    const wrapper = document.getElementById('token-map-theme-wrapper');
+    return wrapper ? getComputedStyle(wrapper) : getComputedStyle(document.documentElement);
+  }
+
   function renderTokenDots() {
+    const root = getTokenMapRoot();
+    const get = (v) => root.getPropertyValue(v).trim();
+    const setDot = (id, value) => { const el = document.getElementById(id); if (el && value) el.style.background = value; };
+    setDot('tm-50', get('--color-action-primary'));
+    setDot('tm-60', get('--color-action-primary-hover'));
+    setDot('tm-70', get('--color-action-primary-active'));
+    setDot('tm-border-focus', get('--color-border-focus'));
+    setDot('tm-10', get('--brand-10'));
+    setDot('tm-white', get('--white'));
+    setDot('tm-text-on-action', get('--color-text-on-action'));
+  }
+
+  function updateTokenMapStepLabels(theme) {
+    const wrapper = document.getElementById('token-map-theme-wrapper');
+    if (!wrapper) return;
+    const attr = theme === 'dark' ? 'data-step-dark' : 'data-step-light';
+    wrapper.querySelectorAll('.token-map-row[data-step-light]').forEach(row => {
+      const stepCell = row.querySelector('.tm-step');
+      const value = row.getAttribute(attr);
+      if (stepCell && value) stepCell.textContent = value;
+    });
+  }
+
+  function initTokenMapToggle() {
+    const wrapper = document.getElementById('token-map-theme-wrapper');
+    const btns = document.querySelectorAll('.token-map-toggle-btn');
+    if (!wrapper || !btns.length) return;
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-theme');
+        if (!theme) return;
+        wrapper.setAttribute('data-theme', theme);
+        btns.forEach(b => {
+          const isActive = b.getAttribute('data-theme') === theme;
+          b.classList.toggle('is-active', isActive);
+          b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+        updateTokenMapStepLabels(theme);
+        renderTokenDots();
+      });
+    });
+  }
+
+  function renderAlphaTints() {
     const root = getComputedStyle(document.documentElement);
-    [0, 10, 30, 40, 50, 60, 80].forEach(step => {
-      const dot = document.getElementById(`tm-${step}`);
-      if (dot) dot.style.background = root.getPropertyValue(`--brand-${step}`).trim();
+    const hex50 = root.getPropertyValue('--brand-50').trim() || '#A03AFF';
+    const ALPHA_STEPS = [
+      { id: 'alpha-a50',  pct: 0.09 },
+      { id: 'alpha-a100', pct: 0.18 },
+      { id: 'alpha-a150', pct: 0.24 },
+      { id: 'alpha-a200', pct: 0.32 },
+    ];
+    ALPHA_STEPS.forEach(({ id, pct }) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.background = `color-mix(in srgb, ${hex50} ${pct * 100}%, transparent)`;
+      }
     });
   }
 
@@ -414,9 +684,72 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     renderScale();
     renderHero();
     renderTokenDots();
+    renderAlphaTints();
   }
 
   renderAll();
+  lastOklch = getBrandOklch();
+
+  function initStrips() {
+    updateHueStrip();
+    updateChromaStrip(lastOklch.L, lastOklch.h);
+    updateLightnessStrip(lastOklch.C, lastOklch.h);
+  }
+
+  function initSliders() {
+    const hueSlider = document.getElementById('hue-slider');
+    const lightnessSlider = document.getElementById('lightness-slider');
+    const chromaSlider = document.getElementById('chroma-slider');
+    const hueValue = document.getElementById('hue-value');
+    const lightnessValue = document.getElementById('lightness-value');
+    const chromaValue = document.getElementById('chroma-value');
+
+    if (hueSlider) {
+      hueSlider.addEventListener('input', () => {
+        const deg = parseFloat(hueSlider.value);
+        const h = (deg * Math.PI) / 180;
+        applyFromOklch(lastOklch.L, lastOklch.C, h);
+      });
+    }
+    if (hueValue) {
+      hueValue.addEventListener('change', () => {
+        const deg = parseFloat(hueValue.value);
+        if (Number.isNaN(deg)) return;
+        const clamped = ((deg % 360) + 360) % 360;
+        const h = (clamped * Math.PI) / 180;
+        applyFromOklch(lastOklch.L, lastOklch.C, h);
+      });
+    }
+    if (lightnessSlider) {
+      lightnessSlider.addEventListener('input', () => {
+        const newL = parseFloat(lightnessSlider.value);
+        applyFromOklch(newL, lastOklch.C, lastOklch.h);
+      });
+    }
+    if (lightnessValue) {
+      lightnessValue.addEventListener('change', () => {
+        const val = parseFloat(lightnessValue.value);
+        if (Number.isNaN(val)) return;
+        const newL = Math.max(L_MIN, Math.min(L_MAX, val));
+        applyFromOklch(newL, lastOklch.C, lastOklch.h);
+      });
+    }
+    if (chromaSlider) {
+      chromaSlider.addEventListener('input', () => {
+        const newC = parseFloat(chromaSlider.value);
+        applyFromOklch(lastOklch.L, newC, lastOklch.h);
+      });
+    }
+    if (chromaValue) {
+      chromaValue.addEventListener('change', () => {
+        const val = parseFloat(chromaValue.value);
+        if (Number.isNaN(val)) return;
+        const newC = Math.max(0, Math.min(C_MAX, val));
+        applyFromOklch(lastOklch.L, newC, lastOklch.h);
+      });
+    }
+    syncSlidersFromOklch(lastOklch.L, lastOklch.C, lastOklch.h);
+  }
 
   // Multi-brand: click or keyboard to apply
   function setActiveCard(activeCard) {
@@ -448,10 +781,16 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     setActiveCard(null);
   }
 
-  // When brand colour changes from floating bar (or anywhere), sync the selected card
+  // When brand colour changes from floating bar (or anywhere), sync the selected card, sliders and strips
   window.addEventListener('nexus:brandcolourchange', (e) => {
     renderAll();
     syncActiveCardFromHex(e.detail?.hex);
+    const hex = e.detail?.hex || getComputedStyle(document.documentElement).getPropertyValue('--brand-50').trim() || '#A03AFF';
+    const { L, C, h } = hexToOklch(hex);
+    lastOklch = { L, C, h };
+    syncSlidersFromOklch(L, C, h);
+    updateChromaStrip(L, h);
+    updateLightnessStrip(C, h);
   });
 
   // Re-render when DOM style changes (e.g. setBrandColour from same page)
@@ -486,6 +825,9 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     if (cards.length) setActiveCard(cards[0]);
   }
   syncActiveCardFromDOM();
+  initStrips();
+  initSliders();
+  initTokenMapToggle();
 </script>
 
 <style>
@@ -494,43 +836,49 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   ══════════════════════════════════════════════════════════════ */
   .brand-hero {
     display: grid;
-    grid-template-columns: 1fr 200px;
+    grid-template-columns: 1fr 160px;
     gap: 40px;
-    align-items: center;
-    margin-bottom: 56px;
-    padding-bottom: 40px;
+    align-items: start;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
     border-bottom: 1px solid var(--rule);
   }
 
-  .brand-hero-overline {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 8px;
+  .brand-hero-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 160px;
   }
 
-  .brand-hero-title {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 600;
-    color: var(--ink);
-    line-height: 1.1;
-    margin-bottom: 16px;
-    letter-spacing: -0.02em;
+  .brand-hero .page-sub {
+    margin-bottom: 20px;
   }
 
-  .brand-hero-sub {
-    font-size: var(--font-size-400);
+  .brand-hero-instruction {
+    margin-top: auto;
+    margin-bottom: 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
     color: var(--ink-2);
-    line-height: 1.7;
-    max-width: 520px;
+    line-height: 1.45;
+    font-style: normal;
+  }
+
+  .brand-hero-instruction em {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 22px;
+  }
+
+  .brand-hero-instruction-hint {
+    color: #9a9590;
   }
 
   .brand-hero-swatch {
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
     border-radius: 20px;
     background: var(--brand-50, #A03AFF);
     display: flex;
@@ -571,104 +919,8 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   }
 
   /* ═══════════════════════════════════════════════════════════
-     SCALE — :global() required for JS-injected .scale-cell / .sc-hex
+     SCALE META (scale strip uses global .scale / .step from components.css)
   ══════════════════════════════════════════════════════════════ */
-  .scale-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-
-  .scale-strip {
-    display: grid;
-    grid-template-columns: repeat(11, 1fr);
-    border-radius: var(--radius);
-    overflow: hidden;
-    height: 88px;
-    min-width: 0;
-  }
-
-  .scale-strip :global(.scale-cell) {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease;
-    position: relative;
-    overflow: hidden;
-    min-width: 0;
-    padding-bottom: 6px;
-  }
-
-  .scale-strip :global(.scale-cell:hover) {
-    z-index: 2;
-    transform: scale(1.03);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.22);
-  }
-
-  .scale-strip :global(.scale-cell:active) { transform: scale(0.98); }
-
-  .scale-strip :global(.sc-hex) {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 600;
-    white-space: nowrap;
-    padding: 4px 8px;
-    border-radius: 4px;
-    letter-spacing: 0.03em;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-  }
-
-  .scale-strip :global(.sc-light .sc-hex) {
-    background: rgba(255, 255, 255, 0.35);
-    color: #1a1816;
-  }
-
-  .scale-strip :global(.sc-dark .sc-hex) {
-    background: rgba(0, 0, 0, 0.3);
-    color: rgba(255, 255, 255, 0.95);
-  }
-
-  .scale-strip :global(.sc-copied::after) {
-    content: 'Copied';
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 600;
-    background: rgba(0,0,0,0.5);
-    color: #fff;
-    animation: copiedFlash 0.8s ease forwards;
-  }
-
-  @keyframes copiedFlash {
-    0%   { opacity: 1; }
-    70%  { opacity: 1; }
-    100% { opacity: 0; }
-  }
-
-  .scale-labels {
-    display: grid;
-    grid-template-columns: repeat(11, 1fr);
-    gap: 0;
-    min-width: 0;
-  }
-
-  .scale-labels :global(.scale-label-n) {
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--ink-3);
-    white-space: nowrap;
-  }
-
   .scale-meta {
     display: flex;
     flex-wrap: wrap;
@@ -965,8 +1217,242 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   }
 
   /* ═══════════════════════════════════════════════════════════
-     MULTI-BRAND
+     MULTI-BRAND + HUE WHEEL
   ══════════════════════════════════════════════════════════════ */
+  .brand-picker-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .brand-picker-presets {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hue-wheel-section-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+  }
+
+  .brand-picker-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .token-map-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .token-map-block .token-map {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+  }
+
+  .token-map-block .token-map-row .tm-token {
+    min-width: 0;
+  }
+
+  .brand-picker-strips {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .brand-strips-container {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+    background: var(--card-bg);
+    border: 2px solid var(--rule);
+    border-radius: var(--radius);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .token-map-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .token-map-toggle {
+    display: flex;
+    border-radius: var(--radius-100);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    background: var(--page-bg);
+  }
+
+  .token-map-toggle-btn {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border: none;
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .token-map-toggle-btn:hover {
+    color: var(--ink);
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .token-map-toggle-btn.is-active {
+    background: var(--card-bg);
+    color: var(--ink);
+    box-shadow: 0 0 0 1px var(--rule);
+  }
+
+  .token-map-toggle-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-border-focus, var(--ink-3));
+  }
+
+  .tm-meta {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--ink-3);
+  }
+
+  .brand-strips-container:hover {
+    border-color: var(--ink-3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  .brand-strip-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .brand-strip {
+    width: 100%;
+    height: 28px;
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+  }
+
+  .brand-slider-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-slider-controls .brand-slider-input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .brand-slider-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-2);
+    min-width: 72px;
+    flex-shrink: 0;
+  }
+
+  .brand-slider-input {
+    flex: 1;
+    min-width: 0;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--rule);
+    border-radius: 4px;
+  }
+
+  .brand-slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--brand-50, var(--ink));
+    border: 2px solid var(--card-bg);
+    box-shadow: 0 0 0 1px var(--rule);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  .brand-slider-input::-webkit-slider-thumb:hover {
+    transform: scale(1.08);
+  }
+
+  .brand-slider-input::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--brand-50, var(--ink));
+    border: 2px solid var(--card-bg);
+    box-shadow: 0 0 0 1px var(--rule);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  .brand-slider-input::-moz-range-thumb:hover {
+    transform: scale(1.08);
+  }
+
+  .brand-slider-input:focus-visible {
+    outline: none;
+  }
+
+  .brand-slider-input:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px var(--border-focus, rgba(0, 0, 0, 0.15));
+  }
+
+  .brand-slider-input:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px var(--border-focus, rgba(0, 0, 0, 0.15));
+  }
+
+  .brand-slider-value {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
+    text-align: right;
+    width: 4em;
+    padding: 6px 8px;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--card-bg);
+    -moz-appearance: textfield;
+  }
+
+  .brand-slider-value::-webkit-outer-spin-button,
+  .brand-slider-value::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .brand-slider-value:focus {
+    outline: none;
+    border-color: var(--border-focus, var(--ink-3));
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.06);
+  }
+
   .multibrand-row {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -1019,7 +1505,7 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
     padding: 2px 5px;
     border-radius: 3px;
     background: var(--brand-50, var(--ink));
-    color: #fff;
+    color: var(--white);
   }
 
   .mb-swatch {
@@ -1185,14 +1671,93 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   }
 
   /* ═══════════════════════════════════════════════════════════
+     ALPHA TINTS
+  ══════════════════════════════════════════════════════════════ */
+  .alpha-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .alpha-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .alpha-swatch {
+    height: 64px;
+    border-radius: var(--radius);
+    border: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+
+  .alpha-overlay {
+    position: absolute;
+    inset: 0;
+    transition: background 300ms ease;
+  }
+
+  .alpha-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .alpha-name {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .alpha-value {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+
+  .alpha-usage {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .alpha-usage-row {
+    display: flex;
+    gap: 16px;
+    padding: 10px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+    line-height: 1.5;
+  }
+
+  .alpha-usage-row:last-child { border-bottom: none; }
+
+  .alpha-usage-token {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-3);
+    min-width: 130px;
+    flex-shrink: 0;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
      RESPONSIVE
   ══════════════════════════════════════════════════════════════ */
   @media (max-width: 860px) {
     .brand-hero { grid-template-columns: 1fr; }
     .brand-hero-swatch { width: 120px; height: 120px; }
+    .brand-picker-row { grid-template-columns: 1fr; }
     .preview-grid { grid-template-columns: 1fr; }
     .preview-card--wide { grid-column: span 1; }
     .multibrand-row { grid-template-columns: repeat(3, 1fr); }
+    .alpha-strip { grid-template-columns: repeat(2, 1fr); }
     .usage-grid { grid-template-columns: 1fr; }
     .pipeline { flex-direction: column; align-items: flex-start; }
     .pipeline-step { flex-direction: row; text-align: left; }
@@ -1204,12 +1769,5 @@ setBrandColour(<span class="cs">'#1C6EF1'</span>);
   @media (max-width: 520px) {
     .multibrand-row { grid-template-columns: repeat(2, 1fr); }
     .scale-meta { flex-direction: column; gap: 12px; padding: 14px 18px; }
-    .scale-strip { height: 72px; }
-  }
-
-  @media (max-width: 400px) {
-    .scale-container { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
-    .scale-strip,
-    .scale-labels { min-width: 440px; }
   }
 </style>

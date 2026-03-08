@@ -1,5 +1,6 @@
 import React from 'react'
 import type { Preview } from '@storybook/react-vite'
+import '../src/styles/base.css'
 import '../src/styles/tokens.scss'
 import { setBrandColour } from '../src/utils/setBrandColour'
 

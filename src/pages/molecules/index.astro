@@ -1,18 +1,111 @@
 ---
 import Layout from '../../layouts/Default.astro';
+
+const molecules = [
+  { name: 'Dropzone',  href: '/molecules/dropzone',  icon: '⇪', desc: 'Drag-and-drop file upload area with file list, remove, and size/type validation', status: 'ready' },
+  { name: 'Table',     href: '/molecules/table',     icon: '▦', desc: 'Compound table with sizes, striped/hoverable variants, sticky headers, and sort indicators', status: 'ready' },
+];
 ---
 
 <Layout title="Molecules" section="molecules">
   <h1 class="page-title">Molecules</h1>
-  <p class="page-sub">Form fields · Cards · Search bars · Composed patterns</p>
+  <p class="page-sub">Groups of atoms bonded together into functional units — 2 of ~48 complete</p>
 
-  <div class="placeholder">
-    <div class="placeholder-icon">◎</div>
-    <span class="placeholder-badge">Coming Soon</span>
-    <p class="placeholder-text">
-      Groups of atoms bonded together into functional units — a label with an input, a card with an image and text.
-    </p>
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Phase 1 — Foundation</span>
+      <span class="section-desc">{molecules.length} ready</span>
+    </div>
+
+    <div class="molecule-grid">
+      {molecules.map((mol) => (
+        <a href={mol.href} class="molecule-card">
+          <div class="molecule-card-icon">{mol.icon}</div>
+          <div class="molecule-card-body">
+            <div class="molecule-card-name">{mol.name}</div>
+            <div class="molecule-card-desc">{mol.desc}</div>
+          </div>
+          <span class="molecule-card-status molecule-card-status--ready">Ready</span>
+        </a>
+      ))}
+    </div>
   </div>
 
   <div class="footer">Nexus Design System · Molecules</div>
 </Layout>
+
+<style>
+  .molecule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .molecule-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .molecule-card:hover {
+    border-color: var(--ink-3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .molecule-card-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--page-bg);
+    border-radius: 8px;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: var(--ink-2);
+  }
+
+  .molecule-card-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .molecule-card-name {
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .molecule-card-desc {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.4;
+  }
+
+  .molecule-card-status {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 100px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .molecule-card-status--ready {
+    background: #C8E6CE;
+    color: #136D39;
+  }
+
+  @media (max-width: 640px) {
+    .molecule-grid { grid-template-columns: 1fr; }
+  }
+</style>

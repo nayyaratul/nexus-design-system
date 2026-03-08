@@ -2,6 +2,159 @@
 
 ## 2026-03-08
 
+### Molecules Implementation Plan
+
+**Status:** 44/44 atoms complete. 2 molecules built (Dropzone, Table). ~43 molecules planned across 7 phases.
+
+**Rules (carry forward from atoms):**
+- One folder per molecule: `src/molecules/<Name>/` with `Name.jsx`, `Name.module.scss`, `Name.stories.jsx`
+- Export in `src/molecules/index.js` (alphabetical)
+- Nav entry in `src/layouts/Default.astro`
+- Molecule card + count in `src/pages/molecules/index.astro`
+- Doc page `src/pages/molecules/<name>.astro` and showcase `src/components/molecules/<Name>Showcase.jsx`
+- SCSS modules + semantic tokens only; no raw hex/px/rem
+- British English everywhere; URLs lowercase
+
+---
+
+#### Phase 1 — Foundation (app-wide primitives)
+These are consumed by nearly every module. Build first.
+
+| # | Molecule | Purpose | Atoms used |
+|---|----------|---------|------------|
+| 1 | **Card** | Generic container: header / body / footer slots, variants (elevated, outlined, flat) | Divider, Heading, Text |
+| 2 | **EmptyState** | No-data / no-results: icon, title, description, optional CTA | Icon, Heading, Text, Button |
+| 3 | **Modal** | Focused overlay panel: title, body, primary/secondary actions, ESC/click-outside close, focus trap | Overlay, Button, Heading, Text, Divider |
+| 4 | **Drawer** | Slide-from-side/bottom panel (filters, options, compose) | Overlay, Button, Divider |
+| 5 | **Breadcrumb** | Hierarchical navigation (Catalogue → Category → Course) | Link, Text, Icon (separator) |
+| 6 | **SearchInput** | Search field with icon prefix and clear button | Input, Icon, Button |
+| 7 | **Menu** | Action list from a trigger (context menus, overflow menus) | Popover, Menu atom items, Divider |
+| 8 | **ConfirmDialog** | Yes/no confirmation (delete, submit, leave) — composes Modal | Modal, Button, Text |
+| 9 | **Rating** | Interactive or read-only star rating (1–5) with optional label | RatingStar (×N), Text |
+| 10 | **ListSkeleton** | Loading placeholder for any list/card layout | Skeleton (repeated) |
+
+**Deliverables:** 10 molecules. These unlock all module-specific molecules.
+**Already done:** Dropzone (11), Table (12) — built during atoms phase.
+
+---
+
+#### Phase 2 — Courses + Catalogue
+First module vertical. High user traffic; most common UI patterns.
+
+| # | Molecule | Purpose | Atoms used |
+|---|----------|---------|------------|
+| 13 | **CourseCard** | Course tile: image, title, meta (duration/level), progress, badge (New/Locked), CTA | Thumbnail, Heading, Text, ProgressBar, Badge, Button, Card |
+| 14 | **CourseListItem** | Row view: thumbnail, title, duration, progress/status, actions | Thumbnail, Heading, Text, ProgressBar, Badge, Button, Icon |
+| 15 | **ModuleSection** | Collapsible module with lesson list | Accordion, Link, Text, Icon |
+| 16 | **LessonRow** | Single lesson: icon (play/lock/done), title, duration | Icon, Link, Text |
+| 17 | **ProgressSummary** | "X% complete" bar with label | ProgressBar, Text, Heading (optional) |
+| 18 | **FilterChips** | Active filters as dismissible chips + "Clear all" | Tag (dismissible), Button |
+| 19 | **SortDropdown** | "Sort by: Newest / Popular / Duration" | Select or Popover, Menu |
+| 20 | **CatalogueFilters** | Group of filters (category, level, duration) in row or Drawer | Select, Checkbox, ToggleGroup, Label, Drawer |
+
+**Deliverables:** 8 molecules. Course discovery reuses CourseCard, SearchInput, EmptyState from Phase 1.
+
+---
+
+#### Phase 3 — Assessment + Survey
+Timed exams, quizzes, surveys, Likert scales.
+
+| # | Molecule | Purpose | Atoms used |
+|---|----------|---------|------------|
+| 21 | **QuestionCard** | One question: text + answer UI (radio/checkbox/input/textarea) | Card, Heading, Text, RadioGroup / Checkbox / Input / Textarea, FormField |
+| 22 | **AssessmentTimer** | Visible countdown for timed assessments | Timer, Text, Alert (optional) |
+| 23 | **AssessmentProgress** | "Question 3 of 10" step indicator | Steps or ProgressBar, Text |
+| 24 | **SubmitBar** | Sticky footer: Submit + Previous/Next + optional warning | Button, Text, Alert (optional) |
+| 25 | **SurveyQuestion** | Survey-specific question (same pattern as QuestionCard, survey styling) | FormField, Text, Heading, RadioGroup |
+| 26 | **LikertScale** | Scale 1–5, "Strongly disagree → Strongly agree" | Slider or ToggleGroup, Label, Text |
+| 27 | **SurveyProgress** | "Step 2 of 5" progress through survey | ProgressBar, Text, Steps (optional) |
+
+**Deliverables:** 7 molecules.
+
+---
+
+#### Phase 4 — Chat + Messaging (Chatbot & 1:1 talks)
+Chatbot and one-on-one messaging share most patterns.
+
+| # | Molecule | Purpose | Atoms used |
+|---|----------|---------|------------|
+| 28 | **ChatBubble** | One message: avatar (optional), text, role (user/bot), timestamp | Avatar, Text, Badge (optional) |
+| 29 | **ChatInput** | Compose: textarea + send + optional attachment | Textarea, Button, Icon, FileInput (optional) |
+| 30 | **SuggestedChips** | Quick-reply options row | Tag or Button (row) |
+| 31 | **TypingIndicator** | "Bot is typing…" with dot animation | Skeleton or Spinner, Text |
+| 32 | **MessageBubble** | 1:1 message: avatar, text, read receipt / delivery status | Avatar, Text, Icon, Badge |
+| 33 | **ConversationHeader** | Thread header: avatar, name, online status, overflow menu | Avatar, Heading, Text, Badge, Button, Menu |
+| 34 | **MessageInput** | Same pattern as ChatInput (text + send + attach) | Textarea, Button, Icon, FileInput |
+
+**Deliverables:** 7 molecules. MessageBubble/MessageInput may share base with ChatBubble/ChatInput (composition, not duplication).
+
+---
+
+#### Phase 5 — Profile + Notifications
+User-facing settings, stats, and notification feeds.
+
+| # | Molecule | Purpose | Atoms used |
+|---|----------|---------|------------|
+| 35 | **ProfileHeader** | Avatar, name, optional bio, edit button | Avatar, Heading, Text, Button |
+| 36 | **ProfileStat** | One stat: value + label ("12 Courses completed") | Heading, Text |
+| 37 | **SettingsRow** | One setting: label + control (switch/link) | Label, Switch or Link, Text |
+| 38 | **EditableField** | Inline edit: label + value + edit/save/cancel | Label, Input / Textarea, Button, Text |
+| 39 | **AvatarUpload** | Change profile photo (preview + upload) | Avatar, Button, FileInput / Dropzone |
+| 40 | **NotificationItem** | One notification: icon/avatar, title, snippet, time, unread dot | Avatar / Icon, Text, Link, Badge (dot) |
+| 41 | **NotificationGroup** | Date separator + list of NotificationItem | Divider, Text, NotificationItem (×N) |
+
+**Deliverables:** 7 molecules.
+
+---
+
+#### Phase 6 — Feeds + Playlist
+Social feed and media playlist patterns.
+
+| # | Molecule | Purpose | Atoms used |
+|---|----------|---------|------------|
+| 42 | **FeedCard** | Feed item: author, time, content, optional media, actions (like/comment) | Avatar, Text, Link, Image (optional), Icon, Badge |
+| 43 | **FeedFilters** | Tabs or toggles (All / Courses / Updates) | Tabs or ToggleGroup |
+| 44 | **PlaylistItem** | One item: thumbnail, title, duration, order, play/pause state | Thumbnail, Text, Icon, Button (optional) |
+| 45 | **PlaylistHeader** | Playlist title, meta (count, duration), actions | Heading, Text, Button, Icon |
+
+**Deliverables:** 4 molecules.
+
+---
+
+#### Phase 7 — Reels + Data
+Stories/reels overlay and advanced data patterns.
+
+| # | Molecule | Purpose | Atoms used |
+|---|----------|---------|------------|
+| 46 | **ReelFrame** | Full-screen story: media + overlay (progress, CTA, close) | Image / AspectRatio, StoryProgress, Button, Text |
+| 47 | **ReelOverlay** | Top bar: segment progress + close; bottom: optional CTA | StoryProgress, Button, Text |
+| 48 | **DataTable** | Table + pagination + per-page selector + empty state | Table, Pagination, Select, EmptyState |
+
+**Deliverables:** 3 molecules.
+
+---
+
+#### Dependency graph (key chains)
+
+```
+Overlay ──► Modal ──► ConfirmDialog
+       └──► Drawer ──► CatalogueFilters
+Popover ──► Menu ──► SortDropdown, ConversationHeader
+RatingStar ──► Rating
+Timer ──► AssessmentTimer
+StoryProgress ──► ReelFrame, ReelOverlay
+FileInput ──► Dropzone ✓, ChatInput, AvatarUpload
+Table ✓ ──► DataTable
+Card ──► CourseCard, QuestionCard, FeedCard
+EmptyState ──► DataTable
+SearchInput ──► (used standalone in Catalogue, Feeds)
+```
+
+#### Total molecule count: ~48 (including Dropzone + Table already built)
+#### Estimated phase order priority: 1 → 2 → 3 → 4 → 5 → 6 → 7
+
+---
+
 ### Brand page — The Scale section
 - **Alignment:** Replaced separate flex rows with a shared 11-column grid for `.scale-strip` and `.scale-labels` so step numbers stay aligned with colour cells.
 - **Hover:** Removed `flex: 2.4` on cell hover (it broke label alignment). Hover now uses `transform: scale(1.03)` and box-shadow only.

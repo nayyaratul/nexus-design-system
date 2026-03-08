@@ -1,7 +1,7 @@
 import { Table } from './Table';
 
 export default {
-  title: 'Atoms/Table',
+  title: 'Molecules/Table',
   component: Table,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

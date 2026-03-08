@@ -180,7 +180,7 @@ export function AspectRatioShowcase() {
                     fontFamily: 'var(--mono)',
                     fontSize: '11px',
                     fontWeight: 600,
-                    color: '#fff',
+                    color: 'var(--white)',
                     textShadow: '0 1px 2px rgba(0,0,0,0.3)',
                   }}>
                     {r.label}
@@ -217,7 +217,7 @@ export function AspectRatioShowcase() {
                 <span style={{
                   fontSize: '11px',
                   fontFamily: 'var(--mono)',
-                  color: '#fff',
+                  color: 'var(--white)',
                   background: 'rgba(0,0,0,0.5)',
                   backdropFilter: 'blur(8px)',
                   padding: '4px 10px',
@@ -246,7 +246,7 @@ export function AspectRatioShowcase() {
                   <span style={{
                     fontSize: '10px',
                     fontFamily: 'var(--mono)',
-                    color: '#fff',
+                    color: 'var(--white)',
                     background: 'rgba(0,0,0,0.5)',
                     backdropFilter: 'blur(8px)',
                     padding: '3px 8px',

@@ -20,6 +20,10 @@
   --grey-90:  #242424;
   --grey-100: #080808;
 
+  /* Absolute extremes — pure white / pure black (backgrounds, sparing use) */
+  --white: #FFFFFF;
+  --black: #000000;
+
   /* Cool Grey */
   --cool-0:   #F8FAFD;
   --cool-10:  #DCDEE1;
@@ -111,6 +115,12 @@
   --brand-80:  #4A009B;
   --brand-90:  #33006B;
   --brand-100: #110024;
+
+  /* Brand alpha tints — derived from brand-50 */
+  --brand-a50:  color-mix(in srgb, var(--brand-50) 9%, transparent);
+  --brand-a100: color-mix(in srgb, var(--brand-50) 18%, transparent);
+  --brand-a150: color-mix(in srgb, var(--brand-50) 24%, transparent);
+  --brand-a200: color-mix(in srgb, var(--brand-50) 32%, transparent);
 }
 
 
@@ -130,11 +140,15 @@
   --color-text-info:        var(--blue-50);
   --color-text-link:        var(--brand-50);
 
+  /* Absolute extremes — theme mirror (white ↔ black in dark) */
+  --color-white: var(--white);
+  --color-black: var(--black);
+
   /* Backgrounds */
   --color-bg-primary:       var(--grey-0);
   --color-bg-secondary:     var(--warm-0);
   --color-bg-tertiary:      var(--grey-10);
-  --color-bg-elevated:      #FFFFFF;
+  --color-bg-elevated:      var(--white);
   --color-bg-sunken:        var(--cool-0);
   --color-bg-disabled:      var(--grey-10);
   --color-bg-overlay:       color-mix(in srgb, var(--grey-100) calc(var(--opacity-048) * 100%), transparent);
@@ -192,6 +206,10 @@
 
 /* ─── DARK THEME ─────────────────────────────────────────────── */
 [data-theme="dark"] {
+  /* Absolute extremes — theme mirror (white ↔ black) */
+  --color-white: var(--black);
+  --color-black: var(--white);
+
   /* Text — mirror: 90→10, 60→40, 50→50, 30→70, 0→100 */
   --color-text-primary:     var(--grey-10);
   --color-text-secondary:   var(--grey-40);
