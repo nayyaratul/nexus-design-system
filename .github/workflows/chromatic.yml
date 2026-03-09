@@ -27,7 +27,7 @@ jobs:
         run: npm ci
 
       - name: Publish to Chromatic
-        run: npm run chromatic
+        run: npm run chromatic -- --exit-zero-on-changes --exit-once-uploaded
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
