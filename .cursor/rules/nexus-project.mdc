@@ -25,5 +25,12 @@ src/
 ## Key Convention
 - **British English everywhere** — display text AND URLs and filenames (e.g. `colours.astro` → `/colours`, not `colors`)
 
+## Storybook & Chromatic
+- Storybook is the primary place to exercise components in isolation. When adding or updating atoms/molecules/organisms, prefer to add or update Storybook stories alongside Astro docs.
+- Local Storybook: use `npm run storybook` (port 6006) for day-to-day component work; the Astro site remains the primary documentation surface.
+- Chromatic is the hosted Storybook + visual regression service. It is wired via the `chromatic` npm script and `.github/workflows/chromatic.yml`.
+- CI: on every push/PR to `main`, GitHub Actions runs `npm run chromatic -- --exit-zero-on-changes --exit-once-uploaded`. Treat Chromatic as the source of truth for visual diffs; GitHub Actions status should remain green unless the build itself fails.
+- Do not commit `storybook-static/` to the repo. Hosted Storybook lives on Chromatic; link to it from docs if needed instead of checking in build artefacts.
+
 ## Session Continuity
 Always check `.local/updates.md` for the full decision log before starting new work.

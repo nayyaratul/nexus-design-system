@@ -9,6 +9,25 @@
 - Pill variants get a 1px border like Tag; dot variant unchanged.
 - BadgeShowcase updated to use design tokens throughout.
 
+### Storybook & Chromatic CI
+
+- Storybook is the component workbench for Nexus. Run `npm run storybook` locally to browse atoms/molecules/organisms in isolation at `http://localhost:6006`.
+- Stories live next to components as `*.stories.@(js|jsx|ts|tsx)` and are already wired via `.storybook/main.ts`.
+- Chromatic is the hosted Storybook + visual regression layer. It builds Storybook and publishes it to a Chromatic URL for sharing with designers and future sessions.
+- Manual publish (rarely needed now): `npm run chromatic` (uses the `CHROMATIC_PROJECT_TOKEN` GitHub secret configured in the repo).
+- CI workflow: `.github/workflows/chromatic.yml` runs on every push and PR to `main`. It checks out full git history (`fetch-depth: 0`), runs `npm ci`, then runs `npm run chromatic -- --exit-zero-on-changes --exit-once-uploaded`.
+- `--exit-zero-on-changes` keeps GitHub Actions green even when there are visual diffs; review and accept/reject those diffs inside Chromatic’s UI instead of treating them as hard CI failures.
+- `--exit-once-uploaded` lets CI stop waiting as soon as the upload finishes; Chromatic continues running visual tests and attaching results back to the build and PR.
+- Source of truth for the hosted Storybook URL and individual build links is the Chromatic dashboard; do not commit `storybook-static/` to git.
+
+### FormField pattern for field-like atoms
+
+- **Pattern:** `FormField` owns the visible label, required marker, hint, error message, and `htmlFor` wiring; the field atom (e.g. `Input`, `FileInput`) owns the native control and must accept/forward `id`, `name`, and `aria-*` props to that control, plus an `error`/`invalid` prop that toggles `aria-invalid` and visual error state.
+- **Canonical usage:** wrap any field-like atom in `FormField` with matching `htmlFor`/`id`, e.g. `<FormField label="Upload document" htmlFor="upload-document"><FileInput id="upload-document" name="document" /></FormField>`. Docs and Storybook should always use this as the default pattern.
+- **Field-like atoms (current list):** `Input`, `Textarea`, `FileInput`, `Checkbox`, `RadioGroup`/`RadioItem`, `Select`/`SelectTrigger`, `Switch`, `Slider`, `RatingStar` (when used as a rating input), `Toggle`, `ToggleGroup` (when used as a segmented control), `Calendar` (when used as a date input).
+- **Stories:** for each field-like atom, the default Storybook story should use the FormField pattern; any “primitive”/unwrapped stories must supply an accessible name via `aria-label` or `aria-labelledby` so axe’s “form label” rule passes.
+- **Future package guidance:** when this repo is published as `@nexus/design-system`, the README should include a “FormField pattern for field-like atoms” section mirroring this contract so consuming apps consistently use `FormField + [Atom]` for labelled form fields.
+
 ## 2026-03-08
 
 ### Pill variant for Toggle and ToggleGroup

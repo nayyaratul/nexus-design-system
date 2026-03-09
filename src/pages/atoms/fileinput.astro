@@ -36,6 +36,33 @@ import { FileInputShowcase } from '../../components/atoms/FileInputShowcase';
     </div>
   </div>
 
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">FormField pattern</span>
+      <span class="section-desc">Canonical way to label Upload File in forms</span>
+    </div>
+    <div class="info-box">
+      <p>
+        In most product forms, use <code>FileInput</code> inside <code>FormField</code> so labels, hints, and errors are wired up correctly. <code>FormField</code> owns the visible label text, required marker, hint, and error message; <code>FileInput</code> owns the native <code>&lt;input type="file"&gt;</code> and must receive an <code>id</code> that matches <code>FormField</code>'s <code>htmlFor</code>.
+      </p>
+      <pre class="code-snippet"><code>{`
+import { FormField, FileInput } from '@nexus/design-system';
+
+<FormField
+  label="Upload document"
+  htmlFor="upload-document"
+  hint="Accepted: PDF, DOC, DOCX. Max 10 MB."
+  required
+>
+  <FileInput id="upload-document" name="document" accept=".pdf,.doc,.docx" />
+</FormField>
+      `.trim()}</code></pre>
+      <p>
+        When you need to use <code>FileInput</code> without <code>FormField</code> (for example inside a compound molecule), always provide an accessible name via <code>aria-label</code> or <code>aria-labelledby</code> so the hidden file input passes form-label accessibility checks.
+      </p>
+    </div>
+  </div>
+
   <div class="footer">Nexus Design System · Upload File Atom</div>
 </Layout>
 
