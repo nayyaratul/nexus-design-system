@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Default.astro';
 import { FileInputShowcase } from '../../components/atoms/FileInputShowcase';
+import { FileInputThemeComparison } from '../../components/atoms/FileInputThemeComparison.jsx';
 ---
 
 <Layout title="Upload File" section="atoms/fileinput">
@@ -19,6 +20,10 @@ import { FileInputShowcase } from '../../components/atoms/FileInputShowcase';
     <div class="showcase-wrap">
       <FileInputShowcase client:load />
     </div>
+  </div>
+
+  <div class="section">
+    <FileInputThemeComparison client:load />
   </div>
 
   <div class="section">

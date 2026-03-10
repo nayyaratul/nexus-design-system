@@ -18,6 +18,7 @@ const navGroups = [
       { name: 'Grid',       href: '/grid',        id: 'grid',       icon: '▦' },
       { name: 'Iconography', href: '/iconography', id: 'iconography', icon: '◈' },
       { name: 'Theme',      href: '/theme',       id: 'theme',       icon: '◐' },
+      { name: 'Tokens',     href: '/tokens',      id: 'tokens',      icon: '⊕' },
       { name: 'Shape & Surface', href: '/shape-surface',  id: 'shape-surface',  icon: '◇' },
       { name: 'Brand',  href: '/brand',  id: 'brand',  icon: '◆' },
     ],
@@ -36,12 +37,12 @@ const navGroups = [
         { name: 'Checkbox',        href: '/atoms/checkbox',        id: 'atoms/checkbox' },
         { name: 'Code',            href: '/atoms/code',            id: 'atoms/code' },
         { name: 'Divider',         href: '/atoms/divider',         id: 'atoms/divider' },
-        { name: 'FileInput',       href: '/atoms/fileinput',       id: 'atoms/fileinput' },
         { name: 'FormField',       href: '/atoms/formfield',       id: 'atoms/formfield' },
         { name: 'Heading',         href: '/atoms/heading',         id: 'atoms/heading' },
         { name: 'Icon',            href: '/atoms/icon',            id: 'atoms/icon' },
         { name: 'Image',           href: '/atoms/image',           id: 'atoms/image' },
         { name: 'Input',           href: '/atoms/input',           id: 'atoms/input' },
+        { name: 'InputField',      href: '/atoms/inputfield',      id: 'atoms/inputfield' },
         { name: 'Label',           href: '/atoms/label',           id: 'atoms/label' },
         { name: 'Link',            href: '/atoms/link',            id: 'atoms/link' },
         { name: 'Menu',            href: '/atoms/menu',            id: 'atoms/menu' },
@@ -69,11 +70,22 @@ const navGroups = [
         { name: 'Toggle',          href: '/atoms/toggle',          id: 'atoms/toggle' },
         { name: 'ToggleGroup',     href: '/atoms/togglegroup',     id: 'atoms/togglegroup' },
         { name: 'Tooltip',         href: '/atoms/tooltip',         id: 'atoms/tooltip' },
+        { name: 'Upload File',     href: '/atoms/fileinput',       id: 'atoms/fileinput' },
         { name: 'VisuallyHidden',  href: '/atoms/visuallyhidden',  id: 'atoms/visuallyhidden' },
       ]},
       { name: 'Molecules',  href: '/molecules',   id: 'molecules',  icon: '◎', children: [
-        { name: 'Dropzone', href: '/molecules/dropzone', id: 'molecules/dropzone' },
-        { name: 'Table',    href: '/molecules/table',    id: 'molecules/table' },
+        { name: 'Card',          href: '/molecules/card',           id: 'molecules/card' },
+        { name: 'Breadcrumb',    href: '/molecules/breadcrumb',     id: 'molecules/breadcrumb' },
+        { name: 'Confirm dialog',href: '/molecules/confirmdialog',  id: 'molecules/confirmdialog' },
+        { name: 'Drawer',        href: '/molecules/drawer',         id: 'molecules/drawer' },
+        { name: 'Dropzone',      href: '/molecules/dropzone',       id: 'molecules/dropzone' },
+        { name: 'Empty state',   href: '/molecules/empty-state',    id: 'molecules/empty-state' },
+        { name: 'List skeleton', href: '/molecules/list-skeleton',   id: 'molecules/list-skeleton' },
+        { name: 'Modal',         href: '/molecules/modal',          id: 'molecules/modal' },
+        { name: 'Menu',          href: '/molecules/menu',           id: 'molecules/menu' },
+        { name: 'Rating',        href: '/molecules/rating',          id: 'molecules/rating' },
+        { name: 'Search input',  href: '/molecules/searchinput',    id: 'molecules/searchinput' },
+        { name: 'Table',         href: '/molecules/table',          id: 'molecules/table' },
       ]},
       { name: 'Organisms',  href: '/organisms',   id: 'organisms',  icon: '◉' },
     ],
@@ -95,6 +107,7 @@ const isAtomSection = section.startsWith('atoms');
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title} — Nexus Design System</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -124,17 +137,20 @@ const isAtomSection = section.startsWith('atoms');
                   <span class="nav-icon">{item.icon}</span>
                   {item.name}
                 </a>
-                {item.children && (isAtomSection || section.startsWith('molecules')) && (
-                  <div class="nav-children">
-                    {item.children.map((child) => (
-                      <a
-                        href={child.href}
-                        class:list={['nav-link', 'nav-child-link', { active: section === child.id }]}
-                      >
-                        {child.name}
-                      </a>
-                    ))}
-                  </div>
+                {item.children && (
+                  ((item.id === 'atoms' && section.startsWith('atoms')) ||
+                  (item.id === 'molecules' && section.startsWith('molecules'))) && (
+                    <div class="nav-children">
+                      {item.children.map((child) => (
+                        <a
+                          href={child.href}
+                          class:list={['nav-link', 'nav-child-link', { active: section === child.id }]}
+                        >
+                          {child.name}
+                        </a>
+                      ))}
+                    </div>
+                  )
                 )}
               </>
             ))}

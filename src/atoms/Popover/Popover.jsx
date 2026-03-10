@@ -16,6 +16,7 @@ export const PopoverContent = forwardRef(function PopoverContent(
     sideOffset = 8,
     align = 'center',
     showClose = true,
+    showArrow = true,
     container,
     className,
     children,
@@ -39,7 +40,7 @@ export const PopoverContent = forwardRef(function PopoverContent(
           </PopoverPrimitive.Close>
         )}
         {children}
-        <PopoverPrimitive.Arrow className={styles.arrow} />
+        {showArrow && <PopoverPrimitive.Arrow className={styles.arrow} />}
       </PopoverPrimitive.Content>
     </PopoverPrimitive.Portal>
   );

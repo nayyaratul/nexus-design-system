@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { MenuShowcase } from '../../components/molecules/MenuShowcase.jsx';
+import { MenuThemeComparison } from '../../components/molecules/MenuThemeComparison.jsx';
+---
+
+<Layout title="Menu" section="molecules/menu">
+  <h1 class="page-title">Menu</h1>
+  <p class="page-sub">Action list pattern anchored to a trigger button or icon</p>
+
+  <p class="page-intro">
+    The Menu molecule composes the Popover and Menu atoms to expose a list of contextual actions.
+    It provides a trigger, positioned panel, and keyboard-accessible menu items for overflow and
+    context menus.
+  </p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Card overflow and header menus</span>
+    </div>
+    <div class="showcase-wrap">
+      <MenuShowcase client:load />
+    </div>
+  </div>
+
+  <div class="section">
+    <MenuThemeComparison client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Sub-components</span><span>Menu, Menu.Item, Menu.CheckboxItem, Menu.RadioItem, Menu.Group, Menu.Divider</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>open, defaultOpen, onOpenChange, side, align, matchTriggerWidth, renderTrigger, size, variant, closeOnSelect, aria-label, aria-labelledby</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Composes</span><span>Popover, Menu atom (Menu, MenuItem, MenuGroup, MenuDivider), Button, Icon (in usage examples)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens</span><span>--color-bg-elevated, --color-border-default, --color-border-focus, --color-text-primary, --color-text-secondary, --color-action-ghost-hover, --space-*, --radius-*</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>Wrapped PopoverContent acts as the visual panel, while the Menu atom handles <code>role=&quot;menu&quot;</code>, <code>role=&quot;menuitem&quot;</code> and the checkbox/radio roles, keyboard navigation (arrow keys, Home/End, Escape) and typeahead. The trigger is typically a Button with an accessible label. Escape and click-outside close the menu by default; set <code>closeOnSelect=false</code> for filter-style menus that should stay open while toggling items.</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Variants &amp; patterns</span>
+      <span class="section-desc">Action menus, overflow menus, filters, and context menus</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row">
+        <span class="atom-spec-label">Behaviour</span>
+        <span>
+          Use the default close-on-select behaviour for one-shot actions (Rename, Duplicate, Delete).
+          For filter-style menus with checkboxes or radios, set <code>closeOnSelect=false</code> so users can toggle multiple options without the menu closing after each change.
+        </span>
+      </div>
+      <div class="atom-spec-row">
+        <span class="atom-spec-label">Triggers</span>
+        <span>
+          Standard dropdown menus use a text Button trigger; overflow menus use an icon-only Button (typically in cards, tables, and headers); split-button menus pair a primary action Button with a secondary caret Button wired to Menu.
+        </span>
+      </div>
+      <div class="atom-spec-row">
+        <span class="atom-spec-label">Surface</span>
+        <span>
+          <code>variant=&quot;plain&quot;</code> renders a minimal surface suitable for dense menus; <code>variant=&quot;panel&quot;</code> adds extra framing for menus that behave more like small panels.
+          Sizes (<code>sm</code>, <code>md</code>, <code>lg</code>) control item density — use <code>sm</code> for table/toolbars, <code>md</code> as the default, and <code>lg</code> for touch-heavy UIs.
+        </span>
+      </div>
+      <div class="atom-spec-row">
+        <span class="atom-spec-label">Danger zone</span>
+        <span>
+          Destructive actions should use the <code>variant=&quot;destructive&quot;</code> item variant and be grouped at the end of the menu, below a divider or inside a labelled &ldquo;Danger zone&rdquo; group.
+        </span>
+      </div>
+      <div class="atom-spec-row">
+        <span class="atom-spec-label">Context menus</span>
+        <span>
+          Right-click context menus can be built by controlling <code>open</code>/<code>onOpenChange</code> on Menu and toggling them from an element&rsquo;s <code>onContextMenu</code> handler; the Menu stories include a canonical example of this pattern.
+        </span>
+      </div>
+      <div class="atom-spec-row">
+        <span class="atom-spec-label">Long menus</span>
+        <span>
+          Menu panels clamp to a max height and scroll internally when there are many items.
+          Prefer keeping menus short (group related actions, move infrequent flows into separate screens) and use the long-menu pattern sparingly.
+        </span>
+      </div>
+      <div class="atom-spec-row">
+        <span class="atom-spec-label">Future</span>
+        <span>
+          Nested submenus are out of scope for now; when added, they should follow accessible menu-bar patterns (arrow-key navigation across levels, clear hover/focus states) and only be used for complex command sets.
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Menu Molecule</div>
+</Layout>
+
+<style>
+  .page-intro {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-400);
+    max-width: 52ch;
+  }
+  .showcase-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    padding: var(--space-300);
+  }
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    align-items: baseline;
+    padding: var(--space-150) var(--space-200);
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-300);
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 140px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+</style>
+

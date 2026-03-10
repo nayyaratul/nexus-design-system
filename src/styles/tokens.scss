@@ -173,6 +173,7 @@
   --color-border-error:     var(--red-50);
   --color-border-success:   var(--green-50);
   --color-border-focus:     var(--brand-50);
+  --color-border-dialog:    var(--grey-10);
 
   /* Actions */
   --color-action-primary:       var(--brand-50);
@@ -233,6 +234,15 @@
   --color-badge-error-bg:     var(--red-0);
   --color-badge-warning-bg:   var(--yellow-0);
   --color-badge-info-bg:      var(--blue-0);
+
+  /* Accordion divider — neutral: light grey-10 */
+  --color-accordion-divider:  var(--grey-10);
+
+  /* Elevation — surface roles */
+  --elevation-surface-raised-low:    var(--shadow-100);
+  --elevation-surface-raised-mid:    var(--shadow-200);
+  --elevation-surface-raised-high:   var(--shadow-300);
+  --elevation-surface-bottom-sheet:  var(--shadow-400);
 }
 
 
@@ -284,6 +294,7 @@
   --color-border-error:     var(--red-50);
   --color-border-success:   var(--green-50);
   --color-border-focus:     var(--brand-40);
+  --color-border-dialog:    var(--grey-80);
 
   /* Actions — pivots stay at 50; hover/active shift inward */
   --color-action-primary:       var(--brand-50);
@@ -300,8 +311,8 @@
   --color-action-disabled:     var(--grey-70);
 
   /* Interactive */
-  --color-interactive-hover:  var(--grey-90);
-  --color-interactive-active: var(--grey-80);
+  --color-interactive-hover:  var(--grey-80);
+  --color-interactive-active: var(--grey-70);
 
   /* Tooltip */
   --tooltip-bg:    var(--grey-10);
@@ -344,4 +355,13 @@
   --color-badge-error-bg:     var(--red-100);
   --color-badge-warning-bg:   var(--yellow-100);
   --color-badge-info-bg:      var(--blue-100);
+
+  /* Accordion divider — neutral mirror: dark grey-90 (100−10) */
+  --color-accordion-divider:  var(--grey-90);
+
+  /* Elevation — surface roles */
+  --elevation-surface-raised-low:    var(--shadow-100);
+  --elevation-surface-raised-mid:    var(--shadow-200);
+  --elevation-surface-raised-high:   var(--shadow-300);
+  --elevation-surface-bottom-sheet:  var(--shadow-400);
 }

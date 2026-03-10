@@ -8,6 +8,14 @@
   font-family: var(--sans);
   transition: border-color 150ms ease, box-shadow 150ms ease;
 
+  &[type='search'] {
+    /* Hide native WebKit clear icon so SearchInput can provide its own */
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+  }
+
   &::placeholder {
     color: var(--color-text-tertiary);
   }

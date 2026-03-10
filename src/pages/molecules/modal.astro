@@ -1,0 +1,108 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { ModalShowcase } from '../../components/molecules/ModalShowcase.jsx';
+import { ModalThemeComparison } from '../../components/molecules/ModalThemeComparison.jsx';
+---
+
+<Layout title="Modal" section="molecules/modal">
+  <h1 class="page-title">Modal</h1>
+  <p class="page-sub">Accessible overlay dialog for focused tasks, confirmations, and multi-step flows</p>
+
+  <p class="page-intro">
+    The Modal molecule provides a flexible overlay for focused tasks such as editing settings,
+    confirming actions, or stepping through short flows. It composes the Overlay, Heading, Text,
+    Button, and Divider atoms, and handles keyboard interaction, focus trapping, and escape/overlay
+    dismissal where appropriate.
+  </p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Common patterns for default, destructive, and icon-enhanced dialogs</span>
+    </div>
+    <div class="showcase-wrap">
+      <ModalShowcase client:load />
+    </div>
+  </div>
+
+  <div class="section">
+    <ModalThemeComparison client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Icon headers</span>
+      <span class="section-desc">Optional icons to reinforce intent</span>
+    </div>
+    <p class="section-body">
+      The Modal header accepts an <code>icon</code> prop for contextual icons such as information,
+      success, warning, or destructive states. The <code>variant</code> prop controls the frame and
+      border colour, while <code>icon</code> controls the visual emphasis in the header. Use icons
+      sparingly for high-signal moments like irreversible deletions, successful submissions, or
+      important alerts, and keep the meaning duplicated in the title or description for screen
+      readers.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Sub-components</span><span>Modal (surface only) — Overlay atom provides the backdrop</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>open, onOpenChange, size, variant, placement, scrollBehavior, alignFooter, dismissible, closeOnOverlayClick, closeOnEsc, showCloseButton, title, description, icon, footer, ariaLabel, ariaDescribedBy</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm, md, lg, xl, fullscreen</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default, info, success, warning, danger</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Placement</span><span>center (default), top</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Composes</span><span>Overlay, Heading, Text, Button, Divider (in usage)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens</span><span>--color-bg-elevated, --color-bg-overlay, --color-border-default, --color-alert-*, --color-text-*, --space-*, --radius-*, --border-width-*</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>role="dialog", aria-modal, aria-labelledby/aria-label, aria-describedby, keyboard focus trap, Escape handling (when dismissible), and overlay click dismissal where appropriate.</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Modal Molecule</div>
+</Layout>
+
+<style>
+  .page-intro {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-400);
+    max-width: 52ch;
+  }
+  .showcase-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    padding: var(--space-300);
+  }
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    align-items: baseline;
+    padding: var(--space-150) var(--space-200);
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-300);
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 140px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+  .section-body {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    max-width: 60ch;
+  }
+</style>
+

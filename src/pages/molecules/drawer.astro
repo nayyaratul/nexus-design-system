@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { DrawerShowcase } from '../../components/molecules/DrawerShowcase.jsx';
+---
+
+<Layout title="Drawer" section="molecules/drawer">
+  <h1 class="page-title">Drawer</h1>
+  <p class="page-sub">Slide-in panel for filters, inspectors, and secondary flows · side and bottom placements</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Overview</span>
+      <span class="section-desc">When and why to use a drawer</span>
+    </div>
+
+    <p>
+      The Drawer molecule provides a modal-like panel that slides in from the side or bottom of the viewport.
+      Use it for secondary surfaces such as filters, inspectors, and composition flows where the main page
+      should remain visible as context. For primary tasks that fully capture attention, prefer the Modal
+      molecule instead.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Typical catalogue filter pattern</span>
+    </div>
+    <div class="showcase-wrap">
+      <DrawerShowcase client:load />
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Header & footer behaviour</span>
+      <span class="section-desc">Fixed header band and sticky actions</span>
+    </div>
+
+    <p>
+      The Drawer header keeps a compact 80px band for the title and subtitle only, separated from
+      the content by a subtle divider. The body scrolls independently when content overflows, while
+      the action bar stays pinned to the bottom with its own top border. This keeps primary actions
+      visible even in long forms without hiding the surrounding page.
+    </p>
+  </div>
+
+  <div class="footer">Nexus Design System · Drawer</div>
+</Layout>
+
+<style>
+  .showcase-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    padding: var(--space-300);
+  }
+</style>
+

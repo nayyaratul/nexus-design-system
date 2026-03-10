@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { RatingShowcase } from '../../components/molecules/RatingShowcase.jsx';
+import { RatingThemeComparison } from '../../components/molecules/RatingThemeComparison.jsx';
+---
+
+<Layout title="Rating" section="molecules/rating">
+  <h1 class="page-title">Rating</h1>
+  <p class="page-sub">Interactive or read-only star rating with optional label and review count</p>
+
+  <p class="page-intro">
+    The Rating molecule composes the RatingStar atom to provide a form-friendly 1–N star control for
+    collecting or displaying ratings. Use it inside FormField for surveys and assessments, or
+    standalone for read-only display on course cards and summaries. Supports full and half-star
+    precision, keyboard navigation, and accessible radiogroup semantics.
+  </p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Interactive, read-only, compact, and inline patterns</span>
+    </div>
+    <div class="showcase-wrap">
+      <RatingShowcase client:load />
+    </div>
+  </div>
+
+  <div class="section">
+    <RatingThemeComparison client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Accessibility</span>
+    </div>
+    <p class="section-body">
+      In interactive mode the rating uses <code>role="radiogroup"</code> with each star as a
+      <code>role="radio"</code> option. Arrow keys move selection; Enter or Space confirms. Use
+      <code>FormField</code> with <code>htmlFor</code> and <code>id</code> for a visible label and
+      hint. In read-only mode the root exposes a descriptive <code>aria-label</code> (e.g. “4.3 out
+      of 5 based on 123 reviews”).
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Composes</span><span>RatingStar, Text</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>value, defaultValue, max, precision, readOnly, disabled, onChange, variant, size, color, label, showValue, showMax, showCount, count, getLabelText, allowClear, name, id</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>standard, starsOnly, compact</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm, md, lg</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens</span><span>--color-rating-filled, --color-text-tertiary, --space-*, --radius-*</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>radiogroup/radio semantics, keyboard arrows + Enter/Space, optional FormField label and hint.</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Rating Molecule</div>
+</Layout>
+
+<style>
+  .page-intro {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-400);
+    max-width: 52ch;
+  }
+  .showcase-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    padding: var(--space-300);
+  }
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    align-items: baseline;
+    padding: var(--space-150) var(--space-200);
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-300);
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 140px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+  .section-body {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    max-width: 60ch;
+  }
+</style>

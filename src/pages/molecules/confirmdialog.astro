@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { ConfirmDialogShowcase } from '../../components/molecules/ConfirmDialogShowcase.jsx';
+import { ConfirmDialogThemeComparison } from '../../components/molecules/ConfirmDialogThemeComparison.jsx';
+---
+
+<Layout title="Confirm dialog" section="molecules/confirmdialog">
+  <h1 class="page-title">Confirm dialog</h1>
+  <p class="page-sub">Opinionated yes/no confirmation dialog that composes the Modal molecule</p>
+
+  <p class="page-intro">
+    The ConfirmDialog molecule wraps the Modal to provide a focused yes/no confirmation pattern for
+    both routine and destructive actions. It standardises button order, intent styling, and default
+    copy while leaving room for advanced flows such as async confirmations.
+  </p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Default and destructive confirmations</span>
+    </div>
+    <div class="showcase-wrap">
+      <ConfirmDialogShowcase client:load />
+    </div>
+  </div>
+
+  <div class="section">
+    <ConfirmDialogThemeComparison client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Composes</span><span>Modal, Button, Text</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>open, onOpenChange, dismissible, title, description, body, intent, confirmLabel, cancelLabel, onConfirm, onCancel, confirmLoading, disableCancelWhileLoading, ariaLabel</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Intent</span><span>default, destructive, success, warning (mapped to Modal variants)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Button order</span><span>Secondary/ghost cancel on the left, primary or destructive confirm on the right</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens</span><span>Reuses Modal and Button tokens for surface, text, borders, and destructive actions</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>Inherits dialog semantics from Modal. Button labels must describe the outcome (e.g. “Delete” instead of “OK”). Non-dismissible destructive dialogs should only be used for truly critical flows.</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Confirm Dialog Molecule</div>
+</Layout>
+
+<style>
+  .page-intro {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-400);
+    max-width: 52ch;
+  }
+  .showcase-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    padding: var(--space-300);
+  }
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    align-items: baseline;
+    padding: var(--space-150) var(--space-200);
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-300);
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 140px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+</style>
+

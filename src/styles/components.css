@@ -1,5 +1,7 @@
 /* ─── SECTION ───────────────────────────────────────────── */
-.section { margin-bottom: 48px; }
+.section {
+  margin-bottom: 48px;
+}
 .section-header {
   display: flex;
   align-items: baseline;
@@ -19,6 +21,140 @@
   font-size: 13px;
   color: var(--ink-3);
   letter-spacing: 0.03em;
+}
+
+/* Body copy inside sections (paragraphs + lists) */
+.section > p,
+.section > ul,
+.section > ol {
+  margin-top: 10px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+/* When multiple paragraphs are stacked, keep them visually grouped */
+.section > p + p {
+  margin-top: 6px;
+}
+
+/* Lists directly under a section share the same text width and rhythm */
+.section > ul,
+.section > ol {
+  padding-left: 1.2rem;
+}
+
+/* ─── TOKENS PAGE VISUALS ───────────────────────────────── */
+
+.token-architecture {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+
+.token-architecture__step {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--rule);
+  font-size: 12px;
+  font-family: var(--mono);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.token-architecture__step--emphasis {
+  background: #F5F4F1;
+  border-color: #D4CDC3;
+  color: var(--ink);
+}
+
+.token-architecture__arrow {
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.token-scale-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.token-scale-demo__group {
+  flex: 1 1 200px;
+}
+
+.token-scale-demo__label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 6px;
+}
+
+.token-scale-demo__swatches {
+  display: flex;
+  gap: 4px;
+}
+
+.token-scale-demo__swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.token-scale-demo__swatch-labels {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.token-scale-demo__swatch-labels span {
+  min-width: 22px;
+  text-align: center;
+}
+
+.token-chain {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--rule);
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.token-chain__pill {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #F5F4F1;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-2);
+}
+
+.token-chain__pill--semantic {
+  background: #EDEAE5;
+}
+
+.token-chain__pill--primitive {
+  background: #E7F0FF;
+}
+
+.token-chain__arrow {
+  font-size: 11px;
+  color: var(--ink-3);
 }
 
 /* ─── SCALE STRIP ───────────────────────────────────────── */

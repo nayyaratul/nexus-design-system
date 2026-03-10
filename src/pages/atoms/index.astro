@@ -13,11 +13,11 @@ const atoms = [
   { name: 'Code',            href: '/atoms/code',            icon: '⌥', desc: 'Inline and block code display with monospace font and optional copy-to-clipboard', status: 'ready' },
   { name: 'Divider',         href: '/atoms/divider',         icon: '—', desc: 'Horizontal and vertical separators with solid/dashed/dotted variants and optional label', status: 'ready' },
   { name: 'FormField',       href: '/atoms/formfield',       icon: '☷', desc: 'Composition wrapper — Label + children + error/hint spacing', status: 'ready' },
-  { name: 'Upload File',     href: '/atoms/fileinput',       icon: '📎', desc: 'Upload file primitive; accept, multiple, 3 sizes, error/disabled', status: 'ready' },
   { name: 'Heading',         href: '/atoms/heading',         icon: 'H', desc: 'h1–h6 mapped to typography tokens with truncation support', status: 'ready' },
   { name: 'Icon',            href: '/atoms/icon',            icon: '◈', desc: 'Lucide icon wrapper with 5 sizes, colour props, and a11y support', status: 'ready' },
   { name: 'Image',           href: '/atoms/image',           icon: '▣', desc: '4:3 aspect container with blur letterbox, skeleton loading, and error fallback', status: 'ready' },
   { name: 'Input',           href: '/atoms/input',           icon: '▭', desc: 'Native input with 5 types, 3 sizes, error and disabled states', status: 'ready' },
+  { name: 'InputField',      href: '/atoms/inputfield',      icon: '▭', desc: 'Icon-capable text field that composes Input with left/right icons and semantic presets', status: 'ready' },
   { name: 'Label',           href: '/atoms/label',           icon: 'L', desc: 'Radix label with required asterisk, disabled state, and 2 sizes', status: 'ready' },
   { name: 'Link',            href: '/atoms/link',            icon: '⟶', desc: 'Semantic anchor with default and subtle variants, external detection, and disabled state', status: 'ready' },
   { name: 'Menu',            href: '/atoms/menu',            icon: '☰', desc: 'Vertical action list with keyboard nav, checkbox/radio roles, groups, and polymorphic items', status: 'ready' },
@@ -31,33 +31,34 @@ const atoms = [
   { name: 'Skeleton',        href: '/atoms/skeleton',        icon: '▧', desc: 'Animated placeholder shapes for loading states — lines, circles, cards', status: 'ready' },
   { name: 'Slider',          href: '/atoms/slider',          icon: '⊶', desc: 'Radix slider with single and range modes, two sizes, and optional value display', status: 'ready' },
   { name: 'Spinner',         href: '/atoms/spinner',         icon: '↻', desc: 'Spinning and dots loading indicators with semantic colour', status: 'ready' },
-  { name: 'StoryProgress',   href: '/atoms/storyprogress',   icon: '▬', desc: 'Segmented progress for reels/stories with smooth fill transition; parent controls timing', status: 'ready' },
   { name: 'Steps',           href: '/atoms/steps',           icon: '⊳', desc: 'Sequential step indicators with auto-indexing, completion tracking, and two orientations', status: 'ready' },
+  { name: 'StoryProgress',   href: '/atoms/storyprogress',   icon: '▬', desc: 'Segmented progress for reels/stories with smooth fill transition; parent controls timing', status: 'ready' },
   { name: 'Switch',          href: '/atoms/switch',          icon: '⊘', desc: 'Radix toggle switch with 3 sizes and on/off states', status: 'ready' },
   { name: 'Tabs',            href: '/atoms/tabs',            icon: '⊞', desc: 'Radix tabs with default, underline, and pills variants plus horizontal scroll', status: 'ready' },
   { name: 'Tag',             href: '/atoms/tag',             icon: '⊟', desc: 'Interactive pill tags with leading icons and dismissible behaviour', status: 'ready' },
-  { name: 'Timer',           href: '/atoms/timer',           icon: '⏱', desc: 'Display-only time value (mm:ss or hh:mm:ss) for assessments and countdowns', status: 'ready' },
   { name: 'Text',            href: '/atoms/text',            icon: 'T', desc: 'Body, caption, micro, overline variants with weight overrides', status: 'ready' },
   { name: 'Textarea',        href: '/atoms/textarea',        icon: '▦', desc: 'Multi-line text input with resize control and 3 sizes', status: 'ready' },
-  { name: 'Timeline',        href: '/atoms/timeline',        icon: '⊡', desc: 'Vertical and horizontal timelines with status markers and alternate layout', status: 'ready' },
   { name: 'Thumbnail',       href: '/atoms/thumbnail',       icon: '▪', desc: 'Square cropped image with 4 sizes, optional hover overlay, and expand icon', status: 'ready' },
+  { name: 'Timeline',        href: '/atoms/timeline',        icon: '⊡', desc: 'Vertical and horizontal timelines with status markers and alternate layout', status: 'ready' },
+  { name: 'Timer',           href: '/atoms/timer',           icon: '⏱', desc: 'Display-only time value (mm:ss or hh:mm:ss) for assessments and countdowns', status: 'ready' },
   { name: 'Toast',           href: '/atoms/toast',           icon: '▤', desc: 'Radix toast notifications with slide-in animation and swipe-to-dismiss', status: 'ready' },
   { name: 'Toggle',          href: '/atoms/toggle',          icon: '⊡', desc: 'Radix toggle button with pressed/unpressed states, two variants, and three sizes', status: 'ready' },
   { name: 'ToggleGroup',     href: '/atoms/togglegroup',     icon: '⊞', desc: 'Radix toggle group with single/multi select, joined borders, and vertical layout', status: 'ready' },
   { name: 'Tooltip',         href: '/atoms/tooltip',         icon: '▵', desc: 'Radix tooltip with 4 placements, arrow, and fade animations', status: 'ready' },
+  { name: 'Upload File',     href: '/atoms/fileinput',       icon: '📎', desc: 'Upload file primitive; accept, multiple, 3 sizes, error/disabled', status: 'ready' },
   { name: 'VisuallyHidden',  href: '/atoms/visuallyhidden',  icon: '◻', desc: 'Screen-reader-only content wrapper with asChild support for accessible UIs', status: 'ready' },
 ];
 ---
 
 <Layout title="Atoms" section="atoms">
   <h1 class="page-title">Atoms</h1>
-  <p class="page-sub">The smallest reusable UI primitives — 43 atoms across 8 categories</p>
+  <p class="page-sub">The smallest reusable UI primitives — 44 atoms across 8 categories</p>
 
   <!-- Ready atoms -->
   <div class="section">
     <div class="section-header">
       <span class="section-title">Phases 1–6 — All Atoms</span>
-      <span class="section-desc">43 of 43 complete</span>
+      <span class="section-desc">44 of 44 complete</span>
     </div>
 
     <div class="atom-grid">

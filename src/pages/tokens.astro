@@ -1,0 +1,998 @@
+---
+import Layout from '../layouts/Default.astro';
+import AccordionSection from '../components/AccordionSection.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+interface CssToken {
+  name: string;
+  value: string;
+  source: string;
+}
+
+function extractCssVariables(relativePath: string): CssToken[] {
+  const full = path.resolve('src/styles', relativePath);
+  const content = fs.readFileSync(full, 'utf-8');
+  const regex = /--([a-z0-9-]+)\s*:\s*([^;]+);/gi;
+  const tokens: CssToken[] = [];
+  let match: RegExpExecArray | null;
+  while ((match = regex.exec(content)) !== null) {
+    tokens.push({
+      name: `--${match[1]}`,
+      value: match[2].trim(),
+      source: relativePath,
+    });
+  }
+  return tokens;
+}
+
+const baseCssTokensAll = extractCssVariables('base.css');
+const styleCssTokensAll = extractCssVariables('tokens.scss');
+
+const baseCssTokens = baseCssTokensAll.slice().sort((a, b) => a.name.localeCompare(b.name));
+
+function classifyBaseTokenGroup(name: string): string {
+  if (
+    name.startsWith('--font-size-') ||
+    name.startsWith('--line-height-') ||
+    name.startsWith('--font-weight-') ||
+    name.startsWith('--letter-spacing-')
+  ) {
+    return 'typography';
+  }
+  if (name.startsWith('--space-')) return 'spacing';
+  if (name.startsWith('--size-')) return 'size';
+  if (name.startsWith('--radius-')) return 'radius';
+  if (name.startsWith('--border-width-')) return 'border-width';
+  if (name.startsWith('--opacity-')) return 'opacity';
+  if (name.startsWith('--shadow-')) return 'shadow';
+  return 'layout';
+}
+
+const baseGroupMeta = [
+  {
+    id: 'layout',
+    title: 'Layout & system',
+    desc: 'Page background, ink colours, sidebar and font stacks',
+  },
+  {
+    id: 'typography',
+    title: 'Typography primitives',
+    desc: 'Font sizes, line-heights, weights and letter-spacing',
+  },
+  {
+    id: 'spacing',
+    title: 'Spacing scale',
+    desc: '0–1000 spacing steps in rem, mapped to a 4px grid',
+  },
+  {
+    id: 'size',
+    title: 'Fixed size tokens',
+    desc: 'Pixel sizes for icons, thumbnails and layout affordances',
+  },
+  {
+    id: 'radius',
+    title: 'Radius scale',
+    desc: 'Corner rounding from 0 to full pill radius',
+  },
+  {
+    id: 'border-width',
+    title: 'Border width scale',
+    desc: 'Stroke thickness for borders, dividers and outlines',
+  },
+  {
+    id: 'opacity',
+    title: 'Opacity scale',
+    desc: 'Alpha steps for overlays, disabled states and elevation',
+  },
+  {
+    id: 'shadow',
+    title: 'Shadow primitives',
+    desc: 'Box-shadow primitives for raised surfaces and sheets',
+  },
+] satisfies { id: string; title: string; desc: string }[];
+
+const baseGroups: Record<string, CssToken[]> = {};
+for (const meta of baseGroupMeta) baseGroups[meta.id] = [];
+for (const token of baseCssTokens) {
+  const groupId = classifyBaseTokenGroup(token.name);
+  (baseGroups[groupId] ??= []).push(token);
+}
+
+function isColourPrimitive(name: string): boolean {
+  const prefixes = [
+    '--grey-',
+    '--cool-',
+    '--warm-',
+    '--red-',
+    '--green-',
+    '--yellow-',
+    '--blue-',
+    '--white',
+    '--black',
+    '--brand-',
+    '--brand-a',
+  ];
+  return prefixes.some((prefix) => name.startsWith(prefix));
+}
+
+const colourPrimitiveTokens = styleCssTokensAll
+  .filter((t) => isColourPrimitive(t.name))
+  .slice()
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+function classifyColourPrimitiveGroup(name: string): string {
+  if (name.startsWith('--grey-')) return 'neutral-grey';
+  if (name.startsWith('--cool-')) return 'cool-grey';
+  if (name.startsWith('--warm-')) return 'warm-grey';
+  if (name.startsWith('--red-')) return 'red';
+  if (name.startsWith('--green-')) return 'green';
+  if (name.startsWith('--yellow-')) return 'yellow';
+  if (name.startsWith('--blue-')) return 'blue';
+  if (/^--brand-\d/.test(name)) return 'brand';
+  if (name.startsWith('--brand-a')) return 'brand-alpha';
+  if (name === '--white' || name === '--black') return 'extremes';
+  return 'other';
+}
+
+const colourGroupMeta = [
+  { id: 'neutral-grey', title: 'Neutral Grey (--grey-*)', desc: 'Base UI surfaces & text' },
+  { id: 'cool-grey', title: 'Cool Grey (--cool-*)', desc: 'Panels and sidebars' },
+  { id: 'warm-grey', title: 'Warm Grey (--warm-*)', desc: 'Cards and content areas' },
+  { id: 'red', title: 'Red (--red-*)', desc: 'Error, destructive actions and alerts' },
+  { id: 'green', title: 'Green (--green-*)', desc: 'Success and positive actions' },
+  { id: 'yellow', title: 'Yellow (--yellow-*)', desc: 'Warning and attention' },
+  { id: 'blue', title: 'Blue (--blue-*)', desc: 'Informational accents and links' },
+  { id: 'brand', title: 'Brand scale (--brand-*)', desc: 'Primary brand colour ramp' },
+  { id: 'brand-alpha', title: 'Brand alpha tints (--brand-a*)', desc: 'Tints derived from brand-50' },
+  { id: 'extremes', title: 'Extremes (--white / --black)', desc: 'Pure white and black anchors' },
+] satisfies { id: string; title: string; desc: string }[];
+
+const colourGroups: Record<string, CssToken[]> = {};
+for (const meta of colourGroupMeta) colourGroups[meta.id] = [];
+for (const token of colourPrimitiveTokens) {
+  const groupId = classifyColourPrimitiveGroup(token.name);
+  if (!colourGroups[groupId]) continue;
+  colourGroups[groupId].push(token);
+}
+
+const semanticCssTokenMap = new Map<string, CssToken>();
+for (const token of styleCssTokensAll) {
+  if (isColourPrimitive(token.name)) continue;
+  semanticCssTokenMap.set(token.name, token);
+}
+const semanticCssTokens = Array.from(semanticCssTokenMap.values())
+  .slice()
+  .sort((a, b) => a.name.localeCompare(b.name));
+function classifySemanticTokenGroup(name: string): string {
+  if (name.startsWith('--color-text-') || name === '--tooltip-color') return 'text';
+  if (name.startsWith('--color-bg-') || name === '--tooltip-bg' || name === '--color-bg-theme-panel')
+    return 'background';
+  if (name.startsWith('--color-border-')) return 'border';
+  if (name.startsWith('--color-action-') || name.startsWith('--color-interactive-')) return 'action';
+  if (name.startsWith('--color-alert-')) return 'alert';
+  if (name.startsWith('--color-tag-')) return 'tag';
+  if (name.startsWith('--color-badge-') || name === '--color-rating-filled') return 'badge';
+  if (name.startsWith('--color-table-')) return 'table';
+   if (name.startsWith('--elevation-')) return 'elevation';
+  if (name === '--color-white' || name === '--color-black') return 'extremes';
+  return 'other';
+}
+
+const semanticGroupMeta = [
+  { id: 'text', title: 'Text & links', desc: 'Foreground text and icon colours' },
+  { id: 'background', title: 'Backgrounds & surfaces', desc: 'Surfaces, overlays and theme panels' },
+  { id: 'border', title: 'Borders & outlines', desc: 'Strokes, dividers and focus rings' },
+  { id: 'action', title: 'Actions & interactive states', desc: 'Primary, secondary and destructive actions' },
+  { id: 'alert', title: 'Alert status tokens', desc: 'Alert backgrounds and borders for all statuses' },
+  { id: 'tag', title: 'Tag status tokens', desc: 'Tag backgrounds and borders for all statuses' },
+  { id: 'badge', title: 'Badge status tokens', desc: 'Badge backgrounds for all statuses' },
+  { id: 'table', title: 'Table tokens', desc: 'Table header background' },
+  { id: 'elevation', title: 'Elevation tokens', desc: 'Semantic elevation roles for raised surfaces and sheets' },
+  { id: 'extremes', title: 'Absolute extremes', desc: 'Semantic white/black mirrors for theming' },
+] satisfies { id: string; title: string; desc: string }[];
+
+const semanticGroups: Record<string, CssToken[]> = {};
+for (const meta of semanticGroupMeta) semanticGroups[meta.id] = [];
+for (const token of semanticCssTokens) {
+  const groupId = classifySemanticTokenGroup(token.name);
+  if (!semanticGroups[groupId]) continue;
+  semanticGroups[groupId].push(token);
+}
+---
+
+<Layout title="Tokens" section="tokens">
+  <h1 class="page-title">Tokens</h1>
+  <p class="page-sub">Primitive and semantic tokens for colour, typography, spacing, shape and status &middot; Text-first reference</p>
+
+  <!-- ═══════════════════════════════════════════════════════
+       1. INTRO & PURPOSE
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">What are tokens in Nexus?</span>
+      <span class="section-desc">Single source of truth for colour, type, spacing and shape</span>
+    </div>
+
+    <div class="info-box">
+      Design tokens are the smallest pieces of the Nexus design system. They turn visual decisions
+      (colour, typography, spacing, shape, elevation, status) into reusable, code-friendly values.
+      Nexus follows a layered token architecture so that UI code never reaches for raw values directly.
+    </div>
+
+    <p>
+      Canonical token values live in <code>src/tokens/*.json</code> and are surfaced as CSS custom
+      properties in <code>styles/base.css</code>. Visual foundation pages &mdash;
+      <a href="/colours">Colours</a>, <a href="/typography">Typography</a>,
+      <a href="/spacing">Spacing</a>, and <a href="/shape-surface">Shape &amp; Surface</a> &mdash;
+      show these tokens in context. This page focuses on the structure and naming of the tokens
+      themselves.
+    </p>
+
+    <p>
+      The <a href="/blade-tokens">Reference Tokens</a> page is a read-only export of the Blade
+      Design System Figma file. Nexus tokens are a curated, opinionated layer built on top of that
+      reference.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       2. TOKEN HIERARCHY
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Token hierarchy</span>
+      <span class="section-desc">Primitives &rarr; Semantic &rarr; Components</span>
+    </div>
+
+    <div class="info-box">
+      <dl>
+        <dt><strong>Primitive tokens</strong></dt>
+        <dd>
+          Raw scales with no usage meaning. Examples: spacing steps in
+          <code>spacing.json</code> (<code>space.000 &rarr; space.1000</code>),
+          type scales and weights in <code>typography.json</code>
+          (<code>font-size.100</code>&ndash;<code>1000</code>,
+          <code>font-weight.regular</code>/<code>medium</code>/<code>semibold</code>),
+          radii in <code>border-radius.json</code>
+          (<code>radius.000</code>&ndash;<code>radius.full</code>),
+          and opacity steps in <code>opacity.json</code>.
+        </dd>
+
+        <dt><strong>Semantic tokens</strong></dt>
+        <dd>
+          Purposeful aliases that describe <em>what</em> something is for instead of how it looks.
+          Examples: colour roles for surfaces, text and borders, spacing roles for layout gaps,
+          or typography bundles like <code>typography-body</code> and <code>typography-title-md</code>
+          that compose primitive size, line-height, weight and letter-spacing into a single style.
+        </dd>
+
+        <dt><strong>Component tokens</strong></dt>
+        <dd>
+          Optional, component-scoped tokens used when a component needs a stable contract that is
+          more specific than the global semantic layer (for example, button variants or table
+          borders). Component tokens reference semantic tokens, not primitives, so they inherit
+          theming automatically.
+        </dd>
+      </dl>
+    </div>
+
+    <div class="token-architecture">
+      <div class="token-architecture__step">Raw value</div>
+      <div class="token-architecture__arrow">→</div>
+      <div class="token-architecture__step token-architecture__step--emphasis">Primitive token</div>
+      <div class="token-architecture__arrow">→</div>
+      <div class="token-architecture__step token-architecture__step--emphasis">Semantic token</div>
+      <div class="token-architecture__arrow">→</div>
+      <div class="token-architecture__step">Component token</div>
+      <div class="token-architecture__arrow">→</div>
+      <div class="token-architecture__step">Themed output</div>
+    </div>
+
+    <p>
+      In code, the ideal chain is <code>component &rarr; semantic &rarr; primitive</code>.
+      Application code and components depend on semantic or component tokens; only the token layer
+      touches primitives.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       2.B TOKEN NAMING STANDARD (CANONICAL)
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Token naming standard</span>
+      <span class="section-desc">Primitive &rarr; semantic &rarr; component &rarr; themed output</span>
+    </div>
+
+    <p>
+      Nexus uses a strict naming standard for all design tokens. This section is the reference for
+      how tokens are named, how they relate to one another, and how they behave across light and
+      dark themes. The same rules apply to both the codebase and the design tools.
+    </p>
+
+    <AccordionSection title="Architecture &amp; layers" open>
+      <p>
+        All tokens follow a layered chain from raw value through to themed component styles:
+      </p>
+
+      <pre><code>Raw value → Primitive → Semantic → Component → Themed output</code></pre>
+
+      <ul>
+        <li>Components never reference raw values directly.</li>
+        <li>Semantic tokens must reference primitives.</li>
+        <li>Component tokens must reference semantic tokens.</li>
+        <li>Every reference chain must end at a primitive.</li>
+      </ul>
+    </AccordionSection>
+
+    <AccordionSection title="Primitive tokens">
+      <p>
+        Primitives are raw, foundational values. They describe <strong>what the value is</strong>,
+        not how it is used.
+      </p>
+
+      <p><strong>Naming patterns</strong> for primitives:</p>
+      <pre><code>[color]-[shade]
+space-[scale]
+font-size-[scale]
+radius-[scale]
+shadow-[scale]</code></pre>
+
+      <p><strong>Colour scale convention</strong> (11 steps per colour):</p>
+      <ul>
+        <li><code>0</code> &mdash; lightest (near-white tint)</li>
+        <li><code>50</code> &mdash; midpoint (equal contrast in both directions)</li>
+        <li><code>100</code> &mdash; darkest (near-black shade)</li>
+      </ul>
+
+      <div class="bt-table" style="margin-top: 16px;">
+        <div class="bt-table-head">
+          <span class="bt-col-path">Primitive token</span>
+          <span class="bt-col-value">Example</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>neutral-grey-0 / 50 / 100</code></span>
+          <span class="bt-col-value">#FAFAFA / #757575 / #080808</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>red-0 / 50 / 100</code></span>
+          <span class="bt-col-value">Lightest / midpoint / darkest red</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>green-0 / 50 / 100</code></span>
+          <span class="bt-col-value">Lightest / midpoint / darkest green</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>space-000 → space-1000</code></span>
+          <span class="bt-col-value">0 → 5rem spacing scale</span>
+        </div>
+      </div>
+
+      <div class="token-scale-demo">
+        <div class="token-scale-demo__group">
+          <div class="token-scale-demo__label">Neutral grey (0 / 50 / 100)</div>
+          <div class="token-scale-demo__swatches">
+            <div class="token-scale-demo__swatch" style={`background: var(--grey-0);`}></div>
+            <div class="token-scale-demo__swatch" style={`background: var(--grey-50);`}></div>
+            <div class="token-scale-demo__swatch" style={`background: var(--grey-100);`}></div>
+          </div>
+          <div class="token-scale-demo__swatch-labels">
+            <span>0</span>
+            <span>50</span>
+            <span>100</span>
+          </div>
+        </div>
+
+        <div class="token-scale-demo__group">
+          <div class="token-scale-demo__label">Red (0 / 50 / 100)</div>
+          <div class="token-scale-demo__swatches">
+            <div class="token-scale-demo__swatch" style={`background: var(--red-0);`}></div>
+            <div class="token-scale-demo__swatch" style={`background: var(--red-50);`}></div>
+            <div class="token-scale-demo__swatch" style={`background: var(--red-100);`}></div>
+          </div>
+          <div class="token-scale-demo__swatch-labels">
+            <span>0</span>
+            <span>50</span>
+            <span>100</span>
+          </div>
+        </div>
+
+        <div class="token-scale-demo__group">
+          <div class="token-scale-demo__label">Green (0 / 50 / 100)</div>
+          <div class="token-scale-demo__swatches">
+            <div class="token-scale-demo__swatch" style={`background: var(--green-0);`}></div>
+            <div class="token-scale-demo__swatch" style={`background: var(--green-50);`}></div>
+            <div class="token-scale-demo__swatch" style={`background: var(--green-100);`}></div>
+          </div>
+          <div class="token-scale-demo__swatch-labels">
+            <span>0</span>
+            <span>50</span>
+            <span>100</span>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top: 16px;"><strong>Primitive rules</strong>:</p>
+      <ul>
+        <li>No usage meaning (no <code>primary</code>, <code>error</code>, <code>success</code>).</li>
+        <li>No component names (no <code>button</code>, <code>input</code>, <code>card</code>).</li>
+        <li>No state names (no <code>hover</code>, <code>focus</code>, <code>disabled</code>).</li>
+        <li>No semantic intent (no <code>danger</code>, <code>warning</code>, <code>action</code>).</li>
+        <li>Must represent raw scales only.</li>
+      </ul>
+    </AccordionSection>
+
+    <AccordionSection title="Semantic tokens">
+      <p>
+        Semantic tokens describe <strong>purpose</strong>, not appearance. They reference primitive
+        tokens and are the primary theming layer.
+      </p>
+
+      <p><strong>Naming pattern</strong> for semantics:</p>
+      <pre><code>[category]-[property]-[variant]</code></pre>
+
+      <div class="bt-table" style="margin-top: 12px;">
+        <div class="bt-table-head">
+          <span class="bt-col-path">Category</span>
+          <span class="bt-col-value">Description</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>color-background-*</code></span>
+          <span class="bt-col-value">Surface and container fills</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>color-text-*</code></span>
+          <span class="bt-col-value">Text and icon foregrounds</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>color-border-*</code></span>
+          <span class="bt-col-value">Borders, dividers, outlines</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>color-action-*</code></span>
+          <span class="bt-col-value">Interactive element colours</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>spacing-*</code></span>
+          <span class="bt-col-value">Gaps, padding, margins</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>typography-*</code></span>
+          <span class="bt-col-value">Font sizes, line-heights, weights</span>
+        </div>
+      </div>
+
+      <p style="margin-top: 16px;"><strong>Example mappings</strong> (light / dark):</p>
+      <div class="bt-table">
+        <div class="bt-table-head">
+          <span class="bt-col-path">Semantic token</span>
+          <span class="bt-col-value">Light / Dark</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>color-text-primary</code></span>
+          <span class="bt-col-value">neutral-grey-90 / neutral-grey-10</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>color-text-error</code></span>
+          <span class="bt-col-value">red-60 / red-40</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>color-background-primary</code></span>
+          <span class="bt-col-value">neutral-grey-0 / neutral-grey-100</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>color-border-default</code></span>
+          <span class="bt-col-value">neutral-grey-10 / neutral-grey-80</span>
+        </div>
+      </div>
+
+      <p style="margin-top: 16px;"><strong>Semantic rules</strong>:</p>
+      <ul>
+        <li>Must reference primitives, not raw values.</li>
+        <li>Must not reference components.</li>
+        <li>Must work in both light and dark modes (same name, different mapping).</li>
+        <li>Names describe purpose, not colour (e.g. <code>color-text-error</code>, not <code>red-text</code>).</li>
+      </ul>
+    </AccordionSection>
+
+    <AccordionSection title="Component tokens">
+      <p>
+        Component tokens exist only when a component needs specific styling variants. They reference
+        semantic tokens, never primitives.
+      </p>
+
+      <p><strong>Naming pattern</strong> for component tokens:</p>
+      <pre><code>[component]-[variant]-[property]-[state]</code></pre>
+
+      <div class="bt-table" style="margin-top: 12px;">
+        <div class="bt-table-head">
+          <span class="bt-col-path">Component token</span>
+          <span class="bt-col-value">References</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>button-primary-background-default</code></span>
+          <span class="bt-col-value">&rarr; color-action-primary</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>button-primary-background-hover</code></span>
+          <span class="bt-col-value">&rarr; color-action-primary-hover</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>input-default-border-focus</code></span>
+          <span class="bt-col-value">&rarr; color-border-focus</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>badge-success-text-default</code></span>
+          <span class="bt-col-value">&rarr; color-text-success</span>
+        </div>
+      </div>
+
+      <p style="margin-top: 16px;"><strong>Component rules</strong>:</p>
+      <ul>
+        <li>Create component tokens only when necessary (prefer semantic tokens).</li>
+        <li>Must reference semantic tokens; never primitives.</li>
+        <li>Must follow the naming pattern strictly.</li>
+      </ul>
+    </AccordionSection>
+
+    <AccordionSection title="References, theming &amp; validation">
+      <p>Tokens reference other tokens in short, readable chains:</p>
+
+      <div class="token-chain">
+        <span class="token-chain__pill">button-primary-background-default</span>
+        <span class="token-chain__arrow">→</span>
+        <span class="token-chain__pill token-chain__pill--semantic">color-action-primary</span>
+        <span class="token-chain__arrow">→</span>
+        <span class="token-chain__pill token-chain__pill--primitive">brand-500</span>
+      </div>
+
+      <div class="token-chain">
+        <span class="token-chain__pill">input-error-border-default</span>
+        <span class="token-chain__arrow">→</span>
+        <span class="token-chain__pill token-chain__pill--semantic">color-border-error</span>
+        <span class="token-chain__arrow">→</span>
+        <span class="token-chain__pill token-chain__pill--primitive">red-40</span>
+      </div>
+
+      <ul>
+        <li>Maximum reference depth is 4 levels.</li>
+        <li>Chains must always end at a primitive; no circular references.</li>
+        <li>Semantic tokens are the only layer that changes between themes.</li>
+        <li>Token names never include theme identifiers (<code>dark-</code>, <code>light-</code>).</li>
+      </ul>
+
+      <p style="margin-top: 12px;"><strong>Naming principles</strong>:</p>
+      <ul>
+        <li><strong>Descriptive</strong> &mdash; names describe purpose, not appearance.</li>
+        <li><strong>Consistent</strong> &mdash; follow established patterns.</li>
+        <li><strong>Predictable</strong> &mdash; guessable without documentation.</li>
+        <li><strong>Concise</strong> &mdash; short but clear.</li>
+      </ul>
+
+      <div class="bt-table" style="margin-top: 12px;">
+        <div class="bt-table-head">
+          <span class="bt-col-path">Valid</span>
+          <span class="bt-col-value">Invalid</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>color-text-error</code></span>
+          <span class="bt-col-value"><code>red-text</code> &mdash; encodes appearance</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>color-background-primary</code></span>
+          <span class="bt-col-value"><code>bg-white</code> &mdash; not theme-safe</span>
+        </div>
+        <div class="bt-table-row">
+          <span class="bt-col-path"><code>button-primary-background-hover</code></span>
+          <span class="bt-col-value"><code>btn-blue-hover</code> &mdash; encodes colour</span>
+        </div>
+      </div>
+
+      <p style="margin-top: 12px;"><strong>Validation checklist</strong> before adding a token:</p>
+      <ul>
+        <li>Does the name describe what it is for?</li>
+        <li>Does it follow the correct naming pattern?</li>
+        <li>Is the abstraction level correct (primitive / semantic / component)?</li>
+        <li>Does it reference the correct layer?</li>
+        <li>Is the reference chain shorter than 4 levels and theme-safe?</li>
+      </ul>
+    </AccordionSection>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       3. FOUNDATIONS TOKEN INDEX
+  ════════════════════════════════════════════════════════ -->
+
+  <!-- 3.1 COLOUR TOKENS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Colour tokens</span>
+      <span class="section-desc">From OKLCH scales to surfaces, text and status</span>
+    </div>
+
+    <p>
+      Primitive colour scales are defined in <code>colours.json</code> as 11-step OKLCH ramps
+      (0&ndash;100) for neutral, cool and warm greys plus red, green, yellow and blue. The
+      <a href="/colours">Colours</a> page visualises these scales and shows contrast ratios against
+      light and dark backgrounds.
+    </p>
+
+    <p>
+      Semantic colour tokens sit on top of those scales and describe purpose, not hue. Typical
+      groups include:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Surfaces</strong> &mdash; background layers for the application shell and content,
+        such as <code>color-surface-default</code>, <code>color-surface-subtle</code> and
+        <code>color-surface-elevated</code>.
+      </li>
+      <li>
+        <strong>Borders</strong> &mdash; strokes and dividers, such as
+        <code>color-border-subtle</code> and <code>color-border-strong</code>.
+      </li>
+      <li>
+        <strong>Text and icons</strong> &mdash; foreground ink, such as
+        <code>color-text-primary</code>, <code>color-text-secondary</code> and
+        <code>color-text-muted</code>.
+      </li>
+      <li>
+        <strong>Status</strong> &mdash; success, warning, danger and information roles, such as
+        <code>color-status-success</code>, <code>color-status-warning</code>,
+        <code>color-status-danger</code> and <code>color-status-info</code>.
+      </li>
+    </ul>
+
+    <p>
+      Light and dark themes share the same semantic colour names. Only the mapping from semantic
+      token to primitive colour step changes, keeping contrast requirements intact in both modes.
+    </p>
+  </div>
+
+  <!-- 3.2 TYPOGRAPHY TOKENS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Typography tokens</span>
+      <span class="section-desc">Type scale, weights and semantic text styles</span>
+    </div>
+
+    <p>
+      Typography primitives in <code>typography.json</code> define:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Font families</strong>, such as <code>font-family.sans</code> for Inter.
+      </li>
+      <li>
+        <strong>Font sizes</strong> on a 10&ndash;48px ramp
+        (<code>font-size.100</code>&ndash;<code>font-size.1000</code>).
+      </li>
+      <li>
+        <strong>Line-heights</strong> on a 4px grid
+        (<code>line-height.100</code>&ndash;<code>line-height.1000</code>).
+      </li>
+      <li>
+        <strong>Font weights</strong>, such as <code>font-weight.regular</code>,
+        <code>font-weight.medium</code> and <code>font-weight.semibold</code>.
+      </li>
+      <li>
+        <strong>Letter-spacing</strong> primitives, such as <code>letter-spacing.wide</code>,
+        <code>normal</code>, <code>tight</code> and <code>tighter</code>.
+      </li>
+    </ul>
+
+    <p>
+      Semantic typography tokens bundle these primitives into complete text styles:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Caption</strong> &mdash; <code>typography-micro</code>,
+        <code>typography-caption</code>, <code>typography-caption-emphasis</code>
+        for overlines, captions and small helper text.
+      </li>
+      <li>
+        <strong>Body</strong> &mdash; <code>typography-body</code>,
+        <code>typography-body-emphasis</code>, <code>typography-body-strong</code>,
+        <code>typography-body-lg</code> and <code>typography-body-lg-emphasis</code>
+        for paragraphs and UI copy.
+      </li>
+      <li>
+        <strong>Title</strong> &mdash; <code>typography-title-2xs</code> through
+        <code>typography-title-xl</code> for headings and section titles.
+      </li>
+      <li>
+        <strong>Display</strong> &mdash; <code>typography-display-sm</code>,
+        <code>typography-display-lg</code> and their <code>-strong</code> variants for hero text.
+      </li>
+    </ul>
+
+    <p>
+      The <a href="/typography">Typography</a> page shows these styles as a full visual ramp with
+      exact size, line-height, weight and tracking for each token.
+    </p>
+  </div>
+
+  <!-- 3.3 SPACING TOKENS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Spacing tokens</span>
+      <span class="section-desc">4px base grid for padding, gaps and layout</span>
+    </div>
+
+    <p>
+      Spacing primitives in <code>spacing.json</code> define a single
+      <code>space.000</code>&ndash;<code>space.1000</code> scale in rems, mapped to a 4px base
+      grid. Smaller steps (<code>025</code>, <code>050</code>, <code>075</code>) are used for
+      tight in-component spacing; larger steps (from <code>200</code> upwards) handle layout
+      gutters and page structure.
+    </p>
+
+    <p>
+      Common usage patterns include:
+    </p>
+
+    <ul>
+      <li><strong>Component padding</strong> &mdash; card, button and chip padding drawn from the middle of the scale.</li>
+      <li><strong>Stack gaps</strong> &mdash; vertical rhythm between headings, paragraphs and controls.</li>
+      <li><strong>Page structure</strong> &mdash; section spacing and layout gutters at the larger end of the scale.</li>
+    </ul>
+  </div>
+
+  <!-- 3.4 SHAPE & SURFACE TOKENS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Shape &amp; surface tokens</span>
+      <span class="section-desc">Radius, border width, opacity and elevation</span>
+    </div>
+
+    <p>
+      Shape primitives in <code>border-radius.json</code> define a rounded corner scale
+      (<code>radius.000</code>, <code>radius.025</code>, <code>radius.050</code>,
+      <code>radius.100</code>&ndash;<code>radius.500</code>, and <code>radius.full</code> for
+      fully pill-shaped elements). These values are composed into semantic radii for cards, pills
+      and overlays.
+    </p>
+
+    <p>
+      Border width primitives in <code>border-width.json</code> define
+      <code>border-width.000</code>&ndash;<code>border-width.400</code>, from no border through
+      hairline, thin and thick strokes. They are used consistently for outlines, table gridlines
+      and dividers.
+    </p>
+
+    <p>
+      Opacity primitives in <code>opacity.json</code> and the corresponding
+      <code>opacity</code> group in <code>object-status.json</code> provide a scale of alpha
+      values. These underpin disabled, muted and overlay states as semantic opacity tokens (for
+      example, muted text, scrim backdrops or inactive controls).
+    </p>
+
+    <p>
+      Elevation primitives live in <code>shadow.json</code> as a compact <code>shadow.100</code>
+      &ndash; <code>shadow.400</code> scale. In CSS they surface as
+      <code>--shadow-100</code>&ndash;<code>--shadow-400</code>, which capture the geometry of four
+      common surface treatments: low raised, mid raised, high raised and bottom sheet. Semantic
+      elevation tokens such as <code>--elevation-surface-raised-low</code> and
+      <code>--elevation-surface-bottom-sheet</code> alias these primitives for use in components so
+      cards, modals and drawers can share the same elevation language without inlining box-shadows.
+    </p>
+  </div>
+
+  <!-- 3.5 OBJECT STATUS TOKENS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Object status tokens</span>
+      <span class="section-desc">Consistent success, warning, error, info and neutral states</span>
+    </div>
+
+    <p>
+      Status tokens bring together colour, border, opacity and (where needed) elevation to express
+      object states such as success, warning, error, information and neutral. They ensure that a
+      &ldquo;success&rdquo; badge, banner and toast all feel like part of the same system rather
+      than ad-hoc choices.
+    </p>
+
+    <p>
+      Components such as <strong>Badge</strong>, <strong>Tag</strong>, <strong>Alert</strong> and
+      table row highlights rely on these shared status tokens instead of hard-coded colours. When a
+      status palette changes, all affected components update together through the token layer. Where
+      needed, these status roles can be combined with a chosen elevation level &mdash; for example,
+      a high-emphasis toast might pair a success or error palette with
+      <code>--elevation-surface-raised-high</code> while a lighter inline banner remains flat or
+      uses a lower elevation token.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       3.6 CSS TOKEN LISTS (ALL TOKENS IN USE)
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">CSS primitive tokens (base.css)</span>
+      <span class="section-desc">Global custom properties for type, spacing, radius and layout</span>
+    </div>
+
+    <p>
+      These tokens are defined in <code>src/styles/base.css</code> and provide the primitive
+      building blocks for typography, spacing, radii, opacity and layout. Components and semantic
+      tokens derive from this layer.
+    </p>
+
+    {baseGroupMeta.map((group) => {
+      const tokens = baseGroups[group.id] || [];
+      if (!tokens.length) return null;
+      return (
+        <AccordionSection title={`${group.title} (${tokens.length})`} open={group.id === 'layout'}>
+          <p class="bt-subsection-desc">{group.desc}</p>
+          <div class="bt-table">
+            <div class="bt-table-head">
+              <span class="bt-col-path">Token</span>
+              <span class="bt-col-value">Value</span>
+            </div>
+            {tokens.map((t) => (
+              <div class="bt-table-row">
+                <span class="bt-col-path"><code>{t.name}</code></span>
+                <span class="bt-col-value">{t.value}</span>
+              </div>
+            ))}
+          </div>
+        </AccordionSection>
+      );
+    })}
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Colour scale primitives (tokens.scss)</span>
+      <span class="section-desc">Grey, accent and brand ramps from colours.json</span>
+    </div>
+
+    <p>
+      These tokens are defined in <code>src/styles/tokens.scss</code> inside the
+      <code>:root</code> block and mirror the colour scales from <code>src/tokens/colours.json</code>.
+      They are the source for all semantic colour tokens used across light and dark themes.
+    </p>
+
+    {colourGroupMeta.map((group) => {
+      const tokens = colourGroups[group.id] || [];
+      if (!tokens.length) return null;
+      return (
+        <AccordionSection title={`${group.title} (${tokens.length})`} open={group.id === 'neutral-grey'}>
+          <p class="bt-subsection-desc">{group.desc}</p>
+          <div class="bt-table">
+            <div class="bt-table-head">
+              <span class="bt-col-path">Token</span>
+              <span class="bt-col-value">Value</span>
+            </div>
+            {tokens.map((t) => (
+              <div class="bt-table-row">
+                <span class="bt-col-path"><code>{t.name}</code></span>
+                <span class="bt-col-value">{t.value}</span>
+              </div>
+            ))}
+          </div>
+        </AccordionSection>
+      );
+    })}
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Semantic design tokens (tokens.scss)</span>
+      <span class="section-desc">Text, surface, border, action and component roles</span>
+    </div>
+
+    <p>
+      These tokens are also defined in <code>src/styles/tokens.scss</code> under the light and dark
+      theme blocks. They describe text, background, border, action and component roles and are the
+      primary tokens consumed by atoms and molecules.
+    </p>
+
+    {semanticGroupMeta.map((group) => {
+      const tokens = semanticGroups[group.id] || [];
+      if (!tokens.length) return null;
+      return (
+        <AccordionSection title={`${group.title} (${tokens.length})`} open={group.id === 'text'}>
+          <p class="bt-subsection-desc">{group.desc}</p>
+          <div class="bt-table">
+            <div class="bt-table-head">
+              <span class="bt-col-path">Token</span>
+              <span class="bt-col-value">Value</span>
+            </div>
+            {tokens.map((t) => (
+              <div class="bt-table-row">
+                <span class="bt-col-path"><code>{t.name}</code></span>
+                <span class="bt-col-value">{t.value}</span>
+              </div>
+            ))}
+          </div>
+        </AccordionSection>
+      );
+    })}
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       4. COMPONENT MAPPING & THEMING
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Component token mapping</span>
+      <span class="section-desc">Atoms and molecules built from semantic tokens</span>
+    </div>
+
+    <p>
+      Atoms and molecules never reach for raw hex codes, pixel values or bespoke spacing. Instead
+      they consume semantic (and occasionally component) tokens. This keeps UI code small and lets
+      themes or token values evolve without touching component implementations.
+    </p>
+
+    <ul>
+      <li>
+        <strong>Button</strong> &mdash; uses semantic colour tokens for background, text, borders
+        and focus rings; spacing tokens for padding and gaps; and a typography semantic token for
+        the label style.
+      </li>
+      <li>
+        <strong>Table</strong> &mdash; uses spacing tokens for cell padding, border-width tokens
+        for gridlines, and colour tokens for header backgrounds, zebra striping and text.
+      </li>
+      <li>
+        <strong>Card and EmptyState</strong> &mdash; use surface, elevation, radius and spacing
+        tokens to define their containers and internal layout.
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Theming and modes</span>
+      <span class="section-desc">Same token names, different primitive mappings</span>
+    </div>
+
+    <p>
+      Nexus supports light and dark modes by changing <em>mappings</em>, not token names. Primitive
+      scales remain the same; semantic tokens like <code>color-surface-default</code> or
+      <code>color-text-primary</code> point to different steps in those scales per theme. This
+      mirrors the way Blade exports separate Default Light and Default Dark collections on the
+      <a href="/blade-tokens">Reference Tokens</a> page.
+    </p>
+
+    <p>
+      Application and component code stays theme-agnostic: it always asks for the same semantic
+      token, regardless of whether the UI is rendered in light or dark mode.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       5. HOW TO USE TOKENS
+  ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">How to use tokens in code</span>
+      <span class="section-desc">Prefer semantic tokens in components; primitives in the token layer</span>
+    </div>
+
+    <div class="info-box">
+      <ul>
+        <li>Use <strong>semantic</strong> tokens in components and application code.</li>
+        <li>Use <strong>primitives</strong> only when defining or adjusting semantic tokens.</li>
+        <li>Avoid introducing bespoke values in CSS; add or reuse tokens instead.</li>
+      </ul>
+    </div>
+
+    <p>
+      When in doubt, reach for the closest existing semantic token and update primitives or
+      mappings behind it. New tokens should follow the naming patterns in the token naming rules
+      and fit into this primitive &rarr; semantic &rarr; component chain.
+    </p>
+  </div>
+
+  <div class="footer">
+    Nexus Design System &middot; Tokens
+  </div>
+</Layout>
+

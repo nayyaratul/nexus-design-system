@@ -2,14 +2,24 @@
 import Layout from '../../layouts/Default.astro';
 
 const molecules = [
-  { name: 'Dropzone',  href: '/molecules/dropzone',  icon: '⇪', desc: 'Drag-and-drop file upload area with file list, remove, and size/type validation', status: 'ready' },
-  { name: 'Table',     href: '/molecules/table',     icon: '▦', desc: 'Compound table with sizes, striped/hoverable variants, sticky headers, and sort indicators', status: 'ready' },
+  { name: 'Card',          href: '/molecules/card',           icon: '▢', desc: 'Generic container with header, body, and footer slots for dashboard tiles and panels', status: 'ready' },
+  { name: 'Breadcrumb',    href: '/molecules/breadcrumb',     icon: '⤓', desc: 'Hierarchical navigation trail that shows where learners are within a deep information structure', status: 'ready' },
+  { name: 'Confirm dialog',href: '/molecules/confirmdialog',  icon: '✓', desc: 'Yes/no confirmation dialog that composes the Modal molecule for destructive and non-destructive flows', status: 'ready' },
+  { name: 'Drawer',        href: '/molecules/drawer',         icon: '▤', desc: 'Slide-in panel from the side or bottom for secondary surfaces like filters and inspectors', status: 'ready' },
+  { name: 'Dropzone',      href: '/molecules/dropzone',       icon: '⇪', desc: 'Drag-and-drop file upload area with file list, remove, and size/type validation', status: 'ready' },
+  { name: 'Empty state',   href: '/molecules/empty-state',    icon: '∅', desc: 'Reusable patterns for no-data, no-results, and non-blocking error views', status: 'ready' },
+  { name: 'List skeleton', href: '/molecules/list-skeleton', icon: '▭', desc: 'Loading placeholder for list and card layouts with list or card layout variants', status: 'ready' },
+  { name: 'Modal',         href: '/molecules/modal',          icon: '◎', desc: 'Accessible overlay dialog for focused tasks, confirmations, and multi-step flows', status: 'ready' },
+  { name: 'Menu',          href: '/molecules/menu',           icon: '⋯', desc: 'Action list pattern for overflow and contextual menus built on Popover and Menu atoms', status: 'ready' },
+  { name: 'Rating',        href: '/molecules/rating',         icon: '★', desc: 'Interactive or read-only star rating with optional label and review count', status: 'ready' },
+  { name: 'Search input',  href: '/molecules/searchinput',    icon: '⌕', desc: 'Search field with leading icon and clear button for catalogue and table toolbars', status: 'ready' },
+  { name: 'Table',         href: '/molecules/table',          icon: '▦', desc: 'Compound table with sizes, striped/hoverable variants, sticky headers, and sort indicators', status: 'ready' },
 ];
 ---
 
 <Layout title="Molecules" section="molecules">
   <h1 class="page-title">Molecules</h1>
-  <p class="page-sub">Groups of atoms bonded together into functional units — 2 of ~48 complete</p>
+  <p class="page-sub">Groups of atoms bonded together into functional units — 12 of ~48 complete</p>
 
   <div class="section">
     <div class="section-header">

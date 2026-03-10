@@ -1,5 +1,6 @@
 import { FormField } from './FormField';
 import { Input } from '../Input/Input';
+import { InputField } from '../InputField/InputField';
 import { Textarea } from '../Textarea/Textarea';
 import { Select, SelectTrigger, SelectContent, SelectItem } from '../Select/Select';
 
@@ -49,6 +50,27 @@ export const Disabled = {
     disabled: true,
     children: <Input id="username" disabled placeholder="Not editable" />,
   },
+};
+
+export const WithInputFieldIcons = {
+  render: () => (
+    <div style={{ maxWidth: 360, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <FormField label="Search" htmlFor="search" hint="Type a keyword">
+        <InputField id="search" kind="search" placeholder="Search courses" />
+      </FormField>
+      <FormField label="Password" htmlFor="password" required>
+        <InputField id="password" kind="password" placeholder="Enter password" />
+      </FormField>
+      <FormField label="Start date" htmlFor="start-date">
+        <InputField
+          id="start-date"
+          kind="date"
+          placeholder="DD/MM/YYYY"
+          iconPosition="right"
+        />
+      </FormField>
+    </div>
+  ),
 };
 
 export const WithTextarea = {

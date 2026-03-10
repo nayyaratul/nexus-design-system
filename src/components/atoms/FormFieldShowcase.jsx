@@ -1,5 +1,6 @@
 import { FormField } from '../../atoms/FormField/FormField';
 import { Input } from '../../atoms/Input/Input';
+import { InputField } from '../../atoms/InputField/InputField';
 import { Textarea } from '../../atoms/Textarea/Textarea';
 import { Select, SelectTrigger, SelectContent, SelectItem } from '../../atoms/Select/Select';
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
@@ -54,6 +55,31 @@ export function FormFieldShowcase() {
         </div>
       </div>
 
+      {/* With icons (InputField) */}
+      <div>
+        <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>With icons</div>
+        <div style={{ maxWidth: 360, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <FormField label="Search" htmlFor="search-field" hint="Type a keyword">
+            <InputField id="search-field" kind="search" placeholder="Search courses" />
+          </FormField>
+          <FormField label="Start date" htmlFor="start-date-field">
+            <InputField
+              id="start-date-field"
+              kind="date"
+              placeholder="DD/MM/YYYY"
+              iconPosition="right"
+            />
+          </FormField>
+          <FormField label="Password" htmlFor="password-field" required error="Must be 8+ characters">
+            <InputField
+              id="password-field"
+              kind="password"
+              placeholder="Enter password"
+            />
+          </FormField>
+        </div>
+      </div>
+
       {/* Disabled */}
       <div>
         <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '12px' }}>Disabled</div>
@@ -98,10 +124,10 @@ export function FormFieldShowcase() {
             <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>LIGHT</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <FormField label="Email" htmlFor="theme-email" hint="We'll never share your email">
-                <Input id="theme-email" placeholder="you@example.com" />
+                <InputField id="theme-email" kind="default" placeholder="you@example.com" />
               </FormField>
               <FormField label="Password" htmlFor="theme-pass" required error="Must be 8+ characters">
-                <Input id="theme-pass" type="password" error placeholder="Enter password" />
+                <InputField id="theme-pass" kind="password" placeholder="Enter password" />
               </FormField>
             </div>
           </div>
@@ -109,10 +135,10 @@ export function FormFieldShowcase() {
             <div style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginBottom: '12px', fontWeight: 500 }}>DARK</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <FormField label="Email" htmlFor="theme-email-dark" hint="We'll never share your email">
-                <Input id="theme-email-dark" placeholder="you@example.com" />
+                <InputField id="theme-email-dark" kind="default" placeholder="you@example.com" />
               </FormField>
               <FormField label="Password" htmlFor="theme-pass-dark" required error="Must be 8+ characters">
-                <Input id="theme-pass-dark" type="password" error placeholder="Enter password" />
+                <InputField id="theme-pass-dark" kind="password" placeholder="Enter password" />
               </FormField>
             </div>
           </div>

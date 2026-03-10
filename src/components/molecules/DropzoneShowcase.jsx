@@ -94,6 +94,7 @@ export function DropzoneShowcase() {
           )}
         </div>
       </section>
+
     </div>
   );
 }

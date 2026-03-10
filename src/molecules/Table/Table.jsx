@@ -43,7 +43,7 @@ export const Table = forwardRef(function Table(
 
 /* ─── Header ─── */
 const Header = forwardRef(function Header(
-  { sticky = false, stickyOffset = '0px', className, children, style, ...rest },
+  { sticky = false, stickyOffset = '0', className, children, style, ...rest },
   ref,
 ) {
   return (

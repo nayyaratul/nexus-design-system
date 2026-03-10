@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { InputFieldShowcase } from '../../components/atoms/InputFieldShowcase';
+---
+
+<Layout title="InputField" section="atoms/inputfield">
+  <h1 class="page-title">InputField</h1>
+  <p class="page-sub">Icon-capable text input that composes the Input atom with left/right icon slots and semantic presets</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Kinds, icon positions, states, and theme comparison</span>
+    </div>
+    <InputFieldShowcase client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Base</span><span>Composes the Input atom; forwards size, error, disabled, ref, and native input props</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Kinds</span><span>default, search, password, date, time — choose sensible type + default icons per kind</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Icon slots</span><span>`icon` (ReactNode) plus `iconPosition` (left/right) for custom icons; defaults from kind when `icon` is omitted</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm (32px), md (40px), lg (48px) — match Input heights and typography</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">States</span><span>default, hover, focus, error, disabled — reuse Input border, radius, and focus-ring tokens</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Password</span><span>Eye / eye-off toggle button with `aria-label`, keeps focus and keyboard support</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>FormField owns label, hint, and error text; InputField forwards id/name/aria-* to the native input</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Radix</span><span>No — built on a native input element via the Input atom</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · InputField Atom</div>
+</Layout>
+
+<style>
+  .atom-spec {
+    background: var(--card-bg);
+    border: var(--border-width-100) solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    padding: var(--space-125) var(--space-200);
+    font-size: var(--font-size-300);
+    border-bottom: var(--border-width-100) solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 120px;
+    font-weight: var(--font-weight-medium);
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+</style>
+

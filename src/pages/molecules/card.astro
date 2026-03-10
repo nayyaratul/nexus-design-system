@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { CardShowcase } from '../../components/molecules/CardShowcase.jsx';
+import { CardThemeComparison } from '../../components/molecules/CardThemeComparison.jsx';
+---
+
+<Layout title="Card" section="molecules/card">
+  <h1 class="page-title">Card</h1>
+  <p class="page-sub">Generic container with header, body, and footer regions — used across dashboard tiles, detail panels, and list items</p>
+
+  <p class="page-intro">
+    The Card molecule provides a flexible surface for grouping related content. It composes Heading and Text atoms for typography and supports elevated, outlined, and flat variants without hardcoded visual values.
+  </p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Dashboard tiles and content cards</span>
+    </div>
+    <div class="showcase-wrap">
+      <CardShowcase client:load />
+    </div>
+  </div>
+
+  <div class="section">
+    <CardThemeComparison client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Sub-components</span><span>Card, Card.Header, Card.Body, Card.Footer, Card.Media, Card.Title, Card.Eyebrow, Card.Subtitle</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>elevated, outlined, flat</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm, md, lg (padding and spacing only)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>variant, size, interactive, as</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Composes</span><span>Heading, Text, Button, Thumbnail (in usage examples)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens</span><span>--color-bg-elevated, --color-bg-primary, --color-border-subtle, --color-border-default, --color-border-focus, --space-*, --radius-*</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>Interactive cards should use appropriate semantics (button/link) via the <code>as</code> prop and match focus styles with other interactive components.</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Card Molecule</div>
+</Layout>
+
+<style>
+  .page-intro {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-400);
+    max-width: 52ch;
+  }
+  .showcase-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    padding: var(--space-300);
+  }
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    align-items: baseline;
+    padding: var(--space-150) var(--space-200);
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-300);
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 140px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+</style>
+

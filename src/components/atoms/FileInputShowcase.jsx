@@ -80,60 +80,6 @@ export function FileInputShowcase() {
           </FormField>
         </div>
       </section>
-
-      <section className="showcase-section" style={{ display: 'flex', flexDirection: 'column' }}>
-        <h3 className="showcase-section__title" style={sectionTitleStyle}>Theme Comparison</h3>
-        <div className="theme-comparison">
-          <div
-            data-theme="light"
-            style={{
-              padding: 'var(--space-250)',
-              background: 'var(--color-bg-theme-panel)',
-              borderRadius: 'var(--radius-150)',
-              border: 'var(--border-width-100) solid var(--color-border-default)',
-            }}
-          >
-            <div
-              style={{
-                fontSize: 'var(--font-size-100)',
-                color: 'var(--color-text-secondary)',
-                marginBottom: 'var(--space-150)',
-                fontWeight: 'var(--font-weight-medium)',
-              }}
-            >
-              LIGHT
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-200)' }}>
-              <FileInput />
-              <FileInput demoSelectedLabel="report.pdf" />
-            </div>
-          </div>
-          <div
-            data-theme="dark"
-            style={{
-              padding: 'var(--space-250)',
-              background: 'var(--color-bg-theme-panel)',
-              borderRadius: 'var(--radius-150)',
-              border: 'var(--border-width-100) solid var(--color-border-default)',
-            }}
-          >
-            <div
-              style={{
-                fontSize: 'var(--font-size-100)',
-                color: 'var(--color-text-secondary)',
-                marginBottom: 'var(--space-150)',
-                fontWeight: 'var(--font-weight-medium)',
-              }}
-            >
-              DARK
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-200)' }}>
-              <FileInput />
-              <FileInput demoSelectedLabel="report.pdf" />
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

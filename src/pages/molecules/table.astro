@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Default.astro';
 import { TableShowcase } from '../../components/molecules/TableShowcase';
+import { TableThemeComparison } from '../../components/molecules/TableThemeComparison.jsx';
 ---
 
 <Layout title="Table" section="molecules/table">
@@ -13,6 +14,10 @@ import { TableShowcase } from '../../components/molecules/TableShowcase';
       <span class="section-desc">Interactive — click sortable headers to sort</span>
     </div>
     <TableShowcase client:load />
+  </div>
+
+  <div class="section">
+    <TableThemeComparison client:load />
   </div>
 
   <div class="section">

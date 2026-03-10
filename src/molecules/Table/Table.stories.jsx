@@ -119,7 +119,7 @@ export const Bordered = {
 
 export const StickyHeader = {
   render: () => (
-    <div style={{ height: '200px', overflow: 'auto' }}>
+    <div style={{ height: 'calc(12.5 * var(--space-200))', overflow: 'auto' }}>
       <Table>
         <Table.Header sticky>
           <Table.Row>
@@ -167,10 +167,10 @@ export const WithSorting = {
 
 export const Sizes = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-400)' }}>
       {['sm', 'md', 'lg'].map((size) => (
         <div key={size}>
-          <div style={{ fontSize: '11px', fontWeight: 500, color: 'var(--color-text-tertiary)', textTransform: 'uppercase', marginBottom: '8px' }}>{size}</div>
+          <div style={{ fontSize: 'var(--font-size-200)', fontWeight: 500, color: 'var(--color-text-tertiary)', textTransform: 'uppercase', marginBottom: 'var(--space-100)' }}>{size}</div>
           <Table size={size}>
             <Table.Header>
               <Table.Row>

@@ -14,6 +14,7 @@ export { Heading } from './Heading/Heading';
 export { Icon } from './Icon/Icon';
 export { Image } from './Image/Image';
 export { Input } from './Input/Input';
+export { InputField } from './InputField/InputField';
 export { Label } from './Label/Label';
 export { Link } from './Link/Link';
 export { Menu, MenuItem, MenuGroup, MenuDivider } from './Menu/Menu';

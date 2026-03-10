@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { BreadcrumbShowcase } from '../../components/molecules/BreadcrumbShowcase.jsx';
+import { BreadcrumbThemeComparison } from '../../components/molecules/BreadcrumbThemeComparison.jsx';
+---
+
+<Layout title="Breadcrumb" section="molecules/breadcrumb">
+  <h1 class="page-title">Breadcrumb</h1>
+  <p class="page-sub">Hierarchical navigation trail for deep structures · optional icons and overflow handling</p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Overview</span>
+      <span class="section-desc">When and why to use breadcrumbs</span>
+    </div>
+
+    <p>
+      Breadcrumbs show where learners are inside a deep information hierarchy and provide quick access to
+      ancestor pages. They work best when content is organised into three or more levels (for example:
+      Home → Library → Category → Course). Breadcrumbs should never replace primary navigation; instead,
+      they clarify context and offer a secondary way to move up the hierarchy.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Catalogue example and long path</span>
+    </div>
+
+    <BreadcrumbShowcase />
+  </div>
+
+  <div class="section">
+    <BreadcrumbThemeComparison client:load />
+  </div>
+
+  <div class="footer">Nexus Design System · Breadcrumb</div>
+</Layout>
+

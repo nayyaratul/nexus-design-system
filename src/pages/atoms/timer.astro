@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Default.astro';
 import { TimerShowcase } from '../../components/atoms/TimerShowcase';
+import { TimerThemeComparison } from '../../components/atoms/TimerThemeComparison.jsx';
 ---
 
 <Layout title="Timer" section="atoms/timer">
@@ -13,6 +14,10 @@ import { TimerShowcase } from '../../components/atoms/TimerShowcase';
       <span class="section-desc">Sizes, formats, variants, and live-update demo</span>
     </div>
     <TimerShowcase client:load />
+  </div>
+
+  <div class="section">
+    <TimerThemeComparison client:load />
   </div>
 
   <div class="section">

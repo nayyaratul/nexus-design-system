@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { SearchInputShowcase } from '../../components/molecules/SearchInputShowcase.jsx';
+import { SearchInputThemeComparison } from '../../components/molecules/SearchInputThemeComparison.jsx';
+---
+
+<Layout title="Search input" section="molecules/searchinput">
+  <h1 class="page-title">Search input</h1>
+  <p class="page-sub">Search field with icon prefix and clear button for catalogue and table toolbars</p>
+
+  <p class="page-intro">
+    The SearchInput molecule composes the Input, Icon, and Button atoms into a reusable search
+    pattern. It supports a leading search icon, an optional loading state, and a clear button while
+    integrating with the FormField pattern for labels, hints, and error messages.
+  </p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Catalogue and table-level search patterns</span>
+    </div>
+    <div class="showcase-wrap">
+      <SearchInputShowcase client:load />
+    </div>
+  </div>
+
+  <div class="section">
+    <SearchInputThemeComparison client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Sub-components</span><span>SearchInput</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>value, defaultValue, onChange, onSubmit, onClear, size, disabled, error, icon, showClear, loading, id, aria-label, aria-describedby, className</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>sm, md, lg (padding and control height only)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Composes</span><span>Input, Icon, Spinner (for loading state), FormField (in usage examples)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens</span><span>--color-bg-elevated, --color-text-primary, --color-text-secondary, --color-text-tertiary, --color-text-error, --color-border-default, --color-border-focus, --color-interactive-hover, --space-*, --radius-*</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>Uses an underlying <code>input type=&quot;search&quot;</code> with <code>role=&quot;searchbox&quot;</code>. Labels, hints, and error messages come from the surrounding FormField via <code>htmlFor</code>, <code>aria-label</code>, and <code>aria-describedby</code>. The clear button is keyboard accessible and labelled &quot;Clear search&quot;.</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Search Input Molecule</div>
+</Layout>
+
+<style>
+  .page-intro {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-400);
+    max-width: 52ch;
+  }
+  .showcase-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    padding: var(--space-300);
+  }
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    align-items: baseline;
+    padding: var(--space-150) var(--space-200);
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-300);
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 140px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+</style>
+

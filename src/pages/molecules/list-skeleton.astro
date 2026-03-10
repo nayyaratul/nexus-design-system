@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { ListSkeletonShowcase } from '../../components/molecules/ListSkeletonShowcase.jsx';
+import { ListSkeletonThemeComparison } from '../../components/molecules/ListSkeletonThemeComparison.jsx';
+---
+
+<Layout title="List skeleton" section="molecules/list-skeleton">
+  <h1 class="page-title">List skeleton</h1>
+  <p class="page-sub">Loading placeholder for list and card layouts</p>
+
+  <p class="page-intro">
+    ListSkeleton provides a generic multi-item loading placeholder for vertical text lists (e.g.
+    course titles, notifications) and card grids (e.g. course cards). Use it during initial data load
+    so layout and structure are visible while content loads. Prefer skeletons over full-screen
+    spinners for structured content; match <code>layout</code> to the eventual content (list vs
+    card).
+  </p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">List and card layouts with density and animation options</span>
+    </div>
+    <div class="showcase-wrap">
+      <ListSkeletonShowcase client:load />
+    </div>
+  </div>
+
+  <div class="section">
+    <ListSkeletonThemeComparison client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">When to use</span>
+    </div>
+    <p class="section-body">
+      Use ListSkeleton for <strong>initial loading</strong> of list or grid content. Do not keep it
+      visible for long-running background work—switch to an explicit status or message. Respect
+      <code>prefers-reduced-motion</code> by turning off the shimmer (e.g. via
+      <code>animated=false</code> when the user prefers reduced motion). Provide surrounding context
+      such as “Loading courses…” for screen readers.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Composes</span><span>Skeleton (repeated)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>layout, count, animated, density, lines, hasLeading, hasTrailing, hasMedia, hasFooter</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Layouts</span><span>list, card</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Density</span><span>compact, comfortable</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens</span><span>--color-bg-secondary, --color-bg-disabled, --space-*, --radius-*</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>aria-hidden on skeleton root; provide live region or copy for “Loading…” where appropriate; honour reduced motion.</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · List Skeleton Molecule</div>
+</Layout>
+
+<style>
+  .page-intro {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-400);
+    max-width: 52ch;
+  }
+  .showcase-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    padding: var(--space-300);
+  }
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    align-items: baseline;
+    padding: var(--space-150) var(--space-200);
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-300);
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 140px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+  .section-body {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    max-width: 60ch;
+  }
+</style>

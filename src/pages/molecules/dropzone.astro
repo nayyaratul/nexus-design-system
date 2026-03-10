@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Default.astro';
 import { DropzoneShowcase } from '../../components/molecules/DropzoneShowcase';
+import { DropzoneThemeComparison } from '../../components/molecules/DropzoneThemeComparison.jsx';
 ---
 
 <Layout title="Dropzone" section="molecules/dropzone">
@@ -19,6 +20,10 @@ import { DropzoneShowcase } from '../../components/molecules/DropzoneShowcase';
     <div class="showcase-wrap">
       <DropzoneShowcase client:load />
     </div>
+  </div>
+
+  <div class="section">
+    <DropzoneThemeComparison client:load />
   </div>
 
   <div class="section">

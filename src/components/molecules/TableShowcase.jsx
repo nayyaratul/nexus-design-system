@@ -13,26 +13,26 @@ function Card({ label, children, style }) {
   return (
     <div style={{
       background: 'var(--card-bg)',
-      borderRadius: '12px',
-      border: '1px solid var(--rule)',
-      boxShadow: '0 1px 3px rgba(26,24,22,0.04), 0 4px 12px rgba(26,24,22,0.02)',
-      padding: '24px',
+      borderRadius: 'var(--radius-200)',
+      border: 'var(--border-width-100) solid var(--rule)',
+      boxShadow: '0 var(--size-04) var(--size-12) rgba(26,24,22,0.04), 0 var(--size-08) var(--size-24) rgba(26,24,22,0.02)',
+      padding: 'var(--space-300)',
       ...style,
     }}>
       {label && (
         <div style={{
           display: 'inline-block',
-          fontSize: '10px',
+          fontSize: 'var(--font-size-100)',
           fontWeight: 600,
           fontFamily: 'var(--mono)',
           color: 'var(--ink-3)',
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
-          marginBottom: '16px',
+          marginBottom: 'var(--space-200)',
           background: 'var(--page-bg)',
-          padding: '3px 8px',
-          borderRadius: '4px',
-          border: '1px solid var(--rule)',
+          padding: 'var(--space-025) var(--space-100)',
+          borderRadius: 'var(--radius-100)',
+          border: 'var(--border-width-100) solid var(--rule)',
         }}>{label}</div>
       )}
       {children}
@@ -60,11 +60,15 @@ export function TableShowcase() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-400)' }}>
       {/* Sizes */}
-      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: 'var(--space-200)', flexWrap: 'wrap' }}>
         {['sm', 'md', 'lg'].map((size) => (
-          <Card key={size} label={size} style={{ flex: '1 1 280px', minWidth: 0 }}>
+          <Card
+            key={size}
+            label={size}
+            style={{ flex: '1 1 calc(17.5 * var(--space-200))', minWidth: 0 }}
+          >
             <Table size={size}>
               <Table.Header>
                 <Table.Row>
@@ -88,7 +92,13 @@ export function TableShowcase() {
       </div>
 
       {/* Variants */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '1rem' }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(calc(23.75 * var(--space-200)), 1fr))',
+          gap: 'var(--space-200)',
+        }}
+      >
         <Card label="Simple">
           <Table variant="simple">
             <Table.Header>
@@ -181,7 +191,14 @@ export function TableShowcase() {
 
       {/* Sticky Header */}
       <Card label="Sticky header">
-        <div style={{ height: '220px', overflow: 'auto', borderRadius: '8px', border: '1px solid var(--rule)' }}>
+        <div
+          style={{
+            height: 'calc(13.75 * var(--space-200))',
+            overflow: 'auto',
+            borderRadius: 'var(--radius-150)',
+            border: 'var(--border-width-100) solid var(--rule)',
+          }}
+        >
           <Table>
             <Table.Header sticky>
               <Table.Row>
@@ -280,27 +297,33 @@ export function TableShowcase() {
       </Card>
 
       {/* Theme Comparison */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem' }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(calc(20 * var(--space-200)), 1fr))',
+          gap: 'var(--space-200)',
+        }}
+      >
         <div data-theme="light" style={{
-          padding: '24px',
+          padding: 'var(--space-300)',
           background: 'var(--color-bg-theme-panel)',
-          borderRadius: '12px',
-          border: '1px solid var(--rule)',
-          boxShadow: '0 1px 3px rgba(26,24,22,0.04), 0 4px 12px rgba(26,24,22,0.02)',
+          borderRadius: 'var(--radius-200)',
+          border: 'var(--border-width-100) solid var(--rule)',
+          boxShadow: '0 var(--size-04) var(--size-12) rgba(26,24,22,0.04), 0 var(--size-08) var(--size-24) rgba(26,24,22,0.02)',
         }}>
           <div style={{
             display: 'inline-block',
-            fontSize: '10px',
+            fontSize: 'var(--font-size-100)',
             fontWeight: 600,
             fontFamily: 'var(--mono)',
             color: 'var(--ink-3)',
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
-            marginBottom: '16px',
+            marginBottom: 'var(--space-200)',
             background: 'var(--page-bg)',
-            padding: '3px 8px',
-            borderRadius: '4px',
-            border: '1px solid var(--rule)',
+            padding: 'var(--space-025) var(--space-100)',
+            borderRadius: 'var(--radius-100)',
+            border: 'var(--border-width-100) solid var(--rule)',
           }}>Light</div>
           <Table size="sm" variant="striped" hoverable>
             <Table.Header>
@@ -320,23 +343,23 @@ export function TableShowcase() {
           </Table>
         </div>
         <div data-theme="dark" style={{
-          padding: '24px',
+          padding: 'var(--space-300)',
           background: 'var(--color-bg-theme-panel)',
-          borderRadius: '12px',
-          border: '1px solid var(--color-border-default)',
+          borderRadius: 'var(--radius-200)',
+          border: 'var(--border-width-100) solid var(--color-border-default)',
         }}>
           <div style={{
             display: 'inline-block',
-            fontSize: '10px',
+            fontSize: 'var(--font-size-100)',
             fontWeight: 600,
             fontFamily: 'var(--mono)',
             color: 'var(--color-text-tertiary)',
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
-            marginBottom: '16px',
-            padding: '3px 8px',
-            borderRadius: '4px',
-            border: '1px solid var(--color-border-default)',
+            marginBottom: 'var(--space-200)',
+            padding: 'var(--space-025) var(--space-100)',
+            borderRadius: 'var(--radius-100)',
+            border: 'var(--border-width-100) solid var(--color-border-default)',
           }}>Dark</div>
           <Table size="sm" variant="striped" hoverable>
             <Table.Header>

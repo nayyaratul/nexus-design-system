@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Default.astro';
+import { EmptyStateShowcase } from '../../components/molecules/EmptyStateShowcase.jsx';
+import { EmptyStateThemeComparison } from '../../components/molecules/EmptyStateThemeComparison.jsx';
+---
+
+<Layout title="Empty State" section="molecules/empty-state">
+  <h1 class="page-title">Empty state</h1>
+  <p class="page-sub">Patterns for no-data, no-results, and non-blocking error states across the product</p>
+
+  <p class="page-intro">
+    Empty states guide users when there is nothing to show yet — for example first-time use, filtered views with no results, or temporary errors. The EmptyState molecule composes Icon, Heading, Text, and Button atoms into reusable layouts.
+  </p>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Showcase</span>
+      <span class="section-desc">Page-level and section-level patterns</span>
+    </div>
+    <div class="showcase-wrap">
+      <EmptyStateShowcase client:load />
+    </div>
+  </div>
+
+  <div class="section">
+    <EmptyStateThemeComparison client:load />
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Anatomy</span>
+    </div>
+    <div class="atom-spec">
+      <div class="atom-spec-row"><span class="atom-spec-label">Props</span><span>variant, size, iconName/icon, title, description, primaryAction, secondaryAction, align</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Variants</span><span>default, no-results, error, upgrade</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Sizes</span><span>page (full-page), section (panel), inline (compact)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Composes</span><span>Icon, Heading, Text, Button, Code (in usage examples)</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">Tokens</span><span>--color-bg-secondary, --color-bg-error, --color-bg-info, --color-text-primary, --color-text-secondary, --space-*, --radius-*</span></div>
+      <div class="atom-spec-row"><span class="atom-spec-label">A11y</span><span>Section uses <code>aria-label</code> derived from the title; CTAs are standard buttons or links. Error variants should not replace critical error handling flows.</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Nexus Design System · Empty State Molecule</div>
+</Layout>
+
+<style>
+  .page-intro {
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-400);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-400);
+    max-width: 52ch;
+  }
+  .showcase-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    padding: var(--space-300);
+  }
+  .atom-spec {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-100);
+    overflow: hidden;
+  }
+  .atom-spec-row {
+    display: flex;
+    align-items: baseline;
+    padding: var(--space-150) var(--space-200);
+    font-size: var(--font-size-300);
+    line-height: var(--line-height-300);
+    border-bottom: 1px solid var(--rule);
+  }
+  .atom-spec-row:last-child { border-bottom: none; }
+  .atom-spec-label {
+    min-width: 140px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+</style>
+

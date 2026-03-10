@@ -1,0 +1,126 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-075);
+  font-family: var(--sans);
+}
+
+.label {
+  margin-right: var(--space-075);
+  color: var(--color-text-secondary);
+}
+
+.group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-050);
+}
+
+.starWrapper {
+  display: inline-flex;
+}
+
+.star {
+  display: inline-flex;
+}
+
+.starButton {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-050);
+}
+
+.starButton:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.starButtonChecked {
+  /* Slight background hint for the current selection */
+  background: color-mix(in srgb, var(--color-rating-filled) 14%, transparent);
+}
+
+.readOnly .starButton {
+  cursor: default;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.meta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-050);
+  margin-left: var(--space-075);
+  color: var(--color-text-secondary);
+}
+
+.value {
+  font-variant-numeric: tabular-nums;
+}
+
+.max {
+  margin-left: 2px;
+  color: var(--color-text-tertiary);
+}
+
+.count {
+  font-size: var(--font-size-100);
+}
+
+/* Sizes map to RatingStar sizes where possible */
+.size-sm .group {
+  gap: var(--space-025);
+}
+
+.size-lg .group {
+  gap: var(--space-100);
+}
+
+/* Variants */
+.variant-starsOnly .meta {
+  display: none;
+}
+
+.variant-compact {
+  gap: var(--space-050);
+}
+
+.variant-compact .label {
+  display: none;
+}
+
+.variant-compact .meta {
+  margin-left: var(--space-050);
+}
+
+/* Colour: selected stars = yellow (RatingStar .filled); unselected = grey (RatingStar .empty, same as half-star inactive) */
+.color-default .starButtonChecked {
+  /* Keep background hint for current selection only; star colour comes from RatingStar state */
+}
+
+.color-muted .star {
+  /* Muted variant: all stars use tertiary grey */
+  color: var(--color-text-tertiary);
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+

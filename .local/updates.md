@@ -2,6 +2,12 @@
 
 ## 2026-03-09
 
+### Modal icon headers
+
+- Modal header exposes an `icon` slot alongside `title` and `description` for contextual icons (info/success/warning/danger).
+- Canonical pattern: optional icon to the left of the title; `variant` controls the frame colour, `icon` controls emphasis only.
+- Docs and showcase updated to include an icon-header example and guidance to use icons sparingly for high-signal actions (e.g. irreversible deletes, critical alerts).
+
 ### Badge pill design aligned with Tag
 
 - Badge pills use dedicated semantic tokens `--color-badge-{variant}-bg` and `--color-badge-{variant}-border`.
@@ -52,6 +58,22 @@ Added `shape` prop to the Button atom: `default` (radius-100), `rounded` (radius
 - Doc page `src/pages/molecules/<name>.astro` and showcase `src/components/molecules/<Name>Showcase.jsx`
 - SCSS modules + semantic tokens only; no raw hex/px/rem
 - British English everywhere; URLs lowercase
+
+#### Molecules build execution — phases & sessions
+
+- **Execution strategy:** build molecules strictly **phase by phase** (Phase 1 → Phase 7) in the order defined below, and within each phase work **session by session**, where each session focuses on a very small, coherent slice (typically 1–2 molecules) so that a single AI session does not run out of context memory.
+- **Per-session workflow (for any molecule):**
+  - Define the public API and slots (props, variants, header/body/footer regions, etc.) and how it composes existing atoms.
+  - Verify all dependent atoms exist and expose the right props; if an atom needs changes, log that work separately instead of expanding the current session.
+  - Implement the molecule component and styling using semantic tokens only (no raw hex/px/rem), following the atoms rules above.
+  - Add Storybook stories for defaults and key variants, plus a documentation page and showcase component on the doc site.
+  - Wire the molecule into exports, navigation, and the `/molecules` index, then verify via Storybook and the Astro doc build.
+- **Phase 1 sessions (Foundation molecules):**
+  - Session 1 — `Card` + `EmptyState`
+  - Session 2 — `Modal` + `ConfirmDialog` (ConfirmDialog composes Modal)
+  - Session 3 — `Drawer` + `Breadcrumb`
+  - Session 4 — `SearchInput` + `Menu`
+  - Session 5 — `Rating` + `ListSkeleton`
 
 ---
 

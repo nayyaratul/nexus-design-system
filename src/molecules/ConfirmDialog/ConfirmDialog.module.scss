@@ -1,0 +1,20 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-150);
+}
+
+.body {
+  color: var(--color-text-primary);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-100);
+}
+
+.primaryDanger {
+  /* Alias to destructive action tokens for clarity in usage */
+}
+
