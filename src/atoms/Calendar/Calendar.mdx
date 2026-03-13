@@ -1,0 +1,78 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as CalendarStories from './Calendar.stories';
+
+<Meta of={CalendarStories} />
+
+# Calendar
+
+A date picker grid that supports single-date and date-range selection. Built with full keyboard navigation and ARIA grid semantics.
+
+<Primary />
+
+<Controls />
+
+## Single Date Selection
+
+Click a day to select it. The selected date is highlighted with the primary brand colour. The component can be controlled (pass `value` + `onChange`) or uncontrolled (use `defaultValue`).
+
+<Canvas of={CalendarStories.WithSelected} />
+
+## Date Range
+
+Set `mode="range"` to enable range selection. Click once to set the start date, click again to set the end. Clicking a third time resets and starts a new range.
+
+<Canvas of={CalendarStories.DateRange} />
+
+## Week Start Day
+
+Use `weekStartsOn` to change which day begins the week. Defaults to `0` (Sunday). Set to `1` for Monday-start locales.
+
+<Canvas of={CalendarStories.MondayStart} />
+
+## Min / Max Boundaries
+
+Pass `min` and `max` dates to restrict the selectable range. Days outside the range are disabled.
+
+<Canvas of={CalendarStories.WithMinMax} />
+
+## Disabled Dates
+
+Use `disabledDates` to disable specific dates. Pass an array of `Date` objects or a predicate function. The example below disables weekends.
+
+<Canvas of={CalendarStories.WithDisabledDates} />
+
+## Sizes
+
+Three sizes to fit different layout contexts.
+
+| Size | Use case |
+|------|----------|
+| `sm` | Popovers, compact sidebars |
+| `md` | Default — forms and dialogs |
+| `lg` | Full-page date pickers, dashboards |
+
+<Canvas of={CalendarStories.Sizes} />
+
+## Keyboard Navigation
+
+The calendar implements the WAI-ARIA grid pattern:
+
+| Key | Action |
+|-----|--------|
+| `Arrow Left / Right` | Move focus by one day |
+| `Arrow Up / Down` | Move focus by one week |
+| `Home / End` | Jump to start / end of the week |
+| `Page Up / Down` | Navigate to previous / next month |
+| `Enter / Space` | Select the focused date |
+
+## Accessibility
+
+- Uses `role="grid"` with `role="row"` and `role="gridcell"` for proper semantics.
+- Month label is wrapped in `aria-live="polite"` so screen readers announce month changes.
+- Navigation buttons have `aria-label` ("Previous month", "Next month").
+- Range start/end cells are announced via `aria-label`.
+- `aria-selected` marks the currently selected date(s).
+
+## Props
+
+<ArgTypes of={CalendarStories} />

@@ -1,0 +1,46 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as InputFieldStories from './InputField.stories';
+
+<Meta of={InputFieldStories} />
+
+# InputField
+
+An enhanced text input that wraps the base `Input` with optional icons and preset "kinds" for common input types like search, password, date, and time.
+
+<Primary />
+
+<Controls />
+
+## Kinds
+
+Preset kinds configure the icon and input type automatically.
+
+- **default** — plain text input, no icon.
+- **search** — search icon on the left.
+- **password** — visibility toggle on the right.
+- **date** — calendar icon.
+- **time** — clock icon.
+
+<Canvas of={InputFieldStories.Kinds} />
+
+## Icon positions
+
+Custom icons can be placed on the left or right side of the input.
+
+<Canvas of={InputFieldStories.IconPositions} />
+
+## States
+
+Default, error, and disabled states.
+
+<Canvas of={InputFieldStories.States} />
+
+## Accessibility
+
+- The password kind renders a toggle button with `aria-label` ("Show password" / "Hide password").
+- Decorative icons are marked `aria-hidden`.
+- Pair with `FormField` for a proper `<label>` association.
+
+## Props
+
+<ArgTypes of={InputFieldStories} />

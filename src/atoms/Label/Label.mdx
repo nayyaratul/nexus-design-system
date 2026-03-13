@@ -1,0 +1,40 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as LabelStories from './Label.stories';
+
+<Meta of={LabelStories} />
+
+# Label
+
+Accessible form label built on Radix UI's Label primitive. Always pair with an input element via `htmlFor`.
+
+<Primary />
+
+<Controls />
+
+## Sizes
+
+Two sizes align with the `sm` and `md` input sizes.
+
+<Canvas of={LabelStories.Sizes} />
+
+## States
+
+Labels can be marked as required (shows a red asterisk) or disabled (reduced opacity).
+
+<Canvas of={LabelStories.States} />
+
+## Required
+
+The asterisk is marked `aria-hidden="true"` so screen readers rely on the input's own `required` attribute instead of the visual indicator.
+
+<Canvas of={LabelStories.Required} />
+
+## Accessibility
+
+- Built on `@radix-ui/react-label`, which renders a native `<label>` element.
+- Connect to inputs using the `htmlFor` prop for proper focus management.
+- The required asterisk is decorative — set `required` on the input itself for assistive technology.
+
+## Props
+
+<ArgTypes of={LabelStories} />

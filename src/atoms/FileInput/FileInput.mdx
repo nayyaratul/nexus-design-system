@@ -1,0 +1,53 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as FileInputStories from './FileInput.stories';
+
+<Meta of={FileInputStories} />
+
+# FileInput
+
+A styled file-upload control that replaces the browser's native file input. It shows an upload button and an optional filename label with truncation tooltip.
+
+<Primary />
+
+<Controls />
+
+## Sizes
+
+Three sizes: `sm`, `md`, and `lg`.
+
+<Canvas of={FileInputStories.Sizes} />
+
+## States
+
+Default, error, and disabled states.
+
+<Canvas of={FileInputStories.States} />
+
+## Accept and multiple
+
+Use `accept` to restrict file types and `multiple` to allow multi-file selection.
+
+<Canvas of={FileInputStories.AcceptAndMultiple} />
+
+## Without file label
+
+Set `showFileLabel={false}` to hide the filename display, useful when a parent component handles the label.
+
+<Canvas of={FileInputStories.WithoutFileLabel} />
+
+## With FormField
+
+Wrap in a `FormField` for label, hint, and error messaging.
+
+<Canvas of={FileInputStories.Default} />
+
+## Accessibility
+
+- The native `<input type="file">` is visually hidden but remains in the DOM for assistive technology.
+- The visible button triggers the hidden input on click.
+- `aria-invalid` is set when `error` is true.
+- Truncated filenames display a tooltip on hover.
+
+## Props
+
+<ArgTypes of={FileInputStories} />

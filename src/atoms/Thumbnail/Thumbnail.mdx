@@ -1,0 +1,40 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as ThumbnailStories from './Thumbnail.stories';
+
+<Meta of={ThumbnailStories} />
+
+# Thumbnail
+
+A fixed-size square image preview, ideal for galleries, file lists, or avatar grids. Supports an interactive hover overlay and graceful error fallback.
+
+<Primary />
+
+<Controls />
+
+## Sizes
+
+Four sizes are available: `xs`, `sm`, `md` (default), and `lg`.
+
+<Canvas of={ThumbnailStories.Sizes} />
+
+## With Overlay
+
+Set `overlay` to show a hover overlay with an action icon. Pair with `onClick` to make the thumbnail interactive (adds `role="button"` and `tabIndex`).
+
+<Canvas of={ThumbnailStories.WithOverlay} />
+
+## Error State
+
+When the image fails to load, a fallback icon replaces the broken image. The icon size scales with the thumbnail size.
+
+<Canvas of={ThumbnailStories.ErrorState} />
+
+## Accessibility
+
+- When `overlay` and `onClick` are set, the component renders with `role="button"` and `tabIndex={0}` for keyboard access.
+- Always provide a descriptive `alt` attribute.
+- Error fallback uses an icon; ensure surrounding context conveys meaning for screen readers.
+
+## Props
+
+<ArgTypes of={ThumbnailStories} />

@@ -1,0 +1,47 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as StoryProgressStories from './StoryProgress.stories';
+
+<Meta of={StoryProgressStories} />
+
+# StoryProgress
+
+A segmented progress indicator inspired by social-media story UIs. Each segment represents a discrete step, with the active segment showing partial fill.
+
+<Primary />
+
+<Controls />
+
+## Sizes
+
+Four track heights are available: `xs`, `sm`, `md`, and `lg`.
+
+<Canvas of={StoryProgressStories.Sizes} />
+
+## Subtle variant
+
+Use `variant="subtle"` on dark backgrounds for a lower-contrast appearance.
+
+<Canvas of={StoryProgressStories.Subtle} />
+
+## Segment positions
+
+The component handles edge cases like the first and last segments gracefully.
+
+<Canvas of={StoryProgressStories.FirstSegment} />
+
+<Canvas of={StoryProgressStories.LastSegment} />
+
+## Many segments
+
+Works with any segment count. Segments share available width equally.
+
+<Canvas of={StoryProgressStories.ManySegments} />
+
+## Accessibility
+
+- Uses `role="progressbar"` with `aria-valuemin`, `aria-valuemax`, and `aria-valuenow`.
+- Provides an `aria-label` describing the current segment and percentage.
+
+## Props
+
+<ArgTypes of={StoryProgressStories} />

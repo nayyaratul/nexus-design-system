@@ -1,0 +1,45 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as TextareaStories from './Textarea.stories';
+
+<Meta of={TextareaStories} />
+
+# Textarea
+
+Multi-line text input for longer form content like descriptions, comments, or notes. Wraps a native `<textarea>` with consistent styling.
+
+<Primary />
+
+<Controls />
+
+## Sizes
+
+Three sizes that align with the Input component for visual consistency in forms.
+
+<Canvas of={TextareaStories.Sizes} />
+
+## States
+
+The `error` prop applies a red border and sets `aria-invalid`. The `disabled` prop prevents interaction.
+
+<Canvas of={TextareaStories.States} />
+
+## Resize Options
+
+Control whether users can resize the textarea.
+
+- **vertical** (default) — Users can adjust height only.
+- **both** — Free resize in both directions.
+- **none** — Fixed size, useful for constrained layouts.
+
+<Canvas of={TextareaStories.ResizeOptions} />
+
+## Accessibility
+
+- Renders a native `<textarea>` with full keyboard support.
+- Sets `aria-invalid` when `error` is true.
+- Always pair with a `<Label>` using matching `htmlFor`/`id` attributes.
+- The `rows` prop sets the initial visible height.
+
+## Props
+
+<ArgTypes of={TextareaStories} />

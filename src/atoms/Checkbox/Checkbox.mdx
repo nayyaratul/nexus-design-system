@@ -1,0 +1,53 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as CheckboxStories from './Checkbox.stories';
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+
+Toggle control for binary or indeterminate selections. Built on Radix UI's Checkbox primitive for robust keyboard and screen reader support.
+
+<Primary />
+
+<Controls />
+
+## Checked
+
+Standard checked state with a checkmark icon.
+
+<Canvas of={CheckboxStories.Checked} />
+
+## Indeterminate
+
+Pass `checked="indeterminate"` for parent checkboxes where only some children are selected. Displays a minus icon.
+
+<Canvas of={CheckboxStories.Indeterminate} />
+
+## Sizes
+
+Two sizes: `sm` for dense UIs and `md` as the default.
+
+<Canvas of={CheckboxStories.Sizes} />
+
+## States
+
+All visual states at a glance: unchecked, checked, indeterminate, disabled unchecked, and disabled checked.
+
+<Canvas of={CheckboxStories.States} />
+
+## Interactive Example
+
+A checkbox paired with a `<label>` for a real-world form pattern.
+
+<Canvas of={CheckboxStories.Interactive} />
+
+## Accessibility
+
+- Built on `@radix-ui/react-checkbox`, which manages `aria-checked` (including the `mixed` state for indeterminate).
+- Always pair with a visible `<label>` linked by `id`/`htmlFor`, or provide an `aria-label`.
+- Supports `disabled` and `required` attributes natively.
+- Full keyboard support: `Space` toggles the checkbox.
+
+## Props
+
+<ArgTypes of={CheckboxStories} />

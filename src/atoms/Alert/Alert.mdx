@@ -1,0 +1,62 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as AlertStories from './Alert.stories';
+
+<Meta of={AlertStories} />
+
+# Alert
+
+Alerts communicate important messages to the user. They appear inline and are not dismissible by default, ensuring critical information is seen.
+
+<Primary />
+
+<Controls />
+
+## Variants
+
+Each variant maps to a semantic meaning with a matching icon and colour scheme.
+
+- **Info** — neutral information or tips. Uses the info icon.
+- **Success** — confirms a completed action. Uses the check-circle icon.
+- **Warning** — caution before a potentially risky action. Uses the triangle icon.
+- **Error** — something went wrong and needs attention. Uses the x-circle icon.
+
+<Canvas of={AlertStories.Variants} />
+
+## Dismissible
+
+Set `dismissible` to show a close button. Provide an `onDismiss` callback to handle removal.
+
+<Canvas of={AlertStories.Dismissible} />
+
+## Title Only
+
+Alerts work with just a title when no additional detail is needed. The body is optional.
+
+<Canvas of={AlertStories.TitleOnly} />
+
+## Body Only
+
+Conversely, you can omit the title for simple inline messages.
+
+<Canvas of={AlertStories.BodyOnly} />
+
+## With Actions
+
+Use the `action` prop to add buttons inside the alert. This is useful for prompting the user to take immediate action in response to the message.
+
+<Canvas of={AlertStories.WithAction} />
+
+## Custom Icons
+
+By default, each variant renders its own icon. Override this by passing a custom component or element via the `icon` prop. Set `icon={null}` to remove the icon entirely.
+
+## Accessibility
+
+- Renders with `role="alert"`, which causes screen readers to announce the content immediately.
+- Dismiss button includes `aria-label="Dismiss alert"`.
+- Colour is never the sole indicator — each variant has a distinct icon.
+- Action buttons inside alerts remain focusable and keyboard-accessible.
+
+## Props
+
+<ArgTypes of={AlertStories} />

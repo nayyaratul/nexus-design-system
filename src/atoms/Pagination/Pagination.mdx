@@ -1,0 +1,54 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as PaginationStories from './Pagination.stories';
+
+<Meta of={PaginationStories} />
+
+# Pagination
+
+A page navigation control with numbered buttons, ellipsis truncation, and previous/next arrows. Automatically computes which page numbers to display based on the current page, total pages, and sibling count.
+
+<Primary />
+
+<Controls />
+
+## Many Pages
+
+When the total page count is high, boundary pages and sibling pages are shown with ellipsis in between to keep the control compact.
+
+<Canvas of={PaginationStories.ManyPages} />
+
+## Sizes
+
+Three sizes are available: `sm`, `md` (default), and `lg`.
+
+<Canvas of={PaginationStories.Sizes} />
+
+## Without Previous/Next Arrows
+
+Set `showPrevNext={false}` to hide the chevron arrows and show only numbered page buttons.
+
+<Canvas of={PaginationStories.NoPrevNext} />
+
+## Few Pages
+
+When total pages fit within the display threshold, all page numbers render without ellipsis.
+
+<Canvas of={PaginationStories.FewPages} />
+
+## Disabled
+
+A disabled pagination control prevents all interaction and is visually muted.
+
+<Canvas of={PaginationStories.Disabled} />
+
+## Accessibility
+
+- Wrapped in a `<nav>` element with `aria-label="Pagination"`.
+- The active page button uses `aria-current="page"`.
+- Previous and next buttons have descriptive `aria-label` attributes.
+- Disabled buttons set both `disabled` and `aria-disabled="true"`.
+- Ellipsis elements are hidden from assistive technology with `aria-hidden="true"`.
+
+## Props
+
+<ArgTypes of={PaginationStories} />

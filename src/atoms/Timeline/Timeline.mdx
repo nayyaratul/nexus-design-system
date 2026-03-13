@@ -1,0 +1,52 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as TimelineStories from './Timeline.stories';
+
+<Meta of={TimelineStories} />
+
+# Timeline
+
+Displays a chronological sequence of events with markers and connectors. Supports vertical and horizontal orientations, multiple marker styles (dot, ring, icon), and status-based colour coding. Compose with `Timeline` and `TimelineItem`.
+
+<Primary />
+
+<Controls />
+
+## With Icons
+
+Set `marker="icon"` and pass an icon element to replace the default dot with a custom icon per item.
+
+<Canvas of={TimelineStories.WithIcons} />
+
+## Status Variants
+
+Use the `status` prop on each `TimelineItem` to colour-code events: `success`, `warning`, `error`, `info`, or `default`.
+
+<Canvas of={TimelineStories.StatusVariants} />
+
+## Alternate Layout
+
+Use `variant="alternate"` to stagger items on alternating sides of the connector line, creating a centred timeline.
+
+<Canvas of={TimelineStories.Alternate} />
+
+## Horizontal Orientation
+
+Set `orientation="horizontal"` for a left-to-right flow. Useful for pipeline or workflow visualisations.
+
+<Canvas of={TimelineStories.Horizontal} />
+
+## Ring Marker
+
+Use `marker="ring"` for an outlined circular marker instead of the default filled dot.
+
+<Canvas of={TimelineStories.RingMarker} />
+
+## Accessibility
+
+- The container uses `role="list"` and each item uses `role="listitem"` for correct list semantics.
+- Orientation is exposed via `data-orientation` for CSS and testing hooks.
+- Status colours are supplemented by labels; ensure each item has a descriptive `label` so status is not communicated by colour alone.
+
+## Props
+
+<ArgTypes of={TimelineStories} />

@@ -1,0 +1,40 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as RadioGroupStories from './RadioGroup.stories';
+
+<Meta of={RadioGroupStories} />
+
+# RadioGroup
+
+A set of mutually exclusive options where only one can be selected at a time. Built on Radix UI, it composes `RadioGroup` with `RadioItem` children.
+
+<Primary />
+
+<Controls />
+
+## Horizontal Layout
+
+Set `orientation="horizontal"` to arrange items in a row.
+
+<Canvas of={RadioGroupStories.Horizontal} />
+
+## Disabled Group
+
+Disable the entire group by passing `disabled` to `RadioGroup`.
+
+<Canvas of={RadioGroupStories.Disabled} />
+
+## Individual Disabled Items
+
+Disable specific options by passing `disabled` to individual `RadioItem` components while keeping the rest interactive.
+
+<Canvas of={RadioGroupStories.WithDisabledItem} />
+
+## Accessibility
+
+- Built on `@radix-ui/react-radio-group`, which provides `role="radiogroup"` and `role="radio"` with proper `aria-checked` state.
+- Keyboard: arrow keys move focus between items; `Space` selects the focused item.
+- `orientation` prop informs assistive technology of the layout direction.
+
+## Props
+
+<ArgTypes of={RadioGroupStories} />

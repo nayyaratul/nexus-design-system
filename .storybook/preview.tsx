@@ -79,6 +79,7 @@ const preview: Preview = {
       );
     },
   ],
+  tags: ['autodocs'],
   parameters: {
     controls: {
       matchers: {
@@ -90,6 +91,11 @@ const preview: Preview = {
       test: 'todo'
     },
     layout: 'fullscreen',
+    options: {
+      storySort: {
+        method: 'alphabetical',
+      },
+    },
   },
 };
 

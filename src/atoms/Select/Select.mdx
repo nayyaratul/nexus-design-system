@@ -1,0 +1,47 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as SelectStories from './Select.stories';
+
+<Meta of={SelectStories} />
+
+# Select
+
+A dropdown for choosing a single value from a list. Built on Radix UI, it composes `Select`, `SelectTrigger`, `SelectContent`, and `SelectItem`.
+
+<Primary />
+
+<Controls />
+
+## Sizes
+
+The trigger supports `sm`, `md` (default), and `lg` sizes to match surrounding form controls.
+
+<Canvas of={SelectStories.Sizes} />
+
+## Grouped Options
+
+Use `SelectGroup` and `SelectLabel` to organize related options under headings.
+
+<Canvas of={SelectStories.WithGroups} />
+
+## Error State
+
+Pass `error` to `SelectTrigger` to indicate validation failure. This sets `aria-invalid` on the trigger.
+
+<Canvas of={SelectStories.Error} />
+
+## Disabled
+
+Pass `disabled` to the `Select` root to prevent interaction.
+
+<Canvas of={SelectStories.Disabled} />
+
+## Accessibility
+
+- Built on `@radix-ui/react-select`, which provides full ARIA listbox semantics.
+- Keyboard: `Space`/`Enter` opens the menu; arrow keys navigate items; `Escape` closes.
+- `aria-invalid` is set when the `error` prop is true.
+- A check icon marks the currently selected item.
+
+## Props
+
+<ArgTypes of={SelectStories} />

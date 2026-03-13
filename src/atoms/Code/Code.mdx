@@ -1,0 +1,40 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as CodeStories from './Code.stories';
+
+<Meta of={CodeStories} />
+
+# Code
+
+Renders code snippets in inline or block format. The block variant supports a one-click copy button for easy clipboard access.
+
+<Primary />
+
+<Controls />
+
+## Inline
+
+The default `variant="inline"` renders a `<code>` element styled to blend with surrounding body text.
+
+<Canvas of={CodeStories.Inline} />
+
+## Block
+
+Use `variant="block"` for multi-line code samples. Content is rendered inside a `<pre>` with horizontal scroll for long lines.
+
+<Canvas of={CodeStories.Block} />
+
+## Block with Copy
+
+Add `copyable` to show a copy-to-clipboard button in the top-right corner. The icon swaps to a checkmark for two seconds after a successful copy.
+
+<Canvas of={CodeStories.BlockWithCopy} />
+
+## Accessibility
+
+- The copy button has `aria-label="Copy code"` for screen reader users.
+- Uses semantic `<code>` and `<pre>` elements so assistive technology can identify code content.
+- Copy feedback (check icon) is visual only; consider pairing with a live-region announcement in critical flows.
+
+## Props
+
+<ArgTypes of={CodeStories} />

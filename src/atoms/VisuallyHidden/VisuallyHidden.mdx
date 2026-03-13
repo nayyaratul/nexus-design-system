@@ -1,0 +1,34 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as VisuallyHiddenStories from './VisuallyHidden.stories';
+
+<Meta of={VisuallyHiddenStories} />
+
+# VisuallyHidden
+
+Hides content visually while keeping it accessible to screen readers. Essential for labelling icon-only buttons, providing skip-links, and adding context that sighted users infer from layout.
+
+<Primary />
+
+<Controls />
+
+## As Child
+
+When `asChild` is true, the visually-hidden styles are merged onto the single child element instead of wrapping it in an extra `<span>`. Useful when you need to hide an existing element without altering the DOM structure.
+
+<Canvas of={VisuallyHiddenStories.AsChild} />
+
+## Icon Button Pattern
+
+The most common use case: pairing an icon button with a VisuallyHidden label so screen readers announce the button's purpose.
+
+<Canvas of={VisuallyHiddenStories.WithIconButton} />
+
+## Accessibility
+
+- Renders content that is clipped to a 1px area and hidden from visual rendering but remains in the accessibility tree.
+- Does **not** use `display: none` or `visibility: hidden`, which would remove the element from assistive technology.
+- Use this component instead of `aria-label` when you need richer hidden content (e.g. full sentences).
+
+## Props
+
+<ArgTypes of={VisuallyHiddenStories} />

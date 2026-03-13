@@ -1,0 +1,45 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as AspectRatioStories from './AspectRatio.stories';
+
+<Meta of={AspectRatioStories} />
+
+# AspectRatio
+
+Constrains child content to a specific width-to-height ratio. Built on Radix UI's AspectRatio primitive. Use it to maintain consistent proportions for images, videos, and placeholder areas across responsive layouts.
+
+<Primary />
+
+<Controls />
+
+## 16 : 9
+
+The standard widescreen ratio, ideal for video embeds and hero images.
+
+<Canvas of={AspectRatioStories.SixteenNine} />
+
+## Square (1 : 1)
+
+A square aspect ratio, commonly used for avatars and thumbnail grids.
+
+<Canvas of={AspectRatioStories.Square} />
+
+## Portrait (9 : 16)
+
+A tall portrait ratio for mobile-first media and vertical card layouts.
+
+<Canvas of={AspectRatioStories.NineSixteen} />
+
+## With Image
+
+Pass any content as children. Images should use `object-fit: cover` to fill the container without distortion.
+
+<Canvas of={AspectRatioStories.WithImage} />
+
+## Accessibility
+
+- This component is purely presentational and does not introduce any ARIA roles.
+- Ensure images inside the container have appropriate `alt` text.
+
+## Props
+
+<ArgTypes of={AspectRatioStories} />

@@ -1,0 +1,52 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as SliderStories from './Slider.stories';
+
+<Meta of={SliderStories} />
+
+# Slider
+
+A draggable range input built on Radix UI's Slider primitive. Supports single-value and multi-thumb range selection with keyboard navigation.
+
+<Primary />
+
+<Controls />
+
+## Range Selection
+
+Pass two values in the `defaultValue` array to create a range slider with two thumbs.
+
+<Canvas of={SliderStories.Range} />
+
+## Show Value
+
+Enable `showValue` to display the current numeric value alongside the slider. For range sliders, both values are shown separated by a dash.
+
+<Canvas of={SliderStories.WithValue} />
+
+## Small Size
+
+Use `size="sm"` for a more compact slider suited to dense UIs or sidebars.
+
+<Canvas of={SliderStories.Small} />
+
+## Stepped
+
+Set the `step` prop to snap the thumb to fixed increments. Combine with `showValue` to make discrete steps clear to the user.
+
+<Canvas of={SliderStories.Stepped} />
+
+## Disabled
+
+A disabled slider is non-interactive and visually muted.
+
+<Canvas of={SliderStories.Disabled} />
+
+## Accessibility
+
+- Built on Radix `Slider`, which provides `role="slider"`, `aria-valuemin`, `aria-valuemax`, and `aria-valuenow` automatically.
+- Keyboard: `Arrow Left / Right` adjusts value by one step; `Home / End` jumps to min / max.
+- Each thumb is individually focusable and operable with the keyboard.
+
+## Props
+
+<ArgTypes of={SliderStories} />

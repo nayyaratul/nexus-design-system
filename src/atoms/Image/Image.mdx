@@ -1,0 +1,40 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as ImageStories from './Image.stories';
+
+<Meta of={ImageStories} />
+
+# Image
+
+A progressive image component with built-in loading skeleton, blur-up effect, and error fallback. It handles lazy loading automatically.
+
+<Primary />
+
+<Controls />
+
+## Letterboxed
+
+Landscape images are contained within the wrapper, preserving aspect ratio.
+
+<Canvas of={ImageStories.Letterboxed} />
+
+## Portrait
+
+Portrait images are pillarboxed within the container, keeping the full image visible.
+
+<Canvas of={ImageStories.Portrait} />
+
+## Error State
+
+When the image fails to load (or no `src` is provided), a fallback icon is shown instead of a broken image.
+
+<Canvas of={ImageStories.ErrorState} />
+
+## Accessibility
+
+- Always provide a meaningful `alt` attribute describing the image content.
+- Uses native `loading="lazy"` for deferred loading.
+- The skeleton loader is hidden from screen readers with `aria-hidden`.
+
+## Props
+
+<ArgTypes of={ImageStories} />

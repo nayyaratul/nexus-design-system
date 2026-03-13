@@ -1,0 +1,54 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as FormFieldStories from './FormField.stories';
+
+<Meta of={FormFieldStories} />
+
+# FormField
+
+A layout wrapper that pairs a label, hint text, and error message with any form control. Use it to build consistent, accessible form layouts.
+
+<Primary />
+
+<Controls />
+
+## With hint
+
+Hint text appears below the input to provide additional guidance.
+
+<Canvas of={FormFieldStories.WithHint} />
+
+## With error
+
+When `error` is provided, it replaces the hint text and is announced via `role="alert"`.
+
+<Canvas of={FormFieldStories.WithError} />
+
+## Disabled
+
+The disabled state visually mutes the label and passes through to child controls.
+
+<Canvas of={FormFieldStories.Disabled} />
+
+## With InputField icons
+
+Composes with `InputField` for search, password, and date inputs.
+
+<Canvas of={FormFieldStories.WithInputFieldIcons} />
+
+## With Textarea
+
+<Canvas of={FormFieldStories.WithTextarea} />
+
+## With Select
+
+<Canvas of={FormFieldStories.WithSelect} />
+
+## Accessibility
+
+- Renders a `<label>` element linked to the control via `htmlFor`.
+- Error messages use `role="alert"` for immediate screen-reader announcement.
+- Required fields display a visual indicator on the label.
+
+## Props
+
+<ArgTypes of={FormFieldStories} />

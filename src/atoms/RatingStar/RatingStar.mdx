@@ -1,0 +1,42 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as RatingStarStories from './RatingStar.stories';
+
+<Meta of={RatingStarStories} />
+
+# RatingStar
+
+A single star glyph with three visual states: `filled`, `empty`, and `half`. Compose multiple instances to build a full rating display.
+
+<Primary />
+
+<Controls />
+
+## All states
+
+<Canvas of={RatingStarStories.AllStates} />
+
+## Half star
+
+The half state layers a clipped filled star over an empty star to achieve the partial-fill effect.
+
+<Canvas of={RatingStarStories.Half} />
+
+## Sizes
+
+Five sizes from `xs` to `xl` for different contexts.
+
+<Canvas of={RatingStarStories.Sizes} />
+
+## Disabled
+
+Disabled stars are visually muted and typically used for read-only ratings.
+
+<Canvas of={RatingStarStories.Disabled} />
+
+## Accessibility
+
+- Each star is marked `aria-hidden` since it is a decorative glyph. The parent rating component should provide an accessible label (e.g., "4 out of 5 stars").
+
+## Props
+
+<ArgTypes of={RatingStarStories} />

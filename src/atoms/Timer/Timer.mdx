@@ -1,0 +1,50 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as TimerStories from './Timer.stories';
+
+<Meta of={TimerStories} />
+
+# Timer
+
+Displays a formatted time value, typically used for countdowns or elapsed durations. Accepts a number of seconds or a pre-formatted string.
+
+<Primary />
+
+<Controls />
+
+## Formats
+
+Three display formats are available depending on the granularity you need.
+
+- **d: h: m** — days, hours, and minutes (default).
+- **mm:ss** — minutes and seconds.
+- **hh:mm:ss** — hours, minutes, and seconds.
+
+<Canvas of={TimerStories.DaysHoursMinutes} />
+
+<Canvas of={TimerStories.FormatMmSs} />
+
+<Canvas of={TimerStories.FormatHhMmSs} />
+
+## Sizes
+
+<Canvas of={TimerStories.Sizes} />
+
+## Variants
+
+Use `variant` to convey urgency. `warning` and `danger` apply colour cues for time-sensitive states.
+
+<Canvas of={TimerStories.Variants} />
+
+## String value
+
+Pass a string directly to `value` to bypass formatting entirely, useful for placeholder states like `"—"`.
+
+<Canvas of={TimerStories.StringValue} />
+
+## Accessibility
+
+- Renders a `<span>` with `role="timer"` and `aria-live="polite"` so screen readers announce value changes.
+
+## Props
+
+<ArgTypes of={TimerStories} />

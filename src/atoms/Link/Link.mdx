@@ -1,0 +1,46 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as LinkStories from './Link.stories';
+
+<Meta of={LinkStories} />
+
+# Link
+
+A styled anchor element with support for external links, variants, and disabled state. Automatically appends an external-link icon and sets secure `rel` attributes for outbound URLs.
+
+<Primary />
+
+<Controls />
+
+## Subtle Variant
+
+Use `variant="subtle"` for links that should be less visually prominent, such as secondary navigation or metadata.
+
+<Canvas of={LinkStories.Subtle} />
+
+## External Link
+
+When `external` is true (or `target="_blank"` is set), the component adds `rel="noopener noreferrer"` and renders an external-link icon after the label.
+
+<Canvas of={LinkStories.External} />
+
+## Disabled
+
+A disabled link prevents navigation, removes it from the tab order, and is marked with `aria-disabled`.
+
+<Canvas of={LinkStories.Disabled} />
+
+## Inline with Text
+
+Links inherit the surrounding font size and flow naturally within body text.
+
+<Canvas of={LinkStories.InlineWithText} />
+
+## Accessibility
+
+- Uses a native `<a>` element for correct semantics and browser behaviour.
+- External links automatically include `rel="noopener noreferrer"` to prevent reverse tabnabbing.
+- Disabled links set `aria-disabled="true"` and `tabIndex={-1}` instead of relying on a non-standard `disabled` attribute on anchors.
+
+## Props
+
+<ArgTypes of={LinkStories} />

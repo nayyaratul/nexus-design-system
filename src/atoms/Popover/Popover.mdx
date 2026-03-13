@@ -1,0 +1,41 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as PopoverStories from './Popover.stories';
+
+<Meta of={PopoverStories} />
+
+# Popover
+
+A floating panel that opens on trigger click. Built on Radix UI's Popover primitive with portal rendering, optional close button, and arrow indicator. Use it for contextual menus, settings panels, or any non-modal overlay.
+
+<Primary />
+
+<Controls />
+
+## Placement Sides
+
+The `side` prop controls where the popover appears relative to the trigger. Available values: `top`, `right`, `bottom` (default), and `left`.
+
+<Canvas of={PopoverStories.Sides} />
+
+## Without Close Button
+
+Set `showClose={false}` to remove the built-in close button. Users can still dismiss the popover by clicking outside.
+
+<Canvas of={PopoverStories.WithoutClose} />
+
+## Rich Content
+
+Popovers can contain forms, inputs, and structured layouts. Focus is trapped inside the content panel while open.
+
+<Canvas of={PopoverStories.RichContent} />
+
+## Accessibility
+
+- Built on Radix Popover, which manages focus trapping and return-focus behaviour automatically.
+- The close button has an `aria-label="Close"`.
+- Pressing `Escape` dismisses the popover and returns focus to the trigger.
+- Content is rendered in a portal so it is not clipped by overflow containers.
+
+## Props
+
+<ArgTypes of={PopoverStories} />

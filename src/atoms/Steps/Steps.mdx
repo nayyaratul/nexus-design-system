@@ -1,0 +1,52 @@
+import { Meta, Story, Canvas, Controls, ArgTypes, Primary } from '@storybook/addon-docs/blocks';
+import * as StepsStories from './Steps.stories';
+
+<Meta of={StepsStories} />
+
+# Steps
+
+A progress stepper that displays a sequence of numbered or icon-based steps with connectors. Each step automatically derives its status (complete, active, or upcoming) from the `activeStep` index. Compose with `Steps` and `StepItem`.
+
+<Primary />
+
+<Controls />
+
+## All Complete
+
+When `activeStep` exceeds the number of steps, every step shows as complete with a checkmark icon.
+
+<Canvas of={StepsStories.AllComplete} />
+
+## With Icons
+
+Pass a Lucide icon component to the `icon` prop on each `StepItem` to replace the default step number. Completed steps still show a checkmark.
+
+<Canvas of={StepsStories.WithIcons} />
+
+## Vertical Orientation
+
+Use `orientation="vertical"` for sidebar wizards or order-tracking UIs where vertical space is more appropriate.
+
+<Canvas of={StepsStories.Vertical} />
+
+## Sizes
+
+Three sizes are available: `sm`, `md` (default), and `lg`. The marker, icon, and connector scale accordingly.
+
+<Canvas of={StepsStories.Sizes} />
+
+## With Content
+
+In vertical orientation, each `StepItem` can accept children for additional body content beneath the label and description.
+
+<Canvas of={StepsStories.WithContent} />
+
+## Accessibility
+
+- The container uses `role="list"` and each step uses `role="listitem"`.
+- The active step is marked with `aria-current="step"`.
+- Step status (complete, active, upcoming) is communicated visually through colour and icon; pair with descriptive labels for screen reader clarity.
+
+## Props
+
+<ArgTypes of={StepsStories} />
