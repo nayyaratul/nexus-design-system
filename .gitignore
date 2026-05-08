@@ -4,6 +4,7 @@ Thumbs.db
 
 # Local scripts / plugins
 .local/
+grid-screenshot.mjs
 
 # Addon icons (generated / local assets)
 addon-icons/
