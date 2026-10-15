@@ -1,7 +1,9 @@
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from './Tooltip';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Tooltip',
+  parameters: { design: figmaDesign('Atoms/Tooltip') },
   argTypes: {
     side: { control: 'select', options: ['top', 'right', 'bottom', 'left'] },
   },

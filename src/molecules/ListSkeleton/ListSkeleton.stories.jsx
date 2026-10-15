@@ -1,7 +1,9 @@
 import { ListSkeleton } from './ListSkeleton';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/ListSkeleton',
+  parameters: { design: figmaDesign('Molecules/ListSkeleton') },
   component: ListSkeleton,
   argTypes: {
     layout: { control: 'select', options: ['list', 'card'] },

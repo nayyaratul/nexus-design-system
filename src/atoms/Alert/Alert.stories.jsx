@@ -1,8 +1,10 @@
 import { Alert } from './Alert';
 import { Button } from '../Button/Button';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Alert',
+  parameters: { design: figmaDesign('Atoms/Alert') },
   component: Alert,
   argTypes: {
     variant: { control: 'select', options: ['info', 'success', 'warning', 'error'] },

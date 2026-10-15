@@ -1,8 +1,10 @@
 import { InputField } from './InputField';
 import { Icon } from '../Icon/Icon';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/InputField',
+  parameters: { design: figmaDesign('Atoms/InputField') },
   component: InputField,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

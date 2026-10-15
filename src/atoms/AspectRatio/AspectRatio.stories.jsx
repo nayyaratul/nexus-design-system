@@ -1,7 +1,9 @@
 import { AspectRatio } from './AspectRatio';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/AspectRatio',
+  parameters: { design: figmaDesign('Atoms/AspectRatio') },
   component: AspectRatio,
   argTypes: {
     ratio: { control: 'number' },

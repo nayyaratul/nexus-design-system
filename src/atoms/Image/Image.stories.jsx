@@ -1,7 +1,9 @@
 import { Image } from './Image';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Image',
+  parameters: { design: figmaDesign('Atoms/Image') },
   component: Image,
   argTypes: {
     src: { control: 'text' },

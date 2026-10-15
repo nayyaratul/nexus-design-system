@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Menu } from './Menu';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/Menu',
+  parameters: { design: figmaDesign('Molecules/Menu') },
   component: Menu,
 };
 

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Rating } from './Rating';
 import { FormField } from '../../atoms/FormField/FormField';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/Rating',
+  parameters: { design: figmaDesign('Molecules/Rating') },
   component: Rating,
   argTypes: {
     max: { control: 'number' },

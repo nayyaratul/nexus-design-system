@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Calendar } from './Calendar';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Calendar',
+  parameters: { design: figmaDesign('Atoms/Calendar') },
   component: Calendar,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

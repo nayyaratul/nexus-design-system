@@ -1,0 +1,19 @@
+{
+  "codeConnect": {
+    "parser": "react",
+    "include": [
+      "src/figma/connect/**/*.figma.jsx",
+      "src/atoms/**/*.jsx",
+      "src/molecules/**/*.jsx"
+    ],
+    "exclude": ["**/*.stories.jsx", "node_modules/**"],
+    "label": "React",
+    "importPaths": {
+      "src/atoms/*": "src/atoms",
+      "src/molecules/*": "src/molecules"
+    },
+    "documentUrlSubstitutions": {
+      "<FIGMA_NEXUS>": "https://www.figma.com/design/jkpCTJ7uuwomi9SDhIIIDD/Nexus-System-3.0"
+    }
+  }
+}

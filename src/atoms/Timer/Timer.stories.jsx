@@ -1,7 +1,9 @@
 import { Timer } from './Timer';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Timer',
+  parameters: { design: figmaDesign('Atoms/Timer') },
   component: Timer,
   argTypes: {
     value: { control: 'number' },

@@ -1,8 +1,10 @@
 import { EmptyState } from './EmptyState';
 import { Tag } from '../../atoms/Tag/Tag';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/EmptyState',
+  parameters: { design: figmaDesign('Molecules/EmptyState') },
   component: EmptyState,
   argTypes: {
     variant: { control: 'select', options: ['default', 'no-results', 'error', 'upgrade'] },

@@ -1,7 +1,9 @@
 import { Skeleton } from './Skeleton';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Skeleton',
+  parameters: { design: figmaDesign('Atoms/Skeleton') },
   component: Skeleton,
   argTypes: {
     width: { control: 'text' },

@@ -1,8 +1,10 @@
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './Accordion';
 import { HelpCircle, Settings } from 'lucide-react';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Accordion',
+  parameters: { design: figmaDesign('Atoms/Accordion') },
   component: Accordion,
   subcomponents: { AccordionItem, AccordionTrigger, AccordionContent },
   argTypes: {

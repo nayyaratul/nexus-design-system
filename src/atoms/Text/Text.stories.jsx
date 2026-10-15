@@ -1,7 +1,9 @@
 import { Text } from './Text';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Text',
+  parameters: { design: figmaDesign('Atoms/Text') },
   component: Text,
   argTypes: {
     variant: { control: 'select', options: ['body', 'bodyLg', 'caption', 'micro', 'overline'] },

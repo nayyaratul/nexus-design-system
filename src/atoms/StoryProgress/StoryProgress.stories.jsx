@@ -1,7 +1,9 @@
 import { StoryProgress } from './StoryProgress';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/StoryProgress',
+  parameters: { design: figmaDesign('Atoms/StoryProgress') },
   component: StoryProgress,
   argTypes: {
     segments: { control: 'number' },

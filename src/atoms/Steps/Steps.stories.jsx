@@ -1,8 +1,10 @@
 import { Steps, StepItem } from './Steps';
 import { User, CreditCard, Check, Package } from 'lucide-react';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Steps',
+  parameters: { design: figmaDesign('Atoms/Steps') },
   component: Steps,
   argTypes: {
     activeStep: { control: { type: 'number', min: 0, max: 4 } },

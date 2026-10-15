@@ -3,9 +3,11 @@ import { Input } from '../Input/Input';
 import { InputField } from '../InputField/InputField';
 import { Textarea } from '../Textarea/Textarea';
 import { Select, SelectTrigger, SelectContent, SelectItem } from '../Select/Select';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/FormField',
+  parameters: { design: figmaDesign('Atoms/FormField') },
   component: FormField,
   argTypes: {
     label: { control: 'text' },

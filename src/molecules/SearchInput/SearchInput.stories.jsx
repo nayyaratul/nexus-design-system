@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { SearchInput } from './SearchInput';
 import { FormField } from '../../atoms/FormField/FormField';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/SearchInput',
+  parameters: { design: figmaDesign('Molecules/SearchInput') },
   component: SearchInput,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

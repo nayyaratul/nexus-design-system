@@ -1,8 +1,10 @@
 import { Timeline, TimelineItem } from './Timeline';
 import { Check, AlertCircle, Clock, Star, Zap } from 'lucide-react';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Timeline',
+  parameters: { design: figmaDesign('Atoms/Timeline') },
   component: Timeline,
   argTypes: {
     orientation: { control: 'select', options: ['vertical', 'horizontal'] },

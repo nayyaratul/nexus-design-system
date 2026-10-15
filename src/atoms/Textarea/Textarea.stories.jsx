@@ -1,7 +1,9 @@
 import { Textarea } from './Textarea';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Textarea',
+  parameters: { design: figmaDesign('Atoms/Textarea') },
   component: Textarea,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

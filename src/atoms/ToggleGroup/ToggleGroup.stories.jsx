@@ -1,7 +1,8 @@
 import { ToggleGroup, ToggleGroupItem } from './ToggleGroup';
 import { AlignLeft, AlignCenter, AlignRight, AlignJustify, Bold, Italic, Underline } from 'lucide-react';
+import { figmaDesign } from '../../figma/figmaLinks';
 
-export default { title: 'Atoms/ToggleGroup' };
+export default { title: 'Atoms/ToggleGroup', parameters: { design: figmaDesign('Atoms/ToggleGroup') } };
 
 export const SingleSelect = {
   render: () => (

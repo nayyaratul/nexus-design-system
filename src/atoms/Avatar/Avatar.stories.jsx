@@ -1,7 +1,9 @@
 import { Avatar } from './Avatar';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Avatar',
+  parameters: { design: figmaDesign('Atoms/Avatar') },
   component: Avatar,
   argTypes: {
     size: { control: 'select', options: ['xs', 'sm', 'md', 'lg', 'xl'] },

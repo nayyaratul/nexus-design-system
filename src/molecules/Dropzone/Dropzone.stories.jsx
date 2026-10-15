@@ -1,7 +1,9 @@
 import { Dropzone } from './Dropzone';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/Dropzone',
+  parameters: { design: figmaDesign('Molecules/Dropzone') },
   component: Dropzone,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

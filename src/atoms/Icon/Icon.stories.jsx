@@ -1,7 +1,9 @@
 import { Icon } from './Icon';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Icon',
+  parameters: { design: figmaDesign('Atoms/Icon') },
   component: Icon,
   argTypes: {
     name: { control: 'text' },

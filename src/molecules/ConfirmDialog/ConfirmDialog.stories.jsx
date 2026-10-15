@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { ConfirmDialog } from './ConfirmDialog';
 import { Button } from '../../atoms/Button/Button';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/ConfirmDialog',
+  parameters: { design: figmaDesign('Molecules/ConfirmDialog') },
   component: ConfirmDialog,
   argTypes: {
     intent: { control: 'select', options: ['default', 'destructive', 'success', 'warning'] },

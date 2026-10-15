@@ -1,7 +1,9 @@
 import { Divider } from './Divider';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Divider',
+  parameters: { design: figmaDesign('Atoms/Divider') },
   component: Divider,
   argTypes: {
     orientation: { control: 'select', options: ['horizontal', 'vertical'] },

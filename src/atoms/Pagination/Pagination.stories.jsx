@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Pagination } from './Pagination';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Pagination',
+  parameters: { design: figmaDesign('Atoms/Pagination') },
   component: Pagination,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

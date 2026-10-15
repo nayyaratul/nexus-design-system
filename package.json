@@ -9,7 +9,9 @@
     "preview": "astro preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "chromatic"
+    "chromatic": "chromatic",
+    "figma:connect:parse": "figma connect parse",
+    "figma:connect:publish": "figma connect publish"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
@@ -41,7 +43,9 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.1",
+    "@figma/code-connect": "^1.5.3",
     "@storybook/addon-a11y": "^10.2.15",
+    "@storybook/addon-designs": "^11.1.4",
     "@storybook/addon-docs": "^10.2.15",
     "@storybook/addon-onboarding": "^10.2.15",
     "@storybook/addon-themes": "^10.2.17",
