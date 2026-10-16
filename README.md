@@ -26,7 +26,7 @@ src/
 
 ## Figma
 
-The Nexus 3.0 Figma library ([open in Figma](https://www.figma.com/design/jkpCTJ7uuwomi9SDhIIIDD/Nexus-System-3.0)) mirrors this repo: variables for every token, a component for every atom and molecule, Storybook links on every story (Design panel) and Code Connect mappings in `src/figma/connect`. See [docs/figma.md](docs/figma.md).
+The Nexus 3.0 Figma library ([open in Figma](https://www.figma.com/design/jkpCTJ7uuwomi9SDhIIIDD/Nexus-System-3.0)) mirrors this repo: variables for every token, a component for every atom and molecule, Storybook links on every story (Design panel) and Code Connect mappings in `src/figma/connect`. Source of truth: [Bitbucket](https://bitbucket.org/bpss/nexus-design-system). See [docs/figma.md](docs/figma.md).
 
 ## Sections
 

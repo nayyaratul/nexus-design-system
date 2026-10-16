@@ -1,10 +1,11 @@
-# Figma ⇄ Storybook ⇄ GitHub
+# Figma ⇄ Storybook ⇄ Bitbucket
 
 The Nexus 3.0 Figma library mirrors this repository 1:1.
 
 | | Where |
 |---|---|
 | Figma library | [Nexus System 3.0](https://www.figma.com/design/jkpCTJ7uuwomi9SDhIIIDD/Nexus-System-3.0) |
+| Repository | [bitbucket.org/bpss/nexus-design-system](https://bitbucket.org/bpss/nexus-design-system) (mirror: GitHub `nayyaratul/nexus-design-system`, which runs the Chromatic workflow) |
 | Storybook | [Chromatic, `main`](https://main--69ae77fa398420fbe01a9f0a.chromatic.com/) |
 | Tokens | `src/styles/tokens.scss` (semantic) · `src/styles/base.css` (primitives) |
 
@@ -20,7 +21,7 @@ The Nexus 3.0 Figma library mirrors this repository 1:1.
 
 ## Links between the three
 
-- **Figma → Storybook / GitHub**: each component set has a Storybook documentation link, and its description lists the Storybook URL, the GitHub source path and the React component. Each component page header has clickable Storybook and GitHub chips.
+- **Figma → Storybook / Bitbucket**: each component set has a Storybook documentation link, and its description lists the Storybook URL, the Bitbucket source path and the React component. Each component page header has clickable Storybook and Source chips.
 - **Storybook → Figma**: `src/figma/figmaLinks.js` maps each Storybook title to its Figma node. Every story's default export sets `parameters.design`, so the **Design** panel (`@storybook/addon-designs`) opens the matching Figma component.
 - **Code → Figma (Code Connect)**: `src/figma/connect/*.figma.jsx` maps Figma variants and properties to React props. These files are configured in `figma.config.json`.
 
