@@ -51,7 +51,7 @@ figma.connect(Divider, '<FIGMA_NEXUS>?node-id=26-175', {
   props: {
     orientation: figma.enum('Orientation', { Horizontal: 'horizontal', Vertical: 'vertical' }),
     variant: figma.enum('Style', { Solid: 'solid', Dashed: 'dashed', Dotted: 'dotted' }),
-    label: figma.enum('Label', { Yes: figma.string('Label') }),
+    label: figma.enum('Label', { Yes: figma.string('Label text') }),
   },
   example: (props) => <Divider {...props} />,
 });
