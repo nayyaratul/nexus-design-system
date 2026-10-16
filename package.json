@@ -11,7 +11,7 @@
     "build-storybook": "storybook build",
     "chromatic": "chromatic",
     "figma:connect:parse": "figma connect parse",
-    "figma:connect:publish": "figma connect publish"
+    "figma:connect:publish": "figma connect publish --skip-validation --batch-size 10"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
