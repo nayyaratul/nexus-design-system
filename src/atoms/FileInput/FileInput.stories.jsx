@@ -1,8 +1,10 @@
 import { FileInput } from './FileInput';
 import { FormField } from '../FormField/FormField';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Upload File',
+  parameters: { design: figmaDesign('Atoms/Upload File') },
   component: FileInput,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

@@ -1,7 +1,9 @@
 import { Input } from './Input';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Input',
+  parameters: { design: figmaDesign('Atoms/Input') },
   component: Input,
   argTypes: {
     type: { control: 'select', options: ['text', 'email', 'number', 'password', 'search'] },

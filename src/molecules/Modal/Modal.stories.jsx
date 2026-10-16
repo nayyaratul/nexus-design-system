@@ -3,9 +3,11 @@ import { Modal } from './Modal';
 import { Button } from '../../atoms/Button/Button';
 import { Text } from '../../atoms/Text/Text';
 import { Icon } from '../../atoms/Icon/Icon';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/Modal',
+  parameters: { design: figmaDesign('Molecules/Modal') },
   component: Modal,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg', 'xl', 'fullscreen'] },

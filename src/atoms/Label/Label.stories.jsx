@@ -1,7 +1,9 @@
 import { Label } from './Label';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Label',
+  parameters: { design: figmaDesign('Atoms/Label') },
   component: Label,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md'] },

@@ -1,8 +1,10 @@
 import { Tag } from './Tag';
 import { Star, Zap, Heart } from 'lucide-react';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Tag',
+  parameters: { design: figmaDesign('Atoms/Tag') },
   component: Tag,
   argTypes: {
     variant: { control: 'select', options: ['default', 'info', 'success', 'warning', 'error'] },

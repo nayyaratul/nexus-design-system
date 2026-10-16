@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { ProgressBar } from './ProgressBar';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/ProgressBar',
+  parameters: { design: figmaDesign('Atoms/ProgressBar') },
   component: ProgressBar,
   argTypes: {
     value: { control: { type: 'range', min: 0, max: 100 } },

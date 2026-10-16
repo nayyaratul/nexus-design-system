@@ -2,9 +2,11 @@ import { Card } from './Card';
 import { Button } from '../../atoms/Button/Button';
 import { Text } from '../../atoms/Text/Text';
 import { Thumbnail } from '../../atoms/Thumbnail/Thumbnail';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/Card',
+  parameters: { design: figmaDesign('Molecules/Card') },
   component: Card,
   argTypes: {
     variant: { control: 'select', options: ['elevated', 'outlined', 'flat'] },

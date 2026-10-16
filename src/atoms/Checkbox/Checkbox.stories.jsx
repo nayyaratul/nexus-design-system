@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Checkbox } from './Checkbox';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Checkbox',
+  parameters: { design: figmaDesign('Atoms/Checkbox') },
   component: Checkbox,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md'] },

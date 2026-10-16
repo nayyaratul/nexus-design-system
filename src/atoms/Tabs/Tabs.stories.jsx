@@ -1,8 +1,10 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
 import { User, Settings, Bell, CreditCard, Shield } from 'lucide-react';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Tabs',
+  parameters: { design: figmaDesign('Atoms/Tabs') },
   component: Tabs,
   argTypes: {
     variant: { control: 'select', options: ['default', 'underline', 'pills'] },

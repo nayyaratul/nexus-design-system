@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { ToastProvider, Toast, ToastTitle, ToastDescription, ToastAction, ToastClose, ToastViewport } from './Toast';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Toast',
+  parameters: { design: figmaDesign('Atoms/Toast') },
   argTypes: {
     variant: { control: 'select', options: ['default', 'success', 'error', 'warning'] },
   },

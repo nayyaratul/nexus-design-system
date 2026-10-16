@@ -1,7 +1,9 @@
 import { RatingStar } from './RatingStar';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/RatingStar',
+  parameters: { design: figmaDesign('Atoms/RatingStar') },
   component: RatingStar,
   argTypes: {
     state: { control: 'select', options: ['filled', 'empty', 'half'] },

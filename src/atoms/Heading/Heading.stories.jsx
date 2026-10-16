@@ -1,7 +1,9 @@
 import { Heading } from './Heading';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Heading',
+  parameters: { design: figmaDesign('Atoms/Heading') },
   component: Heading,
   argTypes: {
     level: { control: { type: 'range', min: 1, max: 6, step: 1 } },

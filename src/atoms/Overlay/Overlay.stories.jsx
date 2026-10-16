@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Overlay } from './Overlay';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Overlay',
+  parameters: { design: figmaDesign('Atoms/Overlay') },
   component: Overlay,
   argTypes: {
     visible: { control: 'boolean' },

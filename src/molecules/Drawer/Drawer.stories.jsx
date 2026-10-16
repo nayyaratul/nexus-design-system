@@ -5,9 +5,11 @@ import { Text } from '../../atoms/Text/Text';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Divider } from '../../atoms/Divider/Divider';
 import styles from './Drawer.module.scss';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/Drawer',
+  parameters: { design: figmaDesign('Molecules/Drawer') },
   component: Drawer,
   argTypes: {
     placement: { control: 'select', options: ['start', 'end', 'bottom'] },

@@ -1,7 +1,9 @@
 import { Popover, PopoverTrigger, PopoverContent } from './Popover';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Popover',
+  parameters: { design: figmaDesign('Atoms/Popover') },
 };
 
 const btnStyle = { padding: '8px 16px', border: '1px solid var(--color-border-default)', borderRadius: '6px', background: 'var(--color-bg-primary)', color: 'var(--color-text-primary)', cursor: 'pointer', fontSize: '13px' };

@@ -1,7 +1,9 @@
 import { Table } from './Table';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/Table',
+  parameters: { design: figmaDesign('Molecules/Table') },
   component: Table,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

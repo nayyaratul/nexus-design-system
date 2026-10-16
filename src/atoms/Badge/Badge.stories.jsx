@@ -1,7 +1,9 @@
 import { Badge } from './Badge';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Badge',
+  parameters: { design: figmaDesign('Atoms/Badge') },
   component: Badge,
   argTypes: {
     variant: { control: 'select', options: ['default', 'success', 'error', 'warning', 'info'] },

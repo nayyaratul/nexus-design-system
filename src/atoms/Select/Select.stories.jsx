@@ -1,7 +1,9 @@
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectLabel } from './Select';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Select',
+  parameters: { design: figmaDesign('Atoms/Select') },
   component: Select,
   argTypes: {},
 };

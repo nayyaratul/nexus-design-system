@@ -1,8 +1,10 @@
 import { Button } from './Button';
 import { Icon } from '../Icon/Icon';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Button',
+  parameters: { design: figmaDesign('Atoms/Button') },
   component: Button,
   argTypes: {
     variant: { control: 'select', options: ['primary', 'secondary', 'destructive', 'ghost'] },

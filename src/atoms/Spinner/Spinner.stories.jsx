@@ -1,7 +1,9 @@
 import { Spinner } from './Spinner';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Spinner',
+  parameters: { design: figmaDesign('Atoms/Spinner') },
   component: Spinner,
   argTypes: {
     size: { control: 'select', options: ['xs', 'sm', 'md', 'lg', 'xl'] },

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { RadioGroup, RadioItem } from './RadioGroup';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/RadioGroup',
+  parameters: { design: figmaDesign('Atoms/RadioGroup') },
   component: RadioGroup,
   argTypes: {
     orientation: { control: 'select', options: ['vertical', 'horizontal'] },

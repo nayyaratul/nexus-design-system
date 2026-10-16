@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Switch } from './Switch';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Switch',
+  parameters: { design: figmaDesign('Atoms/Switch') },
   component: Switch,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

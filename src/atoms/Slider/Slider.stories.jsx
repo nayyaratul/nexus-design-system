@@ -1,7 +1,9 @@
 import { Slider } from './Slider';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Slider',
+  parameters: { design: figmaDesign('Atoms/Slider') },
 };
 
 export const Default = {

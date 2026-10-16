@@ -1,7 +1,9 @@
 import { Thumbnail } from './Thumbnail';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Thumbnail',
+  parameters: { design: figmaDesign('Atoms/Thumbnail') },
   component: Thumbnail,
   argTypes: {
     size: { control: 'select', options: ['xs', 'sm', 'md', 'lg'] },

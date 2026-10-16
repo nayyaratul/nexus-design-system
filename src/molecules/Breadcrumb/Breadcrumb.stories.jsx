@@ -1,8 +1,10 @@
 import { Breadcrumb } from './Breadcrumb';
 import { Icon } from '../../atoms/Icon/Icon';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Molecules/Breadcrumb',
+  parameters: { design: figmaDesign('Molecules/Breadcrumb') },
   component: Breadcrumb,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md'] },

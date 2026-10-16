@@ -1,7 +1,9 @@
 import { Link } from './Link';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Link',
+  parameters: { design: figmaDesign('Atoms/Link') },
 };
 
 export const Default = {

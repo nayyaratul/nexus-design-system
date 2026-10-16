@@ -1,7 +1,9 @@
 import { Code } from './Code';
+import { figmaDesign } from '../../figma/figmaLinks';
 
 export default {
   title: 'Atoms/Code',
+  parameters: { design: figmaDesign('Atoms/Code') },
 };
 
 export const Inline = {

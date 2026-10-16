@@ -1,7 +1,8 @@
 import { Toggle } from './Toggle';
 import { Bold, Italic, Underline } from 'lucide-react';
+import { figmaDesign } from '../../figma/figmaLinks';
 
-export default { title: 'Atoms/Toggle' };
+export default { title: 'Atoms/Toggle', parameters: { design: figmaDesign('Atoms/Toggle') } };
 
 export const Default = {
   render: () => (
